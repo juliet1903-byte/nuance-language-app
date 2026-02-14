@@ -158,7 +158,7 @@ const SocialTranslator = ({ open, onClose }: SocialTranslatorProps) => {
               </div>
 
               {/* Tone Toggles */}
-              <div className="flex bg-background rounded-xl p-1 mb-5">
+              <div className="flex rounded-xl p-1 mb-5 bg-destructive-foreground">
                 {tones.map((t) =>
               <button
                 key={t.value}
