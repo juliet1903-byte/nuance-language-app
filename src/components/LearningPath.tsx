@@ -15,7 +15,7 @@ const LearningPath = () => {
         {learningPath.map((step, i) =>
         <div key={step.id} className="flex gap-3">
             {/* Stepper line */}
-            <div className="flex flex-col items-center">
+            <div className="flex-col flex items-center justify-start">
               <div
               className={`w-7 h-7 rounded-full flex items-center justify-center shrink-0 ${
               step.completed ?
@@ -34,7 +34,7 @@ const LearningPath = () => {
               }
               </div>
               {i < learningPath.length - 1 &&
-            <div className="w-0.5 h-8 bg-border my-0 border-accent" />
+            <div className="w-0.5 h-8 bg-border my-0 border-accent border border-solid" />
             }
             </div>
 
