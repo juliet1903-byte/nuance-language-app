@@ -1,4 +1,4 @@
-import { useState, useCallback } from "react";
+import { useState, useCallback, useRef } from "react";
 import { X, Mic, HelpCircle, Copy, Loader2 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { supabase } from "@/integrations/supabase/client";
@@ -25,6 +25,49 @@ const SocialTranslator = ({ open, onClose }: SocialTranslatorProps) => {
   const [needlePosition, setNeedlePosition] = useState<number | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [showCoachTip, setShowCoachTip] = useState(false);
+  const [isRecording, setIsRecording] = useState(false);
+  const recognitionRef = useRef<any>(null);
+
+  const handleMic = useCallback(() => {
+    if (isRecording) {
+      recognitionRef.current?.stop();
+      setIsRecording(false);
+      return;
+    }
+
+    const SpeechRecognition = (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
+    if (!SpeechRecognition) {
+      toast({ title: "Not supported", description: "Speech recognition is not available in this browser.", variant: "destructive" });
+      return;
+    }
+
+    const recognition = new SpeechRecognition();
+    recognition.lang = "en-US";
+    recognition.interimResults = true;
+    recognition.continuous = true;
+    recognitionRef.current = recognition;
+
+    let finalTranscript = input;
+
+    recognition.onresult = (event: any) => {
+      let interim = "";
+      for (let i = event.resultIndex; i < event.results.length; i++) {
+        const transcript = event.results[i][0].transcript;
+        if (event.results[i].isFinal) {
+          finalTranscript += (finalTranscript ? " " : "") + transcript;
+        } else {
+          interim = transcript;
+        }
+      }
+      setInput(finalTranscript + (interim ? " " + interim : ""));
+    };
+
+    recognition.onerror = () => setIsRecording(false);
+    recognition.onend = () => setIsRecording(false);
+
+    recognition.start();
+    setIsRecording(true);
+  }, [isRecording, input]);
 
   const handleTranslate = useCallback(async () => {
     if (!input.trim() || isLoading) return;
@@ -128,7 +171,10 @@ const SocialTranslator = ({ open, onClose }: SocialTranslatorProps) => {
                       <X className="w-4 h-4" />
                     </button>
                 }
-                  <button className="p-2 rounded-full bg-muted/60 text-muted-foreground">
+                  <button
+                    onClick={handleMic}
+                    className={`p-2 rounded-full transition-colors ${isRecording ? "bg-destructive text-destructive-foreground animate-pulse" : "bg-muted/60 text-muted-foreground"}`}
+                  >
                     <Mic className="w-4 h-4" />
                   </button>
                 </div>
