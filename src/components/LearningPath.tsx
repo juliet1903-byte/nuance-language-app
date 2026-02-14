@@ -30,7 +30,7 @@ const LearningPath = () => {
               step.active ?
               <div className="w-2.5 h-2.5 rounded-full bg-accent" /> :
 
-              <Lock className="w-3 h-3" />
+              <Lock className="w-3 h-3 text-white" />
               }
               </div>
               {i < learningPath.length - 1 &&
