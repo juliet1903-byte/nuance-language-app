@@ -38,7 +38,7 @@ export const modules: Module[] = [
     title: "Starting Strong",
     subtitle: "Introductions, onboarding, and making your mark",
     description: "How you show up in the first interactions sets the tone for everything that follows.",
-    image: "module-meeting",
+    image: "module-starting-strong",
     lessons: [
       {
         id: "1-1",
