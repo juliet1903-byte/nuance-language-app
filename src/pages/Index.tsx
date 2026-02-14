@@ -46,7 +46,7 @@ const Index = () => {
           <div className="rounded-2xl overflow-hidden bg-card shadow-sm">
             <img alt="Lesson" className="w-full h-40 object-cover" src="/lovable-uploads/5a8baccc-96a0-46e9-a068-c093d117cb1e.png" />
             <div className="p-4">
-              <h3 className="font-semibold text-base mb-1">Silence is Not Politeness</h3>
+              <h3 className="font-semibold text-base mb-1">Introducing Yourself</h3>
               <p className="text-xs text-muted-foreground mb-3">
                 Why your quiet competence might be holding you back
               </p>
