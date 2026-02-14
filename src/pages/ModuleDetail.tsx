@@ -66,7 +66,7 @@ const ModuleDetail = () => {
         </button>
         <div>
           <p className="text-xs text-muted-foreground font-medium">Module {module.number}</p>
-          <h1 className="text-lg font-serif">{module.title}</h1>
+          <h1 className="text-lg font-semibold">{module.title}</h1>
         </div>
       </header>
 
@@ -106,7 +106,7 @@ const ModuleDetail = () => {
           {/* LESSON */}
           {view === "lesson" && lesson && (
             <motion.div key="lesson" initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0 }}>
-              <h2 className="text-xl font-serif mb-4">{lesson.title}</h2>
+              <h2 className="text-xl font-medium mb-4">{lesson.title}</h2>
 
               {/* Phrases */}
               <h3 className="text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-3">Useful Phrases</h3>
@@ -173,7 +173,7 @@ const ModuleDetail = () => {
           {/* EXERCISE */}
           {view === "exercise" && exercise && (
             <motion.div key="exercise" initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0 }}>
-              <h2 className="text-xl font-serif mb-2">Practice</h2>
+              <h2 className="text-xl font-medium mb-2">Practice</h2>
               <p className="text-sm text-muted-foreground mb-4">{exercise.instruction}</p>
 
               {exercise.wordBank && (
@@ -234,7 +234,7 @@ const ModuleDetail = () => {
               <div className="w-20 h-20 rounded-full bg-accent/20 flex items-center justify-center mb-5">
                 <PartyPopper className="w-10 h-10 text-accent" />
               </div>
-              <h2 className="text-2xl font-serif mb-2">Module Complete!</h2>
+              <h2 className="text-2xl font-semibold mb-2">Module Complete!</h2>
               <p className="text-sm text-muted-foreground mb-8 max-w-xs">
                 Great work on {module.title}. You're building real communication skills.
               </p>
