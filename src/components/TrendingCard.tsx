@@ -7,7 +7,7 @@ interface TrendingCardProps {
 
 const TrendingCard = ({ image, badge, badgeColor, title }: TrendingCardProps) => {
   return (
-    <div className="relative rounded-2xl overflow-hidden aspect-[4/5] group cursor-pointer">
+    <div className="relative rounded-2xl overflow-hidden aspect-[4/5] md:aspect-[16/7] group cursor-pointer">
       <img
         src={image}
         alt={title}
