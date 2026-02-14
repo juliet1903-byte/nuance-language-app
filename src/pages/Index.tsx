@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Bell } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import logo from "@/assets/logo_nuance.svg";
+import userAvatar from "@/assets/user-avatar.jpg";
 import heroSilence from "@/assets/hero-silence.jpg";
 import articleWarmIntro from "@/assets/article-warm-intro.jpg";
 import articleInterview from "@/assets/article-interview.jpg";
@@ -35,7 +36,7 @@ const Index = () => {
             <Bell className="w-5 h-5 text-foreground" />
           </button>
           <div className="w-9 h-9 rounded-full bg-muted overflow-hidden">
-            <div className="w-full h-full bg-gradient-to-br from-accent/30 to-cta/30" />
+            <img src={userAvatar} alt="User avatar" className="w-full h-full object-cover" />
           </div>
         </div>
       </header>
