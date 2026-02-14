@@ -114,7 +114,7 @@ export const modules: Module[] = [
     title: "Working Across Cultures",
     subtitle: "Reading communication styles — not just learning idioms",
     description: "Understanding that the same words carry different social weight in different contexts.",
-    image: "module-cultures",
+    image: "module-across-cultures",
     lessons: [
       {
         id: "3-1",
