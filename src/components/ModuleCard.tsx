@@ -6,6 +6,7 @@ import moduleNavigate from "@/assets/module-navigate.jpg";
 import moduleCultures from "@/assets/module-cultures.jpg";
 import moduleStartingStrong from "@/assets/module-starting-strong.png";
 import moduleMeetingRoom from "@/assets/module-meeting-room.png";
+import moduleAcrossCultures from "@/assets/module-across-cultures.png";
 
 const imageMap: Record<string, string> = {
   "module-meeting": moduleMeeting,
@@ -13,6 +14,7 @@ const imageMap: Record<string, string> = {
   "module-cultures": moduleCultures,
   "module-starting-strong": moduleStartingStrong,
   "module-meeting-room": moduleMeetingRoom,
+  "module-across-cultures": moduleAcrossCultures,
 };
 
 const ModuleCard = ({ module }: { module: Module }) => {
