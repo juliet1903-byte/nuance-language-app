@@ -5,12 +5,14 @@ import moduleMeeting from "@/assets/module-meeting.jpg";
 import moduleNavigate from "@/assets/module-navigate.jpg";
 import moduleCultures from "@/assets/module-cultures.jpg";
 import moduleStartingStrong from "@/assets/module-starting-strong.png";
+import moduleMeetingRoom from "@/assets/module-meeting-room.png";
 
 const imageMap: Record<string, string> = {
   "module-meeting": moduleMeeting,
   "module-navigate": moduleNavigate,
   "module-cultures": moduleCultures,
   "module-starting-strong": moduleStartingStrong,
+  "module-meeting-room": moduleMeetingRoom,
 };
 
 const ModuleCard = ({ module }: { module: Module }) => {
