@@ -7,6 +7,7 @@ import { SidebarProvider } from "@/components/SidebarContext";
 import Index from "./pages/Index";
 import ModuleDetail from "./pages/ModuleDetail";
 import Progress from "./pages/Progress";
+import Library from "./pages/Library";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -20,9 +21,10 @@ const App = () => (
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<Index />} />
-            <Route path="/module/:id" element={<ModuleDetail />} />
-            <Route path="/progress" element={<Progress />} />
-            <Route path="*" element={<NotFound />} />
+          <Route path="/module/:id" element={<ModuleDetail />} />
+          <Route path="/progress" element={<Progress />} />
+          <Route path="/library" element={<Library />} />
+          <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>
       </SidebarProvider>
