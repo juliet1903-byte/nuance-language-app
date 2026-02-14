@@ -92,7 +92,7 @@ export const modules: Module[] = [
     title: "The Meeting Room",
     subtitle: "Participating confidently, managing flow, and closing with clarity",
     description: "Meetings are where professional reputations are built — or quietly eroded.",
-    image: "module-meeting",
+    image: "module-meeting-room",
     lessons: [
       {
         id: "2-1",
