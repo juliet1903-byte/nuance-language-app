@@ -1,6 +1,6 @@
 import { Home, BookOpen, BarChart3, User, MessageSquare, PanelLeftClose, PanelLeft } from "lucide-react";
 import { useLocation, useNavigate } from "react-router-dom";
-import logo from "@/assets/logo_nuance.svg";
+import Logo from "@/components/Logo";
 import { useSidebar } from "@/components/SidebarContext";
 
 interface DesktopSidebarProps {
@@ -28,7 +28,7 @@ const DesktopSidebar = ({ onTranslatorOpen }: DesktopSidebarProps) => {
     >
       {/* Logo + collapse toggle */}
       <div className={`flex items-center pt-7 pb-8 ${collapsed ? "px-4 justify-center" : "px-6 justify-between"}`}>
-        {!collapsed && <img src={logo} alt="Nuance" className="h-8" />}
+        {!collapsed && <Logo className="h-8" />}
         <button
           onClick={toggle}
           className="p-2 rounded-lg text-muted-foreground hover:bg-secondary hover:text-foreground transition-colors"
