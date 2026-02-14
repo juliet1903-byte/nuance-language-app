@@ -222,7 +222,7 @@ export const modules: Module[] = [
     title: "Common Mistakes & Final Review",
     subtitle: "A full-program summary of what goes wrong — and how to fix it",
     description: "The most frequent mistakes across every area of the program. Use as a final review.",
-    image: "module-meeting",
+    image: "module-common-mistakes",
     lessons: [
       {
         id: "8-1",
