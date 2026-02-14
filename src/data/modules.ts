@@ -21,6 +21,12 @@ export interface ExerciseItem {
   options?: string[];
 }
 
+export interface ScenarioExercise {
+  title: string;
+  context: string;
+  prompt: string;
+}
+
 export interface Module {
   id: string;
   number: number;
@@ -29,6 +35,7 @@ export interface Module {
   description: string;
   image: string;
   lessons: Lesson[];
+  scenarioExercise: ScenarioExercise;
 }
 
 export const modules: Module[] = [
@@ -46,7 +53,7 @@ export const modules: Module[] = [
         phrases: [
           { phrase: '"I work with [X] to [result] — so they can focus on [Y]."', usage: "Lead with the value you create, not your job category" },
           { phrase: '"I\'m still getting up to speed — but I\'d love to understand how this fits in."', usage: "First days — signals curiosity, not incompetence" },
-          { phrase: '"What does good look like in this role, from your perspective?"', usage: "First one-to-one — signals you\'re here to add value" },
+          { phrase: '"What does good look like in this role, from your perspective?"', usage: "First one-to-one — signals you're here to add value" },
         ],
         coachingNotes: [
           "'I work with [X] to [result]' replaces 'I am a [job title]' with something that actually means something to the listener.",
@@ -60,7 +67,7 @@ export const modules: Module[] = [
         exercises: [
           {
             type: "fill-gap",
-            instruction: "Complete each sentence with the correct phrase.",
+            instruction: "Tap the correct phrase to complete each sentence.",
             wordBank: ["up to speed", "stayed with me", "work with", "what brings", "good look like"],
             items: [
               { id: "1", prompt: '"I _____ development teams to make infrastructure invisible."', answer: "work with" },
@@ -85,6 +92,11 @@ export const modules: Module[] = [
         ],
       },
     ],
+    scenarioExercise: {
+      title: "The First Impression",
+      context: "You're at a team lunch on your second day. A senior engineer you haven't met yet sits across from you and says: \"So, what do you actually do here?\" Two other colleagues are listening.",
+      prompt: "How do you introduce yourself in a way that's memorable and value-driven without sounding rehearsed?",
+    },
   },
   {
     id: "meeting-room",
@@ -105,8 +117,26 @@ export const modules: Module[] = [
         coachingNotes: [
           "'Building on that' creates a soft entry. The key word is 'building' — it signals you were listening and adding, not redirecting.",
         ],
+        exercises: [
+          {
+            type: "fill-gap",
+            instruction: "Tap the correct phrase to complete each sentence.",
+            wordBank: ["Building on that", "before we move on", "reflect back", "fully covered", "add something"],
+            items: [
+              { id: "2-1", prompt: '"_____ — there\'s one angle I don\'t think we\'ve addressed."', answer: "Building on that" },
+              { id: "2-2", prompt: '"Could I _____ here before we close this topic?"', answer: "add something" },
+              { id: "2-3", prompt: '"Before we close — let me _____ what I\'ve heard."', answer: "reflect back" },
+              { id: "2-4", prompt: '"There\'s a perspective we haven\'t _____ yet."', answer: "fully covered" },
+            ],
+          },
+        ],
       },
     ],
+    scenarioExercise: {
+      title: "The Overlooked Point",
+      context: "You're in a product review meeting. The discussion is about to close, but you noticed the team skipped over a critical UX concern that could delay the launch. The PM is already summarising action items.",
+      prompt: "How do you re-open the discussion without sounding like you're derailing the meeting?",
+    },
   },
   {
     id: "across-cultures",
@@ -127,8 +157,26 @@ export const modules: Module[] = [
         coachingNotes: [
           "The word 'slightly' does real work. It signals measured disagreement, not emotional. Compare: 'I disagree with that' vs 'Can I push back on that slightly?'",
         ],
+        exercises: [
+          {
+            type: "fill-gap",
+            instruction: "Tap the correct phrase to complete each sentence.",
+            wordBank: ["push back", "share them", "your thinking", "slightly", "different view"],
+            items: [
+              { id: "3-1", prompt: '"I have some concerns — can I _____?"', answer: "share them" },
+              { id: "3-2", prompt: '"Can I _____ on that _____?"', answer: "push back" },
+              { id: "3-3", prompt: '"I want to understand _____ before I respond."', answer: "your thinking" },
+              { id: "3-4", prompt: '"I\'d like to share a _____ on this."', answer: "different view" },
+            ],
+          },
+        ],
       },
     ],
+    scenarioExercise: {
+      title: "The Indirect Objection",
+      context: "During a cross-team call, a colleague from the Tokyo office says: \"That's an interesting approach — we might need to consider some additional factors.\" Your American teammate responds with: \"Great, so we're aligned!\" You know the Tokyo colleague was actually expressing disagreement.",
+      prompt: "How do you bridge this communication gap without embarrassing either colleague?",
+    },
   },
   {
     id: "managing-up",
@@ -149,8 +197,25 @@ export const modules: Module[] = [
         coachingNotes: [
           "When someone hesitates without a reason, this phrase asks them to articulate the condition. Once you know it, you can meet it or have an honest conversation.",
         ],
+        exercises: [
+          {
+            type: "fill-gap",
+            instruction: "Tap the correct phrase to complete each sentence.",
+            wordBank: ["flag this early", "need to be true", "connects directly", "comfortable with", "too late to act"],
+            items: [
+              { id: "4-1", prompt: '"I think this _____ to your Q3 priority."', answer: "connects directly" },
+              { id: "4-2", prompt: '"What would _____ for you to support this?"', answer: "need to be true" },
+              { id: "4-3", prompt: '"I\'d rather _____ than raise it when it\'s _____."', answer: "flag this early" },
+            ],
+          },
+        ],
       },
     ],
+    scenarioExercise: {
+      title: "The Reluctant Stakeholder",
+      context: "Your skip-level manager has been delaying approval on a process change you proposed. They haven't said no, but they haven't said yes either. You have 5 minutes with them before a meeting.",
+      prompt: "How do you surface their real concern and move toward a decision without being pushy?",
+    },
   },
   {
     id: "difficult-convos",
@@ -171,8 +236,25 @@ export const modules: Module[] = [
         coachingNotes: [
           "Three frameworks: What-Why-Next for quick feedback, DESC for formal/high-stakes, Contrast Method when expectation and reality diverged.",
         ],
+        exercises: [
+          {
+            type: "fill-gap",
+            instruction: "Tap the correct phrase to complete each sentence.",
+            wordBank: ["share an observation", "impact on the team", "from where I'm sitting", "more than once", "specific effect"],
+            items: [
+              { id: "5-1", prompt: '"Can I _____ — it\'s something I\'ve noticed?"', answer: "share an observation" },
+              { id: "5-2", prompt: '"The _____ has been significant this quarter."', answer: "impact on the team" },
+              { id: "5-3", prompt: '"_____, the deadline pressure is affecting quality."', answer: "from where I'm sitting" },
+            ],
+          },
+        ],
       },
     ],
+    scenarioExercise: {
+      title: "The Repeated Pattern",
+      context: "A teammate consistently takes credit for collaborative work in stakeholder updates. It's happened three times now. You like this person and want to preserve the relationship, but it needs to stop.",
+      prompt: "How do you address this pattern directly while keeping the relationship intact?",
+    },
   },
   {
     id: "career-moves",
@@ -192,8 +274,25 @@ export const modules: Module[] = [
         coachingNotes: [
           "Most candidates only talk about decisions they agreed with. Showing you pushed back signals strong independent judgement.",
         ],
+        exercises: [
+          {
+            type: "fill-gap",
+            instruction: "Tap the correct phrase to complete each sentence.",
+            wordBank: ["particularly proud of", "handle differently", "at the time", "my reasoning", "pushed back"],
+            items: [
+              { id: "6-1", prompt: '"One thing I\'m _____ is reducing deploy time by 40%."', answer: "particularly proud of" },
+              { id: "6-2", prompt: '"Looking back, I\'d _____ the stakeholder communication."', answer: "handle differently" },
+              { id: "6-3", prompt: '"_____, here was _____ for that decision."', answer: "at the time" },
+            ],
+          },
+        ],
       },
     ],
+    scenarioExercise: {
+      title: "The Promotion Conversation",
+      context: "Your annual review is next week. You believe you've been performing at the next level for six months but haven't been promoted. Your manager is supportive but hasn't raised it.",
+      prompt: "How do you open the promotion conversation without sounding entitled or creating awkwardness?",
+    },
   },
   {
     id: "dei-fundamentals",
@@ -213,8 +312,25 @@ export const modules: Module[] = [
         coachingNotes: [
           "Most exclusive language is habitual, not malicious. The question is whether language makes certain people feel default and others exceptional.",
         ],
+        exercises: [
+          {
+            type: "fill-gap",
+            instruction: "Tap the correct phrase to complete each sentence.",
+            wordBank: ["Hey everyone", "experience differently", "be aware", "feel default", "habitual"],
+            items: [
+              { id: "7-1", prompt: '"_____ — let\'s get started with the standup."', answer: "Hey everyone" },
+              { id: "7-2", prompt: '"I try to _____ of how people _____ this environment."', answer: "be aware" },
+              { id: "7-3", prompt: '"Most exclusive language is _____, not intentional."', answer: "habitual" },
+            ],
+          },
+        ],
       },
     ],
+    scenarioExercise: {
+      title: "The Uncomfortable Moment",
+      context: "During a team retrospective, a colleague uses the phrase \"that's so lame\" to describe a process. A team member with a visible disability shifts uncomfortably. Nobody else seems to notice.",
+      prompt: "How do you address this in the moment without making it feel like a lecture?",
+    },
   },
   {
     id: "common-mistakes",
@@ -235,8 +351,25 @@ export const modules: Module[] = [
         coachingNotes: [
           "Leading with credentials tells them your category. Leading with value tells them why you matter.",
         ],
+        exercises: [
+          {
+            type: "fill-gap",
+            instruction: "Tap the correct phrase to complete each sentence.",
+            wordBank: ["work with", "add something", "my impression", "hard to follow", "before we move on"],
+            items: [
+              { id: "8-1", prompt: '"I _____ engineering teams to simplify complexity."', answer: "work with" },
+              { id: "8-2", prompt: '"Could I _____ here _____?"', answer: "add something" },
+              { id: "8-3", prompt: '"_____ was that the recommendation was _____."', answer: "my impression" },
+            ],
+          },
+        ],
       },
     ],
+    scenarioExercise: {
+      title: "The Full Review",
+      context: "You're preparing for a high-stakes client presentation. Your manager reviews your draft and says: \"This is too long and the key message gets lost.\" You agree, but you also feel the client needs the context.",
+      prompt: "How do you respond to the feedback and propose a solution that addresses both the brevity concern and the need for context?",
+    },
   },
 ];
 

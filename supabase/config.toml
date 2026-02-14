@@ -1,1 +1,7 @@
 project_id = "hfcmjbamsmfaugpkhahs"
+
+[functions.social-translate]
+verify_jwt = false
+
+[functions.scenario-evaluate]
+verify_jwt = false

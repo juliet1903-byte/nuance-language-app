@@ -1,0 +1,228 @@
+import { useState, useCallback } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { HelpCircle, Loader2, ArrowRight } from "lucide-react";
+import { supabase } from "@/integrations/supabase/client";
+import { toast } from "@/hooks/use-toast";
+
+interface ScenarioExerciseProps {
+  moduleTitle: string;
+  moduleNumber: number;
+  scenario: {
+    title: string;
+    context: string;
+    prompt: string;
+  };
+  onComplete: () => void;
+}
+
+interface EvaluationResult {
+  vibeScore: number;
+  feedback: string;
+  coachTips: string[];
+  strengths: string[];
+}
+
+const ScenarioExercise = ({ moduleTitle, moduleNumber, scenario, onComplete }: ScenarioExerciseProps) => {
+  const [response, setResponse] = useState("");
+  const [result, setResult] = useState<EvaluationResult | null>(null);
+  const [needlePosition, setNeedlePosition] = useState<number | null>(null);
+  const [isLoading, setIsLoading] = useState(false);
+  const [showTips, setShowTips] = useState(false);
+
+  const handleSubmit = useCallback(async () => {
+    if (!response.trim() || isLoading) return;
+    setIsLoading(true);
+    setResult(null);
+    setNeedlePosition(null);
+    setShowTips(false);
+
+    try {
+      const { data, error } = await supabase.functions.invoke("scenario-evaluate", {
+        body: {
+          moduleTitle,
+          moduleNumber,
+          scenario,
+          userResponse: response.trim(),
+        },
+      });
+
+      if (error) throw error;
+      if (data?.error) throw new Error(data.error);
+
+      const res = data as EvaluationResult;
+      setResult(res);
+
+      // Animate needle: start at 15 (low), sweep to actual score
+      setNeedlePosition(15);
+      setTimeout(() => {
+        setNeedlePosition(res.vibeScore);
+      }, 400);
+    } catch (e: any) {
+      console.error("Scenario evaluation error:", e);
+      toast({
+        title: "Evaluation failed",
+        description: e.message || "Please try again.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsLoading(false);
+    }
+  }, [response, isLoading, moduleTitle, moduleNumber, scenario]);
+
+  const passed = result && result.vibeScore >= 60;
+
+  return (
+    <motion.div
+      key="scenario"
+      initial={{ opacity: 0, x: 20 }}
+      animate={{ opacity: 1, x: 0 }}
+      exit={{ opacity: 0 }}
+    >
+      <div className="mb-5">
+        <p className="text-xs font-semibold tracking-wider text-accent uppercase mb-1">
+          Module {moduleNumber} — Final Challenge
+        </p>
+        <h2 className="text-xl font-medium mb-2">{scenario.title}</h2>
+      </div>
+
+      {/* Scenario Context */}
+      <div className="glass-dark rounded-2xl p-5 text-glass-foreground mb-5">
+        <p className="text-xs font-bold tracking-wider text-accent mb-2">SITUATION</p>
+        <p className="text-sm leading-relaxed opacity-90 mb-3">{scenario.context}</p>
+        <p className="text-sm leading-relaxed font-medium">{scenario.prompt}</p>
+      </div>
+
+      {/* User Response */}
+      {!result && (
+        <>
+          <label className="text-xs font-semibold tracking-wider text-muted-foreground uppercase mb-2 block">
+            Your Response
+          </label>
+          <div className="bg-card rounded-xl p-4 mb-5 shadow-sm">
+            <textarea
+              value={response}
+              onChange={(e) => setResponse(e.target.value)}
+              placeholder="Write what you would actually say in this situation..."
+              className="w-full bg-transparent resize-none outline-none text-foreground min-h-[120px] text-sm"
+            />
+          </div>
+
+          <button
+            onClick={handleSubmit}
+            disabled={!response.trim() || isLoading}
+            className="w-full py-3.5 rounded-xl bg-cta text-cta-foreground font-semibold text-sm disabled:opacity-40 transition-opacity flex items-center justify-center gap-2"
+          >
+            {isLoading ? (
+              <>
+                <Loader2 className="w-5 h-5 animate-spin" />
+                Evaluating…
+              </>
+            ) : (
+              "Submit Response"
+            )}
+          </button>
+        </>
+      )}
+
+      {/* Result */}
+      <AnimatePresence>
+        {result && (
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+          >
+            {/* Vibe Meter */}
+            <label className="text-xs font-semibold tracking-wider text-muted-foreground uppercase mb-2 block">
+              Your Nuance Score
+            </label>
+            <div className="relative mb-1" style={{ height: 24 }}>
+              <div className="absolute inset-x-0 top-1/2 -translate-y-1/2 h-2 rounded-full bg-gradient-to-r from-vibe-blunt via-muted to-vibe-nuanced" />
+              {needlePosition !== null && (
+                <motion.div
+                  className="absolute rounded-full bg-foreground border-2 border-card shadow-md"
+                  style={{ width: 24, height: 24, top: 0 }}
+                  initial={{ opacity: 0, left: `calc(${needlePosition}% - 12px)` }}
+                  animate={{ opacity: 1, left: `calc(${needlePosition}% - 12px)` }}
+                  transition={{ type: "spring", damping: 20, stiffness: 150 }}
+                />
+              )}
+            </div>
+            <div className="flex justify-between text-xs font-semibold mb-5">
+              <span className="text-vibe-blunt">Blunt</span>
+              <span className="text-vibe-nuanced">Nuanced</span>
+            </div>
+
+            {/* Feedback */}
+            <div className="glass-dark rounded-2xl p-5 text-glass-foreground mb-5">
+              <p className="text-xs font-bold tracking-wider text-accent mb-2">FEEDBACK</p>
+              <p className="text-sm leading-relaxed opacity-90 mb-4">{result.feedback}</p>
+
+              {result.strengths.length > 0 && (
+                <div className="mb-4">
+                  <p className="text-xs font-bold tracking-wider text-accent mb-2">WHAT WORKED</p>
+                  <ul className="space-y-1">
+                    {result.strengths.map((s, i) => (
+                      <li key={i} className="text-sm opacity-90 flex items-start gap-2">
+                        <span className="text-accent mt-0.5">✓</span> {s}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+
+              {/* Coach Tips Toggle */}
+              <AnimatePresence>
+                {showTips && result.coachTips.length > 0 && (
+                  <motion.div
+                    initial={{ opacity: 0, height: 0 }}
+                    animate={{ opacity: 1, height: "auto" }}
+                    exit={{ opacity: 0, height: 0 }}
+                    className="p-3 rounded-xl bg-accent/20 border border-accent/30"
+                  >
+                    <p className="text-xs font-bold tracking-wider text-accent mb-2">COACH'S TIPS</p>
+                    <ul className="space-y-2">
+                      {result.coachTips.map((tip, i) => (
+                        <li key={i} className="text-sm leading-relaxed opacity-90">
+                          💡 {tip}
+                        </li>
+                      ))}
+                    </ul>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+
+              <div className="flex justify-end mt-3">
+                <button
+                  onClick={() => setShowTips((p) => !p)}
+                  className={`p-2 rounded-full transition-colors ${showTips ? "bg-accent/30" : "bg-glass-foreground/10"}`}
+                >
+                  <HelpCircle className="w-4 h-4" />
+                </button>
+              </div>
+            </div>
+
+            {/* Continue */}
+            <button
+              onClick={passed ? onComplete : () => { setResult(null); setNeedlePosition(null); }}
+              className={`w-full py-3.5 rounded-xl font-semibold text-sm flex items-center justify-center gap-2 ${
+                passed
+                  ? "bg-accent text-accent-foreground"
+                  : "bg-cta text-cta-foreground"
+              }`}
+            >
+              {passed ? (
+                <>
+                  Complete Module <ArrowRight className="w-4 h-4" />
+                </>
+              ) : (
+                "Try Again"
+              )}
+            </button>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </motion.div>
+  );
+};
+
+export default ScenarioExercise;
