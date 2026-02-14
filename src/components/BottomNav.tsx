@@ -1,5 +1,6 @@
 import { Home, BookOpen, BarChart3, User, MessageSquare } from "lucide-react";
 import { useLocation, useNavigate } from "react-router-dom";
+import chatIcon from "@/assets/chat-icon.png";
 
 interface BottomNavProps {
   onTranslatorOpen: () => void;
@@ -27,9 +28,9 @@ const BottomNav = ({ onTranslatorOpen }: BottomNavProps) => {
               <button
                 key="translator"
                 onClick={onTranslatorOpen}
-                className="relative -mt-6 w-14 h-14 rounded-full bg-card dark:bg-[hsl(220,18%,18%)] flex items-center justify-center shadow-lg dark:shadow-black/40 border border-border/50 dark:border-white/10"
+                className="relative -mt-6 w-14 h-14 rounded-full bg-foreground flex items-center justify-center shadow-lg dark:shadow-black/40"
               >
-                <MessageSquare className="w-6 h-6 text-foreground" />
+                <img src={chatIcon} alt="Chat" className="w-6 h-6 dark:invert" />
               </button>
             );
           }
