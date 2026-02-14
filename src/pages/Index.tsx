@@ -32,7 +32,7 @@ const Index = () => {
       {/* Desktop Sidebar */}
       <DesktopSidebar onTranslatorOpen={() => setTranslatorOpen(true)} />
 
-      <div className="flex-1 md:ml-[220px] pb-24 md:pb-8">
+      <div className="flex-1 md:ml-[220px] pb-24 md:pb-8 md:h-screen md:overflow-y-auto">
         {/* Header */}
         <header className="flex items-center justify-between px-5 pt-6 pb-4 md:max-w-[900px] md:mx-auto md:w-full">
           <img src={logo} alt="Nuance" className="h-8 md:hidden" />
