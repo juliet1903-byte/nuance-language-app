@@ -201,7 +201,7 @@ export const modules: Module[] = [
     title: "DEI Fundamentals",
     subtitle: "Language, inclusion, and belonging",
     description: "The specific language choices that either include people or exclude them — often without realising.",
-    image: "module-navigate",
+    image: "module-dei",
     lessons: [
       {
         id: "7-1",
