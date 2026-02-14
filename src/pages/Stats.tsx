@@ -32,65 +32,59 @@ const VibeMeter = ({ score }: { score: number }) => {
   const angle = -90 + (score / 100) * 180;
 
   return (
-    <div className="relative w-full max-w-[280px] mx-auto">
-      <svg viewBox="0 0 200 120" className="w-full">
-        <defs>
-          <linearGradient id="vibe-arc" x1="0" y1="0" x2="1" y2="0">
-            <stop offset="0%" stopColor="hsl(14, 80%, 52%)" />
-            <stop offset="50%" stopColor="hsl(45, 60%, 60%)" />
-            <stop offset="100%" stopColor="hsl(152, 40%, 46%)" />
-          </linearGradient>
-        </defs>
+    <div className="w-full max-w-[320px] mx-auto">
+      <div className="relative">
+        <svg viewBox="0 0 220 130" className="w-full">
+          <defs>
+            <linearGradient id="vibe-arc" x1="0" y1="0" x2="1" y2="0">
+              <stop offset="0%" stopColor="hsl(14, 80%, 52%)" />
+              <stop offset="40%" stopColor="hsl(45, 60%, 55%)" />
+              <stop offset="70%" stopColor="hsl(80, 45%, 50%)" />
+              <stop offset="100%" stopColor="hsl(152, 40%, 46%)" />
+            </linearGradient>
+          </defs>
 
-        {/* Background arc */}
-        <path
-          d="M 20 105 A 80 80 0 0 1 180 105"
-          fill="none"
-          stroke="hsl(var(--muted))"
-          strokeWidth="12"
-          strokeLinecap="round"
-        />
-
-        {/* Coloured arc */}
-        <path
-          d="M 20 105 A 80 80 0 0 1 180 105"
-          fill="none"
-          stroke="url(#vibe-arc)"
-          strokeWidth="12"
-          strokeLinecap="round"
-        />
-
-        {/* Needle */}
-        <motion.g
-          initial={{ rotate: -90 }}
-          animate={{ rotate: angle }}
-          transition={{ type: "spring", stiffness: 40, damping: 12, delay: 0.3 }}
-          style={{ originX: "100px", originY: "105px", transformOrigin: "100px 105px" }}
-        >
-          <line
-            x1="100"
-            y1="105"
-            x2="100"
-            y2="35"
-            stroke="hsl(var(--foreground))"
-            strokeWidth="2.5"
+          {/* Coloured arc */}
+          <path
+            d="M 20 110 A 90 90 0 0 1 200 110"
+            fill="none"
+            stroke="url(#vibe-arc)"
+            strokeWidth="22"
             strokeLinecap="round"
           />
-          <circle cx="100" cy="105" r="5" fill="hsl(var(--foreground))" />
-        </motion.g>
 
-        {/* Labels */}
-        <text x="18" y="118" fontSize="8" fill="hsl(var(--muted-foreground))" textAnchor="start">
-          Blunt
-        </text>
-        <text x="182" y="118" fontSize="8" fill="hsl(var(--muted-foreground))" textAnchor="end">
-          Nuanced
-        </text>
-      </svg>
+          {/* Needle */}
+          <motion.g
+            initial={{ rotate: -90 }}
+            animate={{ rotate: angle }}
+            transition={{ type: "spring", stiffness: 40, damping: 12, delay: 0.3 }}
+            style={{ transformOrigin: "110px 110px" }}
+          >
+            <line
+              x1="110"
+              y1="110"
+              x2="110"
+              y2="32"
+              stroke="hsl(var(--foreground))"
+              strokeWidth="2.5"
+              strokeLinecap="round"
+            />
+            <circle cx="110" cy="110" r="6" fill="hsl(var(--foreground))" />
+          </motion.g>
 
-      {/* Score overlay */}
-      <div className="absolute inset-x-0 bottom-2 flex flex-col items-center">
-        <span className="text-3xl font-semibold">{score}</span>
+          {/* Labels */}
+          <text x="22" y="128" fontSize="9" fill="hsl(var(--muted-foreground))" textAnchor="start">
+            Blunt
+          </text>
+          <text x="198" y="128" fontSize="9" fill="hsl(var(--muted-foreground))" textAnchor="end">
+            Nuanced
+          </text>
+        </svg>
+      </div>
+
+      {/* Score below the meter */}
+      <div className="flex flex-col items-center -mt-8">
+        <span className="text-4xl font-semibold">{score}</span>
         <span className="text-caption text-muted-foreground">Lifetime Vibe IQ</span>
       </div>
     </div>
