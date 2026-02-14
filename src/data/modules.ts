@@ -42,7 +42,7 @@ export const modules: Module[] = [
   {
     id: "starting-strong",
     number: 1,
-    title: "DEI Fundamentals",
+    title: "Starting Strong",
     subtitle: "Introductions, onboarding, and making your mark",
     description: "How you show up in the first interactions sets the tone for everything that follows.",
     image: "module-starting-strong",
