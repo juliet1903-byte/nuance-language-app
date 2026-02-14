@@ -46,7 +46,7 @@ const Index = () => {
 
         {/* Continue Where You Left */}
         <section>
-          <h2 className="text-xl font-serif mb-3">Continue where you left</h2>
+          <h2 className="text-xl font-medium mb-3">Continue where you left</h2>
           <div className="rounded-2xl overflow-hidden bg-card shadow-sm">
             <img src={heroSilence} alt="Lesson" className="w-full h-40 object-cover" />
             <div className="p-4">
@@ -67,7 +67,7 @@ const Index = () => {
         {/* All Modules */}
         <section>
           <div className="flex items-center justify-between mb-3">
-            <h2 className="text-xl font-serif">All Modules</h2>
+            <h2 className="text-xl font-medium">All Modules</h2>
             <span className="text-sm text-muted-foreground">{modules.length}</span>
           </div>
           <div className="flex gap-3 overflow-x-auto pb-2 -mx-5 px-5 scrollbar-none">
@@ -79,7 +79,7 @@ const Index = () => {
 
         {/* Trending */}
         <section>
-          <h2 className="text-xl font-serif mb-3">Trending</h2>
+          <h2 className="text-xl font-medium mb-3">Trending</h2>
           <div className="grid grid-cols-2 gap-3">
             {trendingItems.map((item) => (
               <TrendingCard key={item.title} {...item} />

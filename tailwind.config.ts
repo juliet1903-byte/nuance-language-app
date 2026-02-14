@@ -14,8 +14,11 @@ export default {
     },
     extend: {
       fontFamily: {
-        sans: ['"DM Sans"', 'system-ui', 'sans-serif'],
-        serif: ['"DM Serif Display"', 'serif'],
+        sans: ['"Outfit"', 'system-ui', 'sans-serif'],
+      },
+      fontSize: {
+        'caption': ['0.875rem', { lineHeight: '1.25rem', fontWeight: '400' }],
+        'body': ['1.125rem', { lineHeight: '1.75rem', fontWeight: '400' }],
       },
       colors: {
         border: "hsl(var(--border))",

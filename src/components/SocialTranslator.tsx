@@ -107,7 +107,7 @@ const SocialTranslator = ({ open, onClose }: SocialTranslatorProps) => {
             </div>
 
             <div className="px-5 pb-8">
-              <h2 className="text-2xl font-serif mb-1">Social Translator</h2>
+              <h2 className="text-2xl font-semibold mb-1">Social Translator</h2>
               <p className="text-sm text-muted-foreground mb-5">
                 Turn raw thoughts into leadership communication
               </p>
