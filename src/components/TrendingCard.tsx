@@ -16,12 +16,12 @@ const TrendingCard = ({ image, badge, badgeColor, title }: TrendingCardProps) =>
       />
       <div className="absolute inset-0 bg-gradient-to-t from-foreground/60 to-transparent" />
       <span
-        className="absolute top-3 left-3 text-[10px] font-bold tracking-wider uppercase px-2.5 py-1 rounded-md text-card backdrop-blur-[30px]"
+        className="absolute top-3 left-3 text-[10px] lg:text-xs font-bold tracking-wider uppercase px-2.5 py-1 rounded-md text-card backdrop-blur-[30px]"
         style={{ background: 'rgba(255, 255, 255, 0.1)' }}
       >
         {badge}
       </span>
-      <p className="absolute bottom-3 left-3 right-3 text-sm font-semibold text-card leading-tight">
+      <p className="absolute bottom-3 left-3 right-3 text-sm lg:text-base font-semibold text-card leading-tight">
         {title}
       </p>
     </div>

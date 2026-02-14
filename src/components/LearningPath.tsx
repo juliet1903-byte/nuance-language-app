@@ -12,7 +12,7 @@ const LearningPath = () => {
     >
       <div className="flex items-center justify-between mb-4">
         <h2 className="text-lg font-medium">My Learning Path</h2>
-        <span className="flex items-center gap-1.5 text-sm px-3 py-1.5 rounded-full font-medium text-cta bg-secondary">
+        <span className="flex items-center gap-1.5 text-sm lg:text-base px-3 py-1.5 rounded-full font-medium text-cta bg-secondary">
           <CalendarDays className="w-3.5 h-3.5" /> 7
         </span>
       </div>
@@ -46,8 +46,8 @@ const LearningPath = () => {
 
             {/* Content */}
             <div className="pb-4 pt-0.5">
-              <p className="font-semibold text-sm">{step.title}</p>
-              <p className="text-xs text-muted-foreground">{step.subtitle}</p>
+              <p className="font-semibold text-sm lg:text-base">{step.title}</p>
+              <p className="text-xs lg:text-base text-muted-foreground">{step.subtitle}</p>
               {step.active && step.progress &&
             <div className="mt-2">
                   <div className="w-44 h-1.5 bg-muted rounded-full overflow-hidden">
@@ -56,7 +56,7 @@ const LearningPath = () => {
                   style={{ width: `${step.progress}%` }} />
 
                   </div>
-                  <p className="text-xs text-accent mt-1 font-medium">{step.progress}% complete</p>
+                  <p className="text-xs lg:text-base text-accent mt-1 font-medium">{step.progress}% complete</p>
                 </div>
             }
             </div>

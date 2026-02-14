@@ -47,12 +47,12 @@ const Index = () => {
             <img alt="Lesson" className="w-full h-40 object-cover" src="/lovable-uploads/5a8baccc-96a0-46e9-a068-c093d117cb1e.png" />
             <div className="p-4">
               <h3 className="font-semibold text-base mb-1">Introducing Yourself</h3>
-              <p className="text-xs text-muted-foreground mb-3">
+              <p className="text-xs lg:text-base text-muted-foreground mb-3">
                 Why your quiet competence might be holding you back
               </p>
               <button
                 onClick={() => navigate(`/module/${modules[0].id}`)}
-                className="w-full py-3 rounded-xl text-accent-foreground font-semibold text-sm bg-cta"
+                className="w-full py-3 rounded-xl text-accent-foreground font-semibold text-sm lg:text-base bg-cta"
               >
                 Continue Learning
               </button>
@@ -63,7 +63,7 @@ const Index = () => {
         <section>
           <div className="flex items-center justify-between mb-3">
             <h2 className="text-xl font-medium">All Modules</h2>
-            <span className="text-sm text-muted-foreground">{modules.length}</span>
+            <span className="text-sm lg:text-base text-muted-foreground">{modules.length}</span>
           </div>
           <div className="gap-3 overflow-x-auto pb-2 -mx-5 px-5 scrollbar-none flex items-start justify-start">
             {modules.map((m) => (
