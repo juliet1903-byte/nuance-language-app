@@ -86,7 +86,7 @@ const Index = () => {
         {/* Trending */}
         <section>
           <h2 className="text-xl font-medium mb-3">Trending</h2>
-          <div className="grid grid-cols-2 md:grid-cols-1 gap-3">
+          <div className="grid grid-cols-2 md:grid-cols-1 lg:grid-cols-2 gap-3">
             {trendingItems.map((item) =>
             <TrendingCard key={item.title} {...item} />
             )}
