@@ -44,7 +44,7 @@ const BottomNav = ({ onTranslatorOpen }: BottomNavProps) => {
               }`}
             >
               <tab.icon className="w-5 h-5" />
-              <span className="text-[10px] font-medium">{tab.label}</span>
+              <span className="text-xs font-medium">{tab.label}</span>
             </button>
           );
         })}
