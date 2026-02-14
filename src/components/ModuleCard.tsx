@@ -11,6 +11,7 @@ import moduleManagingUp from "@/assets/module-managing-up.png";
 import moduleDifficultConvos from "@/assets/module-difficult-convos.png";
 import moduleCareerMoves from "@/assets/module-career-moves.png";
 import moduleDei from "@/assets/module-dei.png";
+import moduleCommonMistakes from "@/assets/module-common-mistakes.png";
 
 const imageMap: Record<string, string> = {
   "module-meeting": moduleMeeting,
@@ -23,6 +24,7 @@ const imageMap: Record<string, string> = {
   "module-difficult-convos": moduleDifficultConvos,
   "module-career-moves": moduleCareerMoves,
   "module-dei": moduleDei,
+  "module-common-mistakes": moduleCommonMistakes,
 };
 
 const ModuleCard = ({ module }: { module: Module }) => {
