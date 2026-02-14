@@ -43,7 +43,7 @@ const ModuleCard = ({ module }: { module: Module }) => {
           loading="lazy"
         />
       </div>
-      <p className="text-sm font-semibold leading-tight">{module.title}</p>
+      <p className="text-sm lg:text-base font-semibold leading-tight">{module.title}</p>
     </button>
   );
 };

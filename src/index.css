@@ -113,6 +113,14 @@
     @apply bg-background text-foreground font-sans antialiased text-lg;
   }
 
+  /* Enforce minimum 16px (1rem) text on desktop for content areas.
+     Excludes nav, sidebar, and explicitly small UI via .text-floor-none. */
+  @media (min-width: 1024px) {
+    main :where(p, span, label, li, td, th, a, button) {
+      font-size: max(inherit, 1rem);
+    }
+  }
+
   h1 {
     @apply text-2xl font-semibold;
   }
