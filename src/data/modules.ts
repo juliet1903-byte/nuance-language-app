@@ -136,7 +136,7 @@ export const modules: Module[] = [
     title: "Managing Up & Sideways",
     subtitle: "Influencing without authority",
     description: "Most important relationships are with people you can't direct — only influence.",
-    image: "module-navigate",
+    image: "module-managing-up",
     lessons: [
       {
         id: "4-1",
