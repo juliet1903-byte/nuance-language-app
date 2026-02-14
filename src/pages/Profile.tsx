@@ -66,7 +66,7 @@ const Profile = () => {
             >
               <stat.icon className={`w-5 h-5 ${stat.color} mb-1.5`} />
               <span className="text-xl font-semibold">{stat.value}</span>
-              <span className="text-[11px] text-muted-foreground mt-0.5">
+              <span className="text-xs text-muted-foreground mt-0.5">
                 {stat.label}
               </span>
             </div>
@@ -126,7 +126,7 @@ const Profile = () => {
         </section>
 
         {/* Version */}
-        <p className="text-center text-[11px] text-muted-foreground pb-2">
+        <p className="text-center text-xs text-muted-foreground pb-2">
           Nuance v1.0 · Career Playbook
         </p>
       </main>

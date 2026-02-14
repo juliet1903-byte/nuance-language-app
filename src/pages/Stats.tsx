@@ -209,7 +209,7 @@ const Stats = () => {
               </div>
               <span className="text-2xl font-semibold">{firstTimeAccuracy}%</span>
               <span className="text-xs text-muted-foreground mt-1">First-Time Accuracy</span>
-              <span className="text-[11px] text-muted-foreground/70 mt-0.5">
+              <span className="text-xs text-muted-foreground/70 mt-0.5">
                 Tasks passed without Redo
               </span>
             </motion.div>
@@ -228,7 +228,7 @@ const Stats = () => {
                 {learningHours}h {learningMinutes}m
               </span>
               <span className="text-xs text-muted-foreground mt-1">Learning Time</span>
-              <span className="text-[11px] text-muted-foreground/70 mt-0.5">
+              <span className="text-xs text-muted-foreground/70 mt-0.5">
                 Total hours invested
               </span>
             </motion.div>
@@ -245,7 +245,7 @@ const Stats = () => {
               </div>
               <span className="text-2xl font-semibold">{masteryAverage}/5</span>
               <span className="text-xs text-muted-foreground mt-1">Mastery Average</span>
-              <span className="text-[11px] text-muted-foreground/70 mt-0.5">
+              <span className="text-xs text-muted-foreground/70 mt-0.5">
                 Mean scenario score
               </span>
             </motion.div>

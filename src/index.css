@@ -115,9 +115,13 @@
 
   /* Enforce minimum 16px (1rem) text on desktop for content areas.
      Excludes nav, sidebar, and explicitly small UI via .text-floor-none. */
+  main :where(p, span, label, li, td, th, a, button) {
+    font-size: max(inherit, 0.875rem);   /* 14px floor */
+  }
+
   @media (min-width: 1024px) {
     main :where(p, span, label, li, td, th, a, button) {
-      font-size: max(inherit, 1rem);
+      font-size: max(inherit, 1rem);     /* 16px floor */
     }
   }
 
