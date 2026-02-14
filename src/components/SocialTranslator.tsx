@@ -23,7 +23,7 @@ const SocialTranslator = ({ open, onClose }: SocialTranslatorProps) => {
   const [tone, setTone] = useState<Tone>("colleague");
   const [result, setResult] = useState<TranslationResult | null>(null);
   const [ghostPosition, setGhostPosition] = useState<number | null>(null);
-  const [needlePosition, setNeedlePosition] = useState(25);
+  const [needlePosition, setNeedlePosition] = useState(50);
   const [isLoading, setIsLoading] = useState(false);
   const [showCoachTip, setShowCoachTip] = useState(false);
 
@@ -68,7 +68,7 @@ const SocialTranslator = ({ open, onClose }: SocialTranslatorProps) => {
     setInput("");
     setResult(null);
     setGhostPosition(null);
-    setNeedlePosition(25);
+    setNeedlePosition(50);
     setShowCoachTip(false);
   };
 
@@ -138,23 +138,18 @@ const SocialTranslator = ({ open, onClose }: SocialTranslatorProps) => {
               </div>
 
               {/* Vibe Meter */}
-              <div className="flex items-center justify-between mb-2">
-                <label className="text-xs font-semibold tracking-wider text-muted-foreground uppercase">
-                  The Vibe Meter
-                </label>
-                <button className="p-1 rounded-full border border-border">
-                  <HelpCircle className="w-4 h-4 text-muted-foreground" />
-                </button>
-              </div>
-              <div className="relative mb-1">
-                <div className="h-2 rounded-full bg-gradient-to-r from-vibe-blunt via-yellow-400 to-vibe-nuanced" />
+              <label className="text-xs font-semibold tracking-wider text-muted-foreground uppercase mb-2 block">
+                The Vibe Meter
+              </label>
+              <div className="relative mb-1 h-5 flex items-center">
+                <div className="absolute inset-x-0 top-1/2 -translate-y-1/2 h-2 rounded-full bg-gradient-to-r from-vibe-blunt via-muted to-vibe-nuanced" />
 
-                {/* Ghost marker – dashed circle at raw score */}
+                {/* Ghost marker – dashed black circle at raw score */}
                 {ghostPosition !== null && (
                   <motion.div
                     initial={{ opacity: 0, scale: 0.5 }}
                     animate={{ opacity: 1, scale: 1 }}
-                    className="absolute top-1/2 -translate-y-1/2 w-5 h-5 rounded-full border-2 border-dashed border-vibe-blunt"
+                    className="absolute top-1/2 -translate-y-1/2 w-5 h-5 rounded-full border-2 border-dashed border-foreground"
                     style={{ left: `calc(${ghostPosition}% - 10px)` }}
                   />
                 )}
