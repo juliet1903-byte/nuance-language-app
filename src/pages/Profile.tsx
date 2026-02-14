@@ -49,7 +49,7 @@ const Profile = () => {
           </div>
           <h2 className="text-xl font-semibold">Julia K.</h2>
           <p className="text-sm text-muted-foreground mt-0.5">
-            Junior Marketing Manager
+            Product Designer
           </p>
           <span className="mt-2 inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-accent/15 text-accent text-xs font-semibold">
             <Award className="w-3.5 h-3.5" />
