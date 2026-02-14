@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Bell } from "lucide-react";
 import { useNavigate } from "react-router-dom";
-import logo from "@/assets/logo_nuance.svg";
+import Logo from "@/components/Logo";
 import userAvatar from "@/assets/user-avatar.jpg";
 import trending1 from "@/assets/trending-1.png";
 import trending2 from "@/assets/trending-2.png";
@@ -27,7 +27,7 @@ const Index = () => {
     <AppLayout>
       {/* Header */}
       <header className="flex items-center justify-between px-5 pt-6 pb-4 md:max-w-[900px] md:mx-auto md:w-full">
-        <img src={logo} alt="Nuance" className="h-8 md:hidden" />
+        <Logo className="h-8 md:hidden" />
         <div className="flex items-center gap-3 md:ml-auto">
           <button className="p-2 rounded-full bg-card">
             <Bell className="w-5 h-5 text-foreground" />
