@@ -1,23 +1,42 @@
 
-# Theme-Aware Logo Update
-
-## Overview
-Replace the current logo with the new uploaded SVG, rendered as an inline React component that automatically switches between dark (`#1E1F22`) and white (`#FFFFFF`) based on the active theme.
+# Enforce 14px Minimum Text on Mobile
 
 ## What changes
+All text elements currently sized at 10px or 11px will be bumped to 14px (`text-sm`) on mobile. Elements at 12px (`text-xs`) are already close but will also be raised to 14px for consistency.
 
-### 1. Copy the new SVG to the project
-Save the uploaded file to `src/assets/logo_1.svg` for reference/fallback.
+## Files and changes
 
-### 2. Create `src/components/Logo.tsx`
-A React component that renders the new SVG inline with all `fill` and `stroke` values set to `currentColor` instead of `#1E1F22`. Since the logo is fully monochromatic, every colored attribute becomes `currentColor`, inheriting from the parent's CSS `color` -- which is already controlled by the theme system (`--foreground`).
+### 1. `src/index.css` -- Global floor rule
+Add a base rule (no media query, so it applies at all sizes) that enforces `font-size: max(inherit, 0.875rem)` (14px) on text elements inside `main`. The existing desktop rule already overrides this to 16px at `lg`.
 
-The component accepts a `className` prop for sizing (default `h-8`).
+### 2. `src/components/BottomNav.tsx`
+- Line 47: Change `text-[10px]` to `text-xs` (12px) for bottom nav labels. These sit outside `main` so the global rule won't reach them, but 12px is the standard iOS tab-bar label size and should stay compact. **If you prefer 14px here too, let me know** -- but nav labels at 14px may look oversized.
 
-### 3. Update usages
-- **`src/pages/Index.tsx`** -- replace `<img src={logo} ...>` with `<Logo />`, remove the old logo import.
-- **`src/components/DesktopSidebar.tsx`** -- same replacement.
+### 3. `src/pages/Profile.tsx`
+- Line 69: `text-[11px]` to `text-xs` (stat labels)
+- Line 129: `text-[11px]` to `text-xs` (version string)
 
-### Technical notes
-- No conditional logic or theme hooks needed inside the component. `currentColor` handles light/dark automatically.
-- The existing `text-foreground` class (or inherited foreground color) ensures the logo is near-black in light mode and light/white in dark mode.
+### 4. `src/pages/Stats.tsx`
+- Lines 212, 231, 248: `text-[11px]` to `text-xs` (stat sub-labels)
+
+### 5. `src/components/TrendingCard.tsx`
+- Line 19: `text-[10px]` to `text-xs` (badge text)
+
+All remaining `text-xs` instances across Library, SocialTranslator, ScenarioExercise, FillGapExercise, and LearningPath will be caught by the global CSS floor rule in `index.css`, so no individual file edits are needed for those.
+
+## Technical detail
+The global rule in `index.css` will look like:
+
+```text
+main :where(p, span, label, li, td, th, a, button) {
+  font-size: max(inherit, 0.875rem);   /* 14px floor */
+}
+
+@media (min-width: 1024px) {
+  main :where(p, span, label, li, td, th, a, button) {
+    font-size: max(inherit, 1rem);     /* 16px floor -- already exists */
+  }
+}
+```
+
+The desktop rule overrides the mobile one. The `:where()` selector keeps specificity at zero so explicit utility classes can still go smaller if needed via a `.text-floor-none` escape hatch.
