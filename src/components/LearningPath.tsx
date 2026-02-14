@@ -34,7 +34,7 @@ const LearningPath = () => {
               }
               </div>
               {i < learningPath.length - 1 &&
-            <div className="w-0.5 h-8 bg-border my-0" />
+            <div className="w-0.5 h-8 bg-border my-0 border-accent" />
             }
             </div>
 
