@@ -158,7 +158,7 @@ export const modules: Module[] = [
     title: "Difficult Conversations",
     subtitle: "Conflict, feedback, and hard truths — without the damage",
     description: "The conversations most people avoid are usually the ones that matter most.",
-    image: "module-navigate",
+    image: "module-difficult-convos",
     lessons: [
       {
         id: "5-1",
