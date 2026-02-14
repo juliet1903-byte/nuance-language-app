@@ -47,7 +47,7 @@ const Profile = () => {
               className="w-full h-full object-cover"
             />
           </div>
-          <h2 className="text-xl font-semibold">Sarina M.</h2>
+          <h2 className="text-xl font-semibold">Julia K.</h2>
           <p className="text-sm text-muted-foreground mt-0.5">
             Junior Marketing Manager
           </p>
