@@ -1,56 +1,17 @@
 import { useState, useCallback } from "react";
-import { X, Mic, HelpCircle, Copy } from "lucide-react";
+import { X, Mic, HelpCircle, Copy, Loader2 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import { supabase } from "@/integrations/supabase/client";
+import { toast } from "@/hooks/use-toast";
 
 type Tone = "neutral" | "colleague" | "leader";
 
 interface TranslationResult {
-  text: string;
-  sections?: { label: string; content: string }[];
-  vibeScore: number;
+  sections: { label: string; content: string }[];
+  rawVibeScore: number;
+  translatedVibeScore: number;
+  coachTip: string;
 }
-
-const translateText = (input: string, tone: Tone): TranslationResult => {
-  if (!input.trim()) return { text: "", vibeScore: 30 };
-
-  if (tone === "leader") {
-    return {
-      text: "",
-      sections: [
-        {
-          label: "SITUATION",
-          content: `I'd like to share an observation. ${input.includes("code") ? "During the sprint, I noticed some concerns with the current approach" : "I've been reflecting on a pattern I've noticed recently"}.`,
-        },
-        {
-          label: "BEHAVIOUR",
-          content: `${input.includes("bad") ? "I noticed the implementation approach diverged from our agreed standards" : "I observed that the current direction may benefit from a different perspective"}.`,
-        },
-        {
-          label: "IMPACT",
-          content: `I think aligning on ${input.includes("system") ? "clearer architectural guidelines" : "shared expectations"} could help us stay on track. What are your thoughts?`,
-        },
-      ],
-      vibeScore: 82,
-    };
-  }
-
-  if (tone === "colleague") {
-    const softened = input
-      .replace(/bad/gi, "could use some attention")
-      .replace(/break/gi, "impact")
-      .replace(/wrong/gi, "different from what we expected");
-    return {
-      text: `From where I'm sitting, ${softened.charAt(0).toLowerCase() + softened.slice(1)}${softened.endsWith(".") ? "" : "."} I'd love to hear your take on this — maybe we can find a way forward together.`,
-      vibeScore: 68,
-    };
-  }
-
-  // Neutral
-  return {
-    text: `I'd like to flag something: ${input.charAt(0).toLowerCase() + input.slice(1)}${input.endsWith(".") ? "" : "."} I think it's worth discussing how we can address this.`,
-    vibeScore: 50,
-  };
-};
 
 interface SocialTranslatorProps {
   open: boolean;
@@ -61,20 +22,61 @@ const SocialTranslator = ({ open, onClose }: SocialTranslatorProps) => {
   const [input, setInput] = useState("");
   const [tone, setTone] = useState<Tone>("colleague");
   const [result, setResult] = useState<TranslationResult | null>(null);
-  const [animatedVibe, setAnimatedVibe] = useState(25);
+  const [ghostPosition, setGhostPosition] = useState<number | null>(null);
+  const [needlePosition, setNeedlePosition] = useState(25);
+  const [isLoading, setIsLoading] = useState(false);
+  const [showCoachTip, setShowCoachTip] = useState(false);
 
-  const handleTranslate = useCallback(() => {
-    if (!input.trim()) return;
-    const translation = translateText(input, tone);
-    setResult(translation);
-    // Animate vibe meter
-    setTimeout(() => setAnimatedVibe(translation.vibeScore), 100);
-  }, [input, tone]);
+  const handleTranslate = useCallback(async () => {
+    if (!input.trim() || isLoading) return;
+    setIsLoading(true);
+    setResult(null);
+    setShowCoachTip(false);
+
+    try {
+      const { data, error } = await supabase.functions.invoke("social-translate", {
+        body: { rawText: input, tone },
+      });
+
+      if (error) throw error;
+      if (data?.error) throw new Error(data.error);
+
+      const res = data as TranslationResult;
+      setResult(res);
+
+      // 1. Snap ghost marker to raw score
+      setGhostPosition(res.rawVibeScore);
+      setNeedlePosition(res.rawVibeScore);
+
+      // 2. After a beat, sweep needle to translated score
+      setTimeout(() => {
+        setNeedlePosition(res.translatedVibeScore);
+      }, 300);
+    } catch (e: any) {
+      console.error("Translation error:", e);
+      toast({
+        title: "Translation failed",
+        description: e.message || "Please try again.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsLoading(false);
+    }
+  }, [input, tone, isLoading]);
 
   const handleClear = () => {
     setInput("");
     setResult(null);
-    setAnimatedVibe(25);
+    setGhostPosition(null);
+    setNeedlePosition(25);
+    setShowCoachTip(false);
+  };
+
+  const handleCopy = () => {
+    if (!result) return;
+    const text = result.sections.map((s) => s.content).join(" ");
+    navigator.clipboard.writeText(text);
+    toast({ title: "Copied to clipboard" });
   };
 
   const tones: { value: Tone; label: string }[] = [
@@ -146,9 +148,21 @@ const SocialTranslator = ({ open, onClose }: SocialTranslatorProps) => {
               </div>
               <div className="relative mb-1">
                 <div className="h-2 rounded-full bg-gradient-to-r from-vibe-blunt via-yellow-400 to-vibe-nuanced" />
+
+                {/* Ghost marker – dashed circle at raw score */}
+                {ghostPosition !== null && (
+                  <motion.div
+                    initial={{ opacity: 0, scale: 0.5 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    className="absolute top-1/2 -translate-y-1/2 w-5 h-5 rounded-full border-2 border-dashed border-vibe-blunt"
+                    style={{ left: `calc(${ghostPosition}% - 10px)` }}
+                  />
+                )}
+
+                {/* Solid needle */}
                 <motion.div
                   className="absolute top-1/2 -translate-y-1/2 w-5 h-5 rounded-full bg-foreground border-2 border-card shadow-md"
-                  animate={{ left: `calc(${animatedVibe}% - 10px)` }}
+                  animate={{ left: `calc(${needlePosition}% - 10px)` }}
                   transition={{ type: "spring", damping: 20, stiffness: 150 }}
                 />
               </div>
@@ -177,44 +191,58 @@ const SocialTranslator = ({ open, onClose }: SocialTranslatorProps) => {
               {/* Translate Button */}
               <button
                 onClick={handleTranslate}
-                disabled={!input.trim()}
-                className="w-full py-4 rounded-xl bg-cta text-cta-foreground font-semibold text-lg disabled:opacity-40 transition-opacity"
+                disabled={!input.trim() || isLoading}
+                className="w-full py-4 rounded-xl bg-cta text-cta-foreground font-semibold text-lg disabled:opacity-40 transition-opacity flex items-center justify-center gap-2"
               >
-                Translate
+                {isLoading ? (
+                  <>
+                    <Loader2 className="w-5 h-5 animate-spin" />
+                    Translating…
+                  </>
+                ) : (
+                  "Translate"
+                )}
               </button>
 
               {/* Result */}
               <AnimatePresence>
-                {result && (result.text || result.sections) && (
+                {result && (
                   <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0 }}
                     className="mt-5 glass-dark rounded-2xl p-5 text-glass-foreground"
                   >
-                    {result.sections ? (
-                      result.sections.map((s) => (
-                        <div key={s.label} className="mb-4 last:mb-0">
-                          <p className="text-xs font-bold tracking-wider text-accent mb-1">{s.label}</p>
-                          <p className="text-sm leading-relaxed opacity-90">{s.content}</p>
-                        </div>
-                      ))
-                    ) : (
-                      <p className="text-sm leading-relaxed">{result.text}</p>
-                    )}
+                    {result.sections.map((s) => (
+                      <div key={s.label} className="mb-4 last:mb-0">
+                        <p className="text-xs font-bold tracking-wider text-accent mb-1">{s.label}</p>
+                        <p className="text-sm leading-relaxed opacity-90">{s.content}</p>
+                      </div>
+                    ))}
+
+                    {/* Coach's Tip */}
+                    <AnimatePresence>
+                      {showCoachTip && result.coachTip && (
+                        <motion.div
+                          initial={{ opacity: 0, height: 0 }}
+                          animate={{ opacity: 1, height: "auto" }}
+                          exit={{ opacity: 0, height: 0 }}
+                          className="mt-3 p-3 rounded-xl bg-accent/20 border border-accent/30"
+                        >
+                          <p className="text-xs font-bold tracking-wider text-accent mb-1">COACH'S TIP</p>
+                          <p className="text-sm leading-relaxed opacity-90">{result.coachTip}</p>
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+
                     <div className="flex justify-end gap-2 mt-4">
-                      <button className="p-2 rounded-full bg-glass-foreground/10">
+                      <button
+                        onClick={() => setShowCoachTip((p) => !p)}
+                        className={`p-2 rounded-full transition-colors ${showCoachTip ? "bg-accent/30" : "bg-glass-foreground/10"}`}
+                      >
                         <HelpCircle className="w-4 h-4" />
                       </button>
-                      <button
-                        onClick={() => {
-                          const text = result.sections
-                            ? result.sections.map((s) => `${s.label}: ${s.content}`).join("\n")
-                            : result.text;
-                          navigator.clipboard.writeText(text);
-                        }}
-                        className="p-2 rounded-full bg-glass-foreground/10"
-                      >
+                      <button onClick={handleCopy} className="p-2 rounded-full bg-glass-foreground/10">
                         <Copy className="w-4 h-4" />
                       </button>
                     </div>
