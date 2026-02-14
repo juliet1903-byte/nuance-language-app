@@ -57,9 +57,11 @@ const VibeMeter = ({ score }: { score: number }) => {
           <defs>
             <linearGradient id="vibe-arc" x1="0" y1="0" x2="1" y2="0">
               <stop offset="0%" stopColor="hsl(14, 80%, 52%)" />
-              <stop offset="30%" stopColor="hsl(30, 50%, 55%)" />
-              <stop offset="50%" stopColor="hsl(36, 15%, 82%)" />
-              <stop offset="70%" stopColor="hsl(80, 45%, 50%)" />
+              <stop offset="25%" stopColor="hsl(30, 50%, 55%)" />
+              <stop offset="38%" stopColor="hsl(36, 15%, 82%)" />
+              <stop offset="50%" stopColor="hsl(36, 12%, 84%)" />
+              <stop offset="62%" stopColor="hsl(36, 15%, 82%)" />
+              <stop offset="75%" stopColor="hsl(80, 45%, 50%)" />
               <stop offset="100%" stopColor="hsl(152, 40%, 46%)" />
             </linearGradient>
           </defs>
