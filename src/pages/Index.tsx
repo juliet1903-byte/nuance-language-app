@@ -4,10 +4,10 @@ import { useNavigate } from "react-router-dom";
 import logo from "@/assets/logo_nuance.svg";
 import userAvatar from "@/assets/user-avatar.jpg";
 import heroSilence from "@/assets/hero-silence.jpg";
-import articleWarmIntro from "@/assets/article-warm-intro.jpg";
-import articleInterview from "@/assets/article-interview.jpg";
-import articleCultures from "@/assets/article-cultures.jpg";
-import articleBurnout from "@/assets/article-burnout.jpg";
+import trending1 from "@/assets/trending-1.png";
+import trending2 from "@/assets/trending-2.png";
+import trending3 from "@/assets/trending-3.png";
+import trending4 from "@/assets/trending-4.png";
 import LearningPath from "@/components/LearningPath";
 import ModuleCard from "@/components/ModuleCard";
 import TrendingCard from "@/components/TrendingCard";
@@ -20,10 +20,10 @@ const Index = () => {
   const navigate = useNavigate();
 
   const trendingItems = [
-  { image: articleWarmIntro, badge: "Article", badgeColor: "bg-accent", title: "The art of the Warm Intro" },
-  { image: articleInterview, badge: "Video", badgeColor: "bg-cta", title: "How to get ready for an interview" },
-  { image: articleCultures, badge: "Deep Dive", badgeColor: "bg-vibe-blunt", title: "Reading between Cultures" },
-  { image: articleBurnout, badge: "Article", badgeColor: "bg-accent", title: "Quiet Cracking or Burning Out" }];
+  { image: trending1, badge: "Article", badgeColor: "bg-accent", title: "The art of the Warm Intro" },
+  { image: trending2, badge: "Video", badgeColor: "bg-cta", title: "How to get ready for an interview" },
+  { image: trending3, badge: "Deep Dive", badgeColor: "bg-vibe-blunt", title: "Reading between Cultures" },
+  { image: trending4, badge: "Article", badgeColor: "bg-accent", title: "Quiet Cracking or Burning Out" }];
 
 
   return (
