@@ -28,8 +28,15 @@ const masteryAverage = 4.2;
 // ---------- Vibe Meter SVG ----------
 
 const VibeMeter = ({ score }: { score: number }) => {
-  // Map 0–100 → -90° to 90°
-  const angle = -90 + (score / 100) * 180;
+  // Arc center and radius
+  const cx = 110;
+  const cy = 110;
+  const r = 90;
+
+  // Map 0–100 → π (left) to 0 (right) for semicircle
+  const theta = Math.PI - (score / 100) * Math.PI;
+  const indicatorX = cx + r * Math.cos(theta);
+  const indicatorY = cy - r * Math.sin(theta);
 
   return (
     <div className="w-full max-w-[320px] mx-auto">
@@ -38,7 +45,8 @@ const VibeMeter = ({ score }: { score: number }) => {
           <defs>
             <linearGradient id="vibe-arc" x1="0" y1="0" x2="1" y2="0">
               <stop offset="0%" stopColor="hsl(14, 80%, 52%)" />
-              <stop offset="40%" stopColor="hsl(45, 60%, 55%)" />
+              <stop offset="30%" stopColor="hsl(30, 50%, 55%)" />
+              <stop offset="50%" stopColor="hsl(var(--muted-foreground))" />
               <stop offset="70%" stopColor="hsl(80, 45%, 50%)" />
               <stop offset="100%" stopColor="hsl(152, 40%, 46%)" />
             </linearGradient>
@@ -53,22 +61,16 @@ const VibeMeter = ({ score }: { score: number }) => {
             strokeLinecap="round"
           />
 
-          {/* Needle line (rotates) */}
-          <motion.line
-            x1="110"
-            y1="110"
-            x2="110"
-            y2="32"
-            stroke="hsl(var(--foreground))"
-            strokeWidth="2.5"
-            strokeLinecap="round"
-            initial={{ rotate: -90 }}
-            animate={{ rotate: angle }}
+          {/* Indicator circle that travels along the arc */}
+          <motion.circle
+            r="8"
+            fill="hsl(var(--foreground))"
+            stroke="hsl(var(--card))"
+            strokeWidth="3"
+            initial={{ cx: cx - r, cy }}
+            animate={{ cx: indicatorX, cy: indicatorY }}
             transition={{ type: "spring", stiffness: 40, damping: 12, delay: 0.3 }}
-            style={{ transformOrigin: "110px 110px" }}
           />
-          {/* Pivot circle (fixed) */}
-          <circle cx="110" cy="110" r="6" fill="hsl(var(--foreground))" />
 
           {/* Labels */}
           <text x="22" y="128" fontSize="9" fill="hsl(var(--muted-foreground))" textAnchor="start">
@@ -81,7 +83,7 @@ const VibeMeter = ({ score }: { score: number }) => {
       </div>
 
       {/* Score below the meter */}
-      <div className="flex flex-col items-center -mt-8">
+      <div className="flex flex-col items-center -mt-6">
         <span className="text-4xl font-semibold">{score}</span>
         <span className="text-caption text-muted-foreground">Lifetime Vibe IQ</span>
       </div>
