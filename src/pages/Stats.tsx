@@ -53,7 +53,7 @@ const VibeMeter = ({ score }: { score: number }) => {
   return (
     <div className="w-full max-w-[320px] mx-auto">
       <div className="relative">
-        <svg viewBox="0 0 220 130" className="w-full">
+        <svg viewBox="0 0 220 138" className="w-full overflow-visible">
           <defs>
             <linearGradient id="vibe-arc" x1="0" y1="0" x2="1" y2="0">
               <stop offset="0%" stopColor="hsl(14, 80%, 52%)" />
