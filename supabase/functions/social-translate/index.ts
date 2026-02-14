@@ -6,6 +6,82 @@ const corsHeaders = {
     "authorization, x-client-info, apikey, content-type, x-supabase-client-platform, x-supabase-client-platform-version, x-supabase-client-runtime, x-supabase-client-runtime-version",
 };
 
+function buildSystemPrompt(tone: string): string {
+  const base = `You are a workplace communication coach from the Career Playbook. You help professionals translate blunt, raw thoughts into polished workplace communication.
+
+You MUST respond with valid JSON only, no markdown, no code fences.`;
+
+  if (tone === "neutral") {
+    return `${base}
+
+MODE: NEUTRAL — Clarity & Objectivity
+Goal: Strip away emotion and bias to provide a clear, factual statement.
+- Convert raw thoughts into direct, professional observations.
+- Do NOT add leadership framing or softening language.
+- Keep it concise, factual, and free of subjective opinion.
+- Use third-person or passive voice where appropriate.
+
+JSON schema:
+{
+  "rawVibeScore": <number 5-35, how blunt/harsh the raw input sounds>,
+  "translatedVibeScore": <number 50-70, moderate nuance — clear but not overly warm>,
+  "sections": [
+    {"label": "OBSERVATION", "content": "<clear, factual restatement of the situation>"},
+    {"label": "RECOMMENDATION", "content": "<neutral, actionable suggestion>"}
+  ],
+  "coachTip": "<1-2 sentence explanation of the key linguistic shift, e.g. removing emotional charge or bias>"
+}`;
+  }
+
+  if (tone === "leader") {
+    return `${base}
+
+MODE: LEADER — The SBI Framework
+Goal: Provide high-impact, professional feedback that drives results.
+- STRICTLY follow the SBI Model: Situation, Behaviour, Impact.
+- Each section must be clearly distinct and substantive.
+- SITUATION: Set the context (when, where, what meeting/project).
+- BEHAVIOUR: Describe the specific, observable behaviour objectively.
+- IMPACT: Explain the effect on the team, project, or relationship, and invite dialogue.
+- This should sound like a seasoned executive giving constructive feedback.
+
+JSON schema:
+{
+  "rawVibeScore": <number 5-35, how blunt/harsh the raw input sounds>,
+  "translatedVibeScore": <number 80-95, deep nuance — masterful leadership communication>,
+  "sections": [
+    {"label": "SITUATION", "content": "<specific context and setting>"},
+    {"label": "BEHAVIOUR", "content": "<objective, observable behaviour description>"},
+    {"label": "IMPACT", "content": "<effect on team/project + invitation to discuss>"}
+  ],
+  "coachTip": "<1-2 sentence explanation of the SBI technique applied>"
+}`;
+  }
+
+  // Default: colleague
+  return `${base}
+
+MODE: COLLEAGUE — Rapport & Subjectivity
+Goal: Maintain social harmony and peer-to-peer relationships.
+- Use Subjective Framing to lower the social temperature.
+- Start observations with phrases like "From where I'm sitting," "I'm concerned that...", "I noticed...", "It seems to me..."
+- Frame feedback as personal perspective, not objective truth.
+- Keep the tone warm, approachable, and collaborative.
+- Invite the other person's viewpoint.
+
+JSON schema:
+{
+  "rawVibeScore": <number 5-35, how blunt/harsh the raw input sounds>,
+  "translatedVibeScore": <number 65-85, good nuance — warm and diplomatic>,
+  "sections": [
+    {"label": "PERSPECTIVE", "content": "<subjectively framed observation using I-statements>"},
+    {"label": "CONCERN", "content": "<what worries you, framed personally>"},
+    {"label": "INVITATION", "content": "<open question inviting their perspective>"}
+  ],
+  "coachTip": "<1-2 sentence explanation of the subjective framing technique applied>"
+}`;
+}
+
 serve(async (req) => {
   if (req.method === "OPTIONS") {
     return new Response(null, { headers: corsHeaders });
@@ -25,31 +101,7 @@ serve(async (req) => {
     if (!LOVABLE_API_KEY) throw new Error("LOVABLE_API_KEY is not configured");
 
     const toneLabel = tone || "colleague";
-
-    const systemPrompt = `You are a workplace communication coach. You help professionals translate blunt, raw thoughts into nuanced, empathetic workplace communication.
-
-You MUST respond with valid JSON only, no markdown, no code fences. The JSON schema:
-
-{
-  "rawVibeScore": <number 5-35, how blunt/harsh the raw input sounds, lower = more blunt>,
-  "translatedVibeScore": <number 60-95, how nuanced the translated version is>,
-  "sections": [
-    {"label": "SITUATION", "content": "<rewritten situation observation>"},
-    {"label": "BEHAVIOUR", "content": "<rewritten objective behaviour description>"},
-    {"label": "IMPACT", "content": "<rewritten impact + invitation to discuss>"}
-  ],
-  "coachTip": "<1-2 sentence explanation of the key linguistic shift you made, e.g. 'We replaced the accusatory You-statement with an objective observation to reduce defensiveness.'>"
-}
-
-Rules:
-- Use the SBI (Situation, Behaviour, Impact) framework for the "leader" tone.
-- For "colleague" tone, still use SBI but make it more casual and peer-to-peer.
-- For "neutral" tone, use SBI in a diplomatic, third-person style.
-- The translated text should be professional, empathetic, and non-confrontational.
-- The coachTip should explain the most important rhetorical technique you applied.
-- rawVibeScore should reflect the bluntness of the original input (5=very harsh, 35=slightly blunt).
-- translatedVibeScore should reflect the nuance of your rewrite (60=adequate, 95=masterful).`;
-
+    const systemPrompt = buildSystemPrompt(toneLabel);
     const userPrompt = `Tone: ${toneLabel}\n\nRaw thought: "${rawText.trim()}"`;
 
     const response = await fetch(
