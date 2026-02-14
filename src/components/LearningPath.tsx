@@ -1,12 +1,18 @@
 import { Check, Lock, CalendarDays } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 import { learningPath } from "@/data/modules";
 
 const LearningPath = () => {
+  const navigate = useNavigate();
+
   return (
-    <div className="bg-card rounded-2xl p-5 shadow-sm px-[16px] py-[12px]">
+    <button
+      onClick={() => navigate("/progress")}
+      className="w-full text-left bg-card rounded-2xl p-5 shadow-sm px-[16px] py-[12px] active:scale-[0.99] transition-transform"
+    >
       <div className="flex items-center justify-between mb-4">
         <h2 className="text-lg font-medium">My Learning Path</h2>
-        <span className="flex items-center gap-1.5 text-sm px-3 py-1.5 rounded-full font-medium text-cta bg-slate-200">
+        <span className="flex items-center gap-1.5 text-sm px-3 py-1.5 rounded-full font-medium text-cta bg-secondary">
           <CalendarDays className="w-3.5 h-3.5" /> 7
         </span>
       </div>
@@ -57,8 +63,8 @@ const LearningPath = () => {
           </div>
         )}
       </div>
-    </div>);
-
+    </button>
+  );
 };
 
 export default LearningPath;
