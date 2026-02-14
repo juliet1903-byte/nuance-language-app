@@ -3,9 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { ArrowLeft, Check, Lock, ChevronDown, ChevronRight, CalendarDays } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { modules } from "@/data/modules";
-import BottomNav from "@/components/BottomNav";
-import DesktopSidebar from "@/components/DesktopSidebar";
-import SocialTranslator from "@/components/SocialTranslator";
+import AppLayout from "@/components/AppLayout";
 
 import moduleStartingStrong from "@/assets/module-starting-strong.png";
 import moduleMeetingRoom from "@/assets/module-meeting-room.png";
@@ -102,7 +100,6 @@ const WEEKDAYS = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
 
 const Progress = () => {
   const navigate = useNavigate();
-  const [translatorOpen, setTranslatorOpen] = useState(false);
   const [expandedLevel, setExpandedLevel] = useState<string | null>("specialist");
 
   const { year, month, daysInMonth, today, activity } = generateActivityData();
@@ -115,10 +112,7 @@ const Progress = () => {
   const streak = 7; // mock streak
 
   return (
-    <div className="min-h-screen bg-background md:flex">
-      <DesktopSidebar onTranslatorOpen={() => setTranslatorOpen(true)} />
-
-      <div className="flex-1 md:ml-[220px] pb-24 md:pb-8 md:h-screen md:overflow-y-auto">
+    <AppLayout>
         {/* Header */}
         <header className="flex items-center gap-3 px-5 pt-6 pb-4 md:max-w-[900px] md:mx-auto md:w-full">
           <button onClick={() => navigate("/")} className="p-2 -ml-2 rounded-full">
@@ -352,11 +346,7 @@ const Progress = () => {
             </div>
           </section>
         </main>
-      </div>
-
-      <BottomNav onTranslatorOpen={() => setTranslatorOpen(true)} />
-      <SocialTranslator open={translatorOpen} onClose={() => setTranslatorOpen(false)} />
-    </div>
+    </AppLayout>
   );
 };
 
