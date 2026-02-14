@@ -22,8 +22,7 @@ const SocialTranslator = ({ open, onClose }: SocialTranslatorProps) => {
   const [input, setInput] = useState("");
   const [tone, setTone] = useState<Tone>("colleague");
   const [result, setResult] = useState<TranslationResult | null>(null);
-  const [ghostPosition, setGhostPosition] = useState<number | null>(null);
-  const [needlePosition, setNeedlePosition] = useState(50);
+  const [needlePosition, setNeedlePosition] = useState<number | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [showCoachTip, setShowCoachTip] = useState(false);
 
@@ -44,14 +43,13 @@ const SocialTranslator = ({ open, onClose }: SocialTranslatorProps) => {
       const res = data as TranslationResult;
       setResult(res);
 
-      // 1. Snap ghost marker to raw score
-      setGhostPosition(res.rawVibeScore);
+      // 1. Show needle at raw score
       setNeedlePosition(res.rawVibeScore);
 
       // 2. After a beat, sweep needle to translated score
       setTimeout(() => {
         setNeedlePosition(res.translatedVibeScore);
-      }, 300);
+      }, 600);
     } catch (e: any) {
       console.error("Translation error:", e);
       toast({
@@ -67,8 +65,7 @@ const SocialTranslator = ({ open, onClose }: SocialTranslatorProps) => {
   const handleClear = () => {
     setInput("");
     setResult(null);
-    setGhostPosition(null);
-    setNeedlePosition(50);
+    setNeedlePosition(null);
     setShowCoachTip(false);
   };
 
@@ -144,22 +141,15 @@ const SocialTranslator = ({ open, onClose }: SocialTranslatorProps) => {
               <div className="relative mb-1 h-5 flex items-center">
                 <div className="absolute inset-x-0 top-1/2 -translate-y-1/2 h-2 rounded-full bg-gradient-to-r from-vibe-blunt via-muted to-vibe-nuanced" />
 
-                {/* Ghost marker – dashed black circle at raw score */}
-                {ghostPosition !== null && (
+                {/* Solid needle – hidden until translate */}
+                {needlePosition !== null && (
                   <motion.div
-                    initial={{ opacity: 0, scale: 0.5 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    className="absolute top-1/2 -translate-y-1/2 w-5 h-5 rounded-full border-2 border-dashed border-foreground"
-                    style={{ left: `calc(${ghostPosition}% - 10px)` }}
+                    className="absolute top-1/2 -translate-y-1/2 w-5 h-5 rounded-full bg-foreground border-2 border-card shadow-md"
+                    initial={{ opacity: 0, scale: 0.5, left: `calc(${needlePosition}% - 10px)` }}
+                    animate={{ opacity: 1, scale: 1, left: `calc(${needlePosition}% - 10px)` }}
+                    transition={{ type: "spring", damping: 20, stiffness: 150 }}
                   />
                 )}
-
-                {/* Solid needle */}
-                <motion.div
-                  className="absolute top-1/2 -translate-y-1/2 w-5 h-5 rounded-full bg-foreground border-2 border-card shadow-md"
-                  animate={{ left: `calc(${needlePosition}% - 10px)` }}
-                  transition={{ type: "spring", damping: 20, stiffness: 150 }}
-                />
               </div>
               <div className="flex justify-between text-xs font-semibold mb-5">
                 <span className="text-vibe-blunt">Blunt</span>
