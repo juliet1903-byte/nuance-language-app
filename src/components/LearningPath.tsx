@@ -6,7 +6,7 @@ const LearningPath = () => {
     <div className="bg-card rounded-2xl p-5 shadow-sm">
       <div className="flex items-center justify-between mb-4">
         <h2 className="text-lg font-medium">My Learning Path</h2>
-        <span className="flex items-center gap-1.5 text-sm text-accent bg-accent/10 px-3 py-1.5 rounded-full font-medium">
+        <span className="flex items-center gap-1.5 text-sm px-3 py-1.5 rounded-full font-medium text-cta bg-slate-200">
           <CalendarDays className="w-3.5 h-3.5" /> 7
         </span>
       </div>
