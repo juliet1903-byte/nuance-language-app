@@ -115,7 +115,7 @@ const SocialTranslator = ({ open, onClose }: SocialTranslatorProps) => {
               <label className="text-xs font-semibold tracking-wider text-muted-foreground uppercase mb-2 block">
                 Your Raw Thoughts
               </label>
-              <div className="relative rounded-xl p-4 mb-5 bg-accent-foreground">
+              <div className="relative rounded-xl p-4 mb-5 bg-card border border-border">
                 <textarea
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
@@ -158,7 +158,7 @@ const SocialTranslator = ({ open, onClose }: SocialTranslatorProps) => {
               </div>
 
               {/* Tone Toggles */}
-              <div className="flex rounded-xl p-1 mb-5 bg-destructive-foreground">
+              <div className="flex rounded-xl p-1 mb-5 bg-secondary border border-border">
                 {tones.map((t) =>
               <button
                 key={t.value}
