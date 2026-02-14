@@ -53,24 +53,22 @@ const VibeMeter = ({ score }: { score: number }) => {
             strokeLinecap="round"
           />
 
-          {/* Needle */}
-          <motion.g
+          {/* Needle line (rotates) */}
+          <motion.line
+            x1="110"
+            y1="110"
+            x2="110"
+            y2="32"
+            stroke="hsl(var(--foreground))"
+            strokeWidth="2.5"
+            strokeLinecap="round"
             initial={{ rotate: -90 }}
             animate={{ rotate: angle }}
             transition={{ type: "spring", stiffness: 40, damping: 12, delay: 0.3 }}
             style={{ transformOrigin: "110px 110px" }}
-          >
-            <line
-              x1="110"
-              y1="110"
-              x2="110"
-              y2="32"
-              stroke="hsl(var(--foreground))"
-              strokeWidth="2.5"
-              strokeLinecap="round"
-            />
-            <circle cx="110" cy="110" r="6" fill="hsl(var(--foreground))" />
-          </motion.g>
+          />
+          {/* Pivot circle (fixed) */}
+          <circle cx="110" cy="110" r="6" fill="hsl(var(--foreground))" />
 
           {/* Labels */}
           <text x="22" y="128" fontSize="9" fill="hsl(var(--muted-foreground))" textAnchor="start">
