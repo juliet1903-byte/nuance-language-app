@@ -39,7 +39,7 @@ const BottomNav = ({ onTranslatorOpen }: BottomNavProps) => {
               key={tab.label}
               onClick={() => navigate(tab.route!)}
               className={`flex flex-col items-center gap-0.5 px-3 py-1 transition-colors ${
-                active ? "text-accent" : "text-muted-foreground"
+                active ? "text-cta" : "text-muted-foreground"
               }`}
             >
               <tab.icon className="w-5 h-5" />
