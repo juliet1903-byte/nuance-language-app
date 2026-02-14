@@ -1,37 +1,23 @@
 
+# Theme-Aware Logo Update
 
-## Replace Trending Card Covers
+## Overview
+Replace the current logo with the new uploaded SVG, rendered as an inline React component that automatically switches between dark (`#1E1F22`) and white (`#FFFFFF`) based on the active theme.
 
-The four uploaded abstract images will be copied into the project and used as the Trending card covers, replacing the current article images.
+## What changes
 
-### Steps
+### 1. Copy the new SVG to the project
+Save the uploaded file to `src/assets/logo_1.svg` for reference/fallback.
 
-1. Copy the four uploaded images into `src/assets/`:
-   - `user-uploads://Frame_2-2.png` -> `src/assets/trending-1.png`
-   - `user-uploads://Frame_4-2.png` -> `src/assets/trending-2.png`
-   - `user-uploads://Frame_5-2.png` -> `src/assets/trending-3.png`
-   - `user-uploads://Frame_6-2.png` -> `src/assets/trending-4.png`
+### 2. Create `src/components/Logo.tsx`
+A React component that renders the new SVG inline with all `fill` and `stroke` values set to `currentColor` instead of `#1E1F22`. Since the logo is fully monochromatic, every colored attribute becomes `currentColor`, inheriting from the parent's CSS `color` -- which is already controlled by the theme system (`--foreground`).
 
-2. Update `src/pages/Index.tsx`:
-   - Replace the old article image imports (`article-warm-intro.jpg`, `article-interview.jpg`, `article-cultures.jpg`, `article-burnout.jpg`) with the new trending image imports
-   - Update the `trendingItems` array to reference the new images
+The component accepts a `className` prop for sizing (default `h-8`).
 
-### Technical Details
+### 3. Update usages
+- **`src/pages/Index.tsx`** -- replace `<img src={logo} ...>` with `<Logo />`, remove the old logo import.
+- **`src/components/DesktopSidebar.tsx`** -- same replacement.
 
-In `src/pages/Index.tsx`, the import section will change from:
-```
-import articleWarmIntro from "@/assets/article-warm-intro.jpg";
-import articleInterview from "@/assets/article-interview.jpg";
-import articleCultures from "@/assets/article-cultures.jpg";
-import articleBurnout from "@/assets/article-burnout.jpg";
-```
-to:
-```
-import trending1 from "@/assets/trending-1.png";
-import trending2 from "@/assets/trending-2.png";
-import trending3 from "@/assets/trending-3.png";
-import trending4 from "@/assets/trending-4.png";
-```
-
-The `trendingItems` array will use these new imports. Card titles and badges remain unchanged.
-
+### Technical notes
+- No conditional logic or theme hooks needed inside the component. `currentColor` handles light/dark automatically.
+- The existing `text-foreground` class (or inherited foreground color) ensures the logo is near-black in light mode and light/white in dark mode.
