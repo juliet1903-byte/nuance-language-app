@@ -86,10 +86,10 @@ const VibeMeter = ({ score }: { score: number }) => {
           />
 
           {/* Labels */}
-          <text x="22" y="128" fontSize="9" fill="hsl(var(--muted-foreground))" textAnchor="start">
+          <text x="6" y="132" fontSize="9" fill="hsl(var(--muted-foreground))" textAnchor="start">
             Blunt
           </text>
-          <text x="198" y="128" fontSize="9" fill="hsl(var(--muted-foreground))" textAnchor="end">
+          <text x="214" y="132" fontSize="9" fill="hsl(var(--muted-foreground))" textAnchor="end">
             Nuanced
           </text>
         </svg>
