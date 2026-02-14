@@ -180,7 +180,7 @@ export const modules: Module[] = [
     title: "Career Moves",
     subtitle: "Interviews, promotions, salary conversations",
     description: "Career conversations are emotionally loaded. There is a middle path that is both honest and effective.",
-    image: "module-cultures",
+    image: "module-career-moves",
     lessons: [
       {
         id: "6-1",
