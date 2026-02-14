@@ -71,7 +71,7 @@ const Index = () => {
             <h2 className="text-xl font-medium">All Modules</h2>
             <span className="text-sm text-muted-foreground">{modules.length}</span>
           </div>
-          <div className="flex gap-3 overflow-x-auto pb-2 -mx-5 px-5 scrollbar-none">
+          <div className="gap-3 overflow-x-auto pb-2 -mx-5 px-5 scrollbar-none flex items-start justify-start">
             {modules.map((m) =>
             <ModuleCard key={m.id} module={m} />
             )}
