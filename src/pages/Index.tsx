@@ -12,6 +12,7 @@ import LearningPath from "@/components/LearningPath";
 import ModuleCard from "@/components/ModuleCard";
 import TrendingCard from "@/components/TrendingCard";
 import BottomNav from "@/components/BottomNav";
+import DesktopSidebar from "@/components/DesktopSidebar";
 import SocialTranslator from "@/components/SocialTranslator";
 import { modules } from "@/data/modules";
 
@@ -27,21 +28,25 @@ const Index = () => {
 
 
   return (
-    <div className="min-h-screen bg-background pb-24">
-      {/* Header */}
-      <header className="flex items-center justify-between px-5 pt-6 pb-4">
-        <img src={logo} alt="Nuance" className="h-8" />
-        <div className="flex items-center gap-3">
-          <button className="p-2 rounded-full bg-card">
-            <Bell className="w-5 h-5 text-foreground" />
-          </button>
-          <div className="w-9 h-9 rounded-full bg-muted overflow-hidden">
-            <img src={userAvatar} alt="User avatar" className="w-full h-full object-cover shadow-none opacity-100" />
-          </div>
-        </div>
-      </header>
+    <div className="min-h-screen bg-background md:flex">
+      {/* Desktop Sidebar */}
+      <DesktopSidebar onTranslatorOpen={() => setTranslatorOpen(true)} />
 
-      <main className="px-5 space-y-7">
+      <div className="flex-1 md:ml-[220px] pb-24 md:pb-8">
+        {/* Header */}
+        <header className="flex items-center justify-between px-5 pt-6 pb-4 md:max-w-[900px] md:mx-auto md:w-full">
+          <img src={logo} alt="Nuance" className="h-8 md:hidden" />
+          <div className="flex items-center gap-3 md:ml-auto">
+            <button className="p-2 rounded-full bg-card">
+              <Bell className="w-5 h-5 text-foreground" />
+            </button>
+            <div className="w-9 h-9 rounded-full bg-muted overflow-hidden">
+              <img src={userAvatar} alt="User avatar" className="w-full h-full object-cover shadow-none opacity-100" />
+            </div>
+          </div>
+        </header>
+
+        <main className="px-5 space-y-7 md:max-w-[900px] md:mx-auto md:w-full">
         {/* Learning Path */}
         <LearningPath />
 
@@ -88,6 +93,7 @@ const Index = () => {
           </div>
         </section>
       </main>
+      </div>
 
       <BottomNav onTranslatorOpen={() => setTranslatorOpen(true)} />
       <SocialTranslator open={translatorOpen} onClose={() => setTranslatorOpen(false)} />
