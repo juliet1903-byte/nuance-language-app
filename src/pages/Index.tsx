@@ -57,7 +57,7 @@ const Index = () => {
               </p>
               <button
                 onClick={() => navigate(`/module/${modules[0].id}`)}
-                className="w-full py-3 rounded-xl bg-accent text-accent-foreground font-semibold text-sm">
+                className="w-full py-3 rounded-xl text-accent-foreground font-semibold text-sm bg-cta">
 
                 Continue Learning
               </button>
