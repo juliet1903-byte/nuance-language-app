@@ -138,16 +138,16 @@ const SocialTranslator = ({ open, onClose }: SocialTranslatorProps) => {
               <label className="text-xs font-semibold tracking-wider text-muted-foreground uppercase mb-2 block">
                 The Vibe Meter
               </label>
-              <div className="relative mb-1 h-6">
+              <div className="relative mb-1" style={{ height: 24 }}>
                 <div className="absolute inset-x-0 top-1/2 -translate-y-1/2 h-2 rounded-full bg-gradient-to-r from-vibe-blunt via-muted to-vibe-nuanced" />
 
                 {/* Solid needle – hidden until translate */}
                 {needlePosition !== null && (
                   <motion.div
-                    className="absolute w-6 h-6 rounded-full bg-foreground border-2 border-card shadow-md"
-                    style={{ top: '50%', transform: 'translateY(-50%)' }}
-                    initial={{ opacity: 0, scale: 0.5, left: `calc(${needlePosition}% - 12px)` }}
-                    animate={{ opacity: 1, scale: 1, left: `calc(${needlePosition}% - 12px)` }}
+                    className="absolute rounded-full bg-foreground border-2 border-card shadow-md"
+                    style={{ width: 24, height: 24, top: 0 }}
+                    initial={{ opacity: 0, left: `calc(${needlePosition}% - 12px)` }}
+                    animate={{ opacity: 1, left: `calc(${needlePosition}% - 12px)` }}
                     transition={{ type: "spring", damping: 20, stiffness: 150 }}
                   />
                 )}
