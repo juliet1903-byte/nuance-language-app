@@ -9,6 +9,7 @@ import ModuleDetail from "./pages/ModuleDetail";
 import Progress from "./pages/Progress";
 import Library from "./pages/Library";
 import Stats from "./pages/Stats";
+import Profile from "./pages/Profile";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -26,6 +27,7 @@ const App = () => (
           <Route path="/progress" element={<Progress />} />
           <Route path="/library" element={<Library />} />
           <Route path="/stats" element={<Stats />} />
+          <Route path="/profile" element={<Profile />} />
           <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>
