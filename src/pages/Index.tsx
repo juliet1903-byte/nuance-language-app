@@ -36,7 +36,7 @@ const Index = () => {
             <Bell className="w-5 h-5 text-foreground" />
           </button>
           <div className="w-9 h-9 rounded-full bg-muted overflow-hidden">
-            <img src={userAvatar} alt="User avatar" className="w-full h-full object-cover shadow-none opacity-50" />
+            <img src={userAvatar} alt="User avatar" className="w-full h-full object-cover shadow-none opacity-100" />
           </div>
         </div>
       </header>
