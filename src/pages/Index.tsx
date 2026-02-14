@@ -19,11 +19,11 @@ const Index = () => {
   const navigate = useNavigate();
 
   const trendingItems = [
-    { image: articleWarmIntro, badge: "Article", badgeColor: "bg-accent", title: "The art of the Warm Intro" },
-    { image: articleInterview, badge: "Video", badgeColor: "bg-cta", title: "How to get ready for an interview" },
-    { image: articleCultures, badge: "Deep Dive", badgeColor: "bg-vibe-blunt", title: "Reading between Cultures" },
-    { image: articleBurnout, badge: "Article", badgeColor: "bg-accent", title: "Quiet Cracking or Burning Out" },
-  ];
+  { image: articleWarmIntro, badge: "Article", badgeColor: "bg-accent", title: "The art of the Warm Intro" },
+  { image: articleInterview, badge: "Video", badgeColor: "bg-cta", title: "How to get ready for an interview" },
+  { image: articleCultures, badge: "Deep Dive", badgeColor: "bg-vibe-blunt", title: "Reading between Cultures" },
+  { image: articleBurnout, badge: "Article", badgeColor: "bg-accent", title: "Quiet Cracking or Burning Out" }];
+
 
   return (
     <div className="min-h-screen bg-background pb-24">
@@ -48,7 +48,7 @@ const Index = () => {
         <section>
           <h2 className="text-xl font-medium mb-3">Continue where you left</h2>
           <div className="rounded-2xl overflow-hidden bg-card shadow-sm">
-            <img src={heroSilence} alt="Lesson" className="w-full h-40 object-cover" />
+            <img alt="Lesson" className="w-full h-40 object-cover" src="/lovable-uploads/5a8baccc-96a0-46e9-a068-c093d117cb1e.png" />
             <div className="p-4">
               <h3 className="font-semibold text-base mb-1">Silence is Not Politeness</h3>
               <p className="text-xs text-muted-foreground mb-3">
@@ -56,8 +56,8 @@ const Index = () => {
               </p>
               <button
                 onClick={() => navigate(`/module/${modules[0].id}`)}
-                className="w-full py-3 rounded-xl bg-accent text-accent-foreground font-semibold text-sm"
-              >
+                className="w-full py-3 rounded-xl bg-accent text-accent-foreground font-semibold text-sm">
+
                 Continue Learning
               </button>
             </div>
@@ -71,9 +71,9 @@ const Index = () => {
             <span className="text-sm text-muted-foreground">{modules.length}</span>
           </div>
           <div className="flex gap-3 overflow-x-auto pb-2 -mx-5 px-5 scrollbar-none">
-            {modules.map((m) => (
-              <ModuleCard key={m.id} module={m} />
-            ))}
+            {modules.map((m) =>
+            <ModuleCard key={m.id} module={m} />
+            )}
           </div>
         </section>
 
@@ -81,17 +81,17 @@ const Index = () => {
         <section>
           <h2 className="text-xl font-medium mb-3">Trending</h2>
           <div className="grid grid-cols-2 gap-3">
-            {trendingItems.map((item) => (
-              <TrendingCard key={item.title} {...item} />
-            ))}
+            {trendingItems.map((item) =>
+            <TrendingCard key={item.title} {...item} />
+            )}
           </div>
         </section>
       </main>
 
       <BottomNav onTranslatorOpen={() => setTranslatorOpen(true)} />
       <SocialTranslator open={translatorOpen} onClose={() => setTranslatorOpen(false)} />
-    </div>
-  );
+    </div>);
+
 };
 
 export default Index;
