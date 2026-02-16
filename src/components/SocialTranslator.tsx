@@ -3,6 +3,7 @@ import { X, Mic, HelpCircle, Copy, Loader2 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "@/hooks/use-toast";
+import { useAuth } from "@/components/AuthContext";
 
 type Tone = "neutral" | "colleague" | "leader";
 
@@ -19,6 +20,7 @@ interface SocialTranslatorProps {
 }
 
 const SocialTranslator = ({ open, onClose }: SocialTranslatorProps) => {
+  const { user } = useAuth();
   const [input, setInput] = useState("");
   const [tone, setTone] = useState<Tone>("colleague");
   const [result, setResult] = useState<TranslationResult | null>(null);
@@ -85,6 +87,16 @@ const SocialTranslator = ({ open, onClose }: SocialTranslatorProps) => {
 
       const res = data as TranslationResult;
       setResult(res);
+
+      // Log translation for tone profile tracking
+      if (user) {
+        supabase.from("activity_log").insert({
+          user_id: user.id,
+          activity_type: "translation_complete",
+          module_id: "social-translator",
+          tone_mode: tone,
+        } as any).then(() => {});
+      }
 
       // 1. Show needle at raw score
       setNeedlePosition(res.rawVibeScore);
