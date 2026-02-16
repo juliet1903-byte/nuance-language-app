@@ -70,6 +70,7 @@ const Auth = () => {
                   <Input
                     id="signin-email"
                     type="email"
+                    autoComplete="email"
                     placeholder="you@example.com"
                     value={signInEmail}
                     onChange={(e) => setSignInEmail(e.target.value)}
@@ -81,6 +82,7 @@ const Auth = () => {
                   <Input
                     id="signin-password"
                     type="password"
+                    autoComplete="current-password"
                     placeholder="••••••••"
                     value={signInPassword}
                     onChange={(e) => setSignInPassword(e.target.value)}
@@ -104,6 +106,7 @@ const Auth = () => {
                   <Input
                     id="signup-name"
                     type="text"
+                    autoComplete="name"
                     placeholder="Your name"
                     value={signUpName}
                     onChange={(e) => setSignUpName(e.target.value)}
@@ -114,6 +117,7 @@ const Auth = () => {
                   <Input
                     id="signup-email"
                     type="email"
+                    autoComplete="email"
                     placeholder="you@example.com"
                     value={signUpEmail}
                     onChange={(e) => setSignUpEmail(e.target.value)}
@@ -125,6 +129,7 @@ const Auth = () => {
                   <Input
                     id="signup-password"
                     type="password"
+                    autoComplete="new-password"
                     placeholder="••••••••"
                     value={signUpPassword}
                     onChange={(e) => setSignUpPassword(e.target.value)}
