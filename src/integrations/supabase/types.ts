@@ -21,6 +21,7 @@ export type Database = {
           id: string
           lesson_id: string | null
           module_id: string
+          tone_mode: string | null
           user_id: string
           vibe_score: number | null
         }
@@ -30,6 +31,7 @@ export type Database = {
           id?: string
           lesson_id?: string | null
           module_id: string
+          tone_mode?: string | null
           user_id: string
           vibe_score?: number | null
         }
@@ -39,6 +41,7 @@ export type Database = {
           id?: string
           lesson_id?: string | null
           module_id?: string
+          tone_mode?: string | null
           user_id?: string
           vibe_score?: number | null
         }

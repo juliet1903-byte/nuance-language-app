@@ -13,10 +13,6 @@ import { useAuth } from "@/components/AuthContext";
 import { useProgress } from "@/hooks/useProgress";
 import LoginBanner from "@/components/LoginBanner";
 
-const toneData = [
-  { name: "Leader Mode", value: 62 },
-  { name: "Colleague Mode", value: 38 },
-];
 const TONE_COLORS = ["hsl(152, 40%, 46%)", "hsl(228, 80%, 56%)"];
 
 
@@ -158,46 +154,79 @@ const Stats = () => {
               Tone Profile
             </h3>
 
-            <div className="flex items-center gap-4">
-              <div className="w-24 h-24 shrink-0">
-                <ResponsiveContainer width="100%" height="100%">
-                  <PieChart>
-                    <Pie
-                      data={toneData}
-                      cx="50%"
-                      cy="50%"
-                      innerRadius={28}
-                      outerRadius={42}
-                      dataKey="value"
-                      strokeWidth={0}
-                    >
-                      {toneData.map((_, idx) => (
-                        <Cell key={idx} fill={TONE_COLORS[idx]} />
-                      ))}
-                    </Pie>
-                  </PieChart>
-                </ResponsiveContainer>
-              </div>
+            {(() => {
+              const translations = activityLog.filter(
+                (a) => a.activity_type === "translation_complete" && (a as any).tone_mode
+              );
+              const leaderCount = translations.filter((a) => (a as any).tone_mode === "leader").length;
+              const colleagueCount = translations.filter((a) => (a as any).tone_mode === "colleague").length;
+              const total = leaderCount + colleagueCount;
 
-              <div className="space-y-2 flex-1">
-                {toneData.map((entry, idx) => (
-                  <div key={entry.name} className="flex items-center justify-between">
-                    <div className="flex items-center gap-2">
-                      <div
-                        className="w-2.5 h-2.5 rounded-full shrink-0"
-                        style={{ backgroundColor: TONE_COLORS[idx] }}
-                      />
-                      <span className="text-sm">{entry.name}</span>
+              if (total === 0) {
+                return (
+                  <div className="flex flex-col items-center justify-center py-8 text-center">
+                    <div className="w-24 h-24 rounded-full border-2 border-dashed border-muted-foreground/30 flex items-center justify-center mb-3">
+                      <span className="text-2xl text-muted-foreground/40">?</span>
                     </div>
-                    <span className="text-sm font-semibold">{entry.value}%</span>
+                    <p className="text-sm text-muted-foreground">
+                      Use the Social Translator to see your tone profile
+                    </p>
                   </div>
-                ))}
-              </div>
-            </div>
+                );
+              }
 
-            <p className="text-xs text-muted-foreground mt-3">
-              Leader Mode uses the SBI Model · Colleague Mode uses Subjective Framing
-            </p>
+              const leaderPct = Math.round((leaderCount / total) * 100);
+              const colleaguePct = 100 - leaderPct;
+              const toneData = [
+                { name: "Leader Mode", value: leaderPct },
+                { name: "Colleague Mode", value: colleaguePct },
+              ];
+
+              return (
+                <>
+                  <div className="flex items-center gap-4">
+                    <div className="w-24 h-24 shrink-0">
+                      <ResponsiveContainer width="100%" height="100%">
+                        <PieChart>
+                          <Pie
+                            data={toneData}
+                            cx="50%"
+                            cy="50%"
+                            innerRadius={28}
+                            outerRadius={42}
+                            dataKey="value"
+                            strokeWidth={0}
+                          >
+                            {toneData.map((_, idx) => (
+                              <Cell key={idx} fill={TONE_COLORS[idx]} />
+                            ))}
+                          </Pie>
+                        </PieChart>
+                      </ResponsiveContainer>
+                    </div>
+
+                    <div className="space-y-2 flex-1">
+                      {toneData.map((entry, idx) => (
+                        <div key={entry.name} className="flex items-center justify-between">
+                          <div className="flex items-center gap-2">
+                            <div
+                              className="w-2.5 h-2.5 rounded-full shrink-0"
+                              style={{ backgroundColor: TONE_COLORS[idx] }}
+                            />
+                            <span className="text-sm">{entry.name}</span>
+                          </div>
+                          <span className="text-sm font-semibold">{entry.value}%</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
+                  <p className="text-xs text-muted-foreground mt-3">
+                    Leader Mode uses the SBI Model · Colleague Mode uses Subjective Framing
+                  </p>
+                </>
+              );
+            })()}
           </div>
         </section>
 
