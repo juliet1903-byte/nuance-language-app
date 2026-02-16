@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Logo from "@/components/Logo";
 import { useAuth } from "@/components/AuthContext";
+import { supabase } from "@/integrations/supabase/client";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -18,6 +19,34 @@ const Auth = () => {
   const [signUpEmail, setSignUpEmail] = useState("");
   const [signUpPassword, setSignUpPassword] = useState("");
   const [signUpName, setSignUpName] = useState("");
+
+  const [showForgot, setShowForgot] = useState(false);
+  const [forgotEmail, setForgotEmail] = useState("");
+  const [forgotLoading, setForgotLoading] = useState(false);
+
+  const COOLDOWN_MS = 10 * 60 * 1000;
+
+  const handleForgotPassword = async (e: React.FormEvent) => {
+    e.preventDefault();
+    const lastRequest = localStorage.getItem("nuance-last-reset-request");
+    if (lastRequest && Date.now() - Number(lastRequest) < COOLDOWN_MS) {
+      const minutesLeft = Math.ceil((COOLDOWN_MS - (Date.now() - Number(lastRequest))) / 60000);
+      toast({ title: "Please wait", description: `Try again in ${minutesLeft} minute${minutesLeft > 1 ? "s" : ""}.`, variant: "destructive" });
+      return;
+    }
+    setForgotLoading(true);
+    const { error } = await supabase.auth.resetPasswordForEmail(forgotEmail, {
+      redirectTo: `${window.location.origin}/reset-password`,
+    });
+    setForgotLoading(false);
+    if (error) {
+      toast({ title: "Request failed", description: error.message, variant: "destructive" });
+    } else {
+      localStorage.setItem("nuance-last-reset-request", String(Date.now()));
+      toast({ title: "Check your email", description: "We sent you a password reset link." });
+      setShowForgot(false);
+    }
+  };
 
   const handleSignIn = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -96,7 +125,42 @@ const Auth = () => {
                 >
                   {loading ? "Signing in…" : "Sign In"}
                 </button>
+                <button
+                  type="button"
+                  onClick={() => { setShowForgot(true); setForgotEmail(signInEmail); }}
+                  className="w-full text-xs text-muted-foreground hover:text-foreground transition-colors mt-2"
+                >
+                  Forgot password?
+                </button>
               </form>
+
+              {showForgot && (
+                <form onSubmit={handleForgotPassword} className="mt-4 space-y-3 border-t pt-4 border-border">
+                  <p className="text-sm text-muted-foreground">Enter your email to receive a reset link.</p>
+                  <Input
+                    type="email"
+                    autoComplete="email"
+                    placeholder="you@example.com"
+                    value={forgotEmail}
+                    onChange={(e) => setForgotEmail(e.target.value)}
+                    required
+                  />
+                  <button
+                    type="submit"
+                    disabled={forgotLoading}
+                    className="w-full py-3 rounded-xl bg-cta text-cta-foreground font-semibold text-sm hover:opacity-90 transition-opacity disabled:opacity-50"
+                  >
+                    {forgotLoading ? "Sending…" : "Send Reset Link"}
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setShowForgot(false)}
+                    className="w-full text-xs text-muted-foreground hover:text-foreground transition-colors"
+                  >
+                    Cancel
+                  </button>
+                </form>
+              )}
             </TabsContent>
 
             <TabsContent value="signup">

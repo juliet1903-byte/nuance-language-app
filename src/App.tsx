@@ -14,6 +14,7 @@ import Progress from "./pages/Progress";
 import Library from "./pages/Library";
 import Stats from "./pages/Stats";
 import Profile from "./pages/Profile";
+import ResetPassword from "./pages/ResetPassword";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -36,6 +37,7 @@ const App = () => (
                 <Route path="/library" element={<Library />} />
                 <Route path="/stats" element={<Stats />} />
                 <Route path="/profile" element={<Profile />} />
+                <Route path="/reset-password" element={<ResetPassword />} />
                 <Route path="*" element={<NotFound />} />
               </Routes>
             </BrowserRouter>
