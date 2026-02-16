@@ -100,9 +100,9 @@ const WEEKDAYS = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
 
 const Progress = () => {
   const navigate = useNavigate();
-  const [expandedLevel, setExpandedLevel] = useState<string | null>("specialist");
   const { isGuest, user } = useAuth();
   const showBanner = isGuest || !user;
+  const [expandedLevel, setExpandedLevel] = useState<string | null>(showBanner ? "natural-flow" : "specialist");
 
   const { year, month, daysInMonth, today, activity } = generateActivityData();
   const monthName = new Date(year, month).toLocaleString("default", { month: "long" });
@@ -190,7 +190,7 @@ const Progress = () => {
                           )}
                         </div>
                         {i < careerLevels.length - 1 && (
-                          <div className="w-px flex-1 bg-border min-h-[16px]" />
+                          <div className="w-px flex-1 bg-border min-h-[40px]" />
                         )}
                       </div>
 
