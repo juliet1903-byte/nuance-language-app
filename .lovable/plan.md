@@ -1,44 +1,54 @@
 
-## Forgot Password with Rate Limiting
+## Add Zero State for Tone Profile Chart (Fed by Real Usage Data)
 
-### Overview
-Add a complete forgot password flow with a 10-minute cooldown between reset requests to prevent abuse. The rate limiting will be enforced client-side via `localStorage` timestamps (simple and effective since the backend already has its own email sending limits).
+### Problem
+The Tone Profile chart on the Stats page currently shows hardcoded mock data (62% Leader / 38% Colleague). It should start empty and populate from actual Social Translator usage.
 
 ### Changes
 
-#### 1. New Page: `src/pages/ResetPassword.tsx`
-- Handles the `/reset-password` route where users land after clicking the email link
-- Detects `type=recovery` in the URL hash
-- Shows a "Set New Password" form
-- Calls `supabase.auth.updateUser({ password })` to save the new password
-- Redirects to `/dashboard` on success
+#### 1. Database Migration
+Add an optional `tone_mode` column to the `activity_log` table to track which mode was used during Social Translator translations.
 
-#### 2. Update: `src/pages/Auth.tsx`
-- Add a "Forgot password?" link below the sign-in password field
-- Clicking it reveals an inline email input + submit button (or toggles to a forgot-password view)
-- On submit, checks `localStorage` for a timestamp key (`nuance-last-reset-request`)
-- If less than 10 minutes have passed, shows a toast: "Please wait X minutes before requesting another reset"
-- Otherwise, calls `supabase.auth.resetPasswordForEmail(email, { redirectTo: origin + '/reset-password' })`
-- Stores the current timestamp in `localStorage`
-- Shows confirmation toast: "Check your email for a reset link"
-
-#### 3. Update: `src/App.tsx`
-- Add route: `<Route path="/reset-password" element={<ResetPassword />} />`
-
-### Rate Limiting Logic
+```sql
+ALTER TABLE public.activity_log ADD COLUMN tone_mode TEXT;
 ```
-const COOLDOWN_MS = 10 * 60 * 1000; // 10 minutes
-const lastRequest = localStorage.getItem("nuance-last-reset-request");
-if (lastRequest && Date.now() - Number(lastRequest) < COOLDOWN_MS) {
-  const minutesLeft = Math.ceil((COOLDOWN_MS - (Date.now() - Number(lastRequest))) / 60000);
-  // show "wait X minutes" toast
-  return;
-}
-// proceed with reset, then:
-localStorage.setItem("nuance-last-reset-request", String(Date.now()));
-```
+
+#### 2. Log Tone Usage in Social Translator (`src/components/SocialTranslator.tsx`)
+After a successful translation, insert an `activity_log` entry with:
+- `activity_type`: `"translation_complete"`
+- `module_id`: `"social-translator"`
+- `tone_mode`: the selected tone (`"leader"` or `"colleague"` or `"neutral"`)
+
+This requires the authenticated user, so import `useAuth` and only log when a user is signed in.
+
+#### 3. Update `useProgress` Hook (`src/hooks/useProgress.ts`)
+- Expose the `activityLog` data (already done).
+- The Stats page will compute tone distribution from it directly.
+
+#### 4. Update Stats Page (`src/pages/Stats.tsx`)
+- Remove the hardcoded `toneData` constant.
+- Compute tone distribution dynamically from `activityLog` entries where `activity_type === "translation_complete"`.
+- Count entries with `tone_mode === "leader"` vs `tone_mode === "colleague"` (exclude "neutral" from the pie chart, or include it as a third segment).
+- **Zero state**: When no translation data exists, show a message like "Use the Social Translator to see your tone profile" instead of the pie chart.
+- When data exists, calculate percentages and render the pie chart as before.
 
 ### Technical Details
-- **Rate limiting approach**: Client-side `localStorage` timestamp. This is appropriate because the authentication system already has server-side rate limits on emails, and this adds a UX-level guard to prevent accidental spam. A determined attacker could bypass it, but the server-side limits remain as the real safeguard.
-- **No database table needed** -- the cooldown is per-browser via `localStorage`.
-- **Reset password page** listens for the `PASSWORD_RECOVERY` event from `onAuthStateChange` to confirm the recovery session is active before allowing password update.
+
+**Tone calculation logic (Stats.tsx):**
+```tsx
+const translations = activityLog.filter(a => a.activity_type === "translation_complete" && a.tone_mode);
+const leaderCount = translations.filter(a => a.tone_mode === "leader").length;
+const colleagueCount = translations.filter(a => a.tone_mode === "colleague").length;
+const total = leaderCount + colleagueCount;
+
+// If total === 0, show empty state
+// Otherwise, compute percentages and render chart
+```
+
+**Zero state UI**: A muted text message centered where the chart would be, encouraging the user to try the Social Translator.
+
+**Files modified:**
+- `supabase/migrations/` -- new migration for `tone_mode` column
+- `src/components/SocialTranslator.tsx` -- log translation activity
+- `src/pages/Stats.tsx` -- dynamic tone data + zero state
+- `src/integrations/supabase/types.ts` -- will auto-update after migration
