@@ -4,10 +4,18 @@ import { learningPath } from "@/data/modules";
 import { useAuth } from "@/components/AuthContext";
 import LoginBanner from "@/components/LoginBanner";
 
+const guestLearningPath: typeof learningPath = [
+  { id: "natural-flow", title: "Natural Flow", subtitle: "Foundations of speech", completed: false, active: true },
+  { id: "specialist", title: "The Specialist", subtitle: "Mastering communication techniques", completed: false, active: false },
+  { id: "collaborator", title: "The Collaborator", subtitle: "Team dynamics & empathy", completed: false, active: false },
+  { id: "influencer", title: "The Influencer", subtitle: "Visionary leadership", completed: false, active: false },
+];
+
 const LearningPath = () => {
   const navigate = useNavigate();
   const { isGuest, user } = useAuth();
   const showBanner = isGuest || !user;
+  const steps = showBanner ? guestLearningPath : learningPath;
 
   return (
     <button
@@ -22,7 +30,7 @@ const LearningPath = () => {
       </div>
 
       <div className="space-y-0">
-        {learningPath.map((step, i) =>
+        {steps.map((step, i) =>
         <div key={step.id} className="flex gap-3">
             {/* Stepper line */}
             <div className="flex flex-col items-center">
@@ -43,7 +51,7 @@ const LearningPath = () => {
               <Lock className="w-3 h-3 text-white" />
               }
               </div>
-              {i < learningPath.length - 1 &&
+              {i < steps.length - 1 &&
             <div className="w-px flex-1 bg-border" />
             }
             </div>
