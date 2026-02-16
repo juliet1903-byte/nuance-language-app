@@ -1,29 +1,48 @@
 
-## Blurred Mock Profile for Guest Users
+## Show Logged-In User Avatar on Landing Page
 
 ### Problem
-The Profile page currently shows an empty state for guests (a generic User icon + "Join Nuance" button). The Stats page uses a better pattern: it renders the full UI with mock data and overlays a blurred `LoginBanner` on top. The Profile page should follow the same approach.
+When a logged-in user visits the landing page (`/`), they see a "Sign In" button even though they're already authenticated. They need a way to quickly navigate back to their dashboard.
 
 ### Changes
 
-#### `src/pages/Profile.tsx`
-Replace the guest `showBanner` branch (the empty state with User icon and "Join Nuance" button) with the same full profile layout used for authenticated users, but populated with mock/placeholder data and wrapped in a `relative` container with the `LoginBanner` overlay.
-
-**Mock data shown behind the blur:**
-- LetterAvatar with letter "U" (or a generic User icon)
-- Display name: "New User"
-- Email: "user@example.com"
-- Level badge: "Natural Flow"
-- Quick stats: 0 Day Streak, 0/8 Modules, 0 Vibe IQ
-- Preferences section (Notifications toggle, Dark Mode toggle, Language row)
-- Account section (Privacy, Help)
-
-**Overlay:** The `LoginBanner` component (same lock icon + "Login to Save Progress" + "Sign Up" button with blurred backdrop) positioned absolutely over the entire mock profile content, identical to how it's used on the Stats page.
+#### `src/pages/Landing.tsx`
+- Import `useAuth` fields: `user`, `profile` (already imported but only destructuring `enterGuestMode`)
+- Import `LetterAvatar` component
+- In the nav bar, replace the "Sign In" button conditionally:
+  - **If user is logged in**: Show a clickable `LetterAvatar` (with the user's name/email) plus "Go to Dashboard" text. Clicking navigates to `/dashboard`.
+  - **If not logged in**: Keep the existing "Sign In" button as-is.
 
 ### Technical Details
 
-- Remove the `showBanner ? (...) : (...)` ternary that currently splits guest vs authenticated views
-- Always render the full profile layout
-- When `showBanner` is true, use mock values for `displayName`, `levelName`, `quickStats`, and `user?.email`
-- Wrap the profile content sections in a `relative` container and conditionally render `<LoginBanner />` inside it when `showBanner` is true
-- No new components or database changes needed
+**Nav bar update (lines 37-45):**
+```tsx
+<nav className="flex items-center justify-between px-6 py-5 max-w-5xl mx-auto">
+  <Logo className="h-8" />
+  {user ? (
+    <button
+      onClick={() => navigate("/dashboard")}
+      className="flex items-center gap-2 text-sm font-medium text-foreground hover:opacity-80 transition-opacity"
+    >
+      <LetterAvatar name={profile?.display_name} email={user.email} size="sm" />
+      <span>{profile?.display_name || user.email?.split("@")[0]}</span>
+    </button>
+  ) : (
+    <button
+      onClick={() => navigate("/auth")}
+      className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
+    >
+      Sign In
+    </button>
+  )}
+</nav>
+```
+
+**Imports to add:**
+- `LetterAvatar` from `@/components/LetterAvatar`
+
+**Destructuring update:**
+- Change `const { enterGuestMode } = useAuth()` to `const { enterGuestMode, user, profile } = useAuth()`
+
+**Files modified:**
+- `src/pages/Landing.tsx`
