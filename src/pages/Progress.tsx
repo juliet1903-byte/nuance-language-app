@@ -166,113 +166,113 @@ const Progress = () => {
                   : level;
 
                 return (
-                  <div key={displayLevel.id}>
-                    <button
-                      onClick={() => setExpandedLevel(isExpanded ? null : displayLevel.id)}
-                      className="w-full flex gap-3 items-start"
-                    >
-                      <div className="flex flex-col items-center">
-                        <div
-                          className={`w-7 h-7 rounded-full flex items-center justify-center shrink-0 ${
-                            displayLevel.completed
-                              ? "bg-accent text-accent-foreground"
-                              : displayLevel.active
-                              ? "border-2 border-accent bg-background"
-                              : "bg-muted text-muted-foreground"
-                          }`}
-                        >
-                          {displayLevel.completed ? (
-                            <Check className="w-4 h-4" />
-                          ) : displayLevel.active ? (
-                            <div className="w-2.5 h-2.5 rounded-full bg-accent" />
-                          ) : (
-                            <Lock className="w-3 h-3 text-accent-foreground" />
-                          )}
-                        </div>
-                        {i < careerLevels.length - 1 && (
-                          <div className="w-px flex-1 bg-border min-h-[40px]" />
+                  <div key={displayLevel.id} className="flex gap-3">
+                    {/* Stepper column spanning full height including expanded content */}
+                    <div className="flex flex-col items-center shrink-0">
+                      <div
+                        className={`w-7 h-7 rounded-full flex items-center justify-center shrink-0 ${
+                          displayLevel.completed
+                            ? "bg-accent text-accent-foreground"
+                            : displayLevel.active
+                            ? "border-2 border-accent bg-background"
+                            : "bg-muted text-muted-foreground"
+                        }`}
+                      >
+                        {displayLevel.completed ? (
+                          <Check className="w-4 h-4" />
+                        ) : displayLevel.active ? (
+                          <div className="w-2.5 h-2.5 rounded-full bg-accent" />
+                        ) : (
+                          <Lock className="w-3 h-3 text-accent-foreground" />
                         )}
                       </div>
-
-                      <div className="flex-1 pb-4 pt-0.5">
-                        <div className="flex items-center justify-between">
-                          <div className="text-left">
-                            <p className="font-semibold text-sm">{displayLevel.title}</p>
-                            <p className="text-xs text-muted-foreground">{displayLevel.subtitle}</p>
-                          </div>
-                          {isExpanded ? (
-                            <ChevronDown className="w-4 h-4 text-muted-foreground" />
-                          ) : (
-                            <ChevronRight className="w-4 h-4 text-muted-foreground" />
-                          )}
-                        </div>
-
-                        {displayLevel.active && displayLevel.progress && (
-                          <div className="mt-2">
-                            <div className="w-full h-1.5 bg-muted rounded-full overflow-hidden">
-                              <div
-                                className="h-full bg-accent rounded-full transition-all"
-                                style={{ width: `${displayLevel.progress}%` }}
-                              />
-                            </div>
-                            <p className="text-xs text-accent mt-1 font-medium">
-                              {displayLevel.progress}% complete
-                            </p>
-                          </div>
-                        )}
-                      </div>
-                    </button>
-
-                    <AnimatePresence>
-                      {isExpanded && (
-                        <motion.div
-                          initial={{ opacity: 0, height: 0 }}
-                          animate={{ opacity: 1, height: "auto" }}
-                          exit={{ opacity: 0, height: 0 }}
-                          className="overflow-hidden ml-10 mb-4"
-                        >
-                          <div className="space-y-2">
-                            {levelModules.map((mod) => {
-                              if (!mod) return null;
-                              const isLocked = !displayLevel.completed && !displayLevel.active;
-                              return (
-                                <button
-                                  key={mod.id}
-                                  onClick={() => !isLocked && navigate(`/module/${mod.id}`)}
-                                  className={`w-full flex items-center gap-3 bg-card rounded-xl p-3 shadow-sm transition-opacity ${
-                                    isLocked ? "opacity-50" : "active:scale-[0.98]"
-                                  }`}
-                                  disabled={isLocked}
-                                >
-                                  <div className="w-12 h-12 rounded-xl overflow-hidden bg-muted shrink-0">
-                                    <img
-                                      src={imageMap[mod.image]}
-                                      alt={mod.title}
-                                      className="w-full h-full object-cover"
-                                    />
-                                  </div>
-                                  <div className="flex-1 text-left">
-                                    <p className="text-sm font-semibold">{mod.title}</p>
-                                    <p className="text-xs text-muted-foreground">
-                                      {mod.lessons.length} lesson{mod.lessons.length > 1 ? "s" : ""} · Module {mod.number}
-                                    </p>
-                                  </div>
-                                  {isLocked ? (
-                                    <Lock className="w-4 h-4 text-muted-foreground" />
-                                  ) : displayLevel.completed ? (
-                                    <div className="w-6 h-6 rounded-full bg-accent flex items-center justify-center">
-                                      <Check className="w-3.5 h-3.5 text-accent-foreground" />
-                                    </div>
-                                  ) : (
-                                    <ChevronRight className="w-4 h-4 text-muted-foreground" />
-                                  )}
-                                </button>
-                              );
-                            })}
-                          </div>
-                        </motion.div>
+                      {i < careerLevels.length - 1 && (
+                        <div className="w-px flex-1 bg-border" />
                       )}
-                    </AnimatePresence>
+                    </div>
+
+                    {/* Content column */}
+                    <div className="flex-1 min-w-0">
+                      <button
+                        onClick={() => setExpandedLevel(isExpanded ? null : displayLevel.id)}
+                        className="w-full flex items-center justify-between pb-4 pt-0.5"
+                      >
+                        <div className="text-left">
+                          <p className="font-semibold text-sm">{displayLevel.title}</p>
+                          <p className="text-xs text-muted-foreground">{displayLevel.subtitle}</p>
+                        </div>
+                        {isExpanded ? (
+                          <ChevronDown className="w-4 h-4 text-muted-foreground shrink-0" />
+                        ) : (
+                          <ChevronRight className="w-4 h-4 text-muted-foreground shrink-0" />
+                        )}
+                      </button>
+
+                      {displayLevel.active && displayLevel.progress && !isExpanded && (
+                        <div className="-mt-2 mb-4">
+                          <div className="w-full h-1.5 bg-muted rounded-full overflow-hidden">
+                            <div
+                              className="h-full bg-accent rounded-full transition-all"
+                              style={{ width: `${displayLevel.progress}%` }}
+                            />
+                          </div>
+                          <p className="text-xs text-accent mt-1 font-medium">
+                            {displayLevel.progress}% complete
+                          </p>
+                        </div>
+                      )}
+
+                      <AnimatePresence>
+                        {isExpanded && (
+                          <motion.div
+                            initial={{ opacity: 0, height: 0 }}
+                            animate={{ opacity: 1, height: "auto" }}
+                            exit={{ opacity: 0, height: 0 }}
+                            className="overflow-hidden mb-4"
+                          >
+                            <div className="space-y-2">
+                              {levelModules.map((mod) => {
+                                if (!mod) return null;
+                                const isLocked = !displayLevel.completed && !displayLevel.active;
+                                return (
+                                  <button
+                                    key={mod.id}
+                                    onClick={() => !isLocked && navigate(`/module/${mod.id}`)}
+                                    className={`w-full flex items-center gap-3 bg-card rounded-xl p-3 shadow-sm transition-opacity ${
+                                      isLocked ? "opacity-50" : "active:scale-[0.98]"
+                                    }`}
+                                    disabled={isLocked}
+                                  >
+                                    <div className="w-12 h-12 rounded-xl overflow-hidden bg-muted shrink-0">
+                                      <img
+                                        src={imageMap[mod.image]}
+                                        alt={mod.title}
+                                        className="w-full h-full object-cover"
+                                      />
+                                    </div>
+                                    <div className="flex-1 text-left">
+                                      <p className="text-sm font-semibold">{mod.title}</p>
+                                      <p className="text-xs text-muted-foreground">
+                                        {mod.lessons.length} lesson{mod.lessons.length > 1 ? "s" : ""} · Module {mod.number}
+                                      </p>
+                                    </div>
+                                    {isLocked ? (
+                                      <Lock className="w-4 h-4 text-muted-foreground" />
+                                    ) : displayLevel.completed ? (
+                                      <div className="w-6 h-6 rounded-full bg-accent flex items-center justify-center">
+                                        <Check className="w-3.5 h-3.5 text-accent-foreground" />
+                                      </div>
+                                    ) : (
+                                      <ChevronRight className="w-4 h-4 text-muted-foreground" />
+                                    )}
+                                  </button>
+                                );
+                              })}
+                            </div>
+                          </motion.div>
+                        )}
+                      </AnimatePresence>
+                    </div>
                   </div>
                 );
               })}
