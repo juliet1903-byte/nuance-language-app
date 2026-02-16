@@ -35,7 +35,7 @@ const ModuleCard = ({ module }: { module: Module }) => {
       onClick={() => navigate(`/module/${module.id}`)}
       className="shrink-0 w-36 text-left"
     >
-      <div className="w-36 h-36 rounded-2xl overflow-hidden bg-muted mb-2">
+      <div className="w-36 h-36 rounded-2xl overflow-hidden bg-muted/50 mb-2">
         <img
           src={imageMap[module.image] || moduleMeeting}
           alt={module.title}
