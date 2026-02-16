@@ -46,7 +46,7 @@ const Profile = () => {
           /* Guest empty state */
           <section className="flex flex-col items-center text-center py-12">
             <div className="w-20 h-20 rounded-full bg-muted flex items-center justify-center ring-2 ring-border ring-offset-2 ring-offset-background mb-4">
-              <User className="w-10 h-10 text-muted-foreground" />
+              <User className="w-10 h-10 text-white dark:text-muted-foreground" />
             </div>
             <h2 className="text-xl font-semibold mb-1">Guest User</h2>
             <p className="text-sm text-muted-foreground max-w-xs mb-6 leading-relaxed">
