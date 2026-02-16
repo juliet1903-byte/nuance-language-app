@@ -56,7 +56,7 @@ const Landing = () => {
       </nav>
 
       {/* Hero */}
-      <section className="text-center px-6 pt-12 pb-14 max-w-3xl mx-auto">
+      <section className="text-center px-6 pt-12 pb-16 max-w-3xl mx-auto">
         <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight leading-tight mb-4">
           Speak with Impact. <span className="text-cta">Lead with Nuance.</span>
         </h1>
