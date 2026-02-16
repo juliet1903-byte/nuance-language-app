@@ -195,7 +195,7 @@ const Stats = () => {
           </div>
         </section>
 
-        {/* ========= EDUCATIONAL METRICS ========= */}
+        {!showBanner && (
         <section>
           <h2 className="text-sm font-semibold uppercase tracking-wider text-muted-foreground mb-3">
             Learning Metrics
@@ -229,9 +229,7 @@ const Stats = () => {
               <div className="w-10 h-10 rounded-full bg-cta/15 flex items-center justify-center mb-3">
                 <Clock className="w-5 h-5 text-cta" />
               </div>
-              <span className="text-2xl font-semibold">
-                {learningHours}h {learningMinutes}m
-              </span>
+              <span className="text-2xl font-semibold">4h 35m</span>
               <span className="text-xs text-muted-foreground mt-1">Learning Time</span>
               <span className="text-xs text-muted-foreground/70 mt-0.5">
                 Total hours invested
@@ -256,6 +254,7 @@ const Stats = () => {
             </motion.div>
           </div>
         </section>
+        )}
       </main>
     </AppLayout>
   );
