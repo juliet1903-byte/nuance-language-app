@@ -8,11 +8,11 @@ const LearningPath = () => {
   return (
     <button
       onClick={() => navigate("/progress")}
-      className="w-full text-left bg-card rounded-2xl p-5 shadow-sm px-[16px] py-[12px] active:scale-[0.99] transition-transform"
-    >
+      className="w-full text-left bg-card rounded-2xl p-5 shadow-sm px-[16px] py-[12px] active:scale-[0.99] transition-transform">
+
       <div className="flex items-center justify-between mb-4">
         <h2 className="text-lg font-medium">My Learning Path</h2>
-        <span className="flex items-center gap-1.5 text-sm lg:text-base px-3 py-1.5 rounded-full font-medium text-cta bg-secondary">
+        <span className="flex items-center gap-1.5 text-sm lg:text-base px-3 py-1.5 rounded-full font-medium text-cta bg-slate-100">
           <CalendarDays className="w-3.5 h-3.5" /> 7
         </span>
       </div>
@@ -63,8 +63,8 @@ const LearningPath = () => {
           </div>
         )}
       </div>
-    </button>
-  );
+    </button>);
+
 };
 
 export default LearningPath;
