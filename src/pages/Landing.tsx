@@ -1,12 +1,13 @@
 import { useNavigate } from "react-router-dom";
 import { Zap, Route, Flame } from "lucide-react";
 import Logo from "@/components/Logo";
+import LetterAvatar from "@/components/LetterAvatar";
 import heroShowcase from "@/assets/hero-showcase.png";
 import { useAuth } from "@/components/AuthContext";
 
 const Landing = () => {
   const navigate = useNavigate();
-  const { enterGuestMode } = useAuth();
+  const { enterGuestMode, user, profile } = useAuth();
 
   const features = [
     {
@@ -36,12 +37,22 @@ const Landing = () => {
       {/* Nav */}
       <nav className="flex items-center justify-between px-6 py-5 max-w-5xl mx-auto">
         <Logo className="h-8" />
-        <button
-          onClick={() => navigate("/auth")}
-          className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
-        >
-          Sign In
-        </button>
+        {user ? (
+          <button
+            onClick={() => navigate("/dashboard")}
+            className="flex items-center gap-2 text-sm font-medium text-foreground hover:opacity-80 transition-opacity"
+          >
+            <LetterAvatar name={profile?.display_name} email={user.email} size="sm" />
+            <span>{profile?.display_name || user.email?.split("@")[0]}</span>
+          </button>
+        ) : (
+          <button
+            onClick={() => navigate("/auth")}
+            className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
+          >
+            Sign In
+          </button>
+        )}
       </nav>
 
       {/* Hero */}
