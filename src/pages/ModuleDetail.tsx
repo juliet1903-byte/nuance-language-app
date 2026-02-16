@@ -6,12 +6,16 @@ import { modules } from "@/data/modules";
 import AppLayout from "@/components/AppLayout";
 import FillGapExercise from "@/components/FillGapExercise";
 import ScenarioExercise from "@/components/ScenarioExercise";
+import { useProgress } from "@/hooks/useProgress";
+import { useAuth } from "@/components/AuthContext";
 
 type View = "overview" | "lesson" | "exercise" | "scenario" | "complete";
 
 const ModuleDetail = () => {
   const { id } = useParams();
   const navigate = useNavigate();
+  const { user } = useAuth();
+  const { logActivity, completedLessons } = useProgress();
   const [view, setView] = useState<View>("overview");
   const [activeLessonIdx, setActiveLessonIdx] = useState(0);
 
@@ -36,6 +40,33 @@ const ModuleDetail = () => {
     else setView("overview");
   };
 
+  const handleLessonComplete = async () => {
+    if (user && lesson) {
+      await logActivity("lesson_complete", module.id, lesson.id);
+    }
+  };
+
+  const handleExerciseComplete = async () => {
+    if (user) {
+      await logActivity("exercise_complete", module.id, lesson?.id);
+    }
+    setView("scenario");
+  };
+
+  const handleScenarioComplete = async (vibeScore?: number) => {
+    if (user) {
+      await logActivity("scenario_complete", module.id, undefined, vibeScore);
+      // Check if all lessons in this module are completed
+      const allDone = module.lessons.every(
+        (l) => completedLessons.has(l.id) || l.id === lesson?.id
+      );
+      if (allDone) {
+        await logActivity("module_complete", module.id);
+      }
+    }
+    setView("complete");
+  };
+
   return (
     <AppLayout>
       <header className="flex items-center gap-3 px-5 pt-6 pb-4 md:max-w-[900px] md:mx-auto md:w-full">
@@ -56,21 +87,27 @@ const ModuleDetail = () => {
 
               <h3 className="text-sm font-semibold uppercase tracking-wider text-muted-foreground mb-3">Lessons</h3>
               <div className="space-y-2">
-                {module.lessons.map((l, i) => (
-                  <button
-                    key={l.id}
-                    onClick={() => { setActiveLessonIdx(i); setView("lesson"); }}
-                    className="w-full flex items-center justify-between bg-card rounded-xl p-4 shadow-sm"
-                  >
-                    <div className="text-left">
-                      <p className="text-sm font-semibold">{module.number}.{i + 1} — {l.title}</p>
-                      <p className="text-xs text-muted-foreground mt-0.5">
-                        {l.phrases.length} phrases · {l.coachingNotes.length} coaching notes
-                      </p>
-                    </div>
-                    <ChevronRight className="w-4 h-4 text-muted-foreground" />
-                  </button>
-                ))}
+                {module.lessons.map((l, i) => {
+                  const isDone = completedLessons.has(l.id);
+                  return (
+                    <button
+                      key={l.id}
+                      onClick={() => { setActiveLessonIdx(i); setView("lesson"); }}
+                      className="w-full flex items-center justify-between bg-card rounded-xl p-4 shadow-sm"
+                    >
+                      <div className="text-left">
+                        <p className="text-sm font-semibold">
+                          {module.number}.{i + 1} — {l.title}
+                          {isDone && <span className="ml-2 text-accent text-xs">✓</span>}
+                        </p>
+                        <p className="text-xs text-muted-foreground mt-0.5">
+                          {l.phrases.length} phrases · {l.coachingNotes.length} coaching notes
+                        </p>
+                      </div>
+                      <ChevronRight className="w-4 h-4 text-muted-foreground" />
+                    </button>
+                  );
+                })}
               </div>
 
               <h3 className="text-sm font-semibold uppercase tracking-wider text-muted-foreground mb-3 mt-6">Final Challenge</h3>
@@ -128,14 +165,20 @@ const ModuleDetail = () => {
 
               {exercise ? (
                 <button
-                  onClick={() => setView("exercise")}
+                  onClick={async () => {
+                    await handleLessonComplete();
+                    setView("exercise");
+                  }}
                   className="w-full py-3.5 rounded-xl bg-cta text-cta-foreground font-semibold text-sm"
                 >
                   Practice Exercises
                 </button>
               ) : (
                 <button
-                  onClick={() => setView("scenario")}
+                  onClick={async () => {
+                    await handleLessonComplete();
+                    setView("scenario");
+                  }}
                   className="w-full py-3.5 rounded-xl bg-accent text-accent-foreground font-semibold text-sm"
                 >
                   Go to Final Challenge
@@ -145,7 +188,7 @@ const ModuleDetail = () => {
           )}
 
           {view === "exercise" && exercise && (
-            <FillGapExercise exercise={exercise} onComplete={() => setView("scenario")} />
+            <FillGapExercise exercise={exercise} onComplete={handleExerciseComplete} />
           )}
 
           {view === "scenario" && (
@@ -153,7 +196,7 @@ const ModuleDetail = () => {
               moduleTitle={module.title}
               moduleNumber={module.number}
               scenario={module.scenarioExercise}
-              onComplete={() => setView("complete")}
+              onComplete={() => handleScenarioComplete()}
             />
           )}
 

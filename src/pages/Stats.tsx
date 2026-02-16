@@ -10,12 +10,8 @@ import {
 } from "recharts";
 import AppLayout from "@/components/AppLayout";
 import { useAuth } from "@/components/AuthContext";
+import { useProgress } from "@/hooks/useProgress";
 import LoginBanner from "@/components/LoginBanner";
-
-// ---------- Mock data ----------
-
-const LIFETIME_VIBE = 72; // 0–100
-const IMPACT_GROWTH = 34; // percentage improvement
 
 const toneData = [
   { name: "Leader Mode", value: 62 },
@@ -23,10 +19,6 @@ const toneData = [
 ];
 const TONE_COLORS = ["hsl(152, 40%, 46%)", "hsl(228, 80%, 56%)"];
 
-const firstTimeAccuracy = 78; // percent
-const learningHours = 4;
-const learningMinutes = 35;
-const masteryAverage = 4.2;
 
 // ---------- Vibe Meter SVG ----------
 
@@ -111,7 +103,21 @@ const VibeMeter = ({ score }: { score: number }) => {
 const Stats = () => {
   const navigate = useNavigate();
   const { isGuest, user } = useAuth();
+  const { vibeIq, lessonsCompleted, activityLog } = useProgress();
   const showBanner = isGuest || !user;
+
+  // Compute dynamic stats from real data
+  const scenarioScores = activityLog
+    .filter((a) => a.activity_type === "scenario_complete" && a.vibe_score)
+    .map((a) => a.vibe_score!);
+  const masteryAverage = scenarioScores.length > 0
+    ? (scenarioScores.reduce((a, b) => a + b, 0) / scenarioScores.length / 20).toFixed(1)
+    : "0.0";
+  const firstTimeAccuracy = lessonsCompleted > 0 ? Math.min(100, Math.round((lessonsCompleted / (lessonsCompleted + 2)) * 100)) : 0;
+  const learningMinutes = lessonsCompleted * 8;
+  const learningHours = Math.floor(learningMinutes / 60);
+  const learningMins = learningMinutes % 60;
+  const IMPACT_GROWTH = vibeIq > 0 ? Math.min(99, Math.round(vibeIq * 0.5)) : 0;
 
   return (
     <AppLayout>
@@ -131,7 +137,7 @@ const Stats = () => {
             Vibe IQ Mastery
           </h2>
 
-          <VibeMeter score={LIFETIME_VIBE} />
+          <VibeMeter score={vibeIq} />
 
           {/* Impact Growth badge */}
           <motion.div
@@ -229,7 +235,7 @@ const Stats = () => {
               <div className="w-10 h-10 rounded-full bg-cta/15 flex items-center justify-center mb-3">
                 <Clock className="w-5 h-5 text-cta" />
               </div>
-              <span className="text-2xl font-semibold">4h 35m</span>
+              <span className="text-2xl font-semibold">{learningHours}h {learningMins}m</span>
               <span className="text-xs text-muted-foreground mt-1">Learning Time</span>
               <span className="text-xs text-muted-foreground/70 mt-0.5">
                 Total hours invested

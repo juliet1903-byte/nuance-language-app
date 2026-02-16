@@ -1,0 +1,200 @@
+import { useEffect, useState, useCallback } from "react";
+import { supabase } from "@/integrations/supabase/client";
+import { useAuth } from "@/components/AuthContext";
+
+export interface ActivityEntry {
+  id: string;
+  activity_type: string;
+  module_id: string;
+  lesson_id: string | null;
+  vibe_score: number | null;
+  created_at: string;
+}
+
+export interface ProgressData {
+  vibeIq: number;
+  xp: number;
+  lessonsCompleted: number;
+  modulesCompleted: number;
+  streakDays: number;
+  learningLevel: number;
+  activeDays: Set<string>; // "YYYY-MM-DD"
+  activityLog: ActivityEntry[];
+  completedLessons: Set<string>; // lesson ids
+  completedModules: Set<string>; // module ids
+  loading: boolean;
+}
+
+function computeStreak(dates: string[]): number {
+  if (dates.length === 0) return 0;
+  const unique = [...new Set(dates)].sort().reverse();
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+  const yesterday = new Date(today);
+  yesterday.setDate(yesterday.getDate() - 1);
+
+  const todayStr = today.toISOString().slice(0, 10);
+  const yesterdayStr = yesterday.toISOString().slice(0, 10);
+
+  // Streak must include today or yesterday
+  if (unique[0] !== todayStr && unique[0] !== yesterdayStr) return 0;
+
+  let streak = 0;
+  let check = unique[0] === todayStr ? new Date(today) : new Date(yesterday);
+
+  for (const dateStr of unique) {
+    const checkStr = check.toISOString().slice(0, 10);
+    if (dateStr === checkStr) {
+      streak++;
+      check.setDate(check.getDate() - 1);
+    } else if (dateStr < checkStr) {
+      break;
+    }
+  }
+  return streak;
+}
+
+export function useProgress() {
+  const { user } = useAuth();
+  const [data, setData] = useState<ProgressData>({
+    vibeIq: 0,
+    xp: 0,
+    lessonsCompleted: 0,
+    modulesCompleted: 0,
+    streakDays: 0,
+    learningLevel: 1,
+    activeDays: new Set(),
+    activityLog: [],
+    completedLessons: new Set(),
+    completedModules: new Set(),
+    loading: true,
+  });
+
+  const fetchAll = useCallback(async () => {
+    if (!user) {
+      setData((d) => ({ ...d, loading: false }));
+      return;
+    }
+
+    const [profileRes, activityRes] = await Promise.all([
+      supabase.from("profiles").select("*").eq("id", user.id).single(),
+      supabase
+        .from("activity_log")
+        .select("*")
+        .eq("user_id", user.id)
+        .order("created_at", { ascending: false }),
+    ]);
+
+    const profile = profileRes.data;
+    const activities = (activityRes.data || []) as ActivityEntry[];
+
+    const activeDays = new Set<string>();
+    const completedLessons = new Set<string>();
+    const completedModules = new Set<string>();
+
+    for (const a of activities) {
+      activeDays.add(a.created_at.slice(0, 10));
+      if (a.activity_type === "lesson_complete" && a.lesson_id) {
+        completedLessons.add(a.lesson_id);
+      }
+      if (a.activity_type === "module_complete") {
+        completedModules.add(a.module_id);
+      }
+    }
+
+    const streak = computeStreak([...activeDays]);
+
+    // Update streak in DB if changed
+    if (profile && streak !== profile.streak_days) {
+      await supabase.from("profiles").update({
+        streak_days: streak,
+        last_active_date: new Date().toISOString().slice(0, 10),
+      }).eq("id", user.id);
+    }
+
+    setData({
+      vibeIq: profile?.vibe_iq ?? 0,
+      xp: (profile as any)?.xp ?? 0,
+      lessonsCompleted: (profile as any)?.lessons_completed ?? 0,
+      modulesCompleted: (profile as any)?.modules_completed ?? 0,
+      streakDays: streak,
+      learningLevel: profile?.learning_level ?? 1,
+      activeDays,
+      activityLog: activities,
+      completedLessons,
+      completedModules,
+      loading: false,
+    });
+  }, [user]);
+
+  useEffect(() => {
+    fetchAll();
+  }, [fetchAll]);
+
+  // Realtime subscription
+  useEffect(() => {
+    if (!user) return;
+    const channel = supabase
+      .channel("activity-changes")
+      .on(
+        "postgres_changes",
+        { event: "INSERT", schema: "public", table: "activity_log", filter: `user_id=eq.${user.id}` },
+        () => fetchAll()
+      )
+      .subscribe();
+    return () => { supabase.removeChannel(channel); };
+  }, [user, fetchAll]);
+
+  const logActivity = useCallback(
+    async (
+      activityType: string,
+      moduleId: string,
+      lessonId?: string,
+      vibeScore?: number
+    ) => {
+      if (!user) return;
+
+      await supabase.from("activity_log").insert({
+        user_id: user.id,
+        activity_type: activityType,
+        module_id: moduleId,
+        lesson_id: lessonId ?? null,
+        vibe_score: vibeScore ?? null,
+      });
+
+      // Update profile counters
+      const updates: Record<string, any> = {
+        last_active_date: new Date().toISOString().slice(0, 10),
+      };
+
+      if (activityType === "lesson_complete") {
+        updates.lessons_completed = (data.lessonsCompleted || 0) + 1;
+        updates.xp = (data.xp || 0) + 25;
+      }
+      if (activityType === "module_complete") {
+        updates.modules_completed = (data.modulesCompleted || 0) + 1;
+        updates.xp = (data.xp || 0) + 100;
+        // Level up logic: each 2 modules = next level (max 4)
+        const newModules = (data.modulesCompleted || 0) + 1;
+        updates.learning_level = Math.min(4, Math.floor(newModules / 2) + 1);
+      }
+      if (activityType === "scenario_complete" && vibeScore) {
+        // Update vibe_iq as running average
+        const totalScenarios = data.activityLog.filter(
+          (a) => a.activity_type === "scenario_complete"
+        ).length;
+        const newVibeIq = Math.round(
+          (data.vibeIq * totalScenarios + vibeScore) / (totalScenarios + 1)
+        );
+        updates.vibe_iq = newVibeIq;
+        updates.xp = (data.xp || 0) + 50;
+      }
+
+      await supabase.from("profiles").update(updates).eq("id", user.id);
+      // Realtime will trigger fetchAll
+    },
+    [user, data]
+  );
+
+  return { ...data, logActivity, refetch: fetchAll };
+}

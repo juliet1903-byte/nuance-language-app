@@ -17,18 +17,26 @@ import { Switch } from "@/components/ui/switch";
 import AppLayout from "@/components/AppLayout";
 import { useTheme } from "@/components/ThemeContext";
 import { useAuth } from "@/components/AuthContext";
-import userAvatar from "@/assets/user-avatar.jpg";
+import { useProgress } from "@/hooks/useProgress";
+import LetterAvatar from "@/components/LetterAvatar";
+import { modules } from "@/data/modules";
+
+const LEVEL_NAMES = ["Natural Flow", "The Specialist", "The Collaborator", "The Influencer"];
 
 const Profile = () => {
   const navigate = useNavigate();
   const { theme, toggle: toggleTheme } = useTheme();
-  const { isGuest, user } = useAuth();
+  const { isGuest, user, profile, signOut } = useAuth();
+  const { streakDays, modulesCompleted, vibeIq, loading } = useProgress();
   const showBanner = isGuest || !user;
 
+  const displayName = profile?.display_name || user?.email?.split("@")[0] || "User";
+  const levelName = LEVEL_NAMES[Math.min((profile?.learning_level ?? 1) - 1, 3)];
+
   const quickStats = [
-    { icon: Flame, label: "Day Streak", value: "7", color: "text-vibe-blunt" },
-    { icon: BookOpen, label: "Modules", value: "2/8", color: "text-cta" },
-    { icon: Award, label: "Vibe IQ", value: "72", color: "text-accent" },
+    { icon: Flame, label: "Day Streak", value: String(streakDays), color: "text-vibe-blunt" },
+    { icon: BookOpen, label: "Modules", value: `${modulesCompleted}/${modules.length}`, color: "text-cta" },
+    { icon: Award, label: "Vibe IQ", value: String(vibeIq), color: "text-accent" },
   ];
 
   return (
@@ -43,7 +51,6 @@ const Profile = () => {
 
       <main className="px-5 space-y-6 pb-8 md:max-w-[900px] md:mx-auto md:w-full">
         {showBanner ? (
-          /* Guest empty state */
           <section className="flex flex-col items-center text-center py-12">
             <div className="w-20 h-20 rounded-full bg-muted flex items-center justify-center ring-2 ring-border ring-offset-2 ring-offset-background mb-4">
               <User className="w-10 h-10 text-white dark:text-muted-foreground" />
@@ -63,20 +70,20 @@ const Profile = () => {
           <>
             {/* Avatar & Name */}
             <section className="flex flex-col items-center text-center">
-              <div className="w-20 h-20 rounded-full overflow-hidden ring-2 ring-accent ring-offset-2 ring-offset-background mb-3">
-                <img
-                  src={userAvatar}
-                  alt="Profile"
-                  className="w-full h-full object-cover"
+              <div className="ring-2 ring-accent ring-offset-2 ring-offset-background rounded-full mb-3">
+                <LetterAvatar
+                  name={profile?.display_name}
+                  email={user?.email}
+                  size="lg"
                 />
               </div>
-              <h2 className="text-xl font-semibold">Julia K.</h2>
+              <h2 className="text-xl font-semibold">{displayName}</h2>
               <p className="text-sm text-muted-foreground mt-0.5">
-                Product Designer
+                {user?.email}
               </p>
               <span className="mt-2 inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-accent/15 text-accent text-xs font-semibold">
                 <Award className="w-3.5 h-3.5" />
-                The Specialist
+                {levelName}
               </span>
             </section>
 
@@ -142,13 +149,15 @@ const Profile = () => {
 
             {/* Sign Out */}
             <section>
-              <button className="w-full flex items-center justify-center gap-2 py-3 rounded-2xl border border-destructive/20 text-destructive text-sm font-medium hover:bg-destructive/5 transition-colors">
+              <button
+                onClick={async () => { await signOut(); navigate("/"); }}
+                className="w-full flex items-center justify-center gap-2 py-3 rounded-2xl border border-destructive/20 text-destructive text-sm font-medium hover:bg-destructive/5 transition-colors"
+              >
                 <LogOut className="w-4 h-4" />
                 Sign Out
               </button>
             </section>
 
-            {/* Version */}
             <p className="text-center text-xs text-muted-foreground pb-2">
               Nuance v1.0 · Career Playbook
             </p>
