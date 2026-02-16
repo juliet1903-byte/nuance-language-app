@@ -57,10 +57,10 @@ const Landing = () => {
 
       {/* Hero */}
       <section className="text-center px-6 pt-12 pb-8 max-w-3xl mx-auto py-[64px]">
-        <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight leading-tight mb-5">
+        <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight leading-tight mb-4">
           Speak with Impact. <span className="text-cta">Lead with Nuance.</span>
         </h1>
-        <p className="text-base md:text-lg text-muted-foreground max-w-xl mx-auto mb-8 leading-relaxed">
+        <p className="text-base md:text-lg text-muted-foreground max-w-xl mx-auto mb-4 leading-relaxed">
           You've mastered the basics. Now, master the nuance. Refactor your business communication to lead, influence,
           and impact.
         </p>
