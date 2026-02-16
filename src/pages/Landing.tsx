@@ -10,22 +10,22 @@ const Landing = () => {
   const { enterGuestMode, user, profile } = useAuth();
 
   const features = [
-  {
-    icon: Zap,
-    title: "Social Translator & Vibe Meter",
-    description: "Turn your raw thoughts into polished professional business communication"
-  },
-  {
-    icon: Route,
-    title: "4-Level Learning Path",
-    description: "Progress from Natural Flow to Influencer with structured career communication modules."
-  },
-  {
-    icon: Flame,
-    title: "Daily Streaks",
-    description: "Build consistency and momentum with daily learning goals and streaks."
-  }];
-
+    {
+      icon: Zap,
+      title: "Social Translator & Vibe Meter",
+      description: "Turn your raw thoughts into polished professional business communication",
+    },
+    {
+      icon: Route,
+      title: "4-Level Learning Path",
+      description: "Progress from Natural Flow to Influencer with structured career communication modules.",
+    },
+    {
+      icon: Flame,
+      title: "Daily Streaks",
+      description: "Build consistency and momentum with daily learning goals and streaks.",
+    },
+  ];
 
   const handleGuest = () => {
     enterGuestMode();
@@ -37,26 +37,26 @@ const Landing = () => {
       {/* Nav */}
       <nav className="flex items-center justify-between px-6 py-5 max-w-5xl mx-auto">
         <Logo className="h-8" />
-        {user ?
-        <button
-          onClick={() => navigate("/dashboard")}
-          className="flex items-center gap-2 text-sm font-medium text-foreground hover:opacity-80 transition-opacity">
-
+        {user ? (
+          <button
+            onClick={() => navigate("/dashboard")}
+            className="flex items-center gap-2 text-sm font-medium text-foreground hover:opacity-80 transition-opacity"
+          >
             <LetterAvatar name={profile?.display_name} email={user.email} size="sm" />
             <span>{profile?.display_name || user.email?.split("@")[0]}</span>
-          </button> :
-
-        <button
-          onClick={() => navigate("/auth")}
-          className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">
-
+          </button>
+        ) : (
+          <button
+            onClick={() => navigate("/auth")}
+            className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
+          >
             Sign In
           </button>
-        }
+        )}
       </nav>
 
       {/* Hero */}
-      <section className="text-center px-6 pt-12 pb-8 max-w-3xl mx-auto py-[64px]">
+      <section className="text-center px-6 pt-12 pb-12 max-w-3xl mx-auto">
         <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight leading-tight mb-4">
           Speak with Impact. <span className="text-cta">Lead with Nuance.</span>
         </h1>
@@ -67,14 +67,14 @@ const Landing = () => {
         <div className="flex items-center justify-center gap-4 flex-wrap">
           <button
             onClick={() => navigate("/auth")}
-            className="px-8 py-3 rounded-xl bg-cta text-cta-foreground font-semibold text-sm hover:opacity-90 transition-opacity shadow-md">
-
+            className="px-8 py-3 rounded-xl bg-cta text-cta-foreground font-semibold text-sm hover:opacity-90 transition-opacity shadow-md"
+          >
             Join Nuance
           </button>
           <button
             onClick={handleGuest}
-            className="px-8 py-3 rounded-xl border-2 border-accent text-accent font-semibold text-sm hover:bg-accent/10 transition-colors">
-
+            className="px-8 py-3 rounded-xl border-2 border-accent text-accent font-semibold text-sm hover:bg-accent/10 transition-colors"
+          >
             Try as Guest
           </button>
         </div>
@@ -90,15 +90,15 @@ const Landing = () => {
       {/* Features */}
       <section className="px-6 pb-16 max-w-4xl mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
-          {features.map((f) =>
-          <div key={f.title} className="bg-card rounded-2xl p-6 shadow-sm border border-border/30">
+          {features.map((f) => (
+            <div key={f.title} className="bg-card rounded-2xl p-6 shadow-sm border border-border/30">
               <div className="w-11 h-11 rounded-xl bg-cta/10 flex items-center justify-center mb-4">
                 <f.icon className="w-5 h-5 text-cta" />
               </div>
               <h3 className="font-semibold text-base mb-2">{f.title}</h3>
               <p className="text-sm text-muted-foreground leading-relaxed">{f.description}</p>
             </div>
-          )}
+          ))}
         </div>
       </section>
 
@@ -107,13 +107,13 @@ const Landing = () => {
         <h2 className="text-2xl md:text-3xl font-bold mb-4">Ready to level up your communication?</h2>
         <button
           onClick={() => navigate("/auth")}
-          className="px-10 py-3.5 rounded-xl bg-cta text-cta-foreground font-semibold text-sm hover:opacity-90 transition-opacity shadow-md">
-
+          className="px-10 py-3.5 rounded-xl bg-cta text-cta-foreground font-semibold text-sm hover:opacity-90 transition-opacity shadow-md"
+        >
           Join Nuance
         </button>
       </section>
-    </div>);
-
+    </div>
+  );
 };
 
 export default Landing;
