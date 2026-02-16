@@ -1,8 +1,9 @@
 import { useState } from "react";
-import { Bell } from "lucide-react";
+import { Bell, User } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import Logo from "@/components/Logo";
 import userAvatar from "@/assets/user-avatar.jpg";
+import { useAuth } from "@/components/AuthContext";
 import trending1 from "@/assets/trending-1.png";
 import trending2 from "@/assets/trending-2.png";
 import trending3 from "@/assets/trending-3.png";
@@ -15,7 +16,8 @@ import { modules } from "@/data/modules";
 
 const Index = () => {
   const navigate = useNavigate();
-
+  const { isGuest, user, profile } = useAuth();
+  const showAvatar = !isGuest && user;
   const trendingItems = [
     { image: trending1, badge: "Article", badgeColor: "bg-accent", title: "The art of the Warm Intro" },
     { image: trending2, badge: "Video", badgeColor: "bg-cta", title: "How to get ready for an interview" },
@@ -32,8 +34,12 @@ const Index = () => {
           <button className="p-2 rounded-full bg-card">
             <Bell className="w-5 h-5 text-foreground" />
           </button>
-          <div className="w-9 h-9 rounded-full bg-muted overflow-hidden">
-            <img src={userAvatar} alt="User avatar" className="w-full h-full object-cover shadow-none opacity-100" />
+          <div className="w-9 h-9 rounded-full bg-muted overflow-hidden flex items-center justify-center">
+            {showAvatar ? (
+              <img src={userAvatar} alt="User avatar" className="w-full h-full object-cover shadow-none opacity-100" />
+            ) : (
+              <User className="w-5 h-5 text-muted-foreground" />
+            )}
           </div>
         </div>
       </header>
