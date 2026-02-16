@@ -58,7 +58,18 @@ const Progress = () => {
     loading,
   } = useProgress();
 
-  const [expandedLevel, setExpandedLevel] = useState<string | null>(showBanner ? "natural-flow" : "specialist");
+  // Find the first level with activity for default expansion
+  const getDefaultExpanded = () => {
+    if (showBanner) return "natural-flow";
+    for (const meta of LEVEL_META) {
+      const moduleIds = LEVEL_MODULE_MAP[meta.id];
+      const levelModules = moduleIds.map((mid) => modules.find((m) => m.id === mid)).filter(Boolean);
+      const hasActivity = levelModules.some((m) => m?.lessons.some((l) => completedLessons.has(l.id)));
+      if (hasActivity) return meta.id;
+    }
+    return LEVEL_META[0].id;
+  };
+  const [expandedLevel, setExpandedLevel] = useState<string | null>(getDefaultExpanded());
 
   // Build dynamic career levels
   const careerLevels = LEVEL_META.map((meta) => {
@@ -74,19 +85,14 @@ const Progress = () => {
     );
     const progress = totalLessons > 0 ? Math.round((doneLessons / totalLessons) * 100) : 0;
 
-    return { ...meta, moduleIds: levelModuleIds, completed, progress };
+    // A level is active if user has any progress in it (even partial)
+    const active = !completed && progress > 0;
+
+    return { ...meta, moduleIds: levelModuleIds, completed, progress, active };
   });
 
-  // Determine which levels are active (first non-completed)
-  let foundActive = false;
-  const levelsWithActive = careerLevels.map((level) => {
-    if (level.completed) return { ...level, active: false };
-    if (!foundActive) {
-      foundActive = true;
-      return { ...level, active: true };
-    }
-    return { ...level, active: false };
-  });
+  // Use careerLevels directly (no sequential locking)
+  const levelsWithActive = careerLevels;
 
   // Calendar data
   const now = new Date();
@@ -166,6 +172,8 @@ const Progress = () => {
                           ? "bg-accent text-accent-foreground"
                           : displayLevel.active
                           ? "border-2 border-accent bg-background"
+                          : showBanner
+                          ? "bg-muted text-muted-foreground"
                           : "bg-muted text-muted-foreground"
                       }`}
                     >
@@ -173,8 +181,10 @@ const Progress = () => {
                         <Check className="w-4 h-4" />
                       ) : displayLevel.active ? (
                         <div className="w-2.5 h-2.5 rounded-full bg-accent" />
-                      ) : (
+                      ) : showBanner ? (
                         <Lock className="w-3 h-3 text-accent-foreground" />
+                      ) : (
+                        <div className="w-2.5 h-2.5 rounded-full bg-muted-foreground/40" />
                       )}
                     </div>
                     {i < levelsWithActive.length - 1 && <div className="w-px flex-1 bg-border" />}
@@ -196,7 +206,7 @@ const Progress = () => {
                       )}
                     </button>
 
-                    {displayLevel.active && displayLevel.progress > 0 && !isExpanded && (
+                    {displayLevel.progress > 0 && !isExpanded && (
                       <div className="-mt-2 mb-4">
                         <div className="w-full h-1.5 bg-muted rounded-full overflow-hidden">
                           <div
@@ -221,7 +231,7 @@ const Progress = () => {
                           <div className="space-y-2">
                             {levelModules.map((mod) => {
                               if (!mod) return null;
-                              const isLocked = !displayLevel.completed && !displayLevel.active;
+                              const isLocked = showBanner && !displayLevel.active;
                               const isModuleDone = completedModules.has(mod.id);
                               return (
                                 <button
@@ -242,7 +252,7 @@ const Progress = () => {
                                   <div className="flex-1 text-left">
                                     <p className="text-sm font-semibold">{mod.title}</p>
                                     <p className="text-xs text-muted-foreground">
-                                      {mod.lessons.length} lesson{mod.lessons.length > 1 ? "s" : ""} · Module {mod.number}
+                                      {mod.lessons.filter((l) => completedLessons.has(l.id)).length}/{mod.lessons.length} lesson{mod.lessons.length > 1 ? "s" : ""} · Module {mod.number}
                                     </p>
                                   </div>
                                   {isLocked ? (
