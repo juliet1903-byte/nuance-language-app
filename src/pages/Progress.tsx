@@ -5,7 +5,6 @@ import { motion, AnimatePresence } from "framer-motion";
 import { modules } from "@/data/modules";
 import AppLayout from "@/components/AppLayout";
 import { useAuth } from "@/components/AuthContext";
-import LoginBanner from "@/components/LoginBanner";
 
 import moduleStartingStrong from "@/assets/module-starting-strong.png";
 import moduleMeetingRoom from "@/assets/module-meeting-room.png";
@@ -34,7 +33,7 @@ interface CareerLevel {
   completed: boolean;
   active: boolean;
   progress?: number;
-  moduleIds: string[]; // maps to module IDs from the playbook
+  moduleIds: string[];
 }
 
 const careerLevels: CareerLevel[] = [
@@ -44,7 +43,7 @@ const careerLevels: CareerLevel[] = [
     subtitle: "Foundations of speech",
     completed: true,
     active: false,
-    moduleIds: ["dei-fundamentals", "career-moves"], // Modules 7 & 6
+    moduleIds: ["dei-fundamentals", "career-moves"],
   },
   {
     id: "specialist",
@@ -53,7 +52,7 @@ const careerLevels: CareerLevel[] = [
     completed: false,
     active: true,
     progress: 65,
-    moduleIds: ["starting-strong", "meeting-room"], // Modules 1 & 2
+    moduleIds: ["starting-strong", "meeting-room"],
   },
   {
     id: "collaborator",
@@ -61,7 +60,7 @@ const careerLevels: CareerLevel[] = [
     subtitle: "Team dynamics & empathy",
     completed: false,
     active: false,
-    moduleIds: ["across-cultures", "difficult-convos"], // Modules 3 & 5
+    moduleIds: ["across-cultures", "difficult-convos"],
   },
   {
     id: "influencer",
@@ -69,7 +68,7 @@ const careerLevels: CareerLevel[] = [
     subtitle: "Visionary leadership",
     completed: false,
     active: false,
-    moduleIds: ["managing-up", "common-mistakes"], // Modules 4 & 8
+    moduleIds: ["managing-up", "common-mistakes"],
   },
 ];
 
@@ -82,7 +81,6 @@ const generateActivityData = () => {
   const today = now.getDate();
 
   const activity: Record<number, "completed" | "locked" | "today"> = {};
-  // Some past days marked as completed
   const completedDays = [1, 3, 4, 7, 8, 10, 11, 14, 15, 17, 18, 21];
   for (let d = 1; d <= daysInMonth; d++) {
     if (d === today) {
@@ -109,11 +107,10 @@ const Progress = () => {
   const { year, month, daysInMonth, today, activity } = generateActivityData();
   const monthName = new Date(year, month).toLocaleString("default", { month: "long" });
 
-  // First day of month (0=Sun, adjust to Mon-based)
   const firstDayOfWeek = new Date(year, month, 1).getDay();
   const startOffset = firstDayOfWeek === 0 ? 6 : firstDayOfWeek - 1;
 
-  const streak = 7; // mock streak
+  const streak = 7;
 
   return (
     <AppLayout>
@@ -125,12 +122,31 @@ const Progress = () => {
           <div className="flex-1">
             <h1 className="text-lg font-semibold">My Progress</h1>
           </div>
-          <span className="flex items-center gap-1.5 text-sm px-3 py-1.5 rounded-full font-medium text-cta bg-secondary">
-            <CalendarDays className="w-3.5 h-3.5" /> {streak}
-          </span>
+          {!showBanner && (
+            <span className="flex items-center gap-1.5 text-sm px-3 py-1.5 rounded-full font-medium text-cta bg-secondary">
+              <CalendarDays className="w-3.5 h-3.5" /> {streak}
+            </span>
+          )}
         </header>
 
         <main className="px-5 space-y-6 md:max-w-[900px] md:mx-auto md:w-full">
+          {/* Guest CTA */}
+          {showBanner && (
+            <section className="bg-card rounded-2xl p-6 shadow-sm border border-border/30 text-center">
+              <CalendarDays className="w-10 h-10 text-cta mx-auto mb-3" />
+              <h2 className="font-semibold text-base mb-1">Track Your Progress</h2>
+              <p className="text-sm text-muted-foreground mb-4 leading-relaxed">
+                Join Nuance to track completed lessons, build streaks, and monitor your career maturity path.
+              </p>
+              <button
+                onClick={() => navigate("/auth")}
+                className="px-8 py-3 rounded-xl bg-cta text-cta-foreground font-semibold text-sm hover:opacity-90 transition-opacity shadow-md"
+              >
+                Join to Track Your Progress
+              </button>
+            </section>
+          )}
+
           {/* Career Maturity Levels */}
           <section>
             <h2 className="text-sm font-semibold uppercase tracking-wider text-muted-foreground mb-3">
@@ -144,27 +160,30 @@ const Progress = () => {
                   .map((mid) => modules.find((m) => m.id === mid))
                   .filter(Boolean);
 
+                // For guests, reset all progress
+                const displayLevel = showBanner
+                  ? { ...level, completed: false, active: i === 0, progress: undefined }
+                  : level;
+
                 return (
-                  <div key={level.id}>
-                    {/* Level Header */}
+                  <div key={displayLevel.id}>
                     <button
-                      onClick={() => setExpandedLevel(isExpanded ? null : level.id)}
+                      onClick={() => setExpandedLevel(isExpanded ? null : displayLevel.id)}
                       className="w-full flex gap-3 items-start"
                     >
-                      {/* Stepper */}
                       <div className="flex flex-col items-center">
                         <div
                           className={`w-7 h-7 rounded-full flex items-center justify-center shrink-0 ${
-                            level.completed
+                            displayLevel.completed
                               ? "bg-accent text-accent-foreground"
-                              : level.active
+                              : displayLevel.active
                               ? "border-2 border-accent bg-background"
                               : "bg-muted text-muted-foreground"
                           }`}
                         >
-                          {level.completed ? (
+                          {displayLevel.completed ? (
                             <Check className="w-4 h-4" />
-                          ) : level.active ? (
+                          ) : displayLevel.active ? (
                             <div className="w-2.5 h-2.5 rounded-full bg-accent" />
                           ) : (
                             <Lock className="w-3 h-3 text-accent-foreground" />
@@ -175,12 +194,11 @@ const Progress = () => {
                         )}
                       </div>
 
-                      {/* Content */}
                       <div className="flex-1 pb-4 pt-0.5">
                         <div className="flex items-center justify-between">
                           <div className="text-left">
-                            <p className="font-semibold text-sm">{level.title}</p>
-                            <p className="text-xs text-muted-foreground">{level.subtitle}</p>
+                            <p className="font-semibold text-sm">{displayLevel.title}</p>
+                            <p className="text-xs text-muted-foreground">{displayLevel.subtitle}</p>
                           </div>
                           {isExpanded ? (
                             <ChevronDown className="w-4 h-4 text-muted-foreground" />
@@ -189,23 +207,22 @@ const Progress = () => {
                           )}
                         </div>
 
-                        {level.active && level.progress && (
+                        {displayLevel.active && displayLevel.progress && (
                           <div className="mt-2">
                             <div className="w-full h-1.5 bg-muted rounded-full overflow-hidden">
                               <div
                                 className="h-full bg-accent rounded-full transition-all"
-                                style={{ width: `${level.progress}%` }}
+                                style={{ width: `${displayLevel.progress}%` }}
                               />
                             </div>
                             <p className="text-xs text-accent mt-1 font-medium">
-                              {level.progress}% complete
+                              {displayLevel.progress}% complete
                             </p>
                           </div>
                         )}
                       </div>
                     </button>
 
-                    {/* Expanded Modules */}
                     <AnimatePresence>
                       {isExpanded && (
                         <motion.div
@@ -217,7 +234,7 @@ const Progress = () => {
                           <div className="space-y-2">
                             {levelModules.map((mod) => {
                               if (!mod) return null;
-                              const isLocked = !level.completed && !level.active;
+                              const isLocked = !displayLevel.completed && !displayLevel.active;
                               return (
                                 <button
                                   key={mod.id}
@@ -242,7 +259,7 @@ const Progress = () => {
                                   </div>
                                   {isLocked ? (
                                     <Lock className="w-4 h-4 text-muted-foreground" />
-                                  ) : level.completed ? (
+                                  ) : displayLevel.completed ? (
                                     <div className="w-6 h-6 rounded-full bg-accent flex items-center justify-center">
                                       <Check className="w-3.5 h-3.5 text-accent-foreground" />
                                     </div>
@@ -262,94 +279,93 @@ const Progress = () => {
             </div>
           </section>
 
-          {/* Monthly Activity Calendar */}
-          <section>
-            <h2 className="text-sm font-semibold uppercase tracking-wider text-muted-foreground mb-3">
-              {monthName} {year}
-            </h2>
+          {/* Monthly Activity Calendar — hidden for guests */}
+          {!showBanner && (
+            <section>
+              <h2 className="text-sm font-semibold uppercase tracking-wider text-muted-foreground mb-3">
+                {monthName} {year}
+              </h2>
 
-            <div className="bg-card rounded-2xl p-4 shadow-sm">
-              {/* Weekday headers */}
-              <div className="grid grid-cols-7 gap-1 mb-2">
-                {WEEKDAYS.map((d) => (
-                  <div key={d} className="text-center text-xs font-medium text-muted-foreground py-1">
-                    {d}
-                  </div>
-                ))}
-              </div>
-
-              {/* Days grid */}
-              <div className="grid grid-cols-7 gap-1">
-                {/* Empty cells for offset */}
-                {Array.from({ length: startOffset }).map((_, i) => (
-                  <div key={`empty-${i}`} className="aspect-square" />
-                ))}
-
-                {Array.from({ length: daysInMonth }).map((_, i) => {
-                  const day = i + 1;
-                  const status = activity[day];
-
-                  return (
-                    <div
-                      key={day}
-                      className={`aspect-square rounded-xl flex items-center justify-center text-xs font-medium transition-colors ${
-                        status === "completed"
-                          ? "bg-accent/15 text-accent"
-                          : status === "today"
-                          ? "bg-cta/15 text-cta ring-2 ring-cta/30"
-                          : "bg-muted/40 text-muted-foreground/50"
-                      }`}
-                    >
-                      {status === "completed" ? (
-                        <Check className="w-3.5 h-3.5" />
-                      ) : status === "locked" && day > today ? (
-                        <Lock className="w-3 h-3" />
-                      ) : (
-                        day
-                      )}
+              <div className="bg-card rounded-2xl p-4 shadow-sm">
+                <div className="grid grid-cols-7 gap-1 mb-2">
+                  {WEEKDAYS.map((d) => (
+                    <div key={d} className="text-center text-xs font-medium text-muted-foreground py-1">
+                      {d}
                     </div>
-                  );
-                })}
-              </div>
+                  ))}
+                </div>
 
-              {/* Legend */}
-              <div className="flex items-center gap-4 mt-4 pt-3 border-t border-border">
-                <div className="flex items-center gap-1.5">
-                  <div className="w-4 h-4 rounded bg-accent/15 flex items-center justify-center">
-                    <Check className="w-2.5 h-2.5 text-accent" />
-                  </div>
-                  <span className="text-xs text-muted-foreground">Completed</span>
+                <div className="grid grid-cols-7 gap-1">
+                  {Array.from({ length: startOffset }).map((_, i) => (
+                    <div key={`empty-${i}`} className="aspect-square" />
+                  ))}
+
+                  {Array.from({ length: daysInMonth }).map((_, i) => {
+                    const day = i + 1;
+                    const status = activity[day];
+
+                    return (
+                      <div
+                        key={day}
+                        className={`aspect-square rounded-xl flex items-center justify-center text-xs font-medium transition-colors ${
+                          status === "completed"
+                            ? "bg-accent/15 text-accent"
+                            : status === "today"
+                            ? "bg-cta/15 text-cta ring-2 ring-cta/30"
+                            : "bg-muted/40 text-muted-foreground/50"
+                        }`}
+                      >
+                        {status === "completed" ? (
+                          <Check className="w-3.5 h-3.5" />
+                        ) : status === "locked" && day > today ? (
+                          <Lock className="w-3 h-3" />
+                        ) : (
+                          day
+                        )}
+                      </div>
+                    );
+                  })}
                 </div>
-                <div className="flex items-center gap-1.5">
-                  <div className="w-4 h-4 rounded bg-cta/15 ring-1 ring-cta/30" />
-                  <span className="text-xs text-muted-foreground">Today</span>
-                </div>
-                <div className="flex items-center gap-1.5">
-                  <div className="w-4 h-4 rounded bg-muted/40 flex items-center justify-center">
-                    <Lock className="w-2.5 h-2.5 text-muted-foreground/50" />
+
+                <div className="flex items-center gap-4 mt-4 pt-3 border-t border-border">
+                  <div className="flex items-center gap-1.5">
+                    <div className="w-4 h-4 rounded bg-accent/15 flex items-center justify-center">
+                      <Check className="w-2.5 h-2.5 text-accent" />
+                    </div>
+                    <span className="text-xs text-muted-foreground">Completed</span>
                   </div>
-                  <span className="text-xs text-muted-foreground">Upcoming</span>
+                  <div className="flex items-center gap-1.5">
+                    <div className="w-4 h-4 rounded bg-cta/15 ring-1 ring-cta/30" />
+                    <span className="text-xs text-muted-foreground">Today</span>
+                  </div>
+                  <div className="flex items-center gap-1.5">
+                    <div className="w-4 h-4 rounded bg-muted/40 flex items-center justify-center">
+                      <Lock className="w-2.5 h-2.5 text-muted-foreground/50" />
+                    </div>
+                    <span className="text-xs text-muted-foreground">Upcoming</span>
+                  </div>
                 </div>
               </div>
-            </div>
-          </section>
+            </section>
+          )}
 
-          {/* Stats summary */}
-          <section className="grid grid-cols-3 gap-3 pb-4 relative">
-            {showBanner && <LoginBanner />}
-            <div className="bg-card rounded-2xl p-4 shadow-sm text-center">
-              <p className="text-2xl font-semibold text-accent">{streak}</p>
-              <p className="text-xs text-muted-foreground mt-0.5">Day Streak</p>
-            </div>
-            <div className="bg-card rounded-2xl p-4 shadow-sm text-center">
-              <p className="text-2xl font-semibold text-cta">12</p>
-              <p className="text-xs text-muted-foreground mt-0.5">Lessons Done</p>
-            </div>
-            <div className="bg-card rounded-2xl p-4 shadow-sm text-center">
-              <p className="text-2xl font-semibold text-foreground">2</p>
-              <p className="text-xs text-muted-foreground mt-0.5">Modules Left</p>
-            </div>
-          </section>
+          {/* Stats summary — hidden for guests */}
+          {!showBanner && (
+            <section className="grid grid-cols-3 gap-3 pb-4">
+              <div className="bg-card rounded-2xl p-4 shadow-sm text-center">
+                <p className="text-2xl font-semibold text-accent">{streak}</p>
+                <p className="text-xs text-muted-foreground mt-0.5">Day Streak</p>
+              </div>
+              <div className="bg-card rounded-2xl p-4 shadow-sm text-center">
+                <p className="text-2xl font-semibold text-cta">12</p>
+                <p className="text-xs text-muted-foreground mt-0.5">Lessons Done</p>
+              </div>
+              <div className="bg-card rounded-2xl p-4 shadow-sm text-center">
+                <p className="text-2xl font-semibold text-foreground">2</p>
+                <p className="text-xs text-muted-foreground mt-0.5">Modules Left</p>
+              </div>
+            </section>
+          )}
         </main>
     </AppLayout>
   );
