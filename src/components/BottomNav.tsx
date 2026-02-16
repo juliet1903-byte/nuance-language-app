@@ -12,7 +12,7 @@ const BottomNav = ({ onTranslatorOpen }: BottomNavProps) => {
   const path = location.pathname;
 
   const tabs = [
-    { icon: Home, label: "Home", route: "/" },
+    { icon: Home, label: "Home", route: "/dashboard" },
     { icon: BookOpen, label: "Library", route: "/library" },
     { id: "translator", icon: MessageSquare, label: "" },
     { icon: BarChart3, label: "Stats", route: "/stats" },
