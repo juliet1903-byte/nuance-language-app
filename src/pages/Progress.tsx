@@ -4,6 +4,8 @@ import { ArrowLeft, Check, Lock, ChevronDown, ChevronRight, CalendarDays } from 
 import { motion, AnimatePresence } from "framer-motion";
 import { modules } from "@/data/modules";
 import AppLayout from "@/components/AppLayout";
+import { useAuth } from "@/components/AuthContext";
+import LoginBanner from "@/components/LoginBanner";
 
 import moduleStartingStrong from "@/assets/module-starting-strong.png";
 import moduleMeetingRoom from "@/assets/module-meeting-room.png";
@@ -101,6 +103,8 @@ const WEEKDAYS = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
 const Progress = () => {
   const navigate = useNavigate();
   const [expandedLevel, setExpandedLevel] = useState<string | null>("specialist");
+  const { isGuest, user } = useAuth();
+  const showBanner = isGuest || !user;
 
   const { year, month, daysInMonth, today, activity } = generateActivityData();
   const monthName = new Date(year, month).toLocaleString("default", { month: "long" });
@@ -331,7 +335,8 @@ const Progress = () => {
           </section>
 
           {/* Stats summary */}
-          <section className="grid grid-cols-3 gap-3 pb-4">
+          <section className="grid grid-cols-3 gap-3 pb-4 relative">
+            {showBanner && <LoginBanner />}
             <div className="bg-card rounded-2xl p-4 shadow-sm text-center">
               <p className="text-2xl font-semibold text-accent">{streak}</p>
               <p className="text-xs text-muted-foreground mt-0.5">Day Streak</p>

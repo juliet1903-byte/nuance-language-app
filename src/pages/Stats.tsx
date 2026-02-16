@@ -9,6 +9,8 @@ import {
   ResponsiveContainer,
 } from "recharts";
 import AppLayout from "@/components/AppLayout";
+import { useAuth } from "@/components/AuthContext";
+import LoginBanner from "@/components/LoginBanner";
 
 // ---------- Mock data ----------
 
@@ -108,6 +110,8 @@ const VibeMeter = ({ score }: { score: number }) => {
 
 const Stats = () => {
   const navigate = useNavigate();
+  const { isGuest, user } = useAuth();
+  const showBanner = isGuest || !user;
 
   return (
     <AppLayout>
@@ -121,7 +125,8 @@ const Stats = () => {
 
       <main className="px-5 space-y-6 pb-8 md:max-w-[900px] md:mx-auto md:w-full">
         {/* ========= HERO: Vibe IQ Mastery ========= */}
-        <section className="bg-card rounded-2xl p-6 shadow-sm">
+        <section className="bg-card rounded-2xl p-6 shadow-sm relative">
+          {showBanner && <LoginBanner />}
           <h2 className="text-sm font-semibold uppercase tracking-wider text-muted-foreground mb-4">
             Vibe IQ Mastery
           </h2>

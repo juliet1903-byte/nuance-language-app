@@ -1,9 +1,13 @@
 import { Check, Lock, CalendarDays } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { learningPath } from "@/data/modules";
+import { useAuth } from "@/components/AuthContext";
+import LoginBanner from "@/components/LoginBanner";
 
 const LearningPath = () => {
   const navigate = useNavigate();
+  const { isGuest, user } = useAuth();
+  const showBanner = isGuest || !user;
 
   return (
     <button
@@ -12,8 +16,8 @@ const LearningPath = () => {
 
       <div className="flex items-center justify-between mb-4">
         <h2 className="text-lg font-medium">My Learning Path</h2>
-        <span className="flex items-center gap-1.5 text-sm lg:text-base px-3 py-1.5 rounded-full font-medium text-cta bg-slate-100">
-          <CalendarDays className="w-3.5 h-3.5" /> 7
+        <span className="flex items-center gap-1.5 text-sm lg:text-base px-3 py-1.5 rounded-full font-medium text-cta bg-secondary">
+          <CalendarDays className="w-3.5 h-3.5" /> {showBanner ? "🔒" : "7"}
         </span>
       </div>
 
