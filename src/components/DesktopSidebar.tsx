@@ -22,7 +22,7 @@ const DesktopSidebar = ({ onTranslatorOpen }: DesktopSidebarProps) => {
 
   return (
     <aside
-      className={`hidden md:flex fixed left-0 top-0 bottom-0 flex-col bg-card border-r border-border z-40 transition-all duration-300 ${
+      className={`hidden md:flex fixed left-0 top-0 bottom-0 flex-col bg-card z-40 transition-all duration-300 ${
         collapsed ? "w-[68px]" : "w-[220px]"
       }`}
     >
