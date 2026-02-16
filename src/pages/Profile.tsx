@@ -49,8 +49,8 @@ const Profile = () => {
         <h1 className="text-lg font-semibold">Profile</h1>
       </header>
 
-      <main className="px-5 space-y-6 pb-8 md:max-w-[900px] md:mx-auto md:w-full relative">
-        {showBanner && <LoginBanner />}
+      <main className="px-5 space-y-6 pb-8 md:max-w-[900px] md:mx-auto md:w-full relative overflow-hidden">
+        {showBanner && <LoginBanner className="-top-2" />}
 
         <section className="flex flex-col items-center text-center">
           <div className="ring-2 ring-accent ring-offset-2 ring-offset-background rounded-full mb-3">
