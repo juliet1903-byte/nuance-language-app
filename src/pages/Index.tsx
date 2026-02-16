@@ -1,8 +1,7 @@
-import { useState } from "react";
 import { Bell, User } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import Logo from "@/components/Logo";
-import userAvatar from "@/assets/user-avatar.jpg";
+import LetterAvatar from "@/components/LetterAvatar";
 import { useAuth } from "@/components/AuthContext";
 import trending1 from "@/assets/trending-1.png";
 import trending2 from "@/assets/trending-2.png";
@@ -34,13 +33,17 @@ const Index = () => {
           <button className="p-2 rounded-full bg-card">
             <Bell className="w-5 h-5 text-foreground" />
           </button>
-          <div className="w-9 h-9 rounded-full bg-muted overflow-hidden flex items-center justify-center">
-            {showAvatar ? (
-              <img src={userAvatar} alt="User avatar" className="w-full h-full object-cover shadow-none opacity-100" />
-            ) : (
+          {showAvatar ? (
+            <LetterAvatar
+              name={profile?.display_name}
+              email={user?.email}
+              size="sm"
+            />
+          ) : (
+            <div className="w-9 h-9 rounded-full bg-muted overflow-hidden flex items-center justify-center">
               <User className="w-5 h-5 text-muted-foreground" />
-            )}
-          </div>
+            </div>
+          )}
         </div>
       </header>
 

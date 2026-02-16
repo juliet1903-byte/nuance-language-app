@@ -14,6 +14,36 @@ export type Database = {
   }
   public: {
     Tables: {
+      activity_log: {
+        Row: {
+          activity_type: string
+          created_at: string
+          id: string
+          lesson_id: string | null
+          module_id: string
+          user_id: string
+          vibe_score: number | null
+        }
+        Insert: {
+          activity_type: string
+          created_at?: string
+          id?: string
+          lesson_id?: string | null
+          module_id: string
+          user_id: string
+          vibe_score?: number | null
+        }
+        Update: {
+          activity_type?: string
+          created_at?: string
+          id?: string
+          lesson_id?: string | null
+          module_id?: string
+          user_id?: string
+          vibe_score?: number | null
+        }
+        Relationships: []
+      }
       profiles: {
         Row: {
           created_at: string
@@ -21,9 +51,12 @@ export type Database = {
           id: string
           last_active_date: string | null
           learning_level: number
+          lessons_completed: number
+          modules_completed: number
           streak_days: number
           updated_at: string
           vibe_iq: number
+          xp: number
         }
         Insert: {
           created_at?: string
@@ -31,9 +64,12 @@ export type Database = {
           id: string
           last_active_date?: string | null
           learning_level?: number
+          lessons_completed?: number
+          modules_completed?: number
           streak_days?: number
           updated_at?: string
           vibe_iq?: number
+          xp?: number
         }
         Update: {
           created_at?: string
@@ -41,9 +77,12 @@ export type Database = {
           id?: string
           last_active_date?: string | null
           learning_level?: number
+          lessons_completed?: number
+          modules_completed?: number
           streak_days?: number
           updated_at?: string
           vibe_iq?: number
+          xp?: number
         }
         Relationships: []
       }
