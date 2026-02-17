@@ -1,11 +1,12 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import Logo from "@/components/Logo";
 import { useAuth } from "@/components/AuthContext";
 import { supabase } from "@/integrations/supabase/client";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { Checkbox } from "@/components/ui/checkbox";
 import { toast } from "@/hooks/use-toast";
 
 const Auth = () => {
@@ -19,6 +20,7 @@ const Auth = () => {
   const [signUpEmail, setSignUpEmail] = useState("");
   const [signUpPassword, setSignUpPassword] = useState("");
   const [signUpName, setSignUpName] = useState("");
+  const [agreedPrivacy, setAgreedPrivacy] = useState(false);
 
   const [showForgot, setShowForgot] = useState(false);
   const [forgotEmail, setForgotEmail] = useState("");
@@ -62,6 +64,10 @@ const Auth = () => {
 
   const handleSignUp = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (!agreedPrivacy) {
+      toast({ title: "Privacy Policy", description: "Please agree to the Privacy Policy to continue.", variant: "destructive" });
+      return;
+    }
     setLoading(true);
     const { error } = await signUp(signUpEmail, signUpPassword);
     setLoading(false);
@@ -201,9 +207,23 @@ const Auth = () => {
                     minLength={6}
                   />
                 </div>
+                <div className="flex items-start gap-2">
+                  <Checkbox
+                    id="privacy-agree"
+                    checked={agreedPrivacy}
+                    onCheckedChange={(v) => setAgreedPrivacy(v === true)}
+                    className="mt-0.5"
+                  />
+                  <Label htmlFor="privacy-agree" className="text-sm text-muted-foreground leading-snug cursor-pointer">
+                    I agree to the{" "}
+                    <Link to="/privacy" className="text-cta underline hover:opacity-80" target="_blank">
+                      Privacy Policy
+                    </Link>
+                  </Label>
+                </div>
                 <button
                   type="submit"
-                  disabled={loading}
+                  disabled={loading || !agreedPrivacy}
                   className="w-full py-3 rounded-xl bg-cta text-cta-foreground font-semibold text-sm hover:opacity-90 transition-opacity disabled:opacity-50"
                 >
                   {loading ? "Creating account…" : "Sign Up"}
