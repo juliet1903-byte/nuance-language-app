@@ -1,9 +1,10 @@
 import { useNavigate } from "react-router-dom";
-import { Zap, Route, Flame, AppWindow } from "lucide-react";
+import { Zap, Route, Flame } from "lucide-react";
 import Logo from "@/components/Logo";
 import LetterAvatar from "@/components/LetterAvatar";
 import heroShowcase from "@/assets/hero-showcase.png";
 import { useAuth } from "@/components/AuthContext";
+import Footer from "@/components/Footer";
 
 const Landing = () => {
   const navigate = useNavigate();
@@ -102,16 +103,7 @@ const Landing = () => {
         </div>
       </section>
 
-      {/* Footer CTA */}
-      <section className="text-center px-6 pb-20">
-        <h2 className="text-2xl md:text-3xl font-bold mb-4">Ready to level up your communication?</h2>
-        <button
-          onClick={() => navigate("/auth")}
-          className="px-10 py-3.5 rounded-xl bg-cta text-cta-foreground font-semibold text-sm hover:opacity-90 transition-opacity shadow-md"
-        >
-          Join Nuance
-        </button>
-      </section>
+      <Footer />
     </div>
   );
 };

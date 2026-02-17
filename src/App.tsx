@@ -15,6 +15,7 @@ import Library from "./pages/Library";
 import Stats from "./pages/Stats";
 import Profile from "./pages/Profile";
 import ResetPassword from "./pages/ResetPassword";
+import PrivacyPolicy from "./pages/PrivacyPolicy";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -38,6 +39,7 @@ const App = () => (
                 <Route path="/stats" element={<Stats />} />
                 <Route path="/profile" element={<Profile />} />
                 <Route path="/reset-password" element={<ResetPassword />} />
+                <Route path="/privacy" element={<PrivacyPolicy />} />
                 <Route path="*" element={<NotFound />} />
               </Routes>
             </BrowserRouter>
