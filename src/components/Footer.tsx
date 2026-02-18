@@ -113,9 +113,10 @@ const Footer = () => {
           </div>
         </div>
 
-        {/* Large logoword spanning full width */}
-        <div className="mt-12 mb-2">
-          <img src={logoword} alt="nuance" className="w-full md:max-w-[50%] max-w-3xl h-auto opacity-95" />
+        {/* Logoword + copyright row */}
+        <div className="mt-12 mb-2 grid grid-cols-1 md:grid-cols-2 items-end gap-4">
+          <img src={logoword} alt="nuance" className="w-full max-w-md h-auto opacity-95" />
+          <div className="hidden md:block" />
         </div>
 
         {/* Copyright */}
