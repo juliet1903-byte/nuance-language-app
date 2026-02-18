@@ -62,7 +62,7 @@ serve(async (req) => {
         Authorization: `Bearer ${RESEND_API_KEY}`,
       },
       body: JSON.stringify({
-        from: "Nuance Contact <onboarding@resend.dev>",
+        from: "Nuance AI Language App <onboarding@resend.dev>",
         to: [RECIPIENT],
         subject: `Nuance Contact: ${name}`,
         reply_to: email,
