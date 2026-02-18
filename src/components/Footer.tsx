@@ -36,7 +36,7 @@ const Footer = () => {
     <footer className="bg-[hsl(220,20%,10%)] text-[hsl(36,15%,90%)]">
       {/* CTA Section */}
       <div className="text-center px-6 pt-20 pb-16">
-        <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-8 italic">
+        <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-8">
           Ready to level up your communication?
         </h2>
         <Link
@@ -115,7 +115,7 @@ const Footer = () => {
 
         {/* Large logoword spanning full width */}
         <div className="mt-12 mb-2">
-          <img src={logoword} alt="nuance" className="w-full max-w-3xl h-auto opacity-95" />
+          <img src={logoword} alt="nuance" className="w-full md:max-w-[50%] max-w-3xl h-auto opacity-95" />
         </div>
 
         {/* Copyright */}
