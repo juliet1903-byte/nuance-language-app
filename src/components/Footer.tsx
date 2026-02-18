@@ -43,33 +43,15 @@ const Footer = () => {
           Join Nuance
         </Link>
       </div>
-      {/* Footer Content */}
-      <div className="flex flex-col h-full min-h-[150px]">
-        {/* The Text Content */}
-        <div className="space-y-4">
-          <p className="text-sm text-[hsl(220,8%,55%)] leading-relaxed">
-            Master the nuance of professional communication.
-          </p>
-          <p className="text-xs text-[hsl(220,8%,45%)]">© {new Date().getFullYear()} Nuance. All Rights Reserved.</p>
-        </div>
-
-        {/* This pushes everything above it up, and pins the logo to the bottom */}
-        <div className="mt-auto pt-6">
-          <Logo className="h-7 text-[hsl(36,15%,90%)]" />
-        </div>
-      </div>
-      //{" "}
+      {/* Footer Content */}{" "}
       <div className="max-w-5xl mx-auto px-6 pb-12 grid grid-cols-1 md:grid-cols-3 gap-12">
-        // {/* Logo + Copyright */}
-        //{" "}
+        {/* Logo + Copyright */}{" "}
         <div className="space-y-4">
-          // <Logo className="h-7 text-[hsl(36,15%,90%)]" />
-          //<p className="text-sm text-[hsl(220,8%,55%)]">//Master the nuance of professional communication. // </p>
-          //{" "}
+          <Logo className="h-7 text-[hsl(36,15%,90%)]" />
+          <p className="text-sm text-[hsl(220,8%,55%)]">//Master the nuance of professional communication. // </p>{" "}
           <p className="text-xs text-[hsl(220,8%,45%)]">
-            // © {new Date().getFullYear()} Nuance. All Rights Reserved. //{" "}
-          </p>
-          //{" "}
+            © {new Date().getFullYear()} Nuance. All Rights Reserved. //{" "}
+          </p>{" "}
         </div>
         {/* Links */}
         <div className="space-y-3">
