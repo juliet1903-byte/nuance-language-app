@@ -84,7 +84,7 @@ const Landing = () => {
       {/* Product Showcase */}
       <section className="px-6 pb-16 max-w-4xl mx-auto">
         <div className="rounded-2xl overflow-hidden shadow-xl border border-border/50">
-          <img src={heroShowcase} alt="Nuance app interface" className="w-full h-auto shadow-inner" />
+          <img src={heroShowcase} alt="Nuance app interface" className="w-full h-auto shadow-none" />
         </div>
       </section>
 
