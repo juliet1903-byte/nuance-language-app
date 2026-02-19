@@ -1,5 +1,6 @@
 import { Bell, User } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import { useRef, useEffect, useState } from "react";
 import Logo from "@/components/Logo";
 import LetterAvatar from "@/components/LetterAvatar";
 import { useAuth } from "@/components/AuthContext";
@@ -17,6 +18,27 @@ const Index = () => {
   const navigate = useNavigate();
   const { isGuest, user, profile } = useAuth();
   const showAvatar = !isGuest && user;
+
+  const cardRef = useRef<HTMLDivElement>(null);
+  const [tilt, setTilt] = useState(0);
+
+  useEffect(() => {
+    const container = document.querySelector(".md\\:overflow-y-auto") as HTMLElement | null;
+    const target = container || window;
+
+    const handleScroll = () => {
+      if (!cardRef.current) return;
+      const rect = cardRef.current.getBoundingClientRect();
+      const viewH = window.innerHeight;
+      // 0 when card top is at viewport center, 1 when it's at the top edge
+      const ratio = Math.max(0, Math.min(1, (viewH / 2 - rect.top) / (viewH / 2)));
+      setTilt(ratio * 12); // max 12deg
+    };
+
+    target.addEventListener("scroll", handleScroll, { passive: true });
+    handleScroll();
+    return () => target.removeEventListener("scroll", handleScroll);
+  }, []);
   const trendingItems = [
     { image: trending1, badge: "Article", badgeColor: "bg-accent", title: "The art of the Warm Intro" },
     { image: trending2, badge: "Video", badgeColor: "bg-cta", title: "How to get ready for an interview" },
@@ -52,7 +74,14 @@ const Index = () => {
 
         <section>
           <h2 className="text-xl font-medium mb-3">Continue where you left</h2>
-          <div className="rounded-2xl overflow-hidden bg-card shadow-sm">
+          <div
+            ref={cardRef}
+            className="rounded-2xl overflow-hidden bg-card shadow-sm transition-transform duration-150 will-change-transform"
+            style={{
+              transform: `perspective(800px) rotateX(${tilt}deg)`,
+              transformOrigin: "bottom center",
+            }}
+          >
             <img alt="Lesson" className="w-full h-40 object-cover" src="/lovable-uploads/5a8baccc-96a0-46e9-a068-c093d117cb1e.png" />
             <div className="p-4">
               <h3 className="font-semibold text-base mb-1">Introducing Yourself</h3>
