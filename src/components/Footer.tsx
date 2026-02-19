@@ -36,9 +36,7 @@ const Footer = () => {
     <footer className="bg-[hsl(220,20%,10%)] text-[hsl(36,15%,90%)]">
       {/* CTA Section */}
       <div className="text-center px-6 pt-20 pb-16">
-        <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-8">
-          Ready to level up your communication?
-        </h2>
+        <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-8">Ready to level up your communication?</h2>
         <Link
           to="/auth"
           className="inline-block px-12 py-4 rounded-2xl bg-cta text-cta-foreground font-semibold text-base hover:opacity-90 transition-opacity shadow-md"
@@ -51,11 +49,15 @@ const Footer = () => {
       <div className="max-w-6xl mx-auto px-6 pb-6">
         <div className="grid grid-cols-1 md:grid-cols-[1fr_auto_1fr] gap-12 md:gap-16">
           {/* Left: Logomark + tagline + copyright + logoword pinned bottom */}
-          <div className="flex flex-col h-full">
+          <div className="flex flex-col h-full items-start">
             <img src={logomark} alt="Nuance" className="h-10 w-auto" />
             <div className="space-y-4 mt-4">
               <p className="text-sm text-[hsl(220,8%,55%)] leading-relaxed max-w-[200px]">
-                Master the nuance<br />of professional<br />communication.
+                Master the nuance
+                <br />
+                of professional
+                <br />
+                communication.
               </p>
               <p className="text-xs text-[hsl(220,8%,40%)]">
                 © {new Date().getFullYear()} Nuance. All Rights Reserved.
@@ -68,21 +70,23 @@ const Footer = () => {
 
           {/* Center: Links */}
           <div className="space-y-4">
-            <h3 className="font-semibold text-sm uppercase tracking-widest text-[hsl(220,8%,55%)]">
-              Links
-            </h3>
+            <h3 className="font-semibold text-sm uppercase tracking-widest text-[hsl(220,8%,55%)]">Links</h3>
             <nav className="flex flex-col gap-3">
-              <Link to="/auth" className="text-sm hover:text-white transition-colors">Log In</Link>
-              <Link to="/auth" className="text-sm hover:text-white transition-colors">Register</Link>
-              <Link to="/privacy" className="text-sm hover:text-white transition-colors">Privacy Policy</Link>
+              <Link to="/auth" className="text-sm hover:text-white transition-colors">
+                Log In
+              </Link>
+              <Link to="/auth" className="text-sm hover:text-white transition-colors">
+                Register
+              </Link>
+              <Link to="/privacy" className="text-sm hover:text-white transition-colors">
+                Privacy Policy
+              </Link>
             </nav>
           </div>
 
           {/* Right: Contact Form */}
           <div className="space-y-4">
-            <h3 className="font-semibold text-sm uppercase tracking-widest text-[hsl(220,8%,55%)]">
-              Get in Touch
-            </h3>
+            <h3 className="font-semibold text-sm uppercase tracking-widest text-[hsl(220,8%,55%)]">Get in Touch</h3>
             <form onSubmit={handleContact} className="space-y-3">
               <Input
                 placeholder="Your name"
@@ -120,8 +124,6 @@ const Footer = () => {
             </form>
           </div>
         </div>
-
-
       </div>
     </footer>
   );
