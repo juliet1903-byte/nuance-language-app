@@ -11,7 +11,7 @@ import trending4 from "@/assets/trending-4.png";
 import LearningPath from "@/components/LearningPath";
 import ModuleCard from "@/components/ModuleCard";
 import TrendingCard from "@/components/TrendingCard";
-import AppLayout from "@/components/AppLayout";
+import AppLayout, { useScrollContainer } from "@/components/AppLayout";
 import { modules } from "@/data/modules";
 
 const Index = () => {
@@ -20,35 +20,25 @@ const Index = () => {
   const showAvatar = !isGuest && user;
 
   const cardRef = useRef<HTMLDivElement>(null);
+  const scrollContainerRef = useScrollContainer();
   const [tilt, setTilt] = useState(0);
 
   useEffect(() => {
-    // Find the actual scrolling container (AppLayout's inner div with overflow-y-auto)
-    const scrollEl = cardRef.current?.closest(".md\\:overflow-y-auto, [style]")?.parentElement
-      ? (() => {
-          let el = cardRef.current as HTMLElement | null;
-          while (el) {
-            const ov = getComputedStyle(el).overflowY;
-            if (ov === "auto" || ov === "scroll") return el;
-            el = el.parentElement;
-          }
-          return null;
-        })()
-      : null;
+    const scrollEl = scrollContainerRef?.current;
     const target: HTMLElement | Window = scrollEl || window;
 
-    const handleScroll = () => {
+    const onScroll = () => {
       if (!cardRef.current) return;
       const rect = cardRef.current.getBoundingClientRect();
       const viewH = window.innerHeight;
-      const ratio = Math.max(0, Math.min(1, (viewH / 2 - rect.top) / (viewH / 2)));
-      setTilt(ratio * 12);
+      const r = Math.max(0, Math.min(1, (viewH * 0.5 - rect.top) / (viewH * 0.5)));
+      setTilt(r * 12);
     };
 
-    target.addEventListener("scroll", handleScroll, { passive: true });
-    handleScroll();
-    return () => target.removeEventListener("scroll", handleScroll);
-  }, []);
+    target.addEventListener("scroll", onScroll, { passive: true });
+    onScroll();
+    return () => target.removeEventListener("scroll", onScroll);
+  }, [scrollContainerRef]);
   const trendingItems = [
     { image: trending1, badge: "Article", badgeColor: "bg-accent", title: "The art of the Warm Intro" },
     { image: trending2, badge: "Video", badgeColor: "bg-cta", title: "How to get ready for an interview" },
@@ -86,10 +76,11 @@ const Index = () => {
           <h2 className="text-xl font-medium mb-3">Continue where you left</h2>
           <div
             ref={cardRef}
-            className="rounded-2xl overflow-hidden bg-card shadow-[0_1px_3px_rgba(0,0,0,0.04)] transition-transform duration-150 will-change-transform"
+            className="rounded-2xl overflow-hidden bg-card transition-transform duration-150 will-change-transform"
             style={{
               transform: `perspective(800px) rotateX(${tilt}deg)`,
               transformOrigin: "bottom center",
+              boxShadow: "0 1px 2px rgba(0,0,0,0.03)",
             }}
           >
             <img alt="Lesson" className="w-full h-40 object-cover" src="/lovable-uploads/5a8baccc-96a0-46e9-a068-c093d117cb1e.png" />
