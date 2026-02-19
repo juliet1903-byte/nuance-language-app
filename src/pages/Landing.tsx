@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router-dom";
+import { useRef, useEffect, useState } from "react";
 import { Zap, Route, Flame } from "lucide-react";
 import Logo from "@/components/Logo";
 import LetterAvatar from "@/components/LetterAvatar";
@@ -9,6 +10,21 @@ import Footer from "@/components/Footer";
 const Landing = () => {
   const navigate = useNavigate();
   const { enterGuestMode, user, profile } = useAuth();
+  const showcaseRef = useRef<HTMLDivElement>(null);
+  const [tilt, setTilt] = useState(0);
+
+  useEffect(() => {
+    const onScroll = () => {
+      if (!showcaseRef.current) return;
+      const rect = showcaseRef.current.getBoundingClientRect();
+      const viewH = window.innerHeight;
+      const r = Math.max(0, Math.min(1, (viewH * 0.5 - rect.top) / (viewH * 0.5)));
+      setTilt(r * 12);
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    onScroll();
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
   const features = [
   {
@@ -83,7 +99,14 @@ const Landing = () => {
 
       {/* Product Showcase */}
       <section className="px-6 pb-16 max-w-4xl mx-auto">
-        <div className="rounded-2xl overflow-hidden shadow-xl border border-border/50">
+        <div
+          ref={showcaseRef}
+          className="rounded-2xl overflow-hidden shadow-xl border border-border/50 will-change-transform transition-transform duration-150"
+          style={{
+            transform: `perspective(800px) rotateX(${tilt}deg)`,
+            transformOrigin: "bottom center",
+          }}
+        >
           <img src={heroShowcase} alt="Nuance app interface" className="w-full h-auto shadow-none" />
         </div>
       </section>
