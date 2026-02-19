@@ -50,13 +50,20 @@ const Footer = () => {
       {/* Footer Content - 3 columns */}
       <div className="max-w-6xl mx-auto px-6 pb-6">
         <div className="grid grid-cols-1 md:grid-cols-[1fr_auto_1fr] gap-12 md:gap-16">
-          {/* Left: Logomark + tagline + logoword */}
-          <div className="space-y-4">
+          {/* Left: Logomark + tagline + copyright + logoword pinned bottom */}
+          <div className="flex flex-col h-full">
             <img src={logomark} alt="Nuance" className="h-10 w-auto" />
-            <p className="text-sm text-[hsl(220,8%,55%)] leading-relaxed max-w-[200px]">
-              Master the nuance<br />of professional<br />communication.
-            </p>
-            <img src={logoword} alt="nuance" className="w-full max-w-[220px] h-auto opacity-95 mt-8" />
+            <div className="space-y-4 mt-4">
+              <p className="text-sm text-[hsl(220,8%,55%)] leading-relaxed max-w-[200px]">
+                Master the nuance<br />of professional<br />communication.
+              </p>
+              <p className="text-xs text-[hsl(220,8%,40%)]">
+                © {new Date().getFullYear()} Nuance. All Rights Reserved.
+              </p>
+            </div>
+            <div className="mt-auto pt-8">
+              <img src={logoword} alt="nuance" className="w-full max-w-[220px] h-auto opacity-95" />
+            </div>
           </div>
 
           {/* Center: Links */}
@@ -114,10 +121,7 @@ const Footer = () => {
           </div>
         </div>
 
-        {/* Copyright */}
-        <p className="text-xs text-[hsl(220,8%,40%)] pb-4">
-          © {new Date().getFullYear()} Nuance. All Rights Reserved.
-        </p>
+
       </div>
     </footer>
   );
