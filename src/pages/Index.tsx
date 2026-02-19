@@ -23,16 +23,26 @@ const Index = () => {
   const [tilt, setTilt] = useState(0);
 
   useEffect(() => {
-    const container = document.querySelector(".md\\:overflow-y-auto") as HTMLElement | null;
-    const target = container || window;
+    // Find the actual scrolling container (AppLayout's inner div with overflow-y-auto)
+    const scrollEl = cardRef.current?.closest(".md\\:overflow-y-auto, [style]")?.parentElement
+      ? (() => {
+          let el = cardRef.current as HTMLElement | null;
+          while (el) {
+            const ov = getComputedStyle(el).overflowY;
+            if (ov === "auto" || ov === "scroll") return el;
+            el = el.parentElement;
+          }
+          return null;
+        })()
+      : null;
+    const target: HTMLElement | Window = scrollEl || window;
 
     const handleScroll = () => {
       if (!cardRef.current) return;
       const rect = cardRef.current.getBoundingClientRect();
       const viewH = window.innerHeight;
-      // 0 when card top is at viewport center, 1 when it's at the top edge
       const ratio = Math.max(0, Math.min(1, (viewH / 2 - rect.top) / (viewH / 2)));
-      setTilt(ratio * 12); // max 12deg
+      setTilt(ratio * 12);
     };
 
     target.addEventListener("scroll", handleScroll, { passive: true });
@@ -76,7 +86,7 @@ const Index = () => {
           <h2 className="text-xl font-medium mb-3">Continue where you left</h2>
           <div
             ref={cardRef}
-            className="rounded-2xl overflow-hidden bg-card shadow-sm transition-transform duration-150 will-change-transform"
+            className="rounded-2xl overflow-hidden bg-card shadow-[0_1px_3px_rgba(0,0,0,0.04)] transition-transform duration-150 will-change-transform"
             style={{
               transform: `perspective(800px) rotateX(${tilt}deg)`,
               transformOrigin: "bottom center",
