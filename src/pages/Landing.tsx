@@ -1,30 +1,25 @@
 import { useNavigate } from "react-router-dom";
-import { useRef, useEffect, useState } from "react";
+import { useRef } from "react";
 import { Zap, Route, Flame } from "lucide-react";
 import Logo from "@/components/Logo";
 import LetterAvatar from "@/components/LetterAvatar";
 import heroShowcase from "@/assets/hero-showcase.png";
 import { useAuth } from "@/components/AuthContext";
 import Footer from "@/components/Footer";
+import { motion, useScroll, useTransform, useSpring } from "framer-motion";
 
 const Landing = () => {
   const navigate = useNavigate();
   const { enterGuestMode, user, profile } = useAuth();
   const showcaseRef = useRef<HTMLDivElement>(null);
-  const [tilt, setTilt] = useState(0);
 
-  useEffect(() => {
-    const onScroll = () => {
-      if (!showcaseRef.current) return;
-      const rect = showcaseRef.current.getBoundingClientRect();
-      const viewH = window.innerHeight;
-      const r = Math.max(0, Math.min(1, (viewH * 0.5 - rect.top) / (viewH * 0.5)));
-      setTilt(r * 12);
-    };
-    window.addEventListener("scroll", onScroll, { passive: true });
-    onScroll();
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
+  const { scrollYProgress } = useScroll({
+    target: showcaseRef,
+    offset: ["start end", "end start"],
+  });
+
+  const rawTilt = useTransform(scrollYProgress, [0, 0.5], [18, 0]);
+  const tilt = useSpring(rawTilt, { stiffness: 100, damping: 30 });
 
   const features = [
     {
@@ -98,17 +93,18 @@ const Landing = () => {
       </section>
 
       {/* Product Showcase */}
-      <section className="px-6 pb-16 max-w-4xl mx-auto">
-        <div
-          ref={showcaseRef}
-          className="rounded-2xl overflow-hidden shadow-sm border border-border/50 will-change-transform transition-transform duration-150"
+      <section ref={showcaseRef} className="px-6 pb-16 max-w-4xl mx-auto">
+        <motion.div
+          className="rounded-2xl overflow-hidden border border-border/50 will-change-transform"
           style={{
-            transform: `perspective(800px) rotateX(${tilt}deg)`,
+            rotateX: tilt,
+            perspective: 1000,
             transformOrigin: "bottom center",
+            boxShadow: "0 1px 4px rgba(0,0,0,0.05)",
           }}
         >
           <img src={heroShowcase} alt="Nuance app interface" className="w-full h-auto shadow-none" />
-        </div>
+        </motion.div>
       </section>
 
       {/* Features */}
