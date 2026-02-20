@@ -94,17 +94,19 @@ const Landing = () => {
 
       {/* Product Showcase */}
       <section ref={showcaseRef} className="px-6 pb-16 max-w-4xl mx-auto">
-        <motion.div
-          className="rounded-2xl overflow-hidden border border-border/50 will-change-transform"
-          style={{
-            rotateX: tilt,
-            perspective: 1000,
-            transformOrigin: "bottom center",
-            boxShadow: "0 1px 4px rgba(0,0,0,0.05)",
-          }}
-        >
-          <img src={heroShowcase} alt="Nuance app interface" className="w-full h-auto shadow-none" />
-        </motion.div>
+        {/* Perspective on parent creates the 3D context for the child rotateX */}
+        <div style={{ perspective: "1200px" }}>
+          <motion.div
+            className="rounded-2xl overflow-hidden border border-border/50"
+            style={{
+              rotateX: tilt,
+              transformOrigin: "bottom center",
+              boxShadow: "0 1px 4px rgba(0,0,0,0.05)",
+            }}
+          >
+            <img src={heroShowcase} alt="Nuance app interface" className="w-full h-auto shadow-none" />
+          </motion.div>
+        </div>
       </section>
 
       {/* Features */}
