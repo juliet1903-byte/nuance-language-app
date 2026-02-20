@@ -18,7 +18,7 @@ const Footer = () => {
     setSending(true);
     try {
       const { error } = await supabase.functions.invoke("send-contact", {
-        body: { name: name.trim(), email: email.trim(), message: message.trim() }
+        body: { name: name.trim(), email: email.trim(), message: message.trim() },
       });
       if (error) throw error;
       toast({ title: "Message sent!", description: "We'll get back to you soon." });
@@ -35,18 +35,18 @@ const Footer = () => {
   return (
     <footer className="bg-[hsl(220,20%,10%)] text-[hsl(36,15%,90%)]">
       {/* CTA Section */}
-      <div className="text-center px-6 pt-20 pb-[80px]">
+      <div className="text-center px-6 pt-20 pb-16">
         <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-8">Ready to level up your communication?</h2>
         <Link
           to="/auth"
-          className="inline-block px-12 py-4 rounded-2xl bg-cta text-cta-foreground font-semibold text-base hover:opacity-90 transition-opacity shadow-md">
-
+          className="inline-block px-12 py-4 rounded-2xl bg-cta text-cta-foreground font-semibold text-base hover:opacity-90 transition-opacity shadow-md"
+        >
           Join Nuance
         </Link>
       </div>
 
       {/* Footer Content - 3 columns */}
-      <div className="max-w-6xl mx-auto px-6 pb-6">
+      <div className="max-w-5xl mx-auto px-6 pb-6">
         <div className="grid grid-cols-1 md:grid-cols-[1fr_auto_1fr] gap-12 md:gap-16">
           {/* Left: Logomark + tagline + copyright + logoword pinned bottom */}
           <div className="flex flex-col h-full items-start">
@@ -60,7 +60,7 @@ const Footer = () => {
                 communication.
               </p>
             </div>
-            <div className="mt-auto pt-8">
+            <div className="max-w-5xl mt-auto pt-8">
               <img src={logoword} alt="nuance" className="w-full max-w-[220px] h-auto opacity-95" />
             </div>
             <p className="mt-2 text-xs text-[hsl(220,8%,40%)]">
@@ -94,8 +94,8 @@ const Footer = () => {
                 onChange={(e) => setName(e.target.value)}
                 required
                 maxLength={100}
-                className="bg-[hsl(220,18%,15%)] border-[hsl(220,15%,22%)] text-[hsl(36,15%,90%)] placeholder:text-[hsl(220,8%,45%)] h-11 text-sm rounded-xl" />
-
+                className="bg-[hsl(220,18%,15%)] border-[hsl(220,15%,22%)] text-[hsl(36,15%,90%)] placeholder:text-[hsl(220,8%,45%)] h-11 text-sm rounded-xl"
+              />
               <Input
                 type="email"
                 placeholder="Your email"
@@ -103,8 +103,8 @@ const Footer = () => {
                 onChange={(e) => setEmail(e.target.value)}
                 required
                 maxLength={255}
-                className="bg-[hsl(220,18%,15%)] border-[hsl(220,15%,22%)] text-[hsl(36,15%,90%)] placeholder:text-[hsl(220,8%,45%)] h-11 text-sm rounded-xl" />
-
+                className="bg-[hsl(220,18%,15%)] border-[hsl(220,15%,22%)] text-[hsl(36,15%,90%)] placeholder:text-[hsl(220,8%,45%)] h-11 text-sm rounded-xl"
+              />
               <textarea
                 placeholder="Message"
                 value={message}
@@ -112,21 +112,21 @@ const Footer = () => {
                 required
                 maxLength={1000}
                 rows={3}
-                className="w-full rounded-xl bg-[hsl(220,18%,15%)] border border-[hsl(220,15%,22%)] text-[hsl(36,15%,90%)] placeholder:text-[hsl(220,8%,45%)] px-3 py-2.5 text-sm resize-none focus:outline-none focus:ring-2 focus:ring-ring" />
-
+                className="w-full rounded-xl bg-[hsl(220,18%,15%)] border border-[hsl(220,15%,22%)] text-[hsl(36,15%,90%)] placeholder:text-[hsl(220,8%,45%)] px-3 py-2.5 text-sm resize-none focus:outline-none focus:ring-2 focus:ring-ring"
+              />
               <button
                 type="submit"
                 disabled={sending}
-                className="w-full py-3 rounded-xl bg-cta text-cta-foreground font-semibold text-sm hover:opacity-90 transition-opacity disabled:opacity-50">
-
+                className="w-full py-3 rounded-xl bg-cta text-cta-foreground font-semibold text-sm hover:opacity-90 transition-opacity disabled:opacity-50"
+              >
                 {sending ? "Sending…" : "Send Message"}
               </button>
             </form>
           </div>
         </div>
       </div>
-    </footer>);
-
+    </footer>
+  );
 };
 
 export default Footer;
