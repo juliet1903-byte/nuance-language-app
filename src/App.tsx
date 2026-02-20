@@ -17,6 +17,10 @@ import Profile from "./pages/Profile";
 import ResetPassword from "./pages/ResetPassword";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import NotFound from "./pages/NotFound";
+import ArticleWarmIntro from "./pages/ArticleWarmIntro";
+import ArticleBurnout from "./pages/ArticleBurnout";
+import DeepDiveCultures from "./pages/DeepDiveCultures";
+import VideoInterview from "./pages/VideoInterview";
 
 const queryClient = new QueryClient();
 
@@ -40,6 +44,10 @@ const App = () => (
                 <Route path="/profile" element={<Profile />} />
                 <Route path="/reset-password" element={<ResetPassword />} />
                 <Route path="/privacy" element={<PrivacyPolicy />} />
+                <Route path="/article/warm-intro" element={<ArticleWarmIntro />} />
+                <Route path="/article/burnout" element={<ArticleBurnout />} />
+                <Route path="/deep-dive/cultures" element={<DeepDiveCultures />} />
+                <Route path="/video/interview" element={<VideoInterview />} />
                 <Route path="*" element={<NotFound />} />
               </Routes>
             </BrowserRouter>
