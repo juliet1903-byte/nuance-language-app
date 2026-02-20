@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { BookOpen, Play, FileText, Headphones, Search } from "lucide-react";
+import { BookOpen, Play, FileText, Search } from "lucide-react";
 import AppLayout from "@/components/AppLayout";
 import { modules } from "@/data/modules";
 
@@ -13,6 +13,11 @@ import moduleCareerMoves from "@/assets/module-career-moves.png";
 import moduleDei from "@/assets/module-dei.png";
 import moduleCommonMistakes from "@/assets/module-common-mistakes.png";
 
+import articleWarmIntro from "@/assets/article-warm-intro.jpg";
+import articleBurnout from "@/assets/article-burnout.jpg";
+import articleCultures from "@/assets/article-cultures.jpg";
+import articleInterview from "@/assets/article-interview.jpg";
+
 const imageMap: Record<string, string> = {
   "module-starting-strong": moduleStartingStrong,
   "module-meeting-room": moduleMeetingRoom,
@@ -24,28 +29,16 @@ const imageMap: Record<string, string> = {
   "module-common-mistakes": moduleCommonMistakes,
 };
 
-type Tab = "modules" | "articles" | "videos" | "podcasts";
+type Tab = "modules" | "articles" | "videos";
 
 const articles = [
-  { id: "a1", title: "The Art of the Warm Intro", category: "Networking", readTime: "5 min read" },
-  { id: "a2", title: "Why Silence Isn't Politeness", category: "Communication", readTime: "4 min read" },
-  { id: "a3", title: "Reading Between Cultures", category: "Cross-Cultural", readTime: "6 min read" },
-  { id: "a4", title: "Quiet Cracking or Burning Out?", category: "Wellbeing", readTime: "7 min read" },
-  { id: "a5", title: "Feedback Without the Flinch", category: "Leadership", readTime: "5 min read" },
-  { id: "a6", title: "Owning the Room Without Shouting", category: "Meetings", readTime: "4 min read" },
+  { id: "a1", title: "The Art of the Warm Intro", category: "Networking", readTime: "5 min read", href: "/article/warm-intro", image: articleWarmIntro },
+  { id: "a4", title: "Quiet Cracking or Burning Out?", category: "Wellbeing", readTime: "7 min read", href: "/article/burnout", image: articleBurnout },
+  { id: "a3", title: "Reading Between Cultures", category: "Cross-Cultural", readTime: "10 min read", href: "/deep-dive/cultures", image: articleCultures, badge: "Deep Dive" },
 ];
 
 const videos = [
-  { id: "v1", title: "How to Get Ready for an Interview", duration: "12 min", category: "Career" },
-  { id: "v2", title: "Building Trust in Remote Teams", duration: "8 min", category: "Collaboration" },
-  { id: "v3", title: "The SBI Feedback Model in Action", duration: "10 min", category: "Leadership" },
-  { id: "v4", title: "Navigating Difficult Conversations", duration: "15 min", category: "Communication" },
-];
-
-const podcasts = [
-  { id: "p1", title: "The Nuance of 'No'", duration: "22 min", category: "Communication" },
-  { id: "p2", title: "Managing Up Without Losing Yourself", duration: "18 min", category: "Career" },
-  { id: "p3", title: "Cross-Cultural Communication Myths", duration: "25 min", category: "Culture" },
+  { id: "v1", title: "How to Get Ready for an Interview", duration: "12 min", category: "Career", href: "/video/interview", image: articleInterview },
 ];
 
 const Library = () => {
@@ -57,7 +50,6 @@ const Library = () => {
     { value: "modules", label: "Modules", icon: BookOpen },
     { value: "articles", label: "Articles", icon: FileText },
     { value: "videos", label: "Videos", icon: Play },
-    { value: "podcasts", label: "Podcasts", icon: Headphones },
   ];
 
   const filteredModules = modules.filter((m) =>
@@ -68,9 +60,6 @@ const Library = () => {
   );
   const filteredVideos = videos.filter((v) =>
     v.title.toLowerCase().includes(search.toLowerCase())
-  );
-  const filteredPodcasts = podcasts.filter((p) =>
-    p.title.toLowerCase().includes(search.toLowerCase())
   );
 
   return (
@@ -144,20 +133,28 @@ const Library = () => {
         {activeTab === "articles" && (
           <div className="space-y-3">
             {filteredArticles.map((article) => (
-              <div
+              <button
                 key={article.id}
-                className="flex items-center gap-3 bg-card rounded-xl p-3 shadow-sm"
+                onClick={() => navigate(article.href)}
+                className="w-full flex items-center gap-3 bg-card rounded-xl p-3 shadow-sm active:scale-[0.98] transition-transform"
               >
-                <div className="w-14 h-14 rounded-xl bg-muted shrink-0 flex items-center justify-center">
-                  <FileText className="w-6 h-6 text-muted-foreground/50" />
+                <div className="w-14 h-14 rounded-xl overflow-hidden bg-muted shrink-0">
+                  <img src={article.image} alt={article.title} className="w-full h-full object-cover" />
                 </div>
-                <div className="flex-1">
+                <div className="flex-1 text-left">
+                  <div className="flex items-center gap-1.5 mb-0.5">
+                    {article.badge && (
+                      <span className="text-xs font-bold text-cta bg-cta/10 px-1.5 py-0.5 rounded">
+                        {article.badge}
+                      </span>
+                    )}
+                  </div>
                   <p className="text-sm font-semibold">{article.title}</p>
                   <p className="text-xs text-muted-foreground mt-0.5">
                     {article.category} · {article.readTime}
                   </p>
                 </div>
-              </div>
+              </button>
             ))}
             {filteredArticles.length === 0 && (
               <p className="text-sm text-muted-foreground text-center py-8">No articles found</p>
@@ -169,48 +166,27 @@ const Library = () => {
         {activeTab === "videos" && (
           <div className="space-y-3">
             {filteredVideos.map((video) => (
-              <div
+              <button
                 key={video.id}
-                className="flex items-center gap-3 bg-card rounded-xl p-3 shadow-sm"
+                onClick={() => navigate(video.href)}
+                className="w-full flex items-center gap-3 bg-card rounded-xl p-3 shadow-sm active:scale-[0.98] transition-transform"
               >
-                <div className="w-14 h-14 rounded-xl bg-muted shrink-0 flex items-center justify-center">
-                  <Play className="w-6 h-6 text-muted-foreground/50" />
+                <div className="w-14 h-14 rounded-xl overflow-hidden bg-muted shrink-0 relative">
+                  <img src={video.image} alt={video.title} className="w-full h-full object-cover" />
+                  <div className="absolute inset-0 flex items-center justify-center bg-foreground/20">
+                    <Play className="w-4 h-4 text-white fill-white" />
+                  </div>
                 </div>
-                <div className="flex-1">
+                <div className="flex-1 text-left">
                   <p className="text-sm font-semibold">{video.title}</p>
                   <p className="text-xs text-muted-foreground mt-0.5">
                     {video.category} · {video.duration}
                   </p>
                 </div>
-              </div>
+              </button>
             ))}
             {filteredVideos.length === 0 && (
               <p className="text-sm text-muted-foreground text-center py-8">No videos found</p>
-            )}
-          </div>
-        )}
-
-        {/* Podcasts Tab */}
-        {activeTab === "podcasts" && (
-          <div className="space-y-3">
-            {filteredPodcasts.map((podcast) => (
-              <div
-                key={podcast.id}
-                className="flex items-center gap-3 bg-card rounded-xl p-3 shadow-sm"
-              >
-                <div className="w-14 h-14 rounded-xl bg-muted shrink-0 flex items-center justify-center">
-                  <Headphones className="w-6 h-6 text-muted-foreground/50" />
-                </div>
-                <div className="flex-1">
-                  <p className="text-sm font-semibold">{podcast.title}</p>
-                  <p className="text-xs text-muted-foreground mt-0.5">
-                    {podcast.category} · {podcast.duration}
-                  </p>
-                </div>
-              </div>
-            ))}
-            {filteredPodcasts.length === 0 && (
-              <p className="text-sm text-muted-foreground text-center py-8">No podcasts found</p>
             )}
           </div>
         )}

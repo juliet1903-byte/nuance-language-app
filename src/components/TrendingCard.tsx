@@ -3,11 +3,15 @@ interface TrendingCardProps {
   badge: string;
   badgeColor: string;
   title: string;
+  onClick?: () => void;
 }
 
-const TrendingCard = ({ image, badge, badgeColor, title }: TrendingCardProps) => {
+const TrendingCard = ({ image, badge, badgeColor, title, onClick }: TrendingCardProps) => {
   return (
-    <div className="relative rounded-2xl overflow-hidden aspect-[4/5] md:aspect-[16/7] group cursor-pointer">
+    <button
+      onClick={onClick}
+      className="relative rounded-2xl overflow-hidden aspect-[4/5] md:aspect-[16/7] group cursor-pointer w-full text-left active:scale-[0.98] transition-transform"
+    >
       <img
         src={image}
         alt={title}
@@ -24,7 +28,7 @@ const TrendingCard = ({ image, badge, badgeColor, title }: TrendingCardProps) =>
       <p className="absolute bottom-3 left-3 right-3 text-sm lg:text-base font-semibold text-card leading-tight">
         {title}
       </p>
-    </div>
+    </button>
   );
 };
 

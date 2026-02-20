@@ -40,10 +40,10 @@ const Index = () => {
     return () => target.removeEventListener("scroll", onScroll);
   }, [scrollContainerRef]);
   const trendingItems = [
-    { image: trending1, badge: "Article", badgeColor: "bg-accent", title: "The art of the Warm Intro" },
-    { image: trending2, badge: "Video", badgeColor: "bg-cta", title: "How to get ready for an interview" },
-    { image: trending3, badge: "Deep Dive", badgeColor: "bg-vibe-blunt", title: "Reading between Cultures" },
-    { image: trending4, badge: "Article", badgeColor: "bg-accent", title: "Quiet Cracking or Burning Out" },
+    { image: trending1, badge: "Article", badgeColor: "bg-accent", title: "The Art of the Warm Intro", href: "/article/warm-intro" },
+    { image: trending2, badge: "Video", badgeColor: "bg-cta", title: "How to Get Ready for an Interview", href: "/video/interview" },
+    { image: trending3, badge: "Deep Dive", badgeColor: "bg-vibe-blunt", title: "Reading Between Cultures", href: "/deep-dive/cultures" },
+    { image: trending4, badge: "Article", badgeColor: "bg-accent", title: "Quiet Cracking or Burning Out?", href: "/article/burnout" },
   ];
 
   return (
@@ -115,7 +115,7 @@ const Index = () => {
           <h2 className="text-xl font-medium mb-3">Trending</h2>
           <div className="grid grid-cols-2 md:grid-cols-1 lg:grid-cols-2 gap-3">
             {trendingItems.map((item) => (
-              <TrendingCard key={item.title} {...item} />
+              <TrendingCard key={item.title} {...item} onClick={() => navigate(item.href)} />
             ))}
           </div>
         </section>
