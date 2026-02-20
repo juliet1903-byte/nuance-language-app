@@ -35,7 +35,7 @@ const Footer = () => {
   return (
     <footer className="bg-[hsl(220,20%,10%)] text-[hsl(36,15%,90%)]">
       {/* CTA Section */}
-      <div className="text-center px-6 pt-20 pb-20">
+      <div className="text-center px-6 pt-20 pb-16">
         <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-8">Ready to level up your communication?</h2>
         <Link
           to="/auth"
@@ -46,7 +46,7 @@ const Footer = () => {
       </div>
 
       {/* Footer Content - 3 columns */}
-      <div className="max-w-6xl mx-auto px-6 pb-6">
+      <div className="max-w-5xl mx-auto px-6 pb-6">
         <div className="grid grid-cols-1 md:grid-cols-[1fr_auto_1fr] gap-12 md:gap-16">
           {/* Left: Logomark + tagline + copyright + logoword pinned bottom */}
           <div className="flex flex-col h-full items-start">
