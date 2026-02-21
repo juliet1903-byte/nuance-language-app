@@ -88,12 +88,7 @@ const FillGapExercise = ({ exercise, onComplete }: FillGapExerciseProps) => {
   };
 
   return (
-    <motion.div
-      key="exercise"
-      initial={{ opacity: 0, x: 20 }}
-      animate={{ opacity: 1, x: 0 }}
-      exit={{ opacity: 0 }}
-    >
+    <motion.div key="exercise" initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0 }}>
       <h2 className="text-xl font-medium mb-2">Practice</h2>
       <p className="text-sm text-muted-foreground mb-4">{exercise.instruction}</p>
 
@@ -102,12 +97,10 @@ const FillGapExercise = ({ exercise, onComplete }: FillGapExerciseProps) => {
         <div className="flex flex-wrap gap-2 mb-5">
           {exercise.wordBank.map((w, i) => {
             // Count how many times this word appears in used selections
-            const usedCount = usedWords.filter(
-              (uw) => uw?.toLowerCase() === w.toLowerCase()
-            ).length;
-            const bankCount = exercise.wordBank!.filter(
-              (bw) => bw.toLowerCase() === w.toLowerCase()
-            ).slice(0, i + 1).length;
+            const usedCount = usedWords.filter((uw) => uw?.toLowerCase() === w.toLowerCase()).length;
+            const bankCount = exercise
+              .wordBank!.filter((bw) => bw.toLowerCase() === w.toLowerCase())
+              .slice(0, i + 1).length;
             const isUsed = usedCount >= bankCount;
 
             return (
@@ -115,9 +108,7 @@ const FillGapExercise = ({ exercise, onComplete }: FillGapExerciseProps) => {
                 key={`${w}-${i}`}
                 onClick={() => !isUsed && handleTapWord(w)}
                 className={`text-xs px-4 py-2 rounded-full font-medium shadow-sm transition-all ${
-                  isUsed
-                    ? "bg-muted/50 text-muted-foreground/40 scale-95"
-                    : "bg-card text-foreground active:scale-95"
+                  isUsed ? "bg-muted/50 text-muted-foreground/40 scale-95" : "bg-card text-foreground active:scale-95"
                 }`}
                 whileTap={!isUsed ? { scale: 0.9 } : undefined}
                 disabled={isUsed || checked}
@@ -148,21 +139,17 @@ const FillGapExercise = ({ exercise, onComplete }: FillGapExerciseProps) => {
                       ? hasError
                         ? "bg-destructive/10 border-destructive text-destructive"
                         : isCorrect
-                        ? "bg-accent/10 border-accent text-accent"
-                        : "bg-cta/10 border-cta text-cta"
+                          ? "bg-accent/10 border-accent text-accent"
+                          : "bg-cta/10 border-cta text-cta"
                       : "bg-muted/40 border-dashed border-muted-foreground/30 text-muted-foreground/50"
                   }`}
                 >
-                  {selected || "tap to fill"}
+                  {selected || ""}
                   {isCorrect && <Check className="w-3 h-3 ml-1" />}
                 </button>
                 {parts[1]}
               </p>
-              {hasError && (
-                <p className="text-xs text-muted-foreground mt-2 italic">
-                  💡 {getHint(item)}
-                </p>
-              )}
+              {hasError && <p className="text-xs text-muted-foreground mt-2 italic">💡 {getHint(item)}</p>}
             </div>
           );
         })}
