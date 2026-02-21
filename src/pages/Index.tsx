@@ -4,10 +4,10 @@ import { useRef, useEffect, useState } from "react";
 import Logo from "@/components/Logo";
 import LetterAvatar from "@/components/LetterAvatar";
 import { useAuth } from "@/components/AuthContext";
-import trending1 from "@/assets/article-warm-intro.png";
-import trending2 from "@/assets/article-interview.png";
-import trending3 from "@/assets/article-cultures.png";
-import trending4 from "@/assets/article-burnout.png";
+import trending1 from "@/assets/trending-1.png";
+import trending2 from "@/assets/trending-2.png";
+import trending3 from "@/assets/trending-3.png";
+import trending4 from "@/assets/trending-4.png";
 import LearningPath from "@/components/LearningPath";
 import ModuleCard from "@/components/ModuleCard";
 import TrendingCard from "@/components/TrendingCard";
@@ -40,11 +40,11 @@ const Index = () => {
     return () => target.removeEventListener("scroll", onScroll);
   }, [scrollContainerRef]);
   const trendingItems = [
-    { image: trending1, badge: "Article", badgeColor: "bg-accent", title: "The Art of the Warm Intro", href: "/article/warm-intro" },
-    { image: trending2, badge: "Video", badgeColor: "bg-cta", title: "How to Get Ready for an Interview", href: "/video/interview" },
-    { image: trending3, badge: "Deep Dive", badgeColor: "bg-vibe-blunt", title: "Reading Between Cultures", href: "/deep-dive/cultures" },
-    { image: trending4, badge: "Article", badgeColor: "bg-accent", title: "Quiet Cracking or Burning Out?", href: "/article/burnout" },
-  ];
+  { image: trending1, badge: "Article", badgeColor: "bg-accent", title: "The Art of the Warm Intro", href: "/article/warm-intro" },
+  { image: trending2, badge: "Video", badgeColor: "bg-cta", title: "How to Get Ready for an Interview", href: "/video/interview" },
+  { image: trending3, badge: "Deep Dive", badgeColor: "bg-vibe-blunt", title: "Reading Between Cultures", href: "/deep-dive/cultures" },
+  { image: trending4, badge: "Article", badgeColor: "bg-accent", title: "Quiet Cracking or Burning Out?", href: "/article/burnout" }];
+
 
   return (
     <AppLayout>
@@ -55,17 +55,17 @@ const Index = () => {
           <button className="p-2 rounded-full bg-card">
             <Bell className="w-5 h-5 text-foreground" />
           </button>
-          {showAvatar ? (
-            <LetterAvatar
-              name={profile?.display_name}
-              email={user?.email}
-              size="sm"
-            />
-          ) : (
-            <div className="w-9 h-9 rounded-full bg-muted overflow-hidden flex items-center justify-center">
+          {showAvatar ?
+          <LetterAvatar
+            name={profile?.display_name}
+            email={user?.email}
+            size="sm" /> :
+
+
+          <div className="w-9 h-9 rounded-full bg-muted overflow-hidden flex items-center justify-center">
               <User className="w-5 h-5 text-muted-foreground" />
             </div>
-          )}
+          }
         </div>
       </header>
 
@@ -80,10 +80,10 @@ const Index = () => {
             style={{
               transform: `perspective(800px) rotateX(${tilt}deg)`,
               transformOrigin: "bottom center",
-              boxShadow: "0 1px 2px rgba(0,0,0,0.03)",
-            }}
-          >
-            <img alt="Lesson" className="w-full h-40 object-cover" src="/lovable-uploads/5a8baccc-96a0-46e9-a068-c093d117cb1e.png" />
+              boxShadow: "0 1px 2px rgba(0,0,0,0.03)"
+            }}>
+
+            <img alt="Lesson" className="w-full h-40 object-cover" src="/lovable-uploads/44f61677-4fd5-49b3-9fbb-eabbecbad3aa.png" />
             <div className="p-4">
               <h3 className="font-semibold text-base mb-1">Introducing Yourself</h3>
               <p className="text-xs lg:text-base text-muted-foreground mb-3">
@@ -91,8 +91,8 @@ const Index = () => {
               </p>
               <button
                 onClick={() => navigate(`/module/${modules[0].id}`)}
-                className="w-full py-3 rounded-xl text-accent-foreground font-semibold text-sm lg:text-base bg-cta"
-              >
+                className="w-full py-3 rounded-xl text-accent-foreground font-semibold text-sm lg:text-base bg-cta">
+
                 Continue Learning
               </button>
             </div>
@@ -105,23 +105,23 @@ const Index = () => {
             <span className="text-sm lg:text-base text-muted-foreground">{modules.length}</span>
           </div>
           <div className="gap-3 overflow-x-auto pb-2 -mx-5 px-5 scrollbar-none flex items-start justify-start">
-            {modules.map((m) => (
-              <ModuleCard key={m.id} module={m} />
-            ))}
+            {modules.map((m) =>
+            <ModuleCard key={m.id} module={m} />
+            )}
           </div>
         </section>
 
         <section>
           <h2 className="text-xl font-medium mb-3">Trending</h2>
           <div className="grid grid-cols-2 md:grid-cols-1 lg:grid-cols-2 gap-3">
-            {trendingItems.map((item) => (
-              <TrendingCard key={item.title} {...item} onClick={() => navigate(item.href)} />
-            ))}
+            {trendingItems.map((item) =>
+            <TrendingCard key={item.title} {...item} onClick={() => navigate(item.href)} />
+            )}
           </div>
         </section>
       </main>
-    </AppLayout>
-  );
+    </AppLayout>);
+
 };
 
 export default Index;
