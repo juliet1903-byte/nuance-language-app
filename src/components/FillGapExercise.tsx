@@ -134,7 +134,7 @@ const FillGapExercise = ({ exercise, onComplete }: FillGapExerciseProps) => {
                 {parts[0]}
                 <button
                   onClick={() => handleTapGap(item.id)}
-                  className={`inline-flex items-center min-w-[80px] min-h-[24px] px-3 py-1 mx-1 rounded-lg text-sm font-medium transition-all border-2 ${
+                  className={`inline-flex items-center min-w-[80px] min-h-[32px] px-3 py-1 mx-1 rounded-lg text-sm font-medium transition-all border-2 ${
                     selected
                       ? hasError
                         ? "bg-destructive/10 border-destructive text-destructive"
