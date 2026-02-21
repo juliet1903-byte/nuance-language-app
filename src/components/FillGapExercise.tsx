@@ -144,7 +144,7 @@ const FillGapExercise = ({ exercise, onComplete }: FillGapExerciseProps) => {
                       : "bg-muted/40 border-dashed border-muted-foreground/30 text-muted-foreground/50"
                   }`}
                 >
-                  {selected || ""}
+                  {selected || "     "}
                   {isCorrect && <Check className="w-3 h-3 ml-1" />}
                 </button>
                 {parts[1]}
