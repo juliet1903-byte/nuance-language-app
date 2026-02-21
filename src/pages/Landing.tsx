@@ -52,10 +52,9 @@ const Landing = () => {
         {user ? (
           <button
             onClick={() => navigate("/dashboard")}
-            className="flex items-center gap-2 text-sm font-medium text-foreground hover:opacity-80 transition-opacity"
+            className="flex items-center text-sm font-medium text-foreground hover:opacity-80 transition-opacity"
           >
             <LetterAvatar name={profile?.display_name} email={user.email} size="sm" />
-            <span>{profile?.display_name || user.email?.split("@")[0]}</span>
           </button>
         ) : (
           <button
