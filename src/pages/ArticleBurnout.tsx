@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { ArrowLeft, Clock, Tag } from "lucide-react";
-import articleBurnout from "@/assets/article-burnout.jpg";
+import articleBurnout from "@/assets/article-burnout.png";
 
 const ArticleBurnout = () => {
   const navigate = useNavigate();

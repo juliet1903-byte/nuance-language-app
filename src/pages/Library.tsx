@@ -13,10 +13,10 @@ import moduleCareerMoves from "@/assets/module-career-moves.png";
 import moduleDei from "@/assets/module-dei.png";
 import moduleCommonMistakes from "@/assets/module-common-mistakes.png";
 
-import articleWarmIntro from "@/assets/article-warm-intro.jpg";
-import articleBurnout from "@/assets/article-burnout.jpg";
-import articleCultures from "@/assets/article-cultures.jpg";
-import articleInterview from "@/assets/article-interview.jpg";
+import articleWarmIntro from "@/assets/article-warm-intro.png";
+import articleBurnout from "@/assets/article-burnout.png";
+import articleCultures from "@/assets/article-cultures.png";
+import articleInterview from "@/assets/article-interview.png";
 
 const imageMap: Record<string, string> = {
   "module-starting-strong": moduleStartingStrong,

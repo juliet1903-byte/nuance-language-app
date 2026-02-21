@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { ArrowLeft, Clock, Tag, RotateCcw } from "lucide-react";
 import { useState } from "react";
-import articleCultures from "@/assets/article-cultures.jpg";
+import articleCultures from "@/assets/article-cultures.png";
 
 interface FlipCardProps {
   front: string;
