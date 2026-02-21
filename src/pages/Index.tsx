@@ -1,6 +1,6 @@
 import { Bell, User } from "lucide-react";
 import { useNavigate } from "react-router-dom";
-import { useRef, useEffect, useState } from "react";
+import { useRef, useEffect, useState, useMemo } from "react";
 import Logo from "@/components/Logo";
 import LetterAvatar from "@/components/LetterAvatar";
 import { useAuth } from "@/components/AuthContext";
@@ -13,10 +13,12 @@ import ModuleCard from "@/components/ModuleCard";
 import TrendingCard from "@/components/TrendingCard";
 import AppLayout, { useScrollContainer } from "@/components/AppLayout";
 import { modules } from "@/data/modules";
+import { useProgress } from "@/hooks/useProgress";
 
 const Index = () => {
   const navigate = useNavigate();
   const { isGuest, user, profile } = useAuth();
+  const { completedLessons, completedModules, loading: progressLoading } = useProgress();
   const showAvatar = !isGuest && user;
 
   const cardRef = useRef<HTMLDivElement>(null);
@@ -39,6 +41,30 @@ const Index = () => {
     onScroll();
     return () => target.removeEventListener("scroll", onScroll);
   }, [scrollContainerRef]);
+
+  // Find next lesson for registered users
+  const nextLesson = useMemo(() => {
+    if (isGuest || !user) return null;
+    for (const mod of modules) {
+      for (let i = 0; i < mod.lessons.length; i++) {
+        if (!completedLessons.has(mod.lessons[i].id)) {
+          return { module: mod, lessonIdx: i, lesson: mod.lessons[i] };
+        }
+      }
+    }
+    const lastMod = modules[modules.length - 1];
+    return { module: lastMod, lessonIdx: lastMod.lessons.length - 1, lesson: lastMod.lessons[lastMod.lessons.length - 1] };
+  }, [isGuest, user, completedLessons]);
+
+  const continueModule = isGuest || !nextLesson ? modules[0] : nextLesson.module;
+  const continueTitle = isGuest ? "Start Learning" : "Continue where you left";
+  const continueSubtitle = isGuest
+    ? continueModule.lessons[0]?.title ?? continueModule.subtitle
+    : nextLesson?.lesson.title ?? continueModule.subtitle;
+  const continueDescription = isGuest
+    ? continueModule.description
+    : `Module ${continueModule.number} · Lesson ${(nextLesson?.lessonIdx ?? 0) + 1}`;
+
   const trendingItems = [
   { image: trending1, badge: "Article", badgeColor: "bg-accent", title: "The Art of the Warm Intro", href: "/article/warm-intro" },
   { image: trending2, badge: "Video", badgeColor: "bg-cta", title: "How to Get Ready for an Interview", href: "/video/interview" },
@@ -73,7 +99,7 @@ const Index = () => {
         <LearningPath />
 
         <section>
-          <h2 className="text-xl font-medium mb-3">Continue where you left</h2>
+          <h2 className="text-xl font-medium mb-3">{continueTitle}</h2>
           <div
             ref={cardRef}
             className="rounded-2xl overflow-hidden bg-card transition-transform duration-150 will-change-transform"
@@ -85,15 +111,14 @@ const Index = () => {
 
             <img alt="Lesson" className="w-full h-40 object-cover" src="/lovable-uploads/44f61677-4fd5-49b3-9fbb-eabbecbad3aa.png" />
             <div className="p-4">
-              <h3 className="font-semibold text-base mb-1">Introducing Yourself</h3>
+              <h3 className="font-semibold text-base mb-1">{continueSubtitle}</h3>
               <p className="text-xs lg:text-base text-muted-foreground mb-3">
-                Why your quiet competence might be holding you back
+                {continueDescription}
               </p>
               <button
-                onClick={() => navigate(`/module/${modules[0].id}`)}
+                onClick={() => navigate(`/module/${continueModule.id}`)}
                 className="w-full py-3 rounded-xl text-accent-foreground font-semibold text-sm lg:text-base bg-cta">
-
-                Continue Learning
+                {isGuest ? "Start Learning" : "Continue Learning"}
               </button>
             </div>
           </div>
