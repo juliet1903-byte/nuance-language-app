@@ -19,7 +19,7 @@ const ArticleWarmIntro = () => {
         {/* Hero image */}
         <div className="relative -mx-5 mb-8">
           <img src={articleWarmIntro} alt="The Art of the Warm Intro" className="w-full h-56 md:h-72 object-cover" />
-          <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-transparent to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-black/20 to-transparent" />
           <div className="absolute bottom-4 left-5 right-5">
             <span className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider bg-white/10 backdrop-blur-sm text-white px-2.5 py-1 rounded-md mb-2">
               <Tag className="w-3 h-3" /> Article
