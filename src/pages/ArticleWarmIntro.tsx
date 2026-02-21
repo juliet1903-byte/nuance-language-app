@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { ArrowLeft, Clock, Tag } from "lucide-react";
-import articleWarmIntro from "@/assets/article-warm-intro.jpg";
+import articleWarmIntro from "@/assets/article-warm-intro.png";
 
 const ArticleWarmIntro = () => {
   const navigate = useNavigate();
