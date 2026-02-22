@@ -17,6 +17,8 @@ import articleWarmIntro from "@/assets/article-warm-intro.png";
 import articleBurnout from "@/assets/article-burnout.png";
 import articleCultures from "@/assets/article-cultures.png";
 import articleInterview from "@/assets/article-interview.png";
+import articleCriticism from "@/assets/article-criticism.png";
+import articleConversations from "@/assets/article-conversations.png";
 import videoNeutral from "@/assets/video-neutral.png";
 import videoPositive from "@/assets/video-positive.png";
 
@@ -37,6 +39,8 @@ const articles = [
   { id: "a1", title: "The Art of the Warm Intro", category: "Networking", readTime: "5 min read", href: "/article/warm-intro", image: articleWarmIntro },
   { id: "a4", title: "Quiet Cracking or Burning Out?", category: "Wellbeing", readTime: "7 min read", href: "/article/burnout", image: articleBurnout },
   { id: "a3", title: "Reading Between Cultures", category: "Cross-Cultural", readTime: "10 min read", href: "/deep-dive/cultures", image: articleCultures, badge: "Deep Dive" },
+  { id: "a5", title: "How to Receive Criticism Without Collapsing or Defending", category: "Feedback", readTime: "8 min read", href: "/article/criticism", image: articleCriticism },
+  { id: "a6", title: "The Conversations Most People Avoid", category: "Communication", readTime: "9 min read", href: "/article/conversations", image: articleConversations },
 ];
 
 const videos = [

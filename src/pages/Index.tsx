@@ -4,8 +4,8 @@ import { useRef, useEffect, useState, useMemo } from "react";
 import Logo from "@/components/Logo";
 import LetterAvatar from "@/components/LetterAvatar";
 import { useAuth } from "@/components/AuthContext";
-import articleWarmIntro from "@/assets/article-warm-intro.png";
-import articleBurnout from "@/assets/article-burnout.png";
+import articleCriticism from "@/assets/article-criticism.png";
+import articleConversations from "@/assets/article-conversations.png";
 import articleCultures from "@/assets/article-cultures.png";
 import videoPositive from "@/assets/video-positive.png";
 import LearningPath from "@/components/LearningPath";
@@ -66,8 +66,8 @@ const Index = () => {
     : `Module ${continueModule.number} · Lesson ${(nextLesson?.lessonIdx ?? 0) + 1}`;
 
   const trendingItems = [
-  { image: articleWarmIntro, badge: "Article", badgeColor: "bg-accent", title: "The Art of the Warm Intro", href: "/article/warm-intro" },
-  { image: articleBurnout, badge: "Article", badgeColor: "bg-accent", title: "Quiet Cracking or Burning Out?", href: "/article/burnout" },
+  { image: articleCriticism, badge: "Article", badgeColor: "bg-accent", title: "How to Receive Criticism", href: "/article/criticism" },
+  { image: articleConversations, badge: "Article", badgeColor: "bg-accent", title: "The Conversations Most People Avoid", href: "/article/conversations" },
   { image: videoPositive, badge: "Video", badgeColor: "bg-cta", title: "The 4 Domains of Emotional Intelligence", href: "/video/emotional-intelligence" },
   { image: articleCultures, badge: "Deep Dive", badgeColor: "bg-vibe-blunt", title: "Reading Between Cultures", href: "/deep-dive/cultures" }];
 
