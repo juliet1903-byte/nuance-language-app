@@ -21,6 +21,8 @@ import ArticleWarmIntro from "./pages/ArticleWarmIntro";
 import ArticleBurnout from "./pages/ArticleBurnout";
 import DeepDiveCultures from "./pages/DeepDiveCultures";
 import VideoInterview from "./pages/VideoInterview";
+import VideoRelationships from "./pages/VideoRelationships";
+import VideoEmotionalIntelligence from "./pages/VideoEmotionalIntelligence";
 
 const queryClient = new QueryClient();
 
@@ -48,6 +50,8 @@ const App = () => (
                 <Route path="/article/burnout" element={<ArticleBurnout />} />
                 <Route path="/deep-dive/cultures" element={<DeepDiveCultures />} />
                 <Route path="/video/interview" element={<VideoInterview />} />
+                <Route path="/video/relationships" element={<VideoRelationships />} />
+                <Route path="/video/emotional-intelligence" element={<VideoEmotionalIntelligence />} />
                 <Route path="*" element={<NotFound />} />
               </Routes>
             </BrowserRouter>

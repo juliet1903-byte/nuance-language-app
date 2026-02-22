@@ -17,6 +17,8 @@ import articleWarmIntro from "@/assets/article-warm-intro.png";
 import articleBurnout from "@/assets/article-burnout.png";
 import articleCultures from "@/assets/article-cultures.png";
 import articleInterview from "@/assets/article-interview.png";
+import videoNeutral from "@/assets/video-neutral.png";
+import videoPositive from "@/assets/video-positive.png";
 
 const imageMap: Record<string, string> = {
   "module-starting-strong": moduleStartingStrong,
@@ -39,6 +41,8 @@ const articles = [
 
 const videos = [
   { id: "v1", title: "How to Get Ready for an Interview", duration: "12 min", category: "Career", href: "/video/interview", image: articleInterview },
+  { id: "v2", title: "How to Grow Professional Relationships", duration: "8 min", category: "Networking", href: "/video/relationships", image: videoNeutral },
+  { id: "v3", title: "The 4 Domains of Emotional Intelligence", duration: "6 min", category: "Leadership", href: "/video/emotional-intelligence", image: videoPositive },
 ];
 
 const Library = () => {
