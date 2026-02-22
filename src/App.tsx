@@ -19,6 +19,8 @@ import PrivacyPolicy from "./pages/PrivacyPolicy";
 import NotFound from "./pages/NotFound";
 import ArticleWarmIntro from "./pages/ArticleWarmIntro";
 import ArticleBurnout from "./pages/ArticleBurnout";
+import ArticleCriticism from "./pages/ArticleCriticism";
+import ArticleConversations from "./pages/ArticleConversations";
 import DeepDiveCultures from "./pages/DeepDiveCultures";
 import VideoInterview from "./pages/VideoInterview";
 import VideoRelationships from "./pages/VideoRelationships";
@@ -48,6 +50,8 @@ const App = () => (
                 <Route path="/privacy" element={<PrivacyPolicy />} />
                 <Route path="/article/warm-intro" element={<ArticleWarmIntro />} />
                 <Route path="/article/burnout" element={<ArticleBurnout />} />
+                <Route path="/article/criticism" element={<ArticleCriticism />} />
+                <Route path="/article/conversations" element={<ArticleConversations />} />
                 <Route path="/deep-dive/cultures" element={<DeepDiveCultures />} />
                 <Route path="/video/interview" element={<VideoInterview />} />
                 <Route path="/video/relationships" element={<VideoRelationships />} />
