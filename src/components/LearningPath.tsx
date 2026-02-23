@@ -39,14 +39,14 @@ const LearningPath = () => {
           const moduleIds = LEVEL_MODULE_MAP[meta.id];
           const levelModules = moduleIds.map((mid) => modules.find((m) => m.id === mid)).filter(Boolean);
           const doneModules = moduleIds.filter((mid) => completedModules.has(mid)).length;
-          const completed = doneModules === moduleIds.length;
 
-          // Lesson-based progress
           const totalLessons = levelModules.reduce((sum, m) => sum + (m?.lessons.length ?? 0), 0);
           const doneLessons = levelModules.reduce(
             (sum, m) => sum + (m?.lessons.filter((l) => completedLessons.has(l.id)).length ?? 0),
             0
           );
+          const allLessonsDone = totalLessons > 0 && doneLessons === totalLessons;
+          const completed = allLessonsDone || doneModules === moduleIds.length;
           const progress = totalLessons > 0 ? Math.round((doneLessons / totalLessons) * 100) : 0;
 
           // A level is active if user has any progress in it (even partial)
