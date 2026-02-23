@@ -88,13 +88,14 @@ const SocialTranslator = ({ open, onClose }: SocialTranslatorProps) => {
       const res = data as TranslationResult;
       setResult(res);
 
-      // Log translation for tone profile tracking
+      // Log translation for tone profile tracking (include vibe score)
       if (user) {
         supabase.from("activity_log").insert({
           user_id: user.id,
           activity_type: "translation_complete",
           module_id: "social-translator",
           tone_mode: tone,
+          vibe_score: res.translatedVibeScore,
         } as any).then(() => {});
       }
 

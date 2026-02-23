@@ -112,8 +112,21 @@ export function useProgress() {
       }).eq("id", user.id);
     }
 
+    // Compute vibe_iq as highest-ever score
+    const allVibeScores = activities
+      .filter((a) => a.vibe_score !== null && a.vibe_score !== undefined)
+      .map((a) => a.vibe_score!);
+    const highestVibeIq = allVibeScores.length > 0 ? Math.max(...allVibeScores) : 0;
+
+    // Update vibe_iq in DB if changed
+    if (profile && highestVibeIq !== profile.vibe_iq) {
+      await supabase.from("profiles").update({
+        vibe_iq: highestVibeIq,
+      }).eq("id", user.id);
+    }
+
     setData({
-      vibeIq: profile?.vibe_iq ?? 0,
+      vibeIq: highestVibeIq,
       xp: (profile as any)?.xp ?? 0,
       lessonsCompleted: (profile as any)?.lessons_completed ?? 0,
       modulesCompleted: (profile as any)?.modules_completed ?? 0,
@@ -179,13 +192,8 @@ export function useProgress() {
         updates.learning_level = Math.min(4, Math.floor(newModules / 2) + 1);
       }
       if (activityType === "scenario_complete" && vibeScore) {
-        // Update vibe_iq as running average
-        const totalScenarios = data.activityLog.filter(
-          (a) => a.activity_type === "scenario_complete"
-        ).length;
-        const newVibeIq = Math.round(
-          (data.vibeIq * totalScenarios + vibeScore) / (totalScenarios + 1)
-        );
+        // Update vibe_iq as highest-ever score
+        const newVibeIq = Math.max(data.vibeIq, vibeScore);
         updates.vibe_iq = newVibeIq;
         updates.xp = (data.xp || 0) + 50;
       }
