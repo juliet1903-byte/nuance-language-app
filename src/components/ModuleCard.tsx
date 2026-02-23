@@ -1,5 +1,8 @@
 import { useNavigate } from "react-router-dom";
+import { Check } from "lucide-react";
 import type { Module } from "@/data/modules";
+import { useAuth } from "@/components/AuthContext";
+import { useProgress } from "@/hooks/useProgress";
 
 import moduleMeeting from "@/assets/module-meeting.jpg";
 import moduleNavigate from "@/assets/module-navigate.jpg";
@@ -29,21 +32,37 @@ const imageMap: Record<string, string> = {
 
 const ModuleCard = ({ module }: { module: Module }) => {
   const navigate = useNavigate();
+  const { isGuest, user } = useAuth();
+  const { completedLessons, completedModules } = useProgress();
+
+  const isLoggedIn = !isGuest && !!user;
+  const allLessonsDone = isLoggedIn && module.lessons.length > 0 && module.lessons.every((l) => completedLessons.has(l.id));
+  const isModuleDone = isLoggedIn && (completedModules.has(module.id) || allLessonsDone);
+  const doneLessons = isLoggedIn ? module.lessons.filter((l) => completedLessons.has(l.id)).length : 0;
+  const hasProgress = isLoggedIn && doneLessons > 0 && !isModuleDone;
 
   return (
     <button
       onClick={() => navigate(`/module/${module.id}`)}
       className="shrink-0 w-36 text-left"
     >
-      <div className="w-36 h-36 rounded-2xl overflow-hidden bg-card p-3 mb-2">
+      <div className="w-36 h-36 rounded-2xl overflow-hidden bg-card p-3 mb-2 relative">
         <img
           src={imageMap[module.image] || moduleMeeting}
           alt={module.title}
           className="w-full h-full object-cover"
           loading="lazy"
         />
+        {isModuleDone && (
+          <div className="absolute top-2 right-2 w-6 h-6 rounded-full bg-accent flex items-center justify-center shadow-sm">
+            <Check className="w-3.5 h-3.5 text-accent-foreground" />
+          </div>
+        )}
       </div>
       <p className="text-sm lg:text-base font-semibold leading-tight">{module.title}</p>
+      {hasProgress && (
+        <p className="text-xs text-accent mt-0.5">{doneLessons}/{module.lessons.length} lessons</p>
+      )}
     </button>
   );
 };
