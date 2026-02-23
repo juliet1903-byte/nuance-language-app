@@ -1,8 +1,10 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { BookOpen, Play, FileText, Search } from "lucide-react";
+import { BookOpen, Play, FileText, Search, Check, ChevronRight } from "lucide-react";
 import AppLayout from "@/components/AppLayout";
 import { modules } from "@/data/modules";
+import { useAuth } from "@/components/AuthContext";
+import { useProgress } from "@/hooks/useProgress";
 
 import moduleStartingStrong from "@/assets/module-starting-strong.png";
 import moduleMeetingRoom from "@/assets/module-meeting-room.png";
@@ -51,6 +53,9 @@ const videos = [
 
 const Library = () => {
   const navigate = useNavigate();
+  const { isGuest, user } = useAuth();
+  const { completedLessons, completedModules } = useProgress();
+  const isLoggedIn = !isGuest && !!user;
   const [activeTab, setActiveTab] = useState<Tab>("modules");
   const [search, setSearch] = useState("");
 
@@ -109,7 +114,11 @@ const Library = () => {
         {/* Modules Tab */}
         {activeTab === "modules" && (
           <div className="space-y-3">
-            {filteredModules.map((mod) => (
+            {filteredModules.map((mod) => {
+              const allDone = isLoggedIn && mod.lessons.length > 0 && mod.lessons.every((l) => completedLessons.has(l.id));
+              const isDone = isLoggedIn && (completedModules.has(mod.id) || allDone);
+              const doneLessons = isLoggedIn ? mod.lessons.filter((l) => completedLessons.has(l.id)).length : 0;
+              return (
               <button
                 key={mod.id}
                 onClick={() => navigate(`/module/${mod.id}`)}
@@ -126,11 +135,19 @@ const Library = () => {
                   <p className="text-sm font-semibold">{mod.title}</p>
                   <p className="text-xs text-muted-foreground mt-0.5">{mod.subtitle}</p>
                   <p className="text-xs text-muted-foreground mt-0.5">
-                    {mod.lessons.length} lesson{mod.lessons.length > 1 ? "s" : ""} · Module {mod.number}
+                    {isLoggedIn ? `${doneLessons}/${mod.lessons.length}` : mod.lessons.length} lesson{mod.lessons.length > 1 ? "s" : ""} · Module {mod.number}
                   </p>
                 </div>
+                {isDone ? (
+                  <div className="w-6 h-6 rounded-full bg-accent flex items-center justify-center shrink-0">
+                    <Check className="w-3.5 h-3.5 text-accent-foreground" />
+                  </div>
+                ) : (
+                  <ChevronRight className="w-4 h-4 text-muted-foreground shrink-0" />
+                )}
               </button>
-            ))}
+              );
+            })}
             {filteredModules.length === 0 && (
               <p className="text-sm text-muted-foreground text-center py-8">No modules found</p>
             )}

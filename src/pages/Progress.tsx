@@ -61,11 +61,18 @@ const Progress = () => {
   // Find the first level with activity for default expansion
   const getDefaultExpanded = () => {
     if (showBanner) return "natural-flow";
+    // Find first level that is in-progress (has activity but not completed)
     for (const meta of LEVEL_META) {
       const moduleIds = LEVEL_MODULE_MAP[meta.id];
       const levelModules = moduleIds.map((mid) => modules.find((m) => m.id === mid)).filter(Boolean);
-      const hasActivity = levelModules.some((m) => m?.lessons.some((l) => completedLessons.has(l.id)));
-      if (hasActivity) return meta.id;
+      const totalLessons = levelModules.reduce((sum, m) => sum + (m?.lessons.length ?? 0), 0);
+      const doneLessons = levelModules.reduce(
+        (sum, m) => sum + (m?.lessons.filter((l) => completedLessons.has(l.id)).length ?? 0),
+        0
+      );
+      const hasActivity = doneLessons > 0;
+      const allDone = totalLessons > 0 && doneLessons === totalLessons;
+      if (hasActivity && !allDone) return meta.id;
     }
     return LEVEL_META[0].id;
   };
@@ -233,7 +240,8 @@ const Progress = () => {
                             {levelModules.map((mod) => {
                               if (!mod) return null;
                               const isLocked = showBanner && !displayLevel.active;
-                              const isModuleDone = completedModules.has(mod.id);
+                              const allModLessonsDone = mod.lessons.length > 0 && mod.lessons.every((l) => completedLessons.has(l.id));
+                              const isModuleDone = completedModules.has(mod.id) || allModLessonsDone;
                               return (
                                 <button
                                   key={mod.id}
