@@ -77,12 +77,13 @@ const Progress = () => {
     const levelModules = levelModuleIds.map((mid) => modules.find((m) => m.id === mid)).filter(Boolean);
     const doneCount = levelModuleIds.filter((mid) => completedModules.has(mid)).length;
     const total = levelModuleIds.length;
-    const completed = doneCount === total;
     const totalLessons = levelModules.reduce((sum, m) => sum + (m?.lessons.length ?? 0), 0);
     const doneLessons = levelModules.reduce(
       (sum, m) => sum + (m?.lessons.filter((l) => completedLessons.has(l.id)).length ?? 0),
       0
     );
+    const allLessonsDone = totalLessons > 0 && doneLessons === totalLessons;
+    const completed = allLessonsDone || doneCount === total;
     const progress = totalLessons > 0 ? Math.round((doneLessons / totalLessons) * 100) : 0;
 
     // A level is active if user has any progress in it (even partial)
