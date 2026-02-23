@@ -40,12 +40,6 @@ const ModuleDetail = () => {
     else setView("overview");
   };
 
-  const handleLessonComplete = async () => {
-    if (user && lesson) {
-      await logActivity("lesson_complete", module.id, lesson.id);
-    }
-  };
-
   const handleExerciseComplete = async () => {
     if (user) {
       await logActivity("exercise_complete", module.id, lesson?.id);
@@ -53,14 +47,21 @@ const ModuleDetail = () => {
     setView("scenario");
   };
 
-  const handleScenarioComplete = async (vibeScore?: number) => {
+  const handleScenarioComplete = async (vibeScore: number) => {
     if (user) {
+      // Log scenario completion with vibe score
       await logActivity("scenario_complete", module.id, undefined, vibeScore);
-      // Check if all lessons in this module are completed
+
+      // Only mark lesson as completed when score is neutral or higher (>= 50)
+      if (vibeScore >= 50 && lesson) {
+        await logActivity("lesson_complete", module.id, lesson.id);
+      }
+
+      // Check if all lessons in this module are now completed
       const allDone = module.lessons.every(
         (l) => completedLessons.has(l.id) || l.id === lesson?.id
       );
-      if (allDone) {
+      if (allDone && vibeScore >= 50) {
         await logActivity("module_complete", module.id);
       }
     }
@@ -165,20 +166,14 @@ const ModuleDetail = () => {
 
               {exercise ? (
                 <button
-                  onClick={async () => {
-                    await handleLessonComplete();
-                    setView("exercise");
-                  }}
+                  onClick={() => setView("exercise")}
                   className="w-full py-3.5 rounded-xl bg-cta text-cta-foreground font-semibold text-sm"
                 >
                   Practice Exercises
                 </button>
               ) : (
                 <button
-                  onClick={async () => {
-                    await handleLessonComplete();
-                    setView("scenario");
-                  }}
+                  onClick={() => setView("scenario")}
                   className="w-full py-3.5 rounded-xl bg-accent text-accent-foreground font-semibold text-sm"
                 >
                   Go to Final Challenge
@@ -196,7 +191,7 @@ const ModuleDetail = () => {
               moduleTitle={module.title}
               moduleNumber={module.number}
               scenario={module.scenarioExercise}
-              onComplete={() => handleScenarioComplete()}
+              onComplete={(vibeScore) => handleScenarioComplete(vibeScore)}
             />
           )}
 

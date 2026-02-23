@@ -12,7 +12,7 @@ interface ScenarioExerciseProps {
     context: string;
     prompt: string;
   };
-  onComplete: () => void;
+  onComplete: (vibeScore: number) => void;
 }
 
 interface EvaluationResult {
@@ -69,7 +69,7 @@ const ScenarioExercise = ({ moduleTitle, moduleNumber, scenario, onComplete }: S
     }
   }, [response, isLoading, moduleTitle, moduleNumber, scenario]);
 
-  const passed = result && result.vibeScore >= 60;
+  const passed = result && result.vibeScore >= 50;
 
   return (
     <motion.div
@@ -203,7 +203,7 @@ const ScenarioExercise = ({ moduleTitle, moduleNumber, scenario, onComplete }: S
 
             {/* Continue */}
             <button
-              onClick={passed ? onComplete : () => { setResult(null); setNeedlePosition(null); }}
+              onClick={passed ? () => onComplete(result!.vibeScore) : () => { setResult(null); setNeedlePosition(null); }}
               className={`w-full py-3.5 rounded-xl font-semibold text-sm flex items-center justify-center gap-2 ${
                 passed
                   ? "bg-accent text-accent-foreground"
