@@ -18,7 +18,7 @@ const Landing = () => {
     offset: ["start end", "end start"],
   });
 
-  const rawTilt = useTransform(scrollYProgress, [0.1, 0.6], [12, 0]);
+  const rawTilt = useTransform(scrollYProgress, [0.1, 0.6], [20, 0]);
   const tilt = useSpring(rawTilt, { stiffness: 80, damping: 30 });
 
   const features = [
