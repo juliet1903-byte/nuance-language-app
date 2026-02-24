@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { useRef } from "react";
 import { Zap, Route, Flame } from "lucide-react";
 import Logo from "@/components/Logo";
@@ -45,7 +45,12 @@ const Landing = () => {
   };
 
   return (
-    <div className="min-h-screen bg-background text-foreground">
+    <motion.div
+      className="min-h-screen bg-background text-foreground"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.6, ease: "easeOut" }}
+    >
       {/* Nav */}
       <nav className="flex items-center justify-between px-6 py-5 max-w-5xl mx-auto">
         <Logo className="h-8" />
@@ -67,15 +72,53 @@ const Landing = () => {
       </nav>
 
       {/* Hero */}
-      <section className="text-center px-6 pt-12 pb-16 max-w-3xl mx-auto">
-        <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight leading-tight mb-4">
+      <section className="relative text-center px-6 pt-12 pb-16 max-w-3xl mx-auto overflow-hidden">
+        {/* Notebook grid texture */}
+        <motion.div
+          className="pointer-events-none absolute inset-0"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 1.2, delay: 0.3 }}
+          style={{
+            backgroundImage:
+              "linear-gradient(hsl(var(--border) / 0.25) 1px, transparent 1px), linear-gradient(90deg, hsl(var(--border) / 0.25) 1px, transparent 1px)",
+            backgroundSize: "28px 28px",
+          }}
+        >
+          <motion.div
+            className="absolute inset-0"
+            animate={{ backgroundPosition: ["0px 0px", "28px 28px"] }}
+            transition={{ duration: 40, repeat: Infinity, ease: "linear" }}
+            style={{
+              backgroundImage:
+                "radial-gradient(circle at 50% 50%, hsl(var(--cta) / 0.04) 0%, transparent 70%)",
+              backgroundSize: "200% 200%",
+            }}
+          />
+        </motion.div>
+        <motion.h1
+          className="relative text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight leading-tight mb-4"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.15 }}
+        >
           Speak with Impact. <span className="text-cta">Lead with Nuance.</span>
-        </h1>
-        <p className="text-base md:text-lg text-muted-foreground max-w-xl mx-auto mb-4 leading-relaxed">
+        </motion.h1>
+        <motion.p
+          className="relative text-base md:text-lg text-muted-foreground max-w-xl mx-auto mb-4 leading-relaxed"
+          initial={{ opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.3 }}
+        >
           You've mastered the basics. Now, master the nuance. Refactor your business communication to lead, influence,
           and impact.
-        </p>
-        <div className="flex items-center justify-center gap-4 flex-wrap">
+        </motion.p>
+        <motion.div
+          className="relative flex items-center justify-center gap-4 flex-wrap"
+          initial={{ opacity: 0, y: 12 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.45 }}
+        >
           <button
             onClick={() => navigate("/auth")}
             className="px-8 py-3 rounded-xl bg-cta text-cta-foreground font-semibold text-sm hover:opacity-90 transition-opacity shadow-md"
@@ -88,7 +131,7 @@ const Landing = () => {
           >
             Try as Guest
           </button>
-        </div>
+        </motion.div>
       </section>
 
       {/* Product Showcase */}
@@ -123,8 +166,19 @@ const Landing = () => {
         </div>
       </section>
 
+      {/* CTA Section */}
+      <section className="text-center px-6 pt-20 pb-16 max-w-5xl mx-auto w-full">
+        <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-8">Ready to level up your communication?</h2>
+        <Link
+          to="/auth"
+          className="inline-block px-12 py-4 rounded-2xl bg-cta text-cta-foreground font-semibold text-base hover:opacity-90 transition-opacity shadow-md"
+        >
+          Join Nuance
+        </Link>
+      </section>
+
       <Footer />
-    </div>
+    </motion.div>
   );
 };
 
