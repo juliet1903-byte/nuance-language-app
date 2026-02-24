@@ -18,7 +18,7 @@ const Landing = () => {
     offset: ["start end", "end start"],
   });
 
-  const rawTilt = useTransform(scrollYProgress, [0.1, 0.6], [25, 0]);
+  const rawTilt = useTransform(scrollYProgress, [0.1, 0.6], [12, 0]);
   const tilt = useSpring(rawTilt, { stiffness: 80, damping: 30 });
 
   const features = [
@@ -73,9 +73,9 @@ const Landing = () => {
 
       {/* Hero */}
       <section className="relative text-center px-6 pt-12 pb-16 max-w-3xl mx-auto overflow-hidden">
-        {/* Notebook grid texture */}
+      {/* Notebook grid texture - full width, faded at edges */}
         <motion.div
-          className="pointer-events-none absolute inset-0"
+          className="pointer-events-none absolute inset-y-0 -left-[50vw] -right-[50vw]"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 1.2, delay: 0.3 }}
@@ -83,18 +83,10 @@ const Landing = () => {
             backgroundImage:
               "linear-gradient(hsl(var(--border) / 0.25) 1px, transparent 1px), linear-gradient(90deg, hsl(var(--border) / 0.25) 1px, transparent 1px)",
             backgroundSize: "28px 28px",
+            maskImage: "radial-gradient(ellipse 50% 80% at 50% 50%, black 30%, transparent 100%)",
+            WebkitMaskImage: "radial-gradient(ellipse 50% 80% at 50% 50%, black 30%, transparent 100%)",
           }}
-        >
-          <motion.div
-            className="absolute inset-0"
-            animate={{ backgroundPosition: ["0px 0px", "28px 28px"] }}
-            transition={{ duration: 40, repeat: Infinity, ease: "linear" }}
-            style={{
-              backgroundImage: "radial-gradient(circle at 50% 50%, hsl(var(--cta) / 0.04) 0%, transparent 70%)",
-              backgroundSize: "200% 200%",
-            }}
-          />
-        </motion.div>
+        />
         <motion.h1
           className="relative text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight leading-tight mb-4"
           initial={{ opacity: 0, y: 20 }}
@@ -126,7 +118,7 @@ const Landing = () => {
           </button>
           <button
             onClick={handleGuest}
-            className="px-8 py-3 rounded-xl border border-border text-muted-foreground font-semibold text-sm hover:bg-muted/50 transition-colors"
+            className="px-8 py-3 rounded-xl border border-border bg-card text-muted-foreground font-semibold text-sm hover:bg-muted/50 transition-colors"
           >
             Try as Guest
           </button>
@@ -165,12 +157,23 @@ const Landing = () => {
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="text-center px-6 pt-20 pb-16 max-w-5xl mx-auto w-full">
-        <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-8">Ready to level up your communication?</h2>
+      {/* CTA Section with notebook texture */}
+      <section className="relative text-center px-6 pt-16 pb-20 mb-16 max-w-5xl mx-auto w-full overflow-hidden">
+        {/* Grid texture */}
+        <div
+          className="pointer-events-none absolute inset-y-0 -left-[50vw] -right-[50vw]"
+          style={{
+            backgroundImage:
+              "linear-gradient(hsl(var(--border) / 0.25) 1px, transparent 1px), linear-gradient(90deg, hsl(var(--border) / 0.25) 1px, transparent 1px)",
+            backgroundSize: "28px 28px",
+            maskImage: "radial-gradient(ellipse 50% 80% at 50% 50%, black 30%, transparent 100%)",
+            WebkitMaskImage: "radial-gradient(ellipse 50% 80% at 50% 50%, black 30%, transparent 100%)",
+          }}
+        />
+        <h2 className="relative text-2xl md:text-3xl lg:text-4xl font-bold mb-8">Ready to level up your communication?</h2>
         <Link
           to="/auth"
-          className="inline-block px-12 py-4 rounded-2xl bg-cta text-cta-foreground font-semibold text-base hover:opacity-90 transition-opacity shadow-md"
+          className="relative inline-block px-12 py-4 rounded-2xl bg-cta text-cta-foreground font-semibold text-base hover:opacity-90 transition-opacity shadow-md"
         >
           Join Nuance
         </Link>
