@@ -158,7 +158,7 @@ const Landing = () => {
       </section>
 
       {/* CTA Section with notebook texture */}
-      <section className="relative text-center px-6 pt-16 pb-20 max-w-5xl mx-auto w-full overflow-hidden">
+      <section className="relative text-center px-6 pt-16 pb-20 mb-16 max-w-5xl mx-auto w-full overflow-hidden">
         {/* Grid texture */}
         <div
           className="pointer-events-none absolute inset-y-0 -left-[50vw] -right-[50vw]"
