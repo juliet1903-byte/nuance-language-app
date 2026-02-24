@@ -7,7 +7,7 @@ const VideoEmotionalIntelligence = () => {
   return (
     <div className="min-h-screen bg-background text-foreground">
       <header className="sticky top-0 z-10 bg-background/80 backdrop-blur-md border-b border-border/30 px-5 py-4 flex items-center gap-3">
-        <button onClick={() => navigate(-1)} className="p-1.5 rounded-lg hover:bg-card transition-colors">
+        <button onClick={() => navigate("/dashboard")} className="p-1.5 rounded-lg hover:bg-card transition-colors">
           <ArrowLeft className="w-5 h-5" />
         </button>
         <span className="text-sm font-semibold truncate">The 4 Domains of Emotional Intelligence</span>

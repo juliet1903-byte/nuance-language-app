@@ -34,7 +34,7 @@ const ModuleDetail = () => {
   const nextModule = modules[currentModuleIdx + 1];
 
   const handleBack = () => {
-    if (view === "overview") navigate("/");
+    if (view === "overview") navigate("/dashboard");
     else if (view === "exercise") setView("lesson");
     else if (view === "scenario") setView("lesson");
     else setView("overview");
