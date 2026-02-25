@@ -1,3 +1,6 @@
+import type { Flashcard } from "@/components/FlashcardExercise";
+import type { WordOrderItem } from "@/components/WordOrderExercise";
+
 export interface Lesson {
   id: string;
   title: string;
@@ -5,6 +8,8 @@ export interface Lesson {
   coachingNotes: string[];
   situation?: { title: string; prompt: string; coachingResponse: string };
   exercises?: Exercise[];
+  flashcards?: Flashcard[];
+  wordOrderExercise?: { instruction: string; items: WordOrderItem[] };
 }
 
 export interface Exercise {
@@ -64,6 +69,21 @@ export const modules: Module[] = [
           prompt: "You've been in your new role for two weeks. Your manager opens your one-to-one with: \"So — how are you finding it?\" You have two genuine questions about design ownership and code review.",
           coachingResponse: "\"Overall I'm really enjoying it — the team has been brilliant. Two things I'd love clarity on: ownership of design decisions, and the code review process — it varies quite a bit. Is that something I should raise with someone specific?\"",
         },
+        flashcards: [
+          { front: "\"I work with [X] to [result].\"", back: "A value-driven introduction that tells people why you matter, not just your job title." },
+          { front: "\"Getting up to speed\"", back: "Means becoming fully informed or competent. Signals you're learning without implying incompetence." },
+          { front: "\"What does good look like?\"", back: "Asks the other person to define success from their perspective — shows proactive curiosity." },
+          { front: "Lead with value, not credentials", back: "Instead of 'I'm a developer', say what you actually help people accomplish." },
+          { front: "\"How are you finding it?\"", back: "A common onboarding question from managers — an invitation to share honest early impressions." },
+        ],
+        wordOrderExercise: {
+          instruction: "Arrange the words to form a professional introduction or question.",
+          items: [
+            { id: "wo-1-1", correctSentence: "I work with development teams to simplify infrastructure", scrambledWords: ["simplify", "teams", "I", "development", "work", "with", "to", "infrastructure"] },
+            { id: "wo-1-2", correctSentence: "What does good look like from your perspective", scrambledWords: ["your", "look", "from", "good", "What", "perspective", "does", "like"] },
+            { id: "wo-1-3", correctSentence: "I am still getting up to speed on the process", scrambledWords: ["up", "am", "the", "I", "getting", "speed", "still", "to", "process", "on"] },
+          ],
+        },
         exercises: [
           {
             type: "fill-gap",
@@ -90,6 +110,19 @@ export const modules: Module[] = [
         coachingNotes: [
           "A follow-up message only works if it proves you were paying attention. A generic 'I really enjoyed our conversation' does nothing.",
         ],
+        flashcards: [
+          { front: "\"Stayed with me\"", back: "Means something made a lasting impression. Shows you were genuinely engaged, not just polite." },
+          { front: "\"What's the best way to reach you?\"", back: "A non-transactional way to close a networking conversation and keep the door open." },
+          { front: "Opening small talk", back: "Start with low-stakes, easy-to-answer questions like 'Have you been enjoying the conference?'" },
+          { front: "Follow-up message", back: "Must include a specific reference to something said. Generic 'great chat' messages are forgettable." },
+        ],
+        wordOrderExercise: {
+          instruction: "Put the words in the correct order to form a natural networking phrase.",
+          items: [
+            { id: "wo-1-2a", correctSentence: "Your point about documentation stayed with me", scrambledWords: ["stayed", "about", "point", "Your", "documentation", "me", "with"] },
+            { id: "wo-1-2b", correctSentence: "I would love to stay connected with you", scrambledWords: ["connected", "I", "love", "to", "would", "you", "stay", "with"] },
+          ],
+        },
       },
     ],
     scenarioExercise: {
@@ -117,6 +150,19 @@ export const modules: Module[] = [
         coachingNotes: [
           "'Building on that' creates a soft entry. The key word is 'building' — it signals you were listening and adding, not redirecting.",
         ],
+        flashcards: [
+          { front: "\"Building on that\"", back: "A soft entry phrase that signals you were listening and are adding to the conversation, not redirecting it." },
+          { front: "\"Before we move on\"", back: "Used to claim space in a discussion just before the topic changes — polite but assertive." },
+          { front: "\"Reflect back\"", back: "To summarise what you've heard in your own words. Shows understanding and catches misalignment." },
+          { front: "Soft entry vs hard entry", back: "'Building on that' (soft) vs 'I disagree' (hard). Soft entries preserve relationships while still making your point." },
+        ],
+        wordOrderExercise: {
+          instruction: "Arrange the words to form an effective meeting contribution.",
+          items: [
+            { id: "wo-2-1a", correctSentence: "Could I add something here before we move on", scrambledWords: ["on", "Could", "here", "move", "add", "something", "we", "before", "I"] },
+            { id: "wo-2-1b", correctSentence: "Let me reflect back what I have heard", scrambledWords: ["heard", "me", "what", "Let", "back", "I", "have", "reflect"] },
+          ],
+        },
         exercises: [
           {
             type: "fill-gap",
@@ -157,6 +203,19 @@ export const modules: Module[] = [
         coachingNotes: [
           "The word 'slightly' does real work. It signals measured disagreement, not emotional. Compare: 'I disagree with that' vs 'Can I push back on that slightly?'",
         ],
+        flashcards: [
+          { front: "\"Push back on that slightly\"", back: "A measured way to express disagreement. 'Slightly' de-escalates tension and shows the challenge is professional, not personal." },
+          { front: "High-context vs low-context", back: "High-context cultures (Japan, Korea) imply meaning indirectly. Low-context cultures (US, Netherlands) state it plainly." },
+          { front: "\"That's an interesting approach\"", back: "In some cultures, this may signal polite disagreement rather than genuine interest. Always read the room." },
+          { front: "\"Understand your thinking\"", back: "Shows you want to engage with their reasoning before presenting your own view — builds rapport across cultures." },
+        ],
+        wordOrderExercise: {
+          instruction: "Put the words in the correct order to form a respectful cross-cultural phrase.",
+          items: [
+            { id: "wo-3-1a", correctSentence: "Can I push back on that slightly", scrambledWords: ["slightly", "that", "I", "push", "Can", "on", "back"] },
+            { id: "wo-3-1b", correctSentence: "I want to understand your thinking before I respond", scrambledWords: ["I", "before", "understand", "thinking", "to", "your", "respond", "want", "I"] },
+          ],
+        },
         exercises: [
           {
             type: "fill-gap",
@@ -197,6 +256,20 @@ export const modules: Module[] = [
         coachingNotes: [
           "When someone hesitates without a reason, this phrase asks them to articulate the condition. Once you know it, you can meet it or have an honest conversation.",
         ],
+        flashcards: [
+          { front: "\"Connects directly to\"", back: "Links your proposal to someone else's stated priorities. Makes your idea feel aligned, not competing." },
+          { front: "\"What would need to be true?\"", back: "Surfaces hidden objections by asking the other person to articulate their conditions for agreement." },
+          { front: "\"Flag this early\"", back: "Frames your concern as proactive risk management, not complaining. Shows professional maturity." },
+          { front: "Influencing without authority", back: "The skill of moving people through alignment, empathy, and strategic framing — not through formal power." },
+          { front: "\"Feel comfortable with this\"", back: "Acknowledges the emotional component of decisions. People need to feel safe, not just logically convinced." },
+        ],
+        wordOrderExercise: {
+          instruction: "Arrange the words to form an effective influence phrase.",
+          items: [
+            { id: "wo-4-1a", correctSentence: "What would need to be true for you to support this", scrambledWords: ["for", "need", "true", "What", "you", "this", "be", "to", "support", "would", "to"] },
+            { id: "wo-4-1b", correctSentence: "I would rather flag this early than raise it too late", scrambledWords: ["this", "flag", "late", "raise", "it", "would", "I", "too", "rather", "early", "than"] },
+          ],
+        },
         exercises: [
           {
             type: "fill-gap",
@@ -236,6 +309,20 @@ export const modules: Module[] = [
         coachingNotes: [
           "Three frameworks: What-Why-Next for quick feedback, DESC for formal/high-stakes, Contrast Method when expectation and reality diverged.",
         ],
+        flashcards: [
+          { front: "\"Share an observation\"", back: "Opens feedback gently by asking permission and framing it as a pattern, not a one-off accusation." },
+          { front: "What-Why-Next framework", back: "Quick feedback: What happened → Why it matters → What to do next. Best for informal, low-stakes situations." },
+          { front: "DESC framework", back: "Describe → Express → Specify → Consequences. Best for formal, high-stakes feedback conversations." },
+          { front: "\"From where I'm sitting\"", back: "Frames your feedback as subjective perspective, not absolute truth. Less defensive reaction from the receiver." },
+          { front: "Contrast Method", back: "Used when expectation and reality diverged: 'I expected X, but what happened was Y.' Shows the gap without blame." },
+        ],
+        wordOrderExercise: {
+          instruction: "Arrange the words to form constructive feedback.",
+          items: [
+            { id: "wo-5-1a", correctSentence: "Can I share an observation about something I have noticed", scrambledWords: ["noticed", "about", "share", "Can", "I", "an", "something", "observation", "have", "I"] },
+            { id: "wo-5-1b", correctSentence: "The impact on the team has been significant", scrambledWords: ["significant", "impact", "The", "team", "on", "been", "has", "the"] },
+          ],
+        },
         exercises: [
           {
             type: "fill-gap",
@@ -274,6 +361,19 @@ export const modules: Module[] = [
         coachingNotes: [
           "Most candidates only talk about decisions they agreed with. Showing you pushed back signals strong independent judgement.",
         ],
+        flashcards: [
+          { front: "\"Particularly proud of\"", back: "Leads with your result and then explains why it was hard. Shows both competence and self-awareness." },
+          { front: "\"Handle differently\"", back: "Reflects on past decisions honestly. Signals growth mindset and the ability to learn from mistakes." },
+          { front: "\"At the time, here was my reasoning\"", back: "Explains past decisions without excuses. Shows you made thoughtful choices even if they weren't perfect." },
+          { front: "Talking about failure in interviews", back: "Show the mistake, what you learned, and what you'd do differently. Never blame others or external factors." },
+        ],
+        wordOrderExercise: {
+          instruction: "Put the words in order to form a strong interview answer.",
+          items: [
+            { id: "wo-6-1a", correctSentence: "One thing I am particularly proud of is reducing deploy time", scrambledWords: ["time", "proud", "is", "thing", "I", "reducing", "am", "One", "deploy", "particularly", "of"] },
+            { id: "wo-6-1b", correctSentence: "Looking back I would handle the communication differently", scrambledWords: ["the", "Looking", "I", "handle", "differently", "communication", "back", "would"] },
+          ],
+        },
         exercises: [
           {
             type: "fill-gap",
@@ -312,6 +412,19 @@ export const modules: Module[] = [
         coachingNotes: [
           "Most exclusive language is habitual, not malicious. The question is whether language makes certain people feel default and others exceptional.",
         ],
+        flashcards: [
+          { front: "\"Hey everyone\" vs \"Hey guys\"", back: "'Hey everyone' or 'Hey team' are gender-neutral alternatives that include all participants without assumption." },
+          { front: "Habitual vs malicious exclusion", back: "Most exclusive language isn't intentional — it's habitual. The goal is awareness, not blame." },
+          { front: "\"Experience differently\"", back: "Acknowledges that the same environment isn't equally comfortable for everyone. Shows awareness without preaching." },
+          { front: "Default vs exceptional", back: "Inclusive language avoids making some identities feel 'normal' and others 'other'. Example: 'partner' instead of 'husband/wife'." },
+        ],
+        wordOrderExercise: {
+          instruction: "Arrange the words to form an inclusive workplace phrase.",
+          items: [
+            { id: "wo-7-1a", correctSentence: "I try to be aware of how people experience this differently", scrambledWords: ["this", "aware", "try", "differently", "how", "I", "people", "be", "experience", "of", "to"] },
+            { id: "wo-7-1b", correctSentence: "Hey everyone let us get started with the agenda", scrambledWords: ["agenda", "everyone", "Hey", "get", "with", "us", "the", "started", "let"] },
+          ],
+        },
         exercises: [
           {
             type: "fill-gap",
@@ -351,6 +464,21 @@ export const modules: Module[] = [
         coachingNotes: [
           "Leading with credentials tells them your category. Leading with value tells them why you matter.",
         ],
+        flashcards: [
+          { front: "Mistake: Leading with credentials", back: "Fix: Lead with value. 'I work with [X] to [result]' instead of 'I'm a senior engineer at…'" },
+          { front: "Mistake: Waiting for a pause", back: "Fix: Create your own entry. 'Could I add something here before we move on?' Don't wait for permission that never comes." },
+          { front: "Mistake: 'You' verdicts", back: "Fix: Use subjective framing. 'My impression was…' instead of 'You made a bad recommendation.'" },
+          { front: "Mistake: Generic follow-ups", back: "Fix: Reference something specific from the conversation. Prove you were listening." },
+          { front: "Mistake: Avoiding difficult conversations", back: "Fix: The conversations you avoid are the ones that matter most. Use frameworks (DESC, What-Why-Next) to structure them." },
+          { front: "Mistake: Not reading indirect communication", back: "Fix: In high-context cultures, 'interesting approach' may mean disagreement. Always clarify before assuming alignment." },
+        ],
+        wordOrderExercise: {
+          instruction: "Arrange the words to correct a common communication mistake.",
+          items: [
+            { id: "wo-8-1a", correctSentence: "My impression was that the recommendation was hard to follow", scrambledWords: ["to", "was", "the", "My", "follow", "hard", "that", "recommendation", "impression", "was"] },
+            { id: "wo-8-1b", correctSentence: "Could I add something here before we move on", scrambledWords: ["move", "Could", "we", "before", "I", "something", "on", "add", "here"] },
+          ],
+        },
         exercises: [
           {
             type: "fill-gap",

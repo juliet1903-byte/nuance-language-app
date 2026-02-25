@@ -5,11 +5,13 @@ import { motion, AnimatePresence } from "framer-motion";
 import { modules } from "@/data/modules";
 import AppLayout from "@/components/AppLayout";
 import FillGapExercise from "@/components/FillGapExercise";
+import FlashcardExercise from "@/components/FlashcardExercise";
+import WordOrderExercise from "@/components/WordOrderExercise";
 import ScenarioExercise from "@/components/ScenarioExercise";
 import { useProgress } from "@/hooks/useProgress";
 import { useAuth } from "@/components/AuthContext";
 
-type View = "overview" | "lesson" | "exercise" | "scenario" | "complete";
+type View = "overview" | "lesson" | "flashcards" | "exercise" | "word-order" | "scenario" | "complete";
 
 const ModuleDetail = () => {
   const { id } = useParams();
@@ -33,14 +35,48 @@ const ModuleDetail = () => {
   const currentModuleIdx = modules.findIndex((m) => m.id === id);
   const nextModule = modules[currentModuleIdx + 1];
 
+  // Determine next view after current step
+  const getNextAfterLesson = () => {
+    if (lesson?.flashcards?.length) return "flashcards";
+    if (exercise) return "exercise";
+    if (lesson?.wordOrderExercise) return "word-order";
+    return "scenario";
+  };
+
+  const getNextAfterFlashcards = () => {
+    if (exercise) return "exercise";
+    if (lesson?.wordOrderExercise) return "word-order";
+    return "scenario";
+  };
+
+  const getNextAfterExercise = () => {
+    if (lesson?.wordOrderExercise) return "word-order";
+    return "scenario";
+  };
+
   const handleBack = () => {
     if (view === "overview") navigate("/dashboard");
-    else if (view === "exercise") setView("lesson");
-    else if (view === "scenario") setView("lesson");
+    else if (view === "flashcards") setView("lesson");
+    else if (view === "exercise") {
+      setView(lesson?.flashcards?.length ? "flashcards" : "lesson");
+    } else if (view === "word-order") {
+      setView(exercise ? "exercise" : lesson?.flashcards?.length ? "flashcards" : "lesson");
+    } else if (view === "scenario") setView("lesson");
     else setView("overview");
   };
 
+  const handleFlashcardsComplete = () => {
+    setView(getNextAfterFlashcards() as View);
+  };
+
   const handleExerciseComplete = async () => {
+    if (user) {
+      await logActivity("exercise_complete", module.id, lesson?.id);
+    }
+    setView(getNextAfterExercise() as View);
+  };
+
+  const handleWordOrderComplete = async () => {
     if (user) {
       await logActivity("exercise_complete", module.id, lesson?.id);
     }
@@ -49,15 +85,12 @@ const ModuleDetail = () => {
 
   const handleScenarioComplete = async (vibeScore: number) => {
     if (user) {
-      // Log scenario completion with vibe score
       await logActivity("scenario_complete", module.id, undefined, vibeScore);
 
-      // Only mark lesson as completed when score is neutral or higher (>= 50)
       if (vibeScore >= 50 && lesson) {
         await logActivity("lesson_complete", module.id, lesson.id);
       }
 
-      // Check if all lessons in this module are now completed
       const allDone = module.lessons.every(
         (l) => completedLessons.has(l.id) || l.id === lesson?.id
       );
@@ -102,6 +135,7 @@ const ModuleDetail = () => {
                           {isDone && <span className="ml-2 text-accent text-xs">✓</span>}
                         </p>
                         <p className="text-xs text-muted-foreground mt-0.5">
+                          {l.flashcards?.length ? `${l.flashcards.length} flashcards · ` : ""}
                           {l.phrases.length} phrases · {l.coachingNotes.length} coaching notes
                         </p>
                       </div>
@@ -164,26 +198,29 @@ const ModuleDetail = () => {
                 </div>
               )}
 
-              {exercise ? (
-                <button
-                  onClick={() => setView("exercise")}
-                  className="w-full py-3.5 rounded-xl bg-cta text-cta-foreground font-semibold text-sm"
-                >
-                  Practice Exercises
-                </button>
-              ) : (
-                <button
-                  onClick={() => setView("scenario")}
-                  className="w-full py-3.5 rounded-xl bg-accent text-accent-foreground font-semibold text-sm"
-                >
-                  Go to Final Challenge
-                </button>
-              )}
+              <button
+                onClick={() => setView(getNextAfterLesson() as View)}
+                className="w-full py-3.5 rounded-xl bg-cta text-cta-foreground font-semibold text-sm"
+              >
+                {lesson.flashcards?.length ? "Start Flashcards" : exercise ? "Practice Exercises" : "Go to Final Challenge"}
+              </button>
             </motion.div>
+          )}
+
+          {view === "flashcards" && lesson?.flashcards && (
+            <FlashcardExercise cards={lesson.flashcards} onComplete={handleFlashcardsComplete} />
           )}
 
           {view === "exercise" && exercise && (
             <FillGapExercise exercise={exercise} onComplete={handleExerciseComplete} />
+          )}
+
+          {view === "word-order" && lesson?.wordOrderExercise && (
+            <WordOrderExercise
+              instruction={lesson.wordOrderExercise.instruction}
+              items={lesson.wordOrderExercise.items}
+              onComplete={handleWordOrderComplete}
+            />
           )}
 
           {view === "scenario" && (
@@ -218,7 +255,7 @@ const ModuleDetail = () => {
                 </button>
               ) : (
                 <button
-                  onClick={() => navigate("/")}
+                  onClick={() => navigate("/dashboard")}
                   className="w-full py-3.5 rounded-xl bg-accent text-accent-foreground font-semibold text-sm"
                 >
                   Back to Home
