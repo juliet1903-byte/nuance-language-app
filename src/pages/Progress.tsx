@@ -267,9 +267,7 @@ const Progress = () => {
                                   {isLocked ? (
                                     <Lock className="w-4 h-4 text-muted-foreground" />
                                   ) : isModuleDone ? (
-                                    <div className="w-6 h-6 rounded-full bg-accent flex items-center justify-center">
-                                      <Check className="w-3.5 h-3.5 text-accent-foreground" />
-                                    </div>
+                                    <Check className="w-4 h-4 text-foreground/70 shrink-0" strokeWidth={2.5} />
                                   ) : (
                                     <ChevronRight className="w-4 h-4 text-muted-foreground" />
                                   )}
