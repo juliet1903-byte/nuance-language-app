@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { ArrowLeft, ChevronRight, PartyPopper } from "lucide-react";
+import { ArrowLeft, ChevronRight, PartyPopper, Check } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { modules } from "@/data/modules";
 import AppLayout from "@/components/AppLayout";
@@ -127,19 +127,24 @@ const ModuleDetail = () => {
                     <button
                       key={l.id}
                       onClick={() => { setActiveLessonIdx(i); setView("lesson"); }}
-                      className="w-full flex items-center justify-between bg-card rounded-xl p-4 shadow-sm"
+                      className={`w-full flex items-center justify-between bg-card rounded-xl p-4 shadow-sm ${isDone ? 'opacity-75' : ''}`}
                     >
-                      <div className="text-left">
+                      <div className="text-left flex-1">
                         <p className="text-sm font-semibold">
                           {module.number}.{i + 1} — {l.title}
-                          {isDone && <span className="ml-2 text-accent text-xs">✓</span>}
                         </p>
                         <p className="text-xs text-muted-foreground mt-0.5">
                           {l.flashcards?.length ? `${l.flashcards.length} flashcards · ` : ""}
                           {l.phrases.length} phrases · {l.coachingNotes.length} coaching notes
                         </p>
                       </div>
-                      <ChevronRight className="w-4 h-4 text-muted-foreground" />
+                      {isDone ? (
+                        <div className="w-5 h-5 rounded-full bg-foreground/80 flex items-center justify-center ml-2 shrink-0">
+                          <Check className="w-3 h-3 text-background" />
+                        </div>
+                      ) : (
+                        <ChevronRight className="w-4 h-4 text-muted-foreground ml-2 shrink-0" />
+                      )}
                     </button>
                   );
                 })}
