@@ -87,6 +87,14 @@ const Landing = () => {
             WebkitMaskImage: "radial-gradient(ellipse 50% 80% at 50% 50%, black 30%, transparent 100%)",
           }}
         />
+        <motion.span
+          className="relative inline-block px-4 py-1.5 rounded-full text-xs font-medium mb-4 border bg-cta/10 text-cta border-cta/20"
+          initial={{ opacity: 0, y: 12 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.1 }}
+        >
+          The #1 Communication Tool for Business English Learners
+        </motion.span>
         <motion.h1
           className="relative text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight leading-tight mb-4"
           initial={{ opacity: 0, y: 20 }}
