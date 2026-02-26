@@ -139,9 +139,7 @@ const ModuleDetail = () => {
                         </p>
                       </div>
                       {isDone ? (
-                        <div className="w-5 h-5 rounded-full bg-foreground/80 flex items-center justify-center ml-2 shrink-0">
-                          <Check className="w-3 h-3 text-background" />
-                        </div>
+                        <Check className="w-4 h-4 text-foreground/70 ml-2 shrink-0" strokeWidth={2.5} />
                       ) : (
                         <ChevronRight className="w-4 h-4 text-muted-foreground ml-2 shrink-0" />
                       )}
