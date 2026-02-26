@@ -1,20 +1,17 @@
 
 
-## Enable Email Delivery for Contact Form
+## Plan: Add subtle badge above hero headline
 
-### What will happen
-1. Securely store your Resend API key as a backend secret
-2. Update the contact form backend function sender name to "Nuance AI Language App"
-3. After this, contact form messages will be delivered to your inbox
+**Location**: `src/pages/Landing.tsx`, inside the hero `<section>`, just before the `<motion.h1>`.
 
-### Technical Details
+**Implementation**:
+Add a `<motion.span>` pill badge with:
+- Text: "The #1 Communication Tool for Business English Learners"
+- Classes: `relative inline-block px-4 py-1.5 rounded-full text-xs font-medium mb-4 border`
+- Background: `bg-cta/10` (uses existing blue CTA color at 10% opacity)
+- Text: `text-cta` (darker blue)
+- Border: `border-cta/20` (very subtle blue border)
+- Fade-in animation matching existing stagger pattern (delay between page load and h1)
 
-**Secret to add:**
-- `RESEND_API_KEY` with the value you provided
-
-**File to update: `supabase/functions/send-contact/index.ts`**
-- Change sender name from `"Nuance Contact"` to `"Nuance AI Language App"`
-- The rest of the function already handles Resend correctly
-
-**No other changes needed** -- the function already checks for `RESEND_API_KEY` and uses Resend when available.
+Single file change: `src/pages/Landing.tsx`, inserting ~6 lines before the `<motion.h1>` element.
 
