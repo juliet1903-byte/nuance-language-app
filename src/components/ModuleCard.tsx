@@ -54,8 +54,8 @@ const ModuleCard = ({ module }: { module: Module }) => {
           loading="lazy"
         />
         {isModuleDone && (
-          <div className="absolute top-2 right-2 w-6 h-6 rounded-full bg-accent flex items-center justify-center shadow-sm">
-            <Check className="w-3.5 h-3.5 text-accent-foreground" />
+          <div className="absolute top-2 right-2 w-5 h-5 rounded-full bg-foreground/80 flex items-center justify-center">
+            <Check className="w-3 h-3 text-background" />
           </div>
         )}
       </div>
