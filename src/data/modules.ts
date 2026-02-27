@@ -177,6 +177,43 @@ export const modules: Module[] = [
           },
         ],
       },
+      {
+        id: "2-2",
+        title: "Closing and Following Up",
+        phrases: [
+          { phrase: '"Let me summarise what we\'ve agreed — and who\'s doing what by when."', usage: "Closing a meeting with clarity and accountability" },
+          { phrase: '"Just to confirm — my action is [X] by [date]. Does that sound right?"', usage: "Confirming your own action item to avoid ambiguity" },
+          { phrase: '"I\'ll send a short follow-up so we\'re all aligned."', usage: "Taking ownership of post-meeting clarity" },
+        ],
+        coachingNotes: [
+          "The person who summarises the meeting controls the narrative. If you write the follow-up, you decide what was agreed.",
+          "Always close with names, actions, and deadlines. 'We should do X' is a wish. 'Sarah will do X by Friday' is a plan.",
+        ],
+        flashcards: [
+          { front: "\"Who's doing what by when\"", back: "The gold standard for meeting close. Turns vague agreements into accountable action items." },
+          { front: "\"Send a short follow-up\"", back: "Taking ownership of the summary email. Whoever writes it shapes how decisions are remembered." },
+          { front: "\"Does that sound right?\"", back: "A confirmation check that invites correction without sounding uncertain." },
+        ],
+        wordOrderExercise: {
+          instruction: "Put the words in order to form a clear meeting close.",
+          items: [
+            { id: "wo-2-2a", correctSentence: "Let me summarise what we have agreed today", scrambledWords: ["today", "me", "what", "Let", "agreed", "we", "have", "summarise"] },
+            { id: "wo-2-2b", correctSentence: "I will send a short follow up after the meeting", scrambledWords: ["meeting", "will", "a", "I", "follow", "after", "short", "up", "the", "send"] },
+          ],
+        },
+        exercises: [
+          {
+            type: "fill-gap",
+            instruction: "Tap the correct phrase to complete each sentence.",
+            wordBank: ["who's doing what", "follow-up", "sound right", "by when", "we've agreed"],
+            items: [
+              { id: "2-2a", prompt: '"Let me summarise what _____ — and _____ _____."', answer: "we've agreed" },
+              { id: "2-2b", prompt: '"I\'ll send a short _____ so we\'re all aligned."', answer: "follow-up" },
+              { id: "2-2c", prompt: '"My action is to revise the spec by Friday. Does that _____?"', answer: "sound right" },
+            ],
+          },
+        ],
+      },
     ],
     scenarioExercise: {
       title: "The Overlooked Point",
@@ -226,6 +263,43 @@ export const modules: Module[] = [
               { id: "3-2", prompt: '"Can I _____ on that _____?"', answer: "push back" },
               { id: "3-3", prompt: '"I want to understand _____ before I respond."', answer: "your thinking" },
               { id: "3-4", prompt: '"I\'d like to share a _____ on this."', answer: "different view" },
+            ],
+          },
+        ],
+      },
+      {
+        id: "3-2",
+        title: "Adapting Your Tone Across Contexts",
+        phrases: [
+          { phrase: '"I want to make sure I\'m reading this correctly — are you comfortable with the direction?"', usage: "Checking alignment in a high-context setting" },
+          { phrase: '"In my experience, this approach works well — but I\'m curious how it lands here."', usage: "Sharing a perspective while inviting cultural input" },
+          { phrase: '"I noticed some hesitation — is there something we should discuss further?"', usage: "Naming what you observe without assuming the reason" },
+        ],
+        coachingNotes: [
+          "Silence doesn't always mean agreement. In many cultures, it signals discomfort or a need for more time to process.",
+          "'How it lands here' is a powerful phrase — it acknowledges that your norm isn't universal.",
+        ],
+        flashcards: [
+          { front: "\"Reading this correctly\"", back: "A self-checking phrase that invites the other person to correct your interpretation without losing face." },
+          { front: "\"How it lands here\"", back: "Acknowledges that your approach may not translate across contexts. Shows cultural humility." },
+          { front: "Silence ≠ agreement", back: "In many cultures, silence signals discomfort or the need for processing time, not consent." },
+        ],
+        wordOrderExercise: {
+          instruction: "Arrange the words to form a culturally sensitive question.",
+          items: [
+            { id: "wo-3-2a", correctSentence: "I want to make sure I am reading this correctly", scrambledWords: ["reading", "make", "I", "to", "want", "am", "this", "sure", "I", "correctly"] },
+            { id: "wo-3-2b", correctSentence: "Is there something we should discuss further", scrambledWords: ["further", "there", "something", "Is", "discuss", "should", "we"] },
+          ],
+        },
+        exercises: [
+          {
+            type: "fill-gap",
+            instruction: "Tap the correct phrase to complete each sentence.",
+            wordBank: ["reading this correctly", "how it lands", "some hesitation", "discuss further", "comfortable with"],
+            items: [
+              { id: "3-2a", prompt: '"I want to make sure I\'m _____ — are you _____ the direction?"', answer: "reading this correctly" },
+              { id: "3-2b", prompt: '"I noticed _____ — is there something we should _____?"', answer: "some hesitation" },
+              { id: "3-2c", prompt: '"I\'m curious _____ here given the team dynamics."', answer: "how it lands" },
             ],
           },
         ],
@@ -283,6 +357,43 @@ export const modules: Module[] = [
           },
         ],
       },
+      {
+        id: "4-2",
+        title: "Giving Updates That Build Trust",
+        phrases: [
+          { phrase: '"Here\'s where we are, what\'s at risk, and what I need from you."', usage: "Structured status update for senior stakeholders" },
+          { phrase: '"I want to give you an early signal rather than a late surprise."', usage: "Flagging potential problems before they escalate" },
+          { phrase: '"I\'ve thought about this from your perspective — here\'s what I\'d recommend."', usage: "Showing you've considered their priorities" },
+        ],
+        coachingNotes: [
+          "Senior people don't want to be surprised. An early warning with a plan is always better than a late confession without one.",
+          "Structure updates as: Status → Risk → Ask. Don't bury the ask at the end.",
+        ],
+        flashcards: [
+          { front: "\"Early signal, not late surprise\"", back: "Frames bad news as proactive risk management. Shows you're on top of issues, not hiding them." },
+          { front: "Status → Risk → Ask", back: "The ideal update structure for senior stakeholders. Lead with where things stand, highlight risks, then state what you need." },
+          { front: "\"From your perspective\"", back: "Shows you've considered how the situation affects them, not just you. Builds trust and credibility." },
+        ],
+        wordOrderExercise: {
+          instruction: "Arrange the words to form a clear stakeholder update.",
+          items: [
+            { id: "wo-4-2a", correctSentence: "I want to give you an early signal on this", scrambledWords: ["this", "give", "early", "I", "an", "to", "signal", "you", "want", "on"] },
+            { id: "wo-4-2b", correctSentence: "Here is where we are and what I need from you", scrambledWords: ["you", "is", "are", "Here", "what", "and", "from", "where", "I", "need", "we"] },
+          ],
+        },
+        exercises: [
+          {
+            type: "fill-gap",
+            instruction: "Tap the correct phrase to complete each sentence.",
+            wordBank: ["early signal", "at risk", "your perspective", "late surprise", "what I need"],
+            items: [
+              { id: "4-2a", prompt: '"I want to give you an _____ rather than a _____."', answer: "early signal" },
+              { id: "4-2b", prompt: '"Here\'s where we are, what\'s _____, and _____."', answer: "at risk" },
+              { id: "4-2c", prompt: '"I\'ve thought about this from _____ — here\'s my recommendation."', answer: "your perspective" },
+            ],
+          },
+        ],
+      },
     ],
     scenarioExercise: {
       title: "The Reluctant Stakeholder",
@@ -332,6 +443,43 @@ export const modules: Module[] = [
               { id: "5-1", prompt: '"Can I _____ — it\'s something I\'ve noticed?"', answer: "share an observation" },
               { id: "5-2", prompt: '"The _____ has been significant this quarter."', answer: "impact on the team" },
               { id: "5-3", prompt: '"_____, the deadline pressure is affecting quality."', answer: "from where I'm sitting" },
+            ],
+          },
+        ],
+      },
+      {
+        id: "5-2",
+        title: "Receiving Feedback Gracefully",
+        phrases: [
+          { phrase: '"Thank you for telling me that — can you give me a specific example?"', usage: "Receiving feedback without defensiveness" },
+          { phrase: '"I hadn\'t seen it that way — let me sit with that."', usage: "Acknowledging feedback you need time to process" },
+          { phrase: '"What would you suggest I do differently going forward?"', usage: "Moving from diagnosis to action" },
+        ],
+        coachingNotes: [
+          "Your first response to feedback sets the tone. If you get defensive, they won't give you feedback again — and that's worse.",
+          "Asking for a specific example isn't challenging the feedback — it's showing you want to understand and act on it.",
+        ],
+        flashcards: [
+          { front: "\"Let me sit with that\"", back: "Buys processing time without dismissing feedback. Shows maturity and emotional regulation." },
+          { front: "\"Thank you for telling me\"", back: "Disarms tension immediately. Even if the feedback stings, gratitude keeps the channel open." },
+          { front: "\"Do differently going forward\"", back: "Shifts from past mistakes to future improvement. Shows action-oriented mindset." },
+        ],
+        wordOrderExercise: {
+          instruction: "Arrange the words to form a graceful response to feedback.",
+          items: [
+            { id: "wo-5-2a", correctSentence: "Thank you for telling me that honestly", scrambledWords: ["that", "you", "Thank", "me", "telling", "honestly", "for"] },
+            { id: "wo-5-2b", correctSentence: "What would you suggest I do differently", scrambledWords: ["differently", "would", "suggest", "What", "do", "you", "I"] },
+          ],
+        },
+        exercises: [
+          {
+            type: "fill-gap",
+            instruction: "Tap the correct phrase to complete each sentence.",
+            wordBank: ["sit with that", "telling me", "specific example", "do differently", "seen it that way"],
+            items: [
+              { id: "5-2a", prompt: '"Thank you for _____ — can you give me a _____?"', answer: "telling me" },
+              { id: "5-2b", prompt: '"I hadn\'t _____ — let me _____."', answer: "seen it that way" },
+              { id: "5-2c", prompt: '"What would you suggest I _____ going forward?"', answer: "do differently" },
             ],
           },
         ],
@@ -387,6 +535,43 @@ export const modules: Module[] = [
           },
         ],
       },
+      {
+        id: "6-2",
+        title: "Negotiating Salary and Role",
+        phrases: [
+          { phrase: '"Based on what I\'ve delivered and the market, I believe a range of [X–Y] is fair."', usage: "Anchoring salary with evidence and range" },
+          { phrase: '"I\'m excited about this role — I want to make sure we start on the right footing."', usage: "Framing negotiation as collaborative, not adversarial" },
+          { phrase: '"Is there flexibility on [specific element]?"', usage: "Testing the boundaries without making demands" },
+        ],
+        coachingNotes: [
+          "Always negotiate with a range, not a single number. It shows research and gives the other side room to move.",
+          "'Right footing' signals you're thinking long-term — it's about the relationship, not just the transaction.",
+        ],
+        flashcards: [
+          { front: "\"The right footing\"", back: "Frames salary negotiation as setting up a healthy long-term relationship, not a one-time transaction." },
+          { front: "Range anchoring", back: "Giving a range (e.g., £65–75k) shows research, signals flexibility, and lets the other side feel they're negotiating." },
+          { front: "\"Is there flexibility on…\"", back: "Tests boundaries gently. Works for salary, start date, remote days, or title. Doesn't demand — it asks." },
+        ],
+        wordOrderExercise: {
+          instruction: "Arrange the words to form a confident negotiation phrase.",
+          items: [
+            { id: "wo-6-2a", correctSentence: "I want to make sure we start on the right footing", scrambledWords: ["footing", "make", "the", "I", "start", "right", "to", "sure", "want", "we", "on"] },
+            { id: "wo-6-2b", correctSentence: "Is there flexibility on the remote working arrangement", scrambledWords: ["arrangement", "the", "there", "Is", "on", "working", "flexibility", "remote"] },
+          ],
+        },
+        exercises: [
+          {
+            type: "fill-gap",
+            instruction: "Tap the correct phrase to complete each sentence.",
+            wordBank: ["right footing", "flexibility on", "what I've delivered", "the market", "excited about"],
+            items: [
+              { id: "6-2a", prompt: '"I\'m _____ this role — I want to start on the _____."', answer: "excited about" },
+              { id: "6-2b", prompt: '"Based on _____ and _____, I believe this range is fair."', answer: "what I've delivered" },
+              { id: "6-2c", prompt: '"Is there _____ the start date?"', answer: "flexibility on" },
+            ],
+          },
+        ],
+      },
     ],
     scenarioExercise: {
       title: "The Promotion Conversation",
@@ -434,6 +619,43 @@ export const modules: Module[] = [
               { id: "7-1", prompt: '"_____ — let\'s get started with the standup."', answer: "Hey everyone" },
               { id: "7-2", prompt: '"I try to _____ of how people _____ this environment."', answer: "be aware" },
               { id: "7-3", prompt: '"Most exclusive language is _____, not intentional."', answer: "habitual" },
+            ],
+          },
+        ],
+      },
+      {
+        id: "7-2",
+        title: "Responding to Microaggressions",
+        phrases: [
+          { phrase: '"I think that comment landed differently than you intended — can I share why?"', usage: "Addressing a microaggression without escalating" },
+          { phrase: '"I\'m sure that wasn\'t your intention, but here\'s how it came across."', usage: "Separating intent from impact" },
+          { phrase: '"Can we find a different way to phrase that?"', usage: "Redirecting language without shaming" },
+        ],
+        coachingNotes: [
+          "The goal is awareness, not punishment. Separate intent from impact — people can mean well and still cause harm.",
+          "If you witness it but aren't the target, speaking up matters more. The phrase 'I noticed that too' can be powerful.",
+        ],
+        flashcards: [
+          { front: "Intent vs impact", back: "Someone can mean no harm but still cause it. Address the impact without attacking the intent." },
+          { front: "\"Landed differently\"", back: "A gentle way to say 'that was offensive' — it implies the speaker didn't intend harm but the effect was real." },
+          { front: "Bystander intervention", back: "If you witness a microaggression, saying 'I noticed that too' validates the target and shares the burden of speaking up." },
+        ],
+        wordOrderExercise: {
+          instruction: "Arrange the words to form a thoughtful response to a microaggression.",
+          items: [
+            { id: "wo-7-2a", correctSentence: "I think that comment landed differently than you intended", scrambledWords: ["intended", "think", "that", "I", "differently", "you", "landed", "than", "comment"] },
+            { id: "wo-7-2b", correctSentence: "Can we find a different way to phrase that", scrambledWords: ["that", "we", "find", "Can", "way", "a", "phrase", "to", "different"] },
+          ],
+        },
+        exercises: [
+          {
+            type: "fill-gap",
+            instruction: "Tap the correct phrase to complete each sentence.",
+            wordBank: ["landed differently", "your intention", "came across", "different way", "noticed that too"],
+            items: [
+              { id: "7-2a", prompt: '"I think that comment _____ than you intended."', answer: "landed differently" },
+              { id: "7-2b", prompt: '"I\'m sure that wasn\'t _____, but here\'s how it _____."', answer: "your intention" },
+              { id: "7-2c", prompt: '"Can we find a _____ to phrase that?"', answer: "different way" },
             ],
           },
         ],
@@ -488,6 +710,44 @@ export const modules: Module[] = [
               { id: "8-1", prompt: '"I _____ engineering teams to simplify complexity."', answer: "work with" },
               { id: "8-2", prompt: '"Could I _____ here _____?"', answer: "add something" },
               { id: "8-3", prompt: '"_____ was that the recommendation was _____."', answer: "my impression" },
+            ],
+          },
+        ],
+      },
+      {
+        id: "8-2",
+        title: "Building Your Communication Toolkit",
+        phrases: [
+          { phrase: '"What\'s the one thing you want them to walk away remembering?"', usage: "Self-check before any high-stakes communication" },
+          { phrase: '"I\'m going to structure this as: context, recommendation, ask."', usage: "Announcing your structure to help the listener follow" },
+          { phrase: '"Let me land the key point first, then I\'ll give you the context."', usage: "Leading with the conclusion for time-pressed audiences" },
+        ],
+        coachingNotes: [
+          "Every great communicator structures before speaking. The pattern 'Context → Recommendation → Ask' works in meetings, emails, and presentations.",
+          "If you only have 30 seconds, lead with the point. If you have 5 minutes, add context. Adapt your depth to your audience's time.",
+        ],
+        flashcards: [
+          { front: "\"Walk away remembering\"", back: "A self-check question: if they remember only one thing, what should it be? Design your message around that." },
+          { front: "Context → Recommendation → Ask", back: "A universal communication structure. Set the scene, state your view, then say what you need." },
+          { front: "\"Land the key point first\"", back: "For time-pressed audiences, lead with the conclusion. Don't build up to it — start with it." },
+          { front: "Adapting depth to time", back: "30 seconds = headline only. 2 minutes = headline + context. 5 minutes = full structure. Always match depth to available time." },
+        ],
+        wordOrderExercise: {
+          instruction: "Arrange the words to form a clear communication structure.",
+          items: [
+            { id: "wo-8-2a", correctSentence: "Let me land the key point first then add context", scrambledWords: ["context", "key", "me", "Let", "first", "point", "add", "the", "then", "land"] },
+            { id: "wo-8-2b", correctSentence: "What is the one thing you want them to remember", scrambledWords: ["remember", "the", "is", "What", "thing", "want", "to", "one", "you", "them"] },
+          ],
+        },
+        exercises: [
+          {
+            type: "fill-gap",
+            instruction: "Tap the correct phrase to complete each sentence.",
+            wordBank: ["walk away remembering", "land the key point", "context and ask", "structure this", "recommendation"],
+            items: [
+              { id: "8-2a", prompt: '"What\'s the one thing you want them to _____?"', answer: "walk away remembering" },
+              { id: "8-2b", prompt: '"Let me _____ first, then I\'ll give context."', answer: "land the key point" },
+              { id: "8-2c", prompt: '"I\'m going to _____ as: context, _____, ask."', answer: "structure this" },
             ],
           },
         ],
