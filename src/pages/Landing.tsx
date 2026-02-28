@@ -1,6 +1,6 @@
 import { useNavigate, Link } from "react-router-dom";
 import { useRef } from "react";
-import { Zap, Route, Flame } from "lucide-react";
+import { CircleGauge, Route, Flame } from "lucide-react";
 import Logo from "@/components/Logo";
 import LetterAvatar from "@/components/LetterAvatar";
 import heroShowcase from "@/assets/hero-showcase.png";
@@ -24,7 +24,7 @@ const Landing = () => {
 
   const features = [
     {
-      icon: Zap,
+      icon: CircleGauge,
       title: "Social Translator & Vibe Meter",
       description: "Turn your raw thoughts into polished professional business communication",
     },
