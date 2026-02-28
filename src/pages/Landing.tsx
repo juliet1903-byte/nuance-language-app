@@ -7,6 +7,7 @@ import heroShowcase from "@/assets/hero-showcase.png";
 import { useAuth } from "@/components/AuthContext";
 import Footer from "@/components/Footer";
 import { motion, useScroll, useTransform, useSpring } from "framer-motion";
+import AnimatedGrid from "@/components/AnimatedGrid";
 
 const Landing = () => {
   const navigate = useNavigate();
@@ -86,7 +87,9 @@ const Landing = () => {
             maskImage: "radial-gradient(ellipse 50% 80% at 50% 50%, black 30%, transparent 100%)",
             WebkitMaskImage: "radial-gradient(ellipse 50% 80% at 50% 50%, black 30%, transparent 100%)",
           }}
-        />
+        >
+          <AnimatedGrid />
+        </motion.div>
         <motion.span
           className="relative inline-block px-4 py-1.5 rounded-full text-xs font-medium mb-4 border bg-cta/10 text-cta border-cta/20"
           initial={{ opacity: 0, y: 12 }}
@@ -177,7 +180,9 @@ const Landing = () => {
             maskImage: "radial-gradient(ellipse 50% 80% at 50% 50%, black 30%, transparent 100%)",
             WebkitMaskImage: "radial-gradient(ellipse 50% 80% at 50% 50%, black 30%, transparent 100%)",
           }}
-        />
+        >
+          <AnimatedGrid />
+        </div>
         <h2 className="relative text-2xl md:text-3xl lg:text-4xl font-bold mb-8">Ready to level up your communication?</h2>
         <Link
           to="/auth"
