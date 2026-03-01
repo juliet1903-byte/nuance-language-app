@@ -26,7 +26,7 @@ const Footer = () => {
       setEmail("");
       setMessage("");
     } catch {
-      toast({ title: "Failed to send", description: "Please try again later.", variant: "destructive" });
+      toast({ title: "Message not sent", description: "Something went wrong. Please try again in a moment.", variant: "destructive" });
     } finally {
       setSending(false);
     }

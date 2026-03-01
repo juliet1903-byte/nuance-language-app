@@ -60,8 +60,8 @@ const ScenarioExercise = ({ moduleTitle, moduleNumber, scenario, onComplete }: S
     } catch (e: any) {
       console.error("Scenario evaluation error:", e);
       toast({
-        title: "Evaluation failed",
-        description: e.message || "Please try again.",
+        title: "Couldn't evaluate your response",
+        description: "Something went wrong on our end. Give it another try.",
         variant: "destructive",
       });
     } finally {

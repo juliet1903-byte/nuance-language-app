@@ -40,7 +40,7 @@ const SocialTranslator = ({ open, onClose }: SocialTranslatorProps) => {
 
     const SpeechRecognition = (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
     if (!SpeechRecognition) {
-      toast({ title: "Not supported", description: "Speech recognition is not available in this browser.", variant: "destructive" });
+      toast({ title: "Voice input unavailable", description: "Your browser doesn't support voice input. Try Chrome or Edge instead.", variant: "destructive" });
       return;
     }
 
@@ -111,8 +111,8 @@ const SocialTranslator = ({ open, onClose }: SocialTranslatorProps) => {
     } catch (e: any) {
       console.error("Translation error:", e);
       toast({
-        title: "Translation failed",
-        description: e.message || "Please try again.",
+        title: "Couldn't translate right now",
+        description: "Something went wrong on our end. Please try again in a moment.",
         variant: "destructive"
       });
     } finally {
