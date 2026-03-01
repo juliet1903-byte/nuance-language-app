@@ -25,7 +25,7 @@ const Auth = () => {
     });
     setGoogleLoading(false);
     if (error) {
-      toast({ title: "Google sign in failed", description: error.message, variant: "destructive" });
+      toast({ title: "Couldn't sign in with Google", description: "Something went wrong. Please try again.", variant: "destructive" });
     }
   };
 
@@ -48,7 +48,7 @@ const Auth = () => {
     const lastRequest = localStorage.getItem("nuance-last-reset-request");
     if (lastRequest && Date.now() - Number(lastRequest) < COOLDOWN_MS) {
       const minutesLeft = Math.ceil((COOLDOWN_MS - (Date.now() - Number(lastRequest))) / 60000);
-      toast({ title: "Please wait", description: `Try again in ${minutesLeft} minute${minutesLeft > 1 ? "s" : ""}.`, variant: "destructive" });
+      toast({ title: "Slow down a bit", description: `You can request another reset in ${minutesLeft} minute${minutesLeft > 1 ? "s" : ""}.`, variant: "destructive" });
       return;
     }
     setForgotLoading(true);
@@ -57,7 +57,7 @@ const Auth = () => {
     });
     setForgotLoading(false);
     if (error) {
-      toast({ title: "Request failed", description: error.message, variant: "destructive" });
+      toast({ title: "Couldn't send reset link", description: "Please check your email address and try again.", variant: "destructive" });
     } else {
       localStorage.setItem("nuance-last-reset-request", String(Date.now()));
       toast({ title: "Check your email", description: "We sent you a password reset link." });
@@ -71,7 +71,7 @@ const Auth = () => {
     const { error } = await signIn(signInEmail, signInPassword);
     setLoading(false);
     if (error) {
-      toast({ title: "Sign in failed", description: error.message, variant: "destructive" });
+      toast({ title: "Couldn't sign you in", description: "Please check your email and password and try again.", variant: "destructive" });
     } else {
       navigate("/dashboard");
     }
@@ -80,14 +80,14 @@ const Auth = () => {
   const handleSignUp = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!agreedPrivacy) {
-      toast({ title: "Privacy Policy", description: "Please agree to the Privacy Policy to continue.", variant: "destructive" });
+      toast({ title: "One more step", description: "Please accept the Privacy Policy to create your account.", variant: "destructive" });
       return;
     }
     setLoading(true);
     const { error } = await signUp(signUpEmail, signUpPassword);
     setLoading(false);
     if (error) {
-      toast({ title: "Sign up failed", description: error.message, variant: "destructive" });
+      toast({ title: "Couldn't create your account", description: "This email may already be registered. Try signing in instead.", variant: "destructive" });
     } else {
       toast({ title: "Check your email", description: "We sent you a verification link." });
     }

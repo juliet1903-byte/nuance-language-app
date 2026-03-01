@@ -32,14 +32,14 @@ const ResetPassword = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (password !== confirmPassword) {
-      toast({ title: "Passwords don't match", variant: "destructive" });
+      toast({ title: "Passwords don't match", description: "Make sure both fields are identical.", variant: "destructive" });
       return;
     }
     setLoading(true);
     const { error } = await supabase.auth.updateUser({ password });
     setLoading(false);
     if (error) {
-      toast({ title: "Failed to update password", description: error.message, variant: "destructive" });
+      toast({ title: "Couldn't update your password", description: "Your reset link may have expired. Request a new one and try again.", variant: "destructive" });
     } else {
       toast({ title: "Password updated successfully" });
       navigate("/dashboard");
