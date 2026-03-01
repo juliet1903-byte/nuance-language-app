@@ -30,13 +30,18 @@ const Profile = () => {
   const { streakDays, modulesCompleted, vibeIq } = useProgress();
   const showBanner = isGuest || !user;
 
-  const displayName = showBanner ? "New User" : (profile?.display_name || user?.email?.split("@")[0] || "User");
+  const displayName = showBanner ? "New User" : profile?.display_name || user?.email?.split("@")[0] || "User";
   const displayEmail = showBanner ? "user@example.com" : user?.email;
   const levelName = showBanner ? LEVEL_NAMES[0] : LEVEL_NAMES[Math.min((profile?.learning_level ?? 1) - 1, 3)];
 
   const quickStats = [
     { icon: Flame, label: "Day Streak", value: showBanner ? "0" : String(streakDays), color: "text-vibe-blunt" },
-    { icon: BookOpen, label: "Modules", value: showBanner ? `0/${modules.length}` : `${modulesCompleted}/${modules.length}`, color: "text-cta" },
+    {
+      icon: BookOpen,
+      label: "Modules",
+      value: showBanner ? `0/${modules.length}` : `${modulesCompleted}/${modules.length}`,
+      color: "text-cta",
+    },
     { icon: Award, label: "Vibe IQ", value: showBanner ? "0" : String(vibeIq), color: "text-accent" },
   ];
 
@@ -52,7 +57,7 @@ const Profile = () => {
       <main className="px-5 space-y-6 pb-8 md:max-w-[900px] md:mx-auto md:w-full relative overflow-hidden">
         {showBanner && <LoginBanner className="-top-2" />}
 
-        <section className="flex flex-col items-center text-center">
+        <section className="flex flex-col items-center text-center pt-2">
           <div className="ring-2 ring-accent ring-offset-2 ring-offset-background rounded-full mb-3">
             <LetterAvatar
               name={showBanner ? "U" : profile?.display_name}
@@ -119,7 +124,10 @@ const Profile = () => {
         {!showBanner && (
           <section>
             <button
-              onClick={async () => { await signOut(); navigate("/"); }}
+              onClick={async () => {
+                await signOut();
+                navigate("/");
+              }}
               className="w-full flex items-center justify-center gap-2 py-3 rounded-2xl border border-destructive/20 text-destructive text-sm font-medium hover:bg-destructive/5 transition-colors"
             >
               <LogOut className="w-4 h-4" />
