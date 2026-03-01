@@ -26,7 +26,7 @@ export interface ProgressData {
 }
 
 function computeStreak(dates: string[]): number {
-  if (dates.length === 0) return 0;
+  if (dates.length === 0) return 1;
   const unique = [...new Set(dates)].sort().reverse();
   const today = new Date();
   today.setHours(0, 0, 0, 0);
@@ -37,7 +37,7 @@ function computeStreak(dates: string[]): number {
   const yesterdayStr = yesterday.toISOString().slice(0, 10);
 
   // Streak must include today or yesterday
-  if (unique[0] !== todayStr && unique[0] !== yesterdayStr) return 0;
+  if (unique[0] !== todayStr && unique[0] !== yesterdayStr) return 1;
 
   let streak = 0;
   let check = unique[0] === todayStr ? new Date(today) : new Date(yesterday);
@@ -51,7 +51,7 @@ function computeStreak(dates: string[]): number {
       break;
     }
   }
-  return streak;
+  return Math.max(1, streak);
 }
 
 export function useProgress() {
