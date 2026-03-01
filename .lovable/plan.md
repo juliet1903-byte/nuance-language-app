@@ -1,17 +1,13 @@
 
 
-## Plan: Add subtle badge above hero headline
+## Problem
 
-**Location**: `src/pages/Landing.tsx`, inside the hero `<section>`, just before the `<motion.h1>`.
+The `overflow-hidden` on the `<main>` container (line 52) clips the top of the avatar's `ring-2 ring-offset-2` decoration, since the avatar is the first visual element inside and the ring extends outside its box.
 
-**Implementation**:
-Add a `<motion.span>` pill badge with:
-- Text: "The #1 Communication Tool for Business English Learners"
-- Classes: `relative inline-block px-4 py-1.5 rounded-full text-xs font-medium mb-4 border`
-- Background: `bg-cta/10` (uses existing blue CTA color at 10% opacity)
-- Text: `text-cta` (darker blue)
-- Border: `border-cta/20` (very subtle blue border)
-- Fade-in animation matching existing stagger pattern (delay between page load and h1)
+## Fix
 
-Single file change: `src/pages/Landing.tsx`, inserting ~6 lines before the `<motion.h1>` element.
+Add `pt-2` (or similar small top padding) to the avatar's wrapping `<section>` so the ring has room to render without being clipped. This is the minimal change that preserves the existing `overflow-hidden` (which is needed for the `LoginBanner` blur effect).
+
+**File:** `src/pages/Profile.tsx`, line 55  
+- Change `<section className="flex flex-col items-center text-center">` to `<section className="flex flex-col items-center text-center pt-2">`
 
