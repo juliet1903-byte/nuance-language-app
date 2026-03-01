@@ -29,6 +29,7 @@ const SocialTranslator = ({ open, onClose }: SocialTranslatorProps) => {
   const [showCoachTip, setShowCoachTip] = useState(false);
   const [isRecording, setIsRecording] = useState(false);
   const recognitionRef = useRef<any>(null);
+  const finalTranscriptRef = useRef("");
 
   const handleMic = useCallback(() => {
     if (isRecording) {
@@ -49,19 +50,20 @@ const SocialTranslator = ({ open, onClose }: SocialTranslatorProps) => {
     recognition.continuous = true;
     recognitionRef.current = recognition;
 
-    let finalTranscript = input;
+    // Snapshot existing input as the base
+    finalTranscriptRef.current = input;
 
     recognition.onresult = (event: any) => {
       let interim = "";
       for (let i = event.resultIndex; i < event.results.length; i++) {
         const transcript = event.results[i][0].transcript;
         if (event.results[i].isFinal) {
-          finalTranscript += (finalTranscript ? " " : "") + transcript;
+          finalTranscriptRef.current += (finalTranscriptRef.current ? " " : "") + transcript;
         } else {
           interim = transcript;
         }
       }
-      setInput(finalTranscript + (interim ? " " + interim : ""));
+      setInput(finalTranscriptRef.current + (interim ? " " + interim : ""));
     };
 
     recognition.onerror = () => setIsRecording(false);
