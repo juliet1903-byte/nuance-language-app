@@ -50,7 +50,7 @@ export const modules: Module[] = [
     number: 1,
     title: "Starting Strong",
     subtitle: "Introductions, onboarding, and making your mark",
-    description: "How you show up in the first interactions sets the tone for everything that follows.",
+    description: "How you show up in the first interactions sets the tone for everything that follows. People form opinions about you within minutes, and those opinions are hard to change later. This module covers how to introduce yourself in a way that people actually remember. You will also learn to navigate onboarding conversations and build connections at events. Getting this right early gives you confidence and credibility from day one.",
     image: "module-starting-strong",
     lessons: [
       {
@@ -139,7 +139,7 @@ export const modules: Module[] = [
     number: 2,
     title: "The Meeting Room",
     subtitle: "Participating confidently, managing flow, and closing with clarity",
-    description: "Meetings are where professional reputations are built — or quietly eroded.",
+    description: "Meetings are where professional reputations are built — or quietly eroded. If you stay silent, people forget you were there. If you speak poorly, they remember for the wrong reasons. This module teaches you how to enter discussions confidently, close meetings with clear next steps, and write follow-ups that keep things moving. These are the skills that separate people who attend meetings from people who lead them.",
     image: "module-meeting-room",
     lessons: [
       {
@@ -231,7 +231,7 @@ export const modules: Module[] = [
     number: 3,
     title: "Working Across Cultures",
     subtitle: "Reading communication styles — not just learning idioms",
-    description: "Understanding that the same words carry different social weight in different contexts.",
+    description: "Understanding that the same words carry different social weight in different contexts. What sounds polite in one culture can feel rude in another. This module helps you read indirect communication, adapt your tone, and avoid misunderstandings in international teams. You will learn how to express disagreement respectfully and check for real alignment. These skills are essential for anyone who works with colleagues from different backgrounds.",
     image: "module-across-cultures",
     lessons: [
       {
@@ -323,7 +323,7 @@ export const modules: Module[] = [
     number: 4,
     title: "Managing Up & Sideways",
     subtitle: "Influencing without authority",
-    description: "Most important relationships are with people you can't direct — only influence.",
+    description: "Most important relationships at work are with people you cannot direct — only influence. Your manager, your peers, your stakeholders — none of them report to you. This module teaches you how to link your ideas to what other people care about and give updates that build trust. You will learn to flag problems early and surface hidden objections. These techniques help you get things done even without formal authority.",
     image: "module-managing-up",
     lessons: [
       {
@@ -415,7 +415,7 @@ export const modules: Module[] = [
     number: 5,
     title: "Difficult Conversations",
     subtitle: "Conflict, feedback, and hard truths — without the damage",
-    description: "The conversations most people avoid are usually the ones that matter most.",
+    description: "The conversations most people avoid are usually the ones that matter most. Giving feedback, receiving criticism, and addressing conflict — these moments define professional relationships. This module gives you clear frameworks to handle each situation with confidence. You will learn to deliver honest feedback without damaging trust and receive it without getting defensive. Mastering difficult conversations is one of the most valuable career skills you can build.",
     image: "module-difficult-convos",
     lessons: [
       {
@@ -507,7 +507,7 @@ export const modules: Module[] = [
     number: 6,
     title: "Career Moves",
     subtitle: "Interviews, promotions, salary conversations",
-    description: "Career conversations are emotionally loaded. There is a middle path that is both honest and effective.",
+    description: "Career conversations are emotionally loaded, and most people handle them badly. They either undersell themselves or come across as arrogant. This module teaches you to talk about your achievements with confidence and negotiate salary without awkwardness. You will learn to discuss failures honestly and frame promotion conversations as collaborative. There is a middle path that is both honest and effective — this module shows you how to find it.",
     image: "module-career-moves",
     lessons: [
       {
@@ -597,7 +597,7 @@ export const modules: Module[] = [
     number: 7,
     title: "DEI Fundamentals",
     subtitle: "Language, inclusion, and belonging",
-    description: "The specific language choices that either include people or exclude them — often without realising.",
+    description: "The specific language choices that either include people or exclude them — often without realising. Most exclusive language is not intentional, it is simply habit. This module helps you recognise common patterns and replace them with more thoughtful alternatives. You will also learn how to respond when someone says something that feels wrong. Building this awareness makes every team you join more welcoming and productive.",
     image: "module-dei",
     lessons: [
       {
@@ -687,7 +687,7 @@ export const modules: Module[] = [
     number: 8,
     title: "Common Mistakes & Final Review",
     subtitle: "A full-program summary of what goes wrong — and how to fix it",
-    description: "The most frequent mistakes across every area of the program. Use as a final review.",
+    description: "This module collects the most frequent mistakes from every area of the program in one place. Even experienced professionals repeat the same patterns without realising it. You will see what goes wrong, understand why, and learn the fix for each one. The final lesson gives you universal communication frameworks that work in any professional situation. Use this module as both a summary and a quick reference guide you can return to anytime.",
     image: "module-common-mistakes",
     lessons: [
       {
