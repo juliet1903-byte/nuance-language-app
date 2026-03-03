@@ -164,7 +164,9 @@ const ModuleDetail = () => {
 
           {view === "lesson" && lesson && (
             <motion.div key="lesson" initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0 }}>
-              <h2 className="text-xl font-medium mb-4">{lesson.title}</h2>
+              <h2 className="text-xl font-medium mb-2">{lesson.title}</h2>
+
+              <p className="text-sm text-muted-foreground leading-relaxed mb-6">{lesson.intro}</p>
 
               <h3 className="text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-3">Useful Phrases</h3>
               <div className="space-y-3 mb-6">
