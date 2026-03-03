@@ -14,11 +14,13 @@ import TrendingCard from "@/components/TrendingCard";
 import AppLayout, { useScrollContainer } from "@/components/AppLayout";
 import { modules } from "@/data/modules";
 import { useProgress } from "@/hooks/useProgress";
+import { useNotifications } from "@/hooks/useNotifications";
 
 const Index = () => {
   const navigate = useNavigate();
   const { isGuest, user, profile } = useAuth();
   const { completedLessons, completedModules, loading: progressLoading } = useProgress();
+  const { unreadCount } = useNotifications();
   const showAvatar = !isGuest && user;
 
   const cardRef = useRef<HTMLDivElement>(null);
@@ -78,8 +80,13 @@ const Index = () => {
       <header className="flex items-center justify-between px-5 pt-6 pb-4 md:max-w-[900px] md:mx-auto md:w-full">
         <Logo className="h-8 md:hidden" />
         <div className="flex items-center gap-3 md:ml-auto">
-          <button className="p-2 rounded-full bg-card">
+          <button onClick={() => navigate("/notifications")} className="p-2 rounded-full bg-card relative">
             <Bell className="w-5 h-5 text-foreground" />
+            {unreadCount > 0 && (
+              <span className="absolute -top-0.5 -right-0.5 w-4.5 h-4.5 rounded-full bg-destructive text-destructive-foreground text-[10px] font-bold flex items-center justify-center">
+                {unreadCount > 9 ? "9+" : unreadCount}
+              </span>
+            )}
           </button>
           {showAvatar ?
           <LetterAvatar

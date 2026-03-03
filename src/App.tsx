@@ -14,6 +14,7 @@ import Progress from "./pages/Progress";
 import Library from "./pages/Library";
 import Stats from "./pages/Stats";
 import Profile from "./pages/Profile";
+import Notifications from "./pages/Notifications";
 import ResetPassword from "./pages/ResetPassword";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import NotFound from "./pages/NotFound";
@@ -46,6 +47,7 @@ const App = () => (
                 <Route path="/library" element={<Library />} />
                 <Route path="/stats" element={<Stats />} />
                 <Route path="/profile" element={<Profile />} />
+                <Route path="/notifications" element={<Notifications />} />
                 <Route path="/reset-password" element={<ResetPassword />} />
                 <Route path="/privacy" element={<PrivacyPolicy />} />
                 <Route path="/article/warm-intro" element={<ArticleWarmIntro />} />
