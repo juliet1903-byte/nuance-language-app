@@ -4,6 +4,7 @@ import type { WordOrderItem } from "@/components/WordOrderExercise";
 export interface Lesson {
   id: string;
   title: string;
+  intro: string;
   phrases: { phrase: string; usage: string }[];
   coachingNotes: string[];
   situation?: { title: string; prompt: string; coachingResponse: string };
@@ -55,6 +56,7 @@ export const modules: Module[] = [
       {
         id: "1-1",
         title: "Introducing Yourself",
+        intro: "First impressions shape how people think about you for months. Most professionals introduce themselves with a job title, but that tells people nothing useful. This lesson teaches you to lead with value — what you actually help people achieve. You will also learn how to ask smart questions in your first days. These small shifts make you memorable instead of forgettable.",
         phrases: [
           { phrase: '"I work with [X] to [result] — so they can focus on [Y]."', usage: "Lead with the value you create, not your job category" },
           { phrase: '"I\'m still getting up to speed — but I\'d love to understand how this fits in."', usage: "First days — signals curiosity, not incompetence" },
@@ -102,6 +104,7 @@ export const modules: Module[] = [
       {
         id: "1-2",
         title: "Networking and Conferences",
+        intro: "Networking feels awkward for most people, especially in a second language. But the difference between a forgotten handshake and a real connection is just a few phrases. This lesson shows you how to start conversations naturally and follow up in a way that people actually remember. You will learn to close conversations without sounding transactional. These skills work at conferences, team events, and even casual lunches.",
         phrases: [
           { phrase: '"Have you been enjoying the conference so far?"', usage: "Opening small talk — low stakes, easy to answer" },
           { phrase: '"Your point about [X] stayed with me — I\'ve been thinking about it since."', usage: "Follow-up message — specific reference proves listening" },
@@ -142,6 +145,7 @@ export const modules: Module[] = [
       {
         id: "2-1",
         title: "Getting Into the Conversation",
+        intro: "Meetings are where reputations are built. If you stay quiet, people assume you have nothing to add. But jumping in aggressively can damage relationships. This lesson teaches you soft entry phrases that let you contribute without interrupting. You will learn to claim space in a discussion confidently and naturally.",
         phrases: [
           { phrase: '"Building on that — there\'s one angle I don\'t think we\'ve fully covered yet."', usage: "Non-aggressive entry into discussion" },
           { phrase: '"Could I add something here before we move on?"', usage: "When the topic is about to close" },
@@ -180,6 +184,7 @@ export const modules: Module[] = [
       {
         id: "2-2",
         title: "Closing and Following Up",
+        intro: "Most meetings end without clear next steps, and then nothing happens. The person who summarises the meeting controls what was agreed. This lesson teaches you to close meetings with clarity — names, actions, and deadlines. You will also learn how to write follow-ups that keep everyone aligned. This one skill can completely change how your team sees you.",
         phrases: [
           { phrase: '"Let me summarise what we\'ve agreed — and who\'s doing what by when."', usage: "Closing a meeting with clarity and accountability" },
           { phrase: '"Just to confirm — my action is [X] by [date]. Does that sound right?"', usage: "Confirming your own action item to avoid ambiguity" },
@@ -232,6 +237,7 @@ export const modules: Module[] = [
       {
         id: "3-1",
         title: "Reading Different Communication Styles",
+        intro: "The same words can mean very different things depending on who says them and where. In some cultures, 'that sounds interesting' means genuine enthusiasm. In others, it means polite disagreement. This lesson helps you read what people really mean, not just what they say. You will learn to express disagreement respectfully across different cultural contexts. Understanding these differences prevents costly misunderstandings.",
         phrases: [
           { phrase: '"I have some concerns about this direction — can I share them?"', usage: "Make doubts explicit rather than signalling indirectly" },
           { phrase: '"Can I push back on that slightly?"', usage: "Respectful challenge — 'slightly' de-escalates" },
@@ -270,6 +276,7 @@ export const modules: Module[] = [
       {
         id: "3-2",
         title: "Adapting Your Tone Across Contexts",
+        intro: "What works in one office culture might feel completely wrong in another. Silence does not always mean agreement, and directness does not always mean rudeness. This lesson teaches you to check alignment without making assumptions. You will learn phrases that show cultural awareness and invite honest responses. These skills are essential for anyone working in international teams.",
         phrases: [
           { phrase: '"I want to make sure I\'m reading this correctly — are you comfortable with the direction?"', usage: "Checking alignment in a high-context setting" },
           { phrase: '"In my experience, this approach works well — but I\'m curious how it lands here."', usage: "Sharing a perspective while inviting cultural input" },
@@ -322,6 +329,7 @@ export const modules: Module[] = [
       {
         id: "4-1",
         title: "Influencing Without Authority",
+        intro: "You cannot always tell people what to do. Most of the time, you need to persuade people who do not report to you. This lesson teaches you how to link your ideas to what other people already care about. You will learn to surface hidden objections and address them directly. These techniques work with managers, peers, and stakeholders at any level.",
         phrases: [
           { phrase: '"I think this connects directly to something you mentioned about [their goal]."', usage: "Linking your idea to their stated priorities" },
           { phrase: '"What would need to be true for you to feel comfortable with this?"', usage: "Surfaces the real objection" },
@@ -360,6 +368,7 @@ export const modules: Module[] = [
       {
         id: "4-2",
         title: "Giving Updates That Build Trust",
+        intro: "Senior people hate surprises. When you share bad news late, it damages trust. When you share it early with a plan, it builds credibility. This lesson teaches you to structure updates that senior stakeholders actually want to hear. You will learn the Status-Risk-Ask framework that works in any situation. Good updates are one of the fastest ways to build a strong professional reputation.",
         phrases: [
           { phrase: '"Here\'s where we are, what\'s at risk, and what I need from you."', usage: "Structured status update for senior stakeholders" },
           { phrase: '"I want to give you an early signal rather than a late surprise."', usage: "Flagging potential problems before they escalate" },
@@ -412,6 +421,7 @@ export const modules: Module[] = [
       {
         id: "5-1",
         title: "Delivering Feedback",
+        intro: "Giving feedback is one of the hardest things to do well, especially in a second language. Too soft and the message gets lost. Too direct and the relationship suffers. This lesson gives you three clear frameworks for different situations. You will learn to ground your feedback in observable facts, not personal judgments. Good feedback changes behaviour without damaging trust.",
         phrases: [
           { phrase: '"Can I share an observation — it\'s something I\'ve noticed more than once."', usage: "Opening feedback — permission question softens the landing" },
           { phrase: '"The impact on the team has been [specific effect]."', usage: "Grounding feedback in observable impact" },
@@ -450,6 +460,7 @@ export const modules: Module[] = [
       {
         id: "5-2",
         title: "Receiving Feedback Gracefully",
+        intro: "How you respond to feedback determines whether people will give you honest feedback again. Most people get defensive, and then the feedback stops coming. This lesson teaches you to receive feedback without reacting emotionally. You will learn phrases that buy you time to process and show genuine willingness to improve. This skill is rare, and people who have it grow faster in their careers.",
         phrases: [
           { phrase: '"Thank you for telling me that — can you give me a specific example?"', usage: "Receiving feedback without defensiveness" },
           { phrase: '"I hadn\'t seen it that way — let me sit with that."', usage: "Acknowledging feedback you need time to process" },
@@ -502,6 +513,7 @@ export const modules: Module[] = [
       {
         id: "6-1",
         title: "Talking About Your Work",
+        intro: "In interviews and reviews, most people either undersell themselves or sound arrogant. There is a middle ground that feels natural and confident. This lesson teaches you to talk about your achievements by leading with results and showing self-awareness. You will also learn how to discuss failures honestly without making yourself look bad. These phrases work in interviews, annual reviews, and promotion conversations.",
         phrases: [
           { phrase: '"One thing I\'m particularly proud of is [outcome] — because [why it was hard]."', usage: "Interview or review — leads with result, gives context" },
           { phrase: '"Looking back, I\'d handle [X] differently — but at the time, here was my reasoning."', usage: "Reflecting on failure — shows growth" },
@@ -538,6 +550,7 @@ export const modules: Module[] = [
       {
         id: "6-2",
         title: "Negotiating Salary and Role",
+        intro: "Salary conversations make most people uncomfortable, but avoiding them costs you real money. Many professionals accept the first offer because they do not know what to say. This lesson teaches you to anchor with evidence, use ranges instead of single numbers, and frame negotiation as collaborative. You will learn to test boundaries without making demands. These phrases help you start any role on the right terms.",
         phrases: [
           { phrase: '"Based on what I\'ve delivered and the market, I believe a range of [X–Y] is fair."', usage: "Anchoring salary with evidence and range" },
           { phrase: '"I\'m excited about this role — I want to make sure we start on the right footing."', usage: "Framing negotiation as collaborative, not adversarial" },
@@ -590,6 +603,7 @@ export const modules: Module[] = [
       {
         id: "7-1",
         title: "Inclusive Language in Practice",
+        intro: "Small word choices can make people feel included or excluded without you realising it. Most exclusive language is not intentional — it is just habit. This lesson helps you recognise common patterns and replace them with more inclusive alternatives. You will learn why 'Hey everyone' works better than 'Hey guys' and similar practical swaps. Building this awareness makes you a better colleague and leader.",
         phrases: [
           { phrase: '"Hey everyone / Hey team — let\'s get started."', usage: "Gender-neutral group address" },
           { phrase: '"I try to be aware of how different people experience this environment differently."', usage: "When asked about your DEI approach" },
@@ -626,6 +640,7 @@ export const modules: Module[] = [
       {
         id: "7-2",
         title: "Responding to Microaggressions",
+        intro: "Sometimes people say things that feel wrong, but you are not sure how to respond. Staying silent feels bad, but overreacting can make things worse. This lesson teaches you to address uncomfortable moments calmly and clearly. You will learn to separate someone's intention from the impact of their words. These phrases help whether you are the target or a bystander.",
         phrases: [
           { phrase: '"I think that comment landed differently than you intended — can I share why?"', usage: "Addressing a microaggression without escalating" },
           { phrase: '"I\'m sure that wasn\'t your intention, but here\'s how it came across."', usage: "Separating intent from impact" },
@@ -678,6 +693,7 @@ export const modules: Module[] = [
       {
         id: "8-1",
         title: "12 Common Mistakes",
+        intro: "Even experienced professionals repeat the same communication mistakes without knowing it. Leading with credentials, waiting too long to speak, or avoiding difficult topics — these patterns hold people back. This lesson collects the most frequent mistakes from every module in one place. You will see the mistake, understand why it happens, and learn the fix. Use this as a quick reference whenever you need a refresher.",
         phrases: [
           { phrase: '"I work with engineering teams to make infrastructure invisible."', usage: "Instead of leading with credentials" },
           { phrase: '"Could I add something here before we move on?"', usage: "Instead of waiting for a pause that never comes" },
@@ -717,6 +733,7 @@ export const modules: Module[] = [
       {
         id: "8-2",
         title: "Building Your Communication Toolkit",
+        intro: "Great communicators do not just know what to say — they know how to structure what they say. Whether you have 30 seconds or 5 minutes, the right structure makes your message clear and persuasive. This lesson teaches you universal frameworks that work in meetings, emails, and presentations. You will learn to lead with the key point and adapt your depth to your audience. This is the foundation of professional communication.",
         phrases: [
           { phrase: '"What\'s the one thing you want them to walk away remembering?"', usage: "Self-check before any high-stakes communication" },
           { phrase: '"I\'m going to structure this as: context, recommendation, ask."', usage: "Announcing your structure to help the listener follow" },
