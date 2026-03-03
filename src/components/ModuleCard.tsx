@@ -27,10 +27,10 @@ const imageMap: Record<string, string> = {
   "module-difficult-convos": moduleDifficultConvos,
   "module-career-moves": moduleCareerMoves,
   "module-dei": moduleDei,
-  "module-common-mistakes": moduleCommonMistakes,
+  "module-common-mistakes": moduleCommonMistakes
 };
 
-const ModuleCard = ({ module }: { module: Module }) => {
+const ModuleCard = ({ module }: {module: Module;}) => {
   const navigate = useNavigate();
   const { isGuest, user } = useAuth();
   const { completedLessons, completedModules } = useProgress();
@@ -44,27 +44,27 @@ const ModuleCard = ({ module }: { module: Module }) => {
   return (
     <button
       onClick={() => navigate(`/module/${module.id}`)}
-      className="shrink-0 w-36 text-left"
-    >
+      className="shrink-0 w-36 text-left">
+      
       <div className="w-36 h-36 rounded-2xl overflow-hidden bg-card p-3 mb-2 relative">
         <img
           src={imageMap[module.image] || moduleMeeting}
           alt={module.title}
           className="w-full h-full object-cover"
-          loading="lazy"
-        />
-        {isModuleDone && (
-          <div className="absolute top-2 right-2">
+          loading="lazy" />
+        
+        {isModuleDone &&
+        <div className="absolute top-2 right-2">
             <Check className="w-4 h-4 text-foreground/70" strokeWidth={2.5} />
           </div>
-        )}
+        }
       </div>
       <p className="text-sm lg:text-base font-semibold leading-tight">{module.title}</p>
-      {hasProgress && (
-        <p className="text-xs text-accent mt-0.5">{doneLessons}/{module.lessons.length} lessons</p>
-      )}
-    </button>
-  );
+      {hasProgress &&
+      <p className="text-xs mt-0.5 text-muted-foreground">{doneLessons}/{module.lessons.length} lessons</p>
+      }
+    </button>);
+
 };
 
 export default ModuleCard;
