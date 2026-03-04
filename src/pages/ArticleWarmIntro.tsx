@@ -35,7 +35,7 @@ const ArticleWarmIntro = () => {
         </div>
 
         {/* Lead */}
-        <p className="text-base md:text-lg text-muted-foreground leading-relaxed mb-8 font-medium border-l-2 border-cta pl-4">
+        <p className="text-base md:text-lg leading-relaxed mb-8 font-medium border-l-2 border-cta pl-4 text-secondary-foreground">
           How to introduce people professionally — and why cold LinkedIn messages fail.
         </p>
 
