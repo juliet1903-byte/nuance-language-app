@@ -281,8 +281,8 @@ const SocialTranslator = ({ open, onClose }: SocialTranslatorProps) => {
                     exit={{ opacity: 0, height: 0 }}
                     className="mt-3 p-3 rounded-xl bg-accent/20 border border-accent/30">
                     
-                          <p className="text-xs font-bold tracking-wider text-accent mb-1">COACH'S TIP</p>
-                          <p className="text-sm leading-relaxed opacity-90">{result.coachTip}</p>
+                          <p className="font-bold tracking-wider text-accent mb-1 text-sm">COACH'S TIP</p>
+                          <p className="leading-relaxed opacity-90 text-base">{result.coachTip}</p>
                         </motion.div>
                   }
                     </AnimatePresence>
@@ -292,7 +292,7 @@ const SocialTranslator = ({ open, onClose }: SocialTranslatorProps) => {
                     onClick={() => setShowCoachTip((p) => !p)}
                     className={`p-2 rounded-full transition-colors ${showCoachTip ? "bg-accent/30" : "bg-glass-foreground/10"}`}>
                     
-                        <HelpCircle className="w-4 h-4" />
+                        <HelpCircle className="w-[20px] h-[20px]" />
                       </button>
                       <button onClick={handleCopy} className="p-2 rounded-full bg-glass-foreground/10">
                         <Copy className="w-4 h-4" />
