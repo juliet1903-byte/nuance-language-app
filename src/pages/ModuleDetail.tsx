@@ -155,7 +155,7 @@ const ModuleDetail = () => {
               >
                 <div className="text-left">
                   <p className="text-sm font-semibold">{module.scenarioExercise.title}</p>
-                  <p className="text-xs text-muted-foreground mt-0.5">Situational exercise with Vibe Meter</p>
+                  <p className="text-sm text-muted-foreground mt-0.5">Situational exercise with Vibe Meter</p>
                 </div>
                 <ChevronRight className="w-4 h-4 text-accent" />
               </button>
