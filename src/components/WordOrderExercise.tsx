@@ -163,7 +163,7 @@ const WordOrderExercise = ({ instruction, items, onComplete }: WordOrderExercise
       isCorrect ?
       <button
         onClick={handleNext}
-        className="w-full py-3.5 rounded-xl bg-cta text-cta-foreground font-semibold text-sm">
+        className="w-full py-3.5 rounded-xl bg-cta text-cta-foreground font-semibold text-base">
         
           {currentIdx + 1 < items.length ? "Next" : "Continue"}
         </button> :
