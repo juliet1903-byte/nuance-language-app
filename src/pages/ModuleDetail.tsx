@@ -109,7 +109,7 @@ const ModuleDetail = () => {
         </button>
         <div>
           <p className="text-muted-foreground font-medium text-sm">Module {module.number}</p>
-          <h1 className="text-lg font-semibold">{module.title}</h1>
+          <h1 className="text-lg font-semibold text-muted-foreground">{module.title}</h1>
         </div>
       </header>
 
@@ -195,7 +195,7 @@ const ModuleDetail = () => {
                     <p className="leading-relaxed opacity-90 mb-4 text-base">{lesson.situation.prompt}</p>
                     <details className="group">
                       <summary className="text-xs text-accent cursor-pointer font-semibold">Show coaching response</summary>
-                      <p className="text-sm leading-relaxed opacity-80 mt-3 border-t border-glass-foreground/10 pt-3">
+                      <p className="leading-relaxed opacity-80 mt-3 border-t border-glass-foreground/10 pt-3 text-base">
                         {lesson.situation.coachingResponse}
                       </p>
                     </details>
