@@ -103,7 +103,7 @@ const ScenarioExercise = ({ moduleTitle, moduleNumber, scenario, onComplete }: S
             value={response}
             onChange={(e) => setResponse(e.target.value)}
             placeholder="Write what you would actually say in this situation..."
-            className="w-full bg-transparent resize-none outline-none text-foreground min-h-[120px] text-sm" />
+            className="w-full bg-transparent resize-none outline-none text-foreground min-h-[120px] text-base" />
           
           </div>
 
