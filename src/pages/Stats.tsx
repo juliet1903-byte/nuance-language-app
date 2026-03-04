@@ -6,8 +6,8 @@ import {
   PieChart,
   Pie,
   Cell,
-  ResponsiveContainer,
-} from "recharts";
+  ResponsiveContainer } from
+"recharts";
 import AppLayout from "@/components/AppLayout";
 import { useAuth } from "@/components/AuthContext";
 import { useProgress } from "@/hooks/useProgress";
@@ -18,13 +18,13 @@ const TONE_COLORS = ["hsl(152, 40%, 46%)", "hsl(228, 80%, 56%)"];
 
 // ---------- Vibe Meter SVG ----------
 
-const VibeMeter = ({ score }: { score: number }) => {
+const VibeMeter = ({ score }: {score: number;}) => {
   const cx = 110;
   const cy = 110;
   const r = 90;
 
   // Animate a single value (angle in radians) from π to target
-  const targetTheta = Math.PI - (score / 100) * Math.PI;
+  const targetTheta = Math.PI - score / 100 * Math.PI;
   const theta = useMotionValue(Math.PI); // start at left (Blunt)
 
   const circleX = useTransform(theta, (t) => cx + r * Math.cos(t));
@@ -35,7 +35,7 @@ const VibeMeter = ({ score }: { score: number }) => {
       type: "spring",
       stiffness: 40,
       damping: 12,
-      delay: 0.3,
+      delay: 0.3
     });
     return controls.stop;
   }, [targetTheta]);
@@ -62,8 +62,8 @@ const VibeMeter = ({ score }: { score: number }) => {
             fill="none"
             stroke="url(#vibe-arc)"
             strokeWidth="22"
-            strokeLinecap="round"
-          />
+            strokeLinecap="round" />
+          
 
           {/* Indicator circle — follows the arc via motion values */}
           <motion.circle
@@ -72,8 +72,8 @@ const VibeMeter = ({ score }: { score: number }) => {
             stroke="hsl(var(--card))"
             strokeWidth="3"
             cx={circleX}
-            cy={circleY}
-          />
+            cy={circleY} />
+          
 
           {/* Labels */}
           <text x="6" y="132" fontSize="9" fill="hsl(var(--muted-foreground))" textAnchor="start">
@@ -90,8 +90,8 @@ const VibeMeter = ({ score }: { score: number }) => {
         <span className="text-4xl font-semibold">{score}</span>
         <span className="text-caption text-muted-foreground">Lifetime Vibe IQ</span>
       </div>
-    </div>
-  );
+    </div>);
+
 };
 
 // ---------- Page ----------
@@ -103,13 +103,13 @@ const Stats = () => {
   const showBanner = isGuest || !user;
 
   // Compute dynamic stats from real data
-  const scenarioScores = activityLog
-    .filter((a) => a.activity_type === "scenario_complete" && a.vibe_score)
-    .map((a) => a.vibe_score!);
-  const masteryAverage = scenarioScores.length > 0
-    ? (scenarioScores.reduce((a, b) => a + b, 0) / scenarioScores.length / 20).toFixed(1)
-    : "0.0";
-  const firstTimeAccuracy = lessonsCompleted > 0 ? Math.min(100, Math.round((lessonsCompleted / (lessonsCompleted + 2)) * 100)) : 0;
+  const scenarioScores = activityLog.
+  filter((a) => a.activity_type === "scenario_complete" && a.vibe_score).
+  map((a) => a.vibe_score!);
+  const masteryAverage = scenarioScores.length > 0 ?
+  (scenarioScores.reduce((a, b) => a + b, 0) / scenarioScores.length / 20).toFixed(1) :
+  "0.0";
+  const firstTimeAccuracy = lessonsCompleted > 0 ? Math.min(100, Math.round(lessonsCompleted / (lessonsCompleted + 2) * 100)) : 0;
   const learningMinutes = lessonsCompleted * 8;
   const learningHours = Math.floor(learningMinutes / 60);
   const learningMins = learningMinutes % 60;
@@ -140,8 +140,8 @@ const Stats = () => {
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.6 }}
-            className="flex justify-center mt-5"
-          >
+            className="flex justify-center mt-5">
+            
             <span className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-accent/15 text-accent text-sm font-semibold">
               <TrendingUp className="w-4 h-4" />
               Impact Growth: +{IMPACT_GROWTH}%
@@ -171,16 +171,16 @@ const Stats = () => {
                     <p className="text-sm text-muted-foreground">
                       Use the Social Translator to see your tone profile
                     </p>
-                  </div>
-                );
+                  </div>);
+
               }
 
-              const leaderPct = Math.round((leaderCount / total) * 100);
+              const leaderPct = Math.round(leaderCount / total * 100);
               const colleaguePct = 100 - leaderPct;
               const toneData = [
-                { name: "Leader Mode", value: leaderPct },
-                { name: "Colleague Mode", value: colleaguePct },
-              ];
+              { name: "Leader Mode", value: leaderPct },
+              { name: "Colleague Mode", value: colleaguePct }];
+
 
               return (
                 <>
@@ -195,42 +195,42 @@ const Stats = () => {
                             innerRadius={28}
                             outerRadius={42}
                             dataKey="value"
-                            strokeWidth={0}
-                          >
-                            {toneData.map((_, idx) => (
-                              <Cell key={idx} fill={TONE_COLORS[idx]} />
-                            ))}
+                            strokeWidth={0}>
+                            
+                            {toneData.map((_, idx) =>
+                            <Cell key={idx} fill={TONE_COLORS[idx]} />
+                            )}
                           </Pie>
                         </PieChart>
                       </ResponsiveContainer>
                     </div>
 
                     <div className="space-y-2 flex-1">
-                      {toneData.map((entry, idx) => (
-                        <div key={entry.name} className="flex items-center justify-between">
+                      {toneData.map((entry, idx) =>
+                      <div key={entry.name} className="flex items-center justify-between">
                           <div className="flex items-center gap-2">
                             <div
-                              className="w-2.5 h-2.5 rounded-full shrink-0"
-                              style={{ backgroundColor: TONE_COLORS[idx] }}
-                            />
+                            className="w-2.5 h-2.5 rounded-full shrink-0"
+                            style={{ backgroundColor: TONE_COLORS[idx] }} />
+                          
                             <span className="text-sm">{entry.name}</span>
                           </div>
                           <span className="text-sm font-semibold">{entry.value}%</span>
                         </div>
-                      ))}
+                      )}
                     </div>
                   </div>
 
                   <p className="text-xs text-muted-foreground mt-3">
                     Leader Mode uses the SBI Model · Colleague Mode uses Subjective Framing
                   </p>
-                </>
-              );
+                </>);
+
             })()}
           </div>
         </section>
 
-        {!showBanner && (
+        {!showBanner &&
         <section>
           <h2 className="text-sm font-semibold uppercase tracking-wider text-muted-foreground mb-3">
             Learning Metrics
@@ -242,13 +242,13 @@ const Stats = () => {
               initial={{ opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2 }}
-              className="bg-card rounded-2xl p-5 shadow-sm flex flex-col items-center text-center"
-            >
+              className="bg-card rounded-2xl p-5 shadow-sm flex flex-col items-center text-center">
+              
               <div className="w-10 h-10 rounded-full bg-muted flex items-center justify-center mb-3">
                 <Target className="w-5 h-5 text-muted-foreground" />
               </div>
               <span className="text-2xl font-semibold">{firstTimeAccuracy}%</span>
-              <span className="text-xs text-muted-foreground mt-1">First-Time Accuracy</span>
+              <span className="text-muted-foreground mt-1 text-sm">First-Time Accuracy</span>
               <span className="text-xs text-muted-foreground/70 mt-0.5">
                 Tasks passed without Redo
               </span>
@@ -259,8 +259,8 @@ const Stats = () => {
               initial={{ opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.35 }}
-              className="bg-card rounded-2xl p-5 shadow-sm flex flex-col items-center text-center"
-            >
+              className="bg-card rounded-2xl p-5 shadow-sm flex flex-col items-center text-center">
+              
               <div className="w-10 h-10 rounded-full bg-muted flex items-center justify-center mb-3">
                 <Clock className="w-5 h-5 text-muted-foreground" />
               </div>
@@ -276,8 +276,8 @@ const Stats = () => {
               initial={{ opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.5 }}
-              className="bg-card rounded-2xl p-5 shadow-sm flex flex-col items-center text-center"
-            >
+              className="bg-card rounded-2xl p-5 shadow-sm flex flex-col items-center text-center">
+              
               <div className="w-10 h-10 rounded-full bg-muted flex items-center justify-center mb-3">
                 <Zap className="w-5 h-5 text-muted-foreground" />
               </div>
@@ -289,10 +289,10 @@ const Stats = () => {
             </motion.div>
           </div>
         </section>
-        )}
+        }
       </main>
-    </AppLayout>
-  );
+    </AppLayout>);
+
 };
 
 export default Stats;
