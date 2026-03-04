@@ -269,7 +269,7 @@ const Auth = () => {
                 <button
                   type="submit"
                   disabled={loading || !agreedPrivacy}
-                  className="w-full py-3 rounded-xl bg-cta text-cta-foreground font-semibold text-sm hover:opacity-90 transition-opacity disabled:opacity-50">
+                  className="w-full py-3 rounded-xl bg-cta text-cta-foreground font-semibold text-base hover:opacity-90 transition-opacity disabled:opacity-50">
                   
                   {loading ? "Creating account…" : "Sign Up"}
                 </button>
