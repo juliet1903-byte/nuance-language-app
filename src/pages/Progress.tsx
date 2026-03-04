@@ -259,7 +259,7 @@ const Progress = () => {
                                   
                                   </div>
                                   <div className="flex-1 text-left">
-                                    <p className="text-sm font-semibold">{mod.title}</p>
+                                    <p className="font-semibold text-base">{mod.title}</p>
                                     <p className="text-muted-foreground text-sm">
                                       {mod.lessons.filter((l) => completedLessons.has(l.id)).length}/{mod.lessons.length} lesson{mod.lessons.length > 1 ? "s" : ""} · Module {mod.number}
                                     </p>
