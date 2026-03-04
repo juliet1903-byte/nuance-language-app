@@ -25,7 +25,7 @@ const TrendingCard = ({ image, badge, badgeColor, title, onClick }: TrendingCard
         
         {badge}
       </span>
-      <p className="absolute bottom-3 left-3 right-3 lg:text-base font-semibold text-card leading-tight text-base">
+      <p className="absolute bottom-3 left-3 right-3 lg:text-base text-card leading-tight text-base font-medium">
         {title}
       </p>
     </button>);

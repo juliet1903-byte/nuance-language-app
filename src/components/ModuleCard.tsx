@@ -59,7 +59,7 @@ const ModuleCard = ({ module }: {module: Module;}) => {
           </div>
         }
       </div>
-      <p className="text-sm lg:text-base font-semibold leading-tight">{module.title}</p>
+      <p className="lg:text-base leading-tight text-base font-medium">{module.title}</p>
       {hasProgress &&
       <p className="text-xs mt-0.5 text-muted-foreground">{doneLessons}/{module.lessons.length} lessons</p>
       }

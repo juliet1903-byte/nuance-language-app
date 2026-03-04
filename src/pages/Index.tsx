@@ -118,7 +118,7 @@ const Index = () => {
 
             <img alt="Lesson" className="w-full h-40 object-cover" src="/lovable-uploads/44f61677-4fd5-49b3-9fbb-eabbecbad3aa.png" />
             <div className="p-4 text-sm">
-              <h3 className="font-semibold text-base mb-1">{continueSubtitle}</h3>
+              <h3 className="text-base mb-1 font-medium">{continueSubtitle}</h3>
               <p className="lg:text-base text-muted-foreground mb-3 text-sm">
                 {continueDescription}
               </p>
