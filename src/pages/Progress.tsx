@@ -205,7 +205,7 @@ const Progress = () => {
                       
                       <div className="text-left">
                         <p className="font-semibold text-base">{displayLevel.title}</p>
-                        <p className="text-xs text-muted-foreground">{displayLevel.subtitle}</p>
+                        <p className="text-muted-foreground text-sm">{displayLevel.subtitle}</p>
                       </div>
                       {isExpanded ?
                       <ChevronDown className="w-4 h-4 text-muted-foreground shrink-0" /> :
