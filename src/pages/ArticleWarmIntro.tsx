@@ -12,7 +12,7 @@ const ArticleWarmIntro = () => {
         <button onClick={() => navigate("/dashboard")} className="p-1.5 rounded-lg hover:bg-card transition-colors">
           <ArrowLeft className="w-5 h-5" />
         </button>
-        <span className="text-sm font-semibold truncate">The Art of the Warm Intro</span>
+        <span className="truncate text-base font-medium text-secondary-foreground">The Art of the Warm Intro</span>
       </header>
 
       <article className="max-w-2xl mx-auto px-5 pb-20">
@@ -158,15 +158,15 @@ const ArticleWarmIntro = () => {
             <h2 className="text-xl font-bold mb-3">Common Mistakes That Destroy Credibility</h2>
             <div className="space-y-3">
               {[
-                { mistake: "The LinkedIn intro request", detail: "'I saw you both work in tech and thought you should connect.' This is not an introduction. It is spam." },
-                { mistake: "The group email intro without warning", detail: "Introducing two people on a group email thread without asking them first forces them to respond publicly or look rude." },
-                { mistake: "The vague introduction", detail: "'You two should talk.' About what? Why? When? Vague introductions waste everyone's time." },
-              ].map((item) => (
-                <div key={item.mistake} className="bg-card rounded-xl p-4 border border-border/50">
+              { mistake: "The LinkedIn intro request", detail: "'I saw you both work in tech and thought you should connect.' This is not an introduction. It is spam." },
+              { mistake: "The group email intro without warning", detail: "Introducing two people on a group email thread without asking them first forces them to respond publicly or look rude." },
+              { mistake: "The vague introduction", detail: "'You two should talk.' About what? Why? When? Vague introductions waste everyone's time." }].
+              map((item) =>
+              <div key={item.mistake} className="bg-card rounded-xl p-4 border border-border/50">
                   <p className="font-semibold text-sm mb-1">{item.mistake}</p>
                   <p className="text-sm text-muted-foreground">{item.detail}</p>
                 </div>
-              ))}
+              )}
             </div>
           </section>
 
@@ -182,8 +182,8 @@ const ArticleWarmIntro = () => {
 
         </div>
       </article>
-    </div>
-  );
+    </div>);
+
 };
 
 export default ArticleWarmIntro;
