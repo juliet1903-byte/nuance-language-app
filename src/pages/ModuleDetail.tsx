@@ -117,7 +117,7 @@ const ModuleDetail = () => {
         <AnimatePresence mode="wait">
           {view === "overview" && (
             <motion.div key="overview" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
-              <p className="text-sm text-muted-foreground mb-6">{module.description}</p>
+              <p className="text-base text-muted-foreground mb-6">{module.description}</p>
 
               <h3 className="text-sm font-semibold uppercase tracking-wider text-muted-foreground mb-3">Lessons</h3>
               <div className="space-y-2">
@@ -166,7 +166,7 @@ const ModuleDetail = () => {
             <motion.div key="lesson" initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0 }}>
               <h2 className="text-xl font-medium mb-2">{lesson.title}</h2>
 
-              <p className="text-sm text-muted-foreground leading-relaxed mb-6">{lesson.intro}</p>
+              <p className="text-base text-muted-foreground leading-relaxed mb-6">{lesson.intro}</p>
 
               <h3 className="text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-3">Useful Phrases</h3>
               <div className="space-y-3 mb-6">
