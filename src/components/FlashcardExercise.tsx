@@ -105,7 +105,7 @@ const FlashcardExercise = ({ cards, onComplete }: FlashcardExerciseProps) => {
         initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
         onClick={onComplete}
-        className="w-full py-3.5 rounded-xl bg-cta text-cta-foreground font-semibold text-sm">
+        className="w-full py-3.5 rounded-xl bg-cta text-cta-foreground font-semibold text-base">
         
           Continue
         </motion.button>
