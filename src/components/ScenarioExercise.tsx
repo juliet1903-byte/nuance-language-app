@@ -82,7 +82,7 @@ const ScenarioExercise = ({ moduleTitle, moduleNumber, scenario, onComplete }: S
         <p className="text-xs font-semibold tracking-wider text-accent uppercase mb-1">
           Module {moduleNumber} — Final Challenge
         </p>
-        <h2 className="text-xl font-medium mb-2">{scenario.title}</h2>
+        <h2 className="font-medium mb-2 text-2xl">{scenario.title}</h2>
       </div>
 
       {/* Scenario Context */}
