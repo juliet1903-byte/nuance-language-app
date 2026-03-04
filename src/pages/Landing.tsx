@@ -129,7 +129,7 @@ const Landing = () => {
           </button>
           <button
             onClick={handleGuest}
-            className="px-8 py-3 rounded-xl border border-border bg-card text-muted-foreground font-semibold text-sm hover:bg-muted/50 transition-colors">
+            className="px-8 py-3 rounded-xl border border-border bg-card text-muted-foreground font-semibold text-base hover:bg-muted/50 transition-colors">
             
             Try as Guest
           </button>
