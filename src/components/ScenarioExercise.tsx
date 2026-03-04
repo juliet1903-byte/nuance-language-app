@@ -148,21 +148,21 @@ const ScenarioExercise = ({ moduleTitle, moduleNumber, scenario, onComplete }: S
             }
             </div>
             <div className="flex justify-between text-xs font-semibold mb-5">
-              <span className="text-vibe-blunt">Blunt</span>
-              <span className="text-vibe-nuanced">Nuanced</span>
+              <span className="text-vibe-blunt text-sm">Blunt</span>
+              <span className="text-vibe-nuanced text-sm">Nuanced</span>
             </div>
 
             {/* Feedback */}
             <div className="glass-dark rounded-2xl p-5 text-glass-foreground mb-5">
-              <p className="text-xs font-bold tracking-wider text-accent mb-2">FEEDBACK</p>
-              <p className="text-sm leading-relaxed opacity-90 mb-4">{result.feedback}</p>
+              <p className="font-bold tracking-wider text-accent mb-2 text-sm">FEEDBACK</p>
+              <p className="leading-relaxed opacity-90 mb-4 text-base">{result.feedback}</p>
 
               {result.strengths.length > 0 &&
             <div className="mb-4">
-                  <p className="text-xs font-bold tracking-wider text-accent mb-2">WHAT WORKED</p>
+                  <p className="font-bold tracking-wider text-accent mb-2 text-sm">WHAT WORKED</p>
                   <ul className="space-y-1">
                     {result.strengths.map((s, i) =>
-                <li key={i} className="text-sm opacity-90 flex items-start gap-2">
+                <li key={i} className="opacity-90 flex items-start gap-2 text-base">
                         <span className="text-accent mt-0.5">✓</span> {s}
                       </li>
                 )}
