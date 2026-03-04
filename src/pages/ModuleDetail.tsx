@@ -117,7 +117,7 @@ const ModuleDetail = () => {
         <AnimatePresence mode="wait">
           {view === "overview" &&
           <motion.div key="overview" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
-              <p className="text-sm text-muted-foreground mb-6">{module.description}</p>
+              <p className="text-muted-foreground mb-6 text-base">{module.description}</p>
 
               <h3 className="text-sm font-semibold uppercase tracking-wider text-muted-foreground mb-3">Lessons</h3>
               <div className="space-y-2">
