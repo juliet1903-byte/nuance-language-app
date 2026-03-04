@@ -110,7 +110,7 @@ const WordOrderExercise = ({ instruction, items, onComplete }: WordOrderExercise
             )}
           </AnimatePresence>
           {selectedWords.length === 0 &&
-          <p className="text-muted-foreground/40 py-2 text-sm">Tap words below to build the sentence…</p>
+          <p className="text-muted-foreground/40 py-2 text-base">Tap words below to build the sentence…</p>
           }
         </div>
       </div>
