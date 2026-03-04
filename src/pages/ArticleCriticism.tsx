@@ -178,12 +178,12 @@ const ArticleCriticism = () => {
             <p className="text-muted-foreground leading-relaxed italic text-base">
               Feedback is not a verdict. It is information about how your work is landing with someone else. Your job is to take that information, filter it for what is useful, and decide what to do with it. The people who are best at receiving feedback are not the ones who never get criticized — they are the ones who can hear criticism without treating it as an existential threat.
             </p>
-            <p className="text-xs text-muted-foreground mt-3">— Based on insights from The Career Playbook</p>
+            <p className="text-xs text-muted-foreground mt-3">
+</p>
           </section>
         </div>
       </article>
     </div>);
-
 };
 
 export default ArticleCriticism;
