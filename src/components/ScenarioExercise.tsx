@@ -87,7 +87,7 @@ const ScenarioExercise = ({ moduleTitle, moduleNumber, scenario, onComplete }: S
 
       {/* Scenario Context */}
       <div className="glass-dark rounded-2xl p-5 text-glass-foreground mb-5">
-        <p className="text-xs font-bold tracking-wider text-accent mb-2">SITUATION</p>
+        <p className="font-bold tracking-wider text-accent mb-2 text-sm">SITUATION</p>
         <p className="leading-relaxed opacity-90 mb-3 text-base font-normal">{scenario.context}</p>
         <p className="leading-relaxed text-base font-normal">{scenario.prompt}</p>
       </div>
@@ -95,7 +95,7 @@ const ScenarioExercise = ({ moduleTitle, moduleNumber, scenario, onComplete }: S
       {/* User Response */}
       {!result &&
       <>
-          <label className="text-xs font-semibold tracking-wider text-muted-foreground uppercase mb-2 block">
+          <label className="font-semibold tracking-wider text-muted-foreground uppercase mb-2 block text-sm">
             Your Response
           </label>
           <div className="bg-card rounded-xl p-4 mb-5 shadow-sm">
