@@ -191,7 +191,7 @@ const ModuleDetail = () => {
             <div className="mb-6">
                   <h3 className="text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-3">Scenario</h3>
                   <div className="glass-dark rounded-2xl p-5 text-glass-foreground">
-                    <p className="font-bold tracking-wider text-accent mb-2 text-sm">{lesson.situation.title}</p>
+                    <p className="font-bold tracking-wider text-accent mb-2 text-base">{lesson.situation.title}</p>
                     <p className="leading-relaxed opacity-90 mb-4 text-base">{lesson.situation.prompt}</p>
                     <details className="group">
                       <summary className="text-s text-accent cursor-pointer font-semibold">Show coaching response</summary>
