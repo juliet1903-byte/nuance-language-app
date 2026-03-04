@@ -144,8 +144,8 @@ const WordOrderExercise = ({ instruction, items, onComplete }: WordOrderExercise
             <p className="text-base font-medium">{isCorrect ? "Correct!" : "Not quite right"}</p>
           </div>
           {!isCorrect &&
-        <p className="text-xs text-muted-foreground mt-1">
-              Correct: <span className="italic">{current.correctSentence}</span>
+        <p className="text-muted-foreground mt-1 text-base">
+              Correct: <span className="italic text-base">{current.correctSentence}</span>
             </p>
         }
         </motion.div>
