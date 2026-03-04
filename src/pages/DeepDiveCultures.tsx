@@ -20,7 +20,7 @@ const FlipCard = ({ front, back }: FlipCardProps) => {
         <div className="flex items-start justify-between gap-2">
           <div>
             <p
-              className={`text-s font-bold uppercase tracking-wider mb-1 ${flipped ? "text-cta-foreground/70" : "text-muted-foreground"}`}
+              className={`text-xs font-bold uppercase tracking-wider mb-1 ${flipped ? "text-cta-foreground/70" : "text-muted-foreground"}`}
             >
               {flipped ? "🔓 Real meaning" : "📣 They said"}
             </p>
@@ -29,7 +29,7 @@ const FlipCard = ({ front, back }: FlipCardProps) => {
             </p>
           </div>
           <RotateCcw
-            className={`w-3.5 h-3.5 shrink-0 mt-0.5 transition-transform ${flipped ? "rotate-180 text-cta-foreground/70" : "text-muted-foreground"}`}
+            className={`w-4 h-4 shrink-0 mt-0.5 transition-transform ${flipped ? "rotate-180 text-cta-foreground/70" : "text-muted-foreground"}`}
           />
         </div>
       </div>
