@@ -213,7 +213,7 @@ const Stats = () => {
                             className="w-2.5 h-2.5 rounded-full shrink-0"
                             style={{ backgroundColor: TONE_COLORS[idx] }} />
                           
-                            <span className="text-sm">{entry.name}</span>
+                            <span className="text-sm font-normal">{entry.name}</span>
                           </div>
                           <span className="text-sm font-semibold">{entry.value}%</span>
                         </div>
@@ -248,7 +248,7 @@ const Stats = () => {
                 <Target className="w-5 h-5 text-muted-foreground" />
               </div>
               <span className="text-2xl font-semibold">{firstTimeAccuracy}%</span>
-              <span className="mt-1 text-sm text-secondary-foreground">First-Time Accuracy</span>
+              <span className="mt-1 text-sm text-secondary-foreground font-normal">First-Time Accuracy</span>
               <span className="text-xs text-muted-foreground/70 mt-0.5">
                 Tasks passed without Redo
               </span>
@@ -265,7 +265,7 @@ const Stats = () => {
                 <Clock className="w-5 h-5 text-muted-foreground" />
               </div>
               <span className="text-2xl font-semibold">{learningHours}h {learningMins}m</span>
-              <span className="text-muted-foreground mt-1 text-sm">Learning Time</span>
+              <span className="mt-1 text-sm text-secondary-foreground">Learning Time</span>
               <span className="text-xs text-muted-foreground/70 mt-0.5">
                 Total hours invested
               </span>
@@ -282,7 +282,7 @@ const Stats = () => {
                 <Zap className="w-5 h-5 text-muted-foreground" />
               </div>
               <span className="text-2xl font-semibold">{masteryAverage}/5</span>
-              <span className="text-xs text-muted-foreground mt-1">Mastery Average</span>
+              <span className="mt-1 text-sm text-secondary-foreground">Mastery Average</span>
               <span className="text-xs text-muted-foreground/70 mt-0.5">
                 Mean scenario score
               </span>
