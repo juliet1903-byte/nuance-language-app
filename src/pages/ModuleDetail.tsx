@@ -154,7 +154,7 @@ const ModuleDetail = () => {
                 className="w-full flex items-center justify-between bg-accent/10 border border-accent/20 rounded-xl p-4"
               >
                 <div className="text-left">
-                  <p className="text-sm font-semibold">{module.scenarioExercise.title}</p>
+                  <p className="text-base font-semibold">{module.scenarioExercise.title}</p>
                   <p className="text-sm text-muted-foreground mt-0.5">Situational exercise with Vibe Meter</p>
                 </div>
                 <ChevronRight className="w-4 h-4 text-accent" />
