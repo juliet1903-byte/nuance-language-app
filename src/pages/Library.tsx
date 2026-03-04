@@ -133,7 +133,7 @@ const Library = () => {
                 </div>
                 <div className="flex-1 text-left">
                   <p className="font-semibold text-base">{mod.title}</p>
-                  <p className="text-xs text-muted-foreground mt-0.5">{mod.subtitle}</p>
+                  <p className="text-muted-foreground mt-0.5 text-sm">{mod.subtitle}</p>
                   <p className="text-xs text-muted-foreground mt-0.5">
                     {isLoggedIn ? `${doneLessons}/${mod.lessons.length}` : mod.lessons.length} lesson{mod.lessons.length > 1 ? "s" : ""} · Module {mod.number}
                   </p>
