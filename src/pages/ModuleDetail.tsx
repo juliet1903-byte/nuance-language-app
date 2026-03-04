@@ -109,7 +109,7 @@ const ModuleDetail = () => {
         </button>
         <div>
           <p className="text-muted-foreground font-medium text-sm">Module {module.number}</p>
-          <h1 className="text-lg font-semibold text-muted-foreground">{module.title}</h1>
+          <h1 className="text-lg text-muted-foreground font-medium">{module.title}</h1>
         </div>
       </header>
 

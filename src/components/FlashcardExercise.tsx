@@ -86,7 +86,7 @@ const FlashcardExercise = ({ cards, onComplete }: FlashcardExerciseProps) => {
                     transform: "rotateY(180deg)"
                   }}>
                   
-                  <p className="text-sm leading-relaxed text-foreground">{card.back}</p>
+                  <p className="leading-relaxed text-foreground text-base">{card.back}</p>
                 </div>
               </motion.div>
             </motion.button>);
