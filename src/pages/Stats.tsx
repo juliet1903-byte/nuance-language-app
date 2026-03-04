@@ -88,7 +88,7 @@ const VibeMeter = ({ score }: {score: number;}) => {
       {/* Score below the meter */}
       <div className="flex flex-col items-center -mt-6">
         <span className="text-4xl font-semibold">{score}</span>
-        <span className="text-caption text-muted-foreground">Lifetime Vibe IQ</span>
+        <span className="text-muted-foreground text-sm">Lifetime Vibe IQ</span>
       </div>
     </div>);
 
@@ -248,7 +248,7 @@ const Stats = () => {
                 <Target className="w-5 h-5 text-muted-foreground" />
               </div>
               <span className="text-2xl font-semibold">{firstTimeAccuracy}%</span>
-              <span className="mt-1 text-sm text-secondary-foreground font-normal">First-Time Accuracy</span>
+              <span className="mt-1 text-secondary-foreground text-sm font-normal">First-Time Accuracy</span>
               <span className="text-xs text-muted-foreground/70 mt-0.5">
                 Tasks passed without Redo
               </span>
