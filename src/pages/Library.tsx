@@ -38,17 +38,74 @@ const imageMap: Record<string, string> = {
 type Tab = "modules" | "articles" | "videos";
 
 const articles = [
-{ id: "a1", title: "The Art of the Warm Intro", category: "Networking", readTime: "5 min read", href: "/article/warm-intro", image: articleWarmIntro },
-{ id: "a4", title: "Quiet Cracking or Burning Out?", category: "Wellbeing", readTime: "7 min read", href: "/article/burnout", image: articleBurnout },
-{ id: "a3", title: "Reading Between Cultures", category: "Cross-Cultural", readTime: "10 min read", href: "/deep-dive/cultures", image: articleCultures, badge: "Deep Dive" },
-{ id: "a5", title: "How to Receive Criticism Without Collapsing or Defending", category: "Feedback", readTime: "8 min read", href: "/article/criticism", image: articleCriticism },
-{ id: "a6", title: "The Conversations Most People Avoid", category: "Communication", readTime: "9 min read", href: "/article/conversations", image: articleConversations }];
+{
+  id: "a1",
+  title: "The Art of the Warm Intro",
+  category: "Networking",
+  readTime: "5 min read",
+  href: "/article/warm-intro",
+  image: articleWarmIntro
+},
+{
+  id: "a4",
+  title: "Quiet Cracking or Burning Out?",
+  category: "Wellbeing",
+  readTime: "7 min read",
+  href: "/article/burnout",
+  image: articleBurnout
+},
+{
+  id: "a3",
+  title: "Reading Between Cultures",
+  category: "Cross-Cultural",
+  readTime: "10 min read",
+  href: "/deep-dive/cultures",
+  image: articleCultures,
+  badge: "Deep Dive"
+},
+{
+  id: "a5",
+  title: "How to Receive Criticism Without Collapsing or Defending",
+  category: "Feedback",
+  readTime: "8 min read",
+  href: "/article/criticism",
+  image: articleCriticism
+},
+{
+  id: "a6",
+  title: "The Conversations Most People Avoid",
+  category: "Communication",
+  readTime: "9 min read",
+  href: "/article/conversations",
+  image: articleConversations
+}];
 
 
 const videos = [
-{ id: "v1", title: "How to Get Ready for an Interview", duration: "12 min", category: "Career", href: "/video/interview", image: articleInterview },
-{ id: "v2", title: "How to Grow Professional Relationships", duration: "8 min", category: "Networking", href: "/video/relationships", image: videoNeutral },
-{ id: "v3", title: "The 4 Domains of Emotional Intelligence", duration: "6 min", category: "Leadership", href: "/video/emotional-intelligence", image: videoPositive }];
+{
+  id: "v1",
+  title: "How to Get Ready for an Interview",
+  duration: "12 min",
+  category: "Career",
+  href: "/video/interview",
+  image: articleInterview
+},
+{
+  id: "v2",
+  title: "How to Grow Professional Relationships",
+  duration: "8 min",
+  category: "Networking",
+  href: "/video/relationships",
+  image: videoNeutral
+},
+{
+  id: "v3",
+  title: "The 4 Domains of Emotional Intelligence",
+  duration: "6 min",
+  category: "Leadership",
+  href: "/video/emotional-intelligence",
+  image: videoPositive
+}];
 
 
 const Library = () => {
@@ -65,15 +122,9 @@ const Library = () => {
   { value: "videos", label: "Videos", icon: Play }];
 
 
-  const filteredModules = modules.filter((m) =>
-  m.title.toLowerCase().includes(search.toLowerCase())
-  );
-  const filteredArticles = articles.filter((a) =>
-  a.title.toLowerCase().includes(search.toLowerCase())
-  );
-  const filteredVideos = videos.filter((v) =>
-  v.title.toLowerCase().includes(search.toLowerCase())
-  );
+  const filteredModules = modules.filter((m) => m.title.toLowerCase().includes(search.toLowerCase()));
+  const filteredArticles = articles.filter((a) => a.title.toLowerCase().includes(search.toLowerCase()));
+  const filteredVideos = videos.filter((v) => v.title.toLowerCase().includes(search.toLowerCase()));
 
   return (
     <AppLayout>
@@ -97,10 +148,8 @@ const Library = () => {
           <button
             key={t.value}
             onClick={() => setActiveTab(t.value)}
-            className={`flex-1 flex items-center justify-center gap-1.5 py-2.5 text-xs font-semibold rounded-lg transition-all ${
-            activeTab === t.value ?
-            "bg-foreground text-background shadow-sm" :
-            "text-muted-foreground"}`
+            className={`flex-1 flex items-center justify-center gap-1.5 py-2.5 text-s font-semibold rounded-lg transition-all ${
+            activeTab === t.value ? "bg-foreground text-background shadow-sm" : "text-muted-foreground"}`
             }>
             
               <t.icon className="w-3.5 h-3.5" />
@@ -115,7 +164,8 @@ const Library = () => {
         {activeTab === "modules" &&
         <div className="space-y-3">
             {filteredModules.map((mod) => {
-            const allDone = isLoggedIn && mod.lessons.length > 0 && mod.lessons.every((l) => completedLessons.has(l.id));
+            const allDone =
+            isLoggedIn && mod.lessons.length > 0 && mod.lessons.every((l) => completedLessons.has(l.id));
             const isDone = isLoggedIn && (completedModules.has(mod.id) || allDone);
             const doneLessons = isLoggedIn ? mod.lessons.filter((l) => completedLessons.has(l.id)).length : 0;
             return (
@@ -124,26 +174,23 @@ const Library = () => {
                 onClick={() => navigate(`/module/${mod.id}`)}
                 className="w-full flex items-center gap-3 bg-card rounded-xl p-3 shadow-sm active:scale-[0.98] transition-transform">
                 
-                <div className="w-14 h-14 rounded-xl overflow-hidden bg-muted shrink-0">
-                  <img
-                    src={imageMap[mod.image]}
-                    alt={mod.title}
-                    className="w-full h-full object-cover" />
-                  
-                </div>
-                <div className="flex-1 text-left">
-                  <p className="font-semibold text-base">{mod.title}</p>
-                  <p className="text-muted-foreground mt-0.5 text-sm">{mod.subtitle}</p>
-                  <p className="text-xs text-muted-foreground mt-0.5">
-                    {isLoggedIn ? `${doneLessons}/${mod.lessons.length}` : mod.lessons.length} lesson{mod.lessons.length > 1 ? "s" : ""} · Module {mod.number}
-                  </p>
-                </div>
-                {isDone ?
+                  <div className="w-14 h-14 rounded-xl overflow-hidden bg-muted shrink-0">
+                    <img src={imageMap[mod.image]} alt={mod.title} className="w-full h-full object-cover" />
+                  </div>
+                  <div className="flex-1 text-left">
+                    <p className="font-semibold text-base">{mod.title}</p>
+                    <p className="text-muted-foreground mt-0.5 text-sm">{mod.subtitle}</p>
+                    <p className="text-xs text-muted-foreground mt-0.5">
+                      {isLoggedIn ? `${doneLessons}/${mod.lessons.length}` : mod.lessons.length} lesson
+                      {mod.lessons.length > 1 ? "s" : ""} · Module {mod.number}
+                    </p>
+                  </div>
+                  {isDone ?
                 <Check className="w-4 h-4 text-foreground/70 shrink-0" strokeWidth={2.5} /> :
 
                 <ChevronRight className="w-4 h-4 text-muted-foreground shrink-0" />
                 }
-              </button>);
+                </button>);
 
           })}
             {filteredModules.length === 0 &&
@@ -154,7 +201,7 @@ const Library = () => {
 
         {/* Articles Tab */}
         {activeTab === "articles" &&
-        <div className="space-y-3">
+        <div className="space-y-3 text-base font-medium">
             {filteredArticles.map((article) =>
           <button
             key={article.id}
