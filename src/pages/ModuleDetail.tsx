@@ -254,7 +254,7 @@ const ModuleDetail = () => {
               {nextModule ?
             <button
               onClick={() => {navigate(`/module/${nextModule.id}`);setView("overview");setActiveLessonIdx(0);}}
-              className="w-full py-3.5 rounded-xl bg-cta text-cta-foreground font-semibold text-sm">
+              className="w-full py-3.5 rounded-xl bg-cta text-cta-foreground font-semibold text-base">
               
                   Next Module: {nextModule.title}
                 </button> :
