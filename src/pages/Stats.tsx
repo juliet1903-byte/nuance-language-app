@@ -265,7 +265,7 @@ const Stats = () => {
                 <Clock className="w-5 h-5 text-muted-foreground" />
               </div>
               <span className="text-2xl font-semibold">{learningHours}h {learningMins}m</span>
-              <span className="text-xs text-muted-foreground mt-1">Learning Time</span>
+              <span className="text-muted-foreground mt-1 text-sm">Learning Time</span>
               <span className="text-xs text-muted-foreground/70 mt-0.5">
                 Total hours invested
               </span>
