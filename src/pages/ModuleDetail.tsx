@@ -130,7 +130,7 @@ const ModuleDetail = () => {
                       className={`w-full flex items-center justify-between bg-card rounded-xl p-4 shadow-sm ${isDone ? 'opacity-75' : ''}`}
                     >
                       <div className="text-left flex-1">
-                        <p className="text-sm font-semibold">
+                        <p className="text-base font-semibold">
                           {module.number}.{i + 1} — {l.title}
                         </p>
                         <p className="text-xs text-muted-foreground mt-0.5">
