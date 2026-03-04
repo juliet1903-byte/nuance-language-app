@@ -148,7 +148,7 @@ const Library = () => {
             <button
               key={t.value}
               onClick={() => setActiveTab(t.value)}
-              className={`flex-1 flex items-center justify-center gap-1.5 py-2.5 text-xs font-semibold rounded-lg transition-all ${
+              className={`flex-1 flex items-center justify-center gap-1.5 py-2.5 text-s font-semibold rounded-lg transition-all ${
                 activeTab === t.value ? "bg-foreground text-background shadow-sm" : "text-muted-foreground"
               }`}
             >
