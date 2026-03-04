@@ -32,10 +32,10 @@ const FlashcardExercise = ({ cards, onComplete }: FlashcardExerciseProps) => {
       key="flashcards"
       initial={{ opacity: 0, x: 20 }}
       animate={{ opacity: 1, x: 0 }}
-      exit={{ opacity: 0 }}
-    >
+      exit={{ opacity: 0 }}>
+      
       <h2 className="text-xl font-medium mb-2">Flashcards</h2>
-      <p className="text-sm text-muted-foreground mb-5">
+      <p className="text-muted-foreground mb-5 text-base">
         Tap each card to reveal its meaning. Flip all cards to continue.
       </p>
 
@@ -50,32 +50,32 @@ const FlashcardExercise = ({ cards, onComplete }: FlashcardExerciseProps) => {
               onClick={() => handleFlip(i)}
               className="relative w-full min-h-[100px] rounded-xl shadow-sm text-left overflow-hidden"
               style={{ perspective: 800 }}
-              whileTap={{ scale: 0.98 }}
-            >
+              whileTap={{ scale: 0.98 }}>
+              
               <motion.div
                 className="w-full h-full"
                 animate={{ rotateY: isFlipped ? 180 : 0 }}
                 transition={{ duration: 0.5, ease: "easeInOut" }}
-                style={{ transformStyle: "preserve-3d" }}
-              >
+                style={{ transformStyle: "preserve-3d" }}>
+                
                 {/* Front */}
                 <div
                   className={`absolute inset-0 rounded-xl p-4 flex items-center backface-hidden ${
-                    wasFlipped && !isFlipped
-                      ? "bg-accent/10 border border-accent/20"
-                      : "bg-card border border-border"
-                  }`}
-                  style={{ backfaceVisibility: "hidden" }}
-                >
+                  wasFlipped && !isFlipped ?
+                  "bg-accent/10 border border-accent/20" :
+                  "bg-card border border-border"}`
+                  }
+                  style={{ backfaceVisibility: "hidden" }}>
+                  
                   <div className="flex-1">
-                    <p className="text-sm font-medium leading-relaxed">{card.front}</p>
+                    <p className="font-medium leading-relaxed text-base">{card.front}</p>
                   </div>
-                  {wasFlipped && !isFlipped && (
-                    <Check className="w-4 h-4 text-accent flex-shrink-0 ml-2" />
-                  )}
-                  {!wasFlipped && (
-                    <RotateCcw className="w-4 h-4 text-muted-foreground/40 flex-shrink-0 ml-2" />
-                  )}
+                  {wasFlipped && !isFlipped &&
+                  <Check className="w-4 h-4 text-accent flex-shrink-0 ml-2" />
+                  }
+                  {!wasFlipped &&
+                  <RotateCcw className="w-4 h-4 text-muted-foreground/40 flex-shrink-0 ml-2" />
+                  }
                 </div>
 
                 {/* Back */}
@@ -83,35 +83,35 @@ const FlashcardExercise = ({ cards, onComplete }: FlashcardExerciseProps) => {
                   className="absolute inset-0 rounded-xl p-4 flex items-center bg-cta/10 border border-cta/20"
                   style={{
                     backfaceVisibility: "hidden",
-                    transform: "rotateY(180deg)",
-                  }}
-                >
+                    transform: "rotateY(180deg)"
+                  }}>
+                  
                   <p className="text-sm leading-relaxed text-foreground">{card.back}</p>
                 </div>
               </motion.div>
-            </motion.button>
-          );
+            </motion.button>);
+
         })}
       </div>
 
       <div className="mt-4 text-center">
-        <p className="text-xs text-muted-foreground mb-4">
+        <p className="text-muted-foreground mb-4 text-sm">
           {flippedSet.size}/{cards.length} cards flipped
         </p>
       </div>
 
-      {allFlipped && (
-        <motion.button
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          onClick={onComplete}
-          className="w-full py-3.5 rounded-xl bg-cta text-cta-foreground font-semibold text-sm"
-        >
+      {allFlipped &&
+      <motion.button
+        initial={{ opacity: 0, y: 10 }}
+        animate={{ opacity: 1, y: 0 }}
+        onClick={onComplete}
+        className="w-full py-3.5 rounded-xl bg-cta text-cta-foreground font-semibold text-sm">
+        
           Continue
         </motion.button>
-      )}
-    </motion.div>
-  );
+      }
+    </motion.div>);
+
 };
 
 export default FlashcardExercise;
