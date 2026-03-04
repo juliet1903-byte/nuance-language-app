@@ -89,7 +89,7 @@ const FillGapExercise = ({ exercise, onComplete }: FillGapExerciseProps) => {
 
   return (
     <motion.div key="exercise" initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0 }}>
-      <h2 className="text-xl font-medium mb-2">Practice</h2>
+      <h2 className="font-medium mb-2 text-2xl">Practice</h2>
       <p className="text-muted-foreground mb-4 text-base">{exercise.instruction}</p>
 
       {/* Word Bank */}
