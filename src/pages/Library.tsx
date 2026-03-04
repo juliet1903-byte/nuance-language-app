@@ -172,7 +172,7 @@ const Library = () => {
                       </span>
                 }
                   </div>
-                  <p className="text-sm font-semibold">{article.title}</p>
+                  <p className="font-semibold text-base">{article.title}</p>
                   <p className="text-xs text-muted-foreground mt-0.5">
                     {article.category} · {article.readTime}
                   </p>
