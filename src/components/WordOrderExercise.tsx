@@ -156,7 +156,7 @@ const WordOrderExercise = ({ instruction, items, onComplete }: WordOrderExercise
       <button
         onClick={handleCheck}
         disabled={selectedWords.length === 0}
-        className="w-full py-3.5 rounded-xl bg-cta text-cta-foreground font-semibold text-sm disabled:opacity-40 transition-opacity">
+        className="w-full py-3.5 rounded-xl bg-cta text-cta-foreground font-semibold text-base disabled:opacity-40 transition-opacity">
         
           Check
         </button> :
