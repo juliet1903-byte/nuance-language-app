@@ -60,12 +60,12 @@ const Index = () => {
 
   const continueModule = isGuest || !nextLesson ? modules[0] : nextLesson.module;
   const continueTitle = isGuest ? "Start Learning" : "Continue where you left";
-  const continueSubtitle = isGuest
-    ? continueModule.lessons[0]?.title ?? continueModule.subtitle
-    : nextLesson?.lesson.title ?? continueModule.subtitle;
-  const continueDescription = isGuest
-    ? continueModule.description
-    : `Module ${continueModule.number} · Lesson ${(nextLesson?.lessonIdx ?? 0) + 1}`;
+  const continueSubtitle = isGuest ?
+  continueModule.lessons[0]?.title ?? continueModule.subtitle :
+  nextLesson?.lesson.title ?? continueModule.subtitle;
+  const continueDescription = isGuest ?
+  continueModule.description :
+  `Module ${continueModule.number} · Lesson ${(nextLesson?.lessonIdx ?? 0) + 1}`;
 
   const trendingItems = [
   { image: articleCriticism, badge: "Article", badgeColor: "bg-accent", title: "How to Receive Criticism", href: "/article/criticism" },
@@ -82,11 +82,11 @@ const Index = () => {
         <div className="flex items-center gap-3 md:ml-auto">
           <button onClick={() => navigate("/notifications")} className="p-2 rounded-full bg-card relative">
             <Bell className="w-5 h-5 text-foreground" />
-            {unreadCount > 0 && (
-              <span className="absolute -top-0.5 -right-0.5 w-4.5 h-4.5 rounded-full bg-destructive text-destructive-foreground text-[10px] font-bold flex items-center justify-center">
+            {unreadCount > 0 &&
+            <span className="absolute -top-0.5 -right-0.5 w-4.5 h-4.5 rounded-full bg-destructive text-destructive-foreground text-[10px] font-bold flex items-center justify-center">
                 {unreadCount > 9 ? "9+" : unreadCount}
               </span>
-            )}
+            }
           </button>
           {showAvatar ?
           <LetterAvatar
@@ -109,13 +109,15 @@ const Index = () => {
           <h2 className="text-xl font-medium mb-3">{continueTitle}</h2>
           <div
             ref={cardRef}
-            className="rounded-2xl overflow-hidden bg-card"
+            className="rounded-2xl overflow-hidden bg-card transition-transform duration-150 will-change-transform"
             style={{
+              transform: `perspective(800px) rotateX(${tilt}deg)`,
+              transformOrigin: "bottom center",
               boxShadow: "0 1px 2px rgba(0,0,0,0.03)"
             }}>
 
             <img alt="Lesson" className="w-full h-40 object-cover" src="/lovable-uploads/44f61677-4fd5-49b3-9fbb-eabbecbad3aa.png" />
-            <div className="p-4">
+            <div className="p-4 text-sm">
               <h3 className="font-semibold text-base mb-1">{continueSubtitle}</h3>
               <p className="text-xs lg:text-base text-muted-foreground mb-3">
                 {continueDescription}
