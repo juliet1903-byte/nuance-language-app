@@ -26,8 +26,8 @@ const ModuleDetail = () => {
     return (
       <div className="min-h-screen bg-background flex items-center justify-center">
         <p className="text-muted-foreground">Module not found</p>
-      </div>
-    );
+      </div>);
+
   }
 
   const lesson = module.lessons[activeLessonIdx];
@@ -55,14 +55,14 @@ const ModuleDetail = () => {
   };
 
   const handleBack = () => {
-    if (view === "overview") navigate("/dashboard");
-    else if (view === "flashcards") setView("lesson");
-    else if (view === "exercise") {
+    if (view === "overview") navigate("/dashboard");else
+    if (view === "flashcards") setView("lesson");else
+    if (view === "exercise") {
       setView(lesson?.flashcards?.length ? "flashcards" : "lesson");
     } else if (view === "word-order") {
       setView(exercise ? "exercise" : lesson?.flashcards?.length ? "flashcards" : "lesson");
-    } else if (view === "scenario") setView("lesson");
-    else setView("overview");
+    } else if (view === "scenario") setView("lesson");else
+    setView("overview");
   };
 
   const handleFlashcardsComplete = () => {
@@ -115,80 +115,80 @@ const ModuleDetail = () => {
 
       <main className="px-5 md:max-w-[900px] md:mx-auto md:w-full">
         <AnimatePresence mode="wait">
-          {view === "overview" && (
-            <motion.div key="overview" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
-              <p className="text-base text-muted-foreground mb-6">{module.description}</p>
+          {view === "overview" &&
+          <motion.div key="overview" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
+              <p className="text-sm text-muted-foreground mb-6">{module.description}</p>
 
               <h3 className="text-sm font-semibold uppercase tracking-wider text-muted-foreground mb-3">Lessons</h3>
               <div className="space-y-2">
                 {module.lessons.map((l, i) => {
-                  const isDone = completedLessons.has(l.id);
-                  return (
-                    <button
-                      key={l.id}
-                      onClick={() => { setActiveLessonIdx(i); setView("lesson"); }}
-                      className={`w-full flex items-center justify-between bg-card rounded-xl p-4 shadow-sm ${isDone ? 'opacity-75' : ''}`}
-                    >
+                const isDone = completedLessons.has(l.id);
+                return (
+                  <button
+                    key={l.id}
+                    onClick={() => {setActiveLessonIdx(i);setView("lesson");}}
+                    className={`w-full flex items-center justify-between bg-card rounded-xl p-4 shadow-sm ${isDone ? 'opacity-75' : ''}`}>
+                    
                       <div className="text-left flex-1">
-                        <p className="text-base font-semibold">
+                        <p className="font-medium text-base">
                           {module.number}.{i + 1} — {l.title}
                         </p>
-                        <p className="text-sm text-muted-foreground mt-0.5">
+                        <p className="text-muted-foreground mt-0.5 text-sm">
                           {l.flashcards?.length ? `${l.flashcards.length} flashcards · ` : ""}
                           {l.phrases.length} phrases · {l.coachingNotes.length} coaching notes
                         </p>
                       </div>
-                      {isDone ? (
-                        <Check className="w-4 h-4 text-foreground/70 ml-2 shrink-0" strokeWidth={2.5} />
-                      ) : (
-                        <ChevronRight className="w-4 h-4 text-muted-foreground ml-2 shrink-0" />
-                      )}
-                    </button>
-                  );
-                })}
+                      {isDone ?
+                    <Check className="w-4 h-4 text-foreground/70 ml-2 shrink-0" strokeWidth={2.5} /> :
+
+                    <ChevronRight className="w-4 h-4 text-muted-foreground ml-2 shrink-0" />
+                    }
+                    </button>);
+
+              })}
               </div>
 
               <h3 className="text-sm font-semibold uppercase tracking-wider text-muted-foreground mb-3 mt-6">Final Challenge</h3>
               <button
-                onClick={() => setView("scenario")}
-                className="w-full flex items-center justify-between bg-accent/10 border border-accent/20 rounded-xl p-4"
-              >
+              onClick={() => setView("scenario")}
+              className="w-full flex items-center justify-between bg-accent/10 border border-accent/20 rounded-xl p-4">
+              
                 <div className="text-left">
-                  <p className="text-base font-semibold">{module.scenarioExercise.title}</p>
-                  <p className="text-sm text-muted-foreground mt-0.5">Situational exercise with Vibe Meter</p>
+                  <p className="text-base font-medium">{module.scenarioExercise.title}</p>
+                  <p className="text-muted-foreground mt-0.5 text-sm">Situational exercise with Vibe Meter</p>
                 </div>
                 <ChevronRight className="w-4 h-4 text-accent" />
               </button>
             </motion.div>
-          )}
+          }
 
-          {view === "lesson" && lesson && (
-            <motion.div key="lesson" initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0 }}>
+          {view === "lesson" && lesson &&
+          <motion.div key="lesson" initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0 }}>
               <h2 className="text-xl font-medium mb-2">{lesson.title}</h2>
 
-              <p className="text-base text-muted-foreground leading-relaxed mb-6">{lesson.intro}</p>
+              <p className="text-sm text-muted-foreground leading-relaxed mb-6">{lesson.intro}</p>
 
               <h3 className="text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-3">Useful Phrases</h3>
               <div className="space-y-3 mb-6">
-                {lesson.phrases.map((p, i) => (
-                  <div key={i} className="bg-card rounded-xl p-4 shadow-sm">
+                {lesson.phrases.map((p, i) =>
+              <div key={i} className="bg-card rounded-xl p-4 shadow-sm">
                     <p className="text-sm font-medium mb-1">{p.phrase}</p>
                     <p className="text-xs text-muted-foreground">{p.usage}</p>
                   </div>
-                ))}
+              )}
               </div>
 
               <h3 className="text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-3">Coaching Notes</h3>
               <div className="space-y-3 mb-6">
-                {lesson.coachingNotes.map((note, i) => (
-                  <div key={i} className="bg-accent/10 border border-accent/20 rounded-xl p-4">
+                {lesson.coachingNotes.map((note, i) =>
+              <div key={i} className="bg-accent/10 border border-accent/20 rounded-xl p-4">
                     <p className="text-sm leading-relaxed">{note}</p>
                   </div>
-                ))}
+              )}
               </div>
 
-              {lesson.situation && (
-                <div className="mb-6">
+              {lesson.situation &&
+            <div className="mb-6">
                   <h3 className="text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-3">Scenario</h3>
                   <div className="glass-dark rounded-2xl p-5 text-glass-foreground">
                     <p className="text-xs font-bold tracking-wider text-accent mb-2">{lesson.situation.title}</p>
@@ -201,49 +201,49 @@ const ModuleDetail = () => {
                     </details>
                   </div>
                 </div>
-              )}
+            }
 
               <button
-                onClick={() => setView(getNextAfterLesson() as View)}
-                className="w-full py-3.5 rounded-xl bg-cta text-cta-foreground font-semibold text-sm"
-              >
+              onClick={() => setView(getNextAfterLesson() as View)}
+              className="w-full py-3.5 rounded-xl bg-cta text-cta-foreground font-semibold text-sm">
+              
                 {lesson.flashcards?.length ? "Start Flashcards" : exercise ? "Practice Exercises" : "Go to Final Challenge"}
               </button>
             </motion.div>
-          )}
+          }
 
-          {view === "flashcards" && lesson?.flashcards && (
-            <FlashcardExercise cards={lesson.flashcards} onComplete={handleFlashcardsComplete} />
-          )}
+          {view === "flashcards" && lesson?.flashcards &&
+          <FlashcardExercise cards={lesson.flashcards} onComplete={handleFlashcardsComplete} />
+          }
 
-          {view === "exercise" && exercise && (
-            <FillGapExercise exercise={exercise} onComplete={handleExerciseComplete} />
-          )}
+          {view === "exercise" && exercise &&
+          <FillGapExercise exercise={exercise} onComplete={handleExerciseComplete} />
+          }
 
-          {view === "word-order" && lesson?.wordOrderExercise && (
-            <WordOrderExercise
-              instruction={lesson.wordOrderExercise.instruction}
-              items={lesson.wordOrderExercise.items}
-              onComplete={handleWordOrderComplete}
-            />
-          )}
+          {view === "word-order" && lesson?.wordOrderExercise &&
+          <WordOrderExercise
+            instruction={lesson.wordOrderExercise.instruction}
+            items={lesson.wordOrderExercise.items}
+            onComplete={handleWordOrderComplete} />
 
-          {view === "scenario" && (
-            <ScenarioExercise
-              moduleTitle={module.title}
-              moduleNumber={module.number}
-              scenario={module.scenarioExercise}
-              onComplete={(vibeScore) => handleScenarioComplete(vibeScore)}
-            />
-          )}
+          }
 
-          {view === "complete" && (
-            <motion.div
-              key="complete"
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              className="flex flex-col items-center justify-center py-16 text-center"
-            >
+          {view === "scenario" &&
+          <ScenarioExercise
+            moduleTitle={module.title}
+            moduleNumber={module.number}
+            scenario={module.scenarioExercise}
+            onComplete={(vibeScore) => handleScenarioComplete(vibeScore)} />
+
+          }
+
+          {view === "complete" &&
+          <motion.div
+            key="complete"
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            className="flex flex-col items-center justify-center py-16 text-center">
+            
               <div className="w-20 h-20 rounded-full bg-accent/20 flex items-center justify-center mb-5">
                 <PartyPopper className="w-10 h-10 text-accent" />
               </div>
@@ -251,27 +251,27 @@ const ModuleDetail = () => {
               <p className="text-sm text-muted-foreground mb-8 max-w-xs">
                 Great work on {module.title}. You're building real communication skills.
               </p>
-              {nextModule ? (
-                <button
-                  onClick={() => { navigate(`/module/${nextModule.id}`); setView("overview"); setActiveLessonIdx(0); }}
-                  className="w-full py-3.5 rounded-xl bg-cta text-cta-foreground font-semibold text-sm"
-                >
+              {nextModule ?
+            <button
+              onClick={() => {navigate(`/module/${nextModule.id}`);setView("overview");setActiveLessonIdx(0);}}
+              className="w-full py-3.5 rounded-xl bg-cta text-cta-foreground font-semibold text-sm">
+              
                   Next Module: {nextModule.title}
-                </button>
-              ) : (
-                <button
-                  onClick={() => navigate("/dashboard")}
-                  className="w-full py-3.5 rounded-xl bg-accent text-accent-foreground font-semibold text-sm"
-                >
+                </button> :
+
+            <button
+              onClick={() => navigate("/dashboard")}
+              className="w-full py-3.5 rounded-xl bg-accent text-accent-foreground font-semibold text-sm">
+              
                   Back to Home
                 </button>
-              )}
+            }
             </motion.div>
-          )}
+          }
         </AnimatePresence>
       </main>
-    </AppLayout>
-  );
+    </AppLayout>);
+
 };
 
 export default ModuleDetail;
