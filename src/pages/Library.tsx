@@ -173,7 +173,7 @@ const Library = () => {
                 }
                   </div>
                   <p className="font-semibold text-base">{article.title}</p>
-                  <p className="text-xs text-muted-foreground mt-0.5">
+                  <p className="text-muted-foreground mt-0.5 text-sm">
                     {article.category} · {article.readTime}
                   </p>
                 </div>
