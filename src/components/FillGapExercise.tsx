@@ -90,35 +90,35 @@ const FillGapExercise = ({ exercise, onComplete }: FillGapExerciseProps) => {
   return (
     <motion.div key="exercise" initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0 }}>
       <h2 className="text-xl font-medium mb-2">Practice</h2>
-      <p className="text-sm text-muted-foreground mb-4">{exercise.instruction}</p>
+      <p className="text-muted-foreground mb-4 text-base">{exercise.instruction}</p>
 
       {/* Word Bank */}
-      {exercise.wordBank && (
-        <div className="flex flex-wrap gap-2 mb-5">
+      {exercise.wordBank &&
+      <div className="flex flex-wrap gap-2 mb-5">
           {exercise.wordBank.map((w, i) => {
-            // Count how many times this word appears in used selections
-            const usedCount = usedWords.filter((uw) => uw?.toLowerCase() === w.toLowerCase()).length;
-            const bankCount = exercise
-              .wordBank!.filter((bw) => bw.toLowerCase() === w.toLowerCase())
-              .slice(0, i + 1).length;
-            const isUsed = usedCount >= bankCount;
+          // Count how many times this word appears in used selections
+          const usedCount = usedWords.filter((uw) => uw?.toLowerCase() === w.toLowerCase()).length;
+          const bankCount = exercise.
+          wordBank!.filter((bw) => bw.toLowerCase() === w.toLowerCase()).
+          slice(0, i + 1).length;
+          const isUsed = usedCount >= bankCount;
 
-            return (
-              <motion.button
-                key={`${w}-${i}`}
-                onClick={() => !isUsed && handleTapWord(w)}
-                className={`text-xs px-4 py-2 rounded-full font-medium shadow-sm transition-all ${
-                  isUsed ? "bg-muted/50 text-muted-foreground/40 scale-95" : "bg-card text-foreground active:scale-95"
-                }`}
-                whileTap={!isUsed ? { scale: 0.9 } : undefined}
-                disabled={isUsed || checked}
-              >
+          return (
+            <motion.button
+              key={`${w}-${i}`}
+              onClick={() => !isUsed && handleTapWord(w)}
+              className={`text-xs px-4 py-2 rounded-full font-medium shadow-sm transition-all ${
+              isUsed ? "bg-muted/50 text-muted-foreground/40 scale-95" : "bg-card text-foreground active:scale-95"}`
+              }
+              whileTap={!isUsed ? { scale: 0.9 } : undefined}
+              disabled={isUsed || checked}>
+              
                 {w}
-              </motion.button>
-            );
-          })}
+              </motion.button>);
+
+        })}
         </div>
-      )}
+      }
 
       {/* Gap Items */}
       <div className="space-y-4 mb-6">
@@ -130,50 +130,50 @@ const FillGapExercise = ({ exercise, onComplete }: FillGapExerciseProps) => {
 
           return (
             <div key={item.id} className="bg-card rounded-xl p-4 shadow-sm">
-              <p className="text-sm leading-relaxed">
+              <p className="leading-relaxed text-base">
                 {parts[0]}
                 <button
                   onClick={() => handleTapGap(item.id)}
                   className={`inline-flex items-center min-w-[80px] min-h-[28px] px-3 py-1 mx-1 rounded-lg text-sm font-medium transition-all border-2 ${
-                    selected
-                      ? hasError
-                        ? "bg-destructive/10 border-destructive text-destructive"
-                        : isCorrect
-                          ? "bg-accent/10 border-accent text-accent"
-                          : "bg-cta/10 border-cta text-cta"
-                      : "bg-muted/40 border-dashed border-muted-foreground/30 text-muted-foreground/50"
-                  }`}
-                >
+                  selected ?
+                  hasError ?
+                  "bg-destructive/10 border-destructive text-destructive" :
+                  isCorrect ?
+                  "bg-accent/10 border-accent text-accent" :
+                  "bg-cta/10 border-cta text-cta" :
+                  "bg-muted/40 border-dashed border-muted-foreground/30 text-muted-foreground/50"}`
+                  }>
+                  
                   {selected || "     "}
                   {isCorrect && <Check className="w-3 h-3 ml-1" />}
                 </button>
                 {parts[1]}
               </p>
               {hasError && <p className="text-xs text-muted-foreground mt-2 italic">💡 {getHint(item)}</p>}
-            </div>
-          );
+            </div>);
+
         })}
       </div>
 
       {/* Actions */}
-      {!checked ? (
-        <button
-          onClick={handleCheck}
-          disabled={!allFilled}
-          className="w-full py-3.5 rounded-xl bg-cta text-cta-foreground font-semibold text-sm disabled:opacity-40 transition-opacity"
-        >
+      {!checked ?
+      <button
+        onClick={handleCheck}
+        disabled={!allFilled}
+        className="w-full py-3.5 rounded-xl bg-cta text-cta-foreground font-semibold text-sm disabled:opacity-40 transition-opacity">
+        
           Check Answers
-        </button>
-      ) : errors.size > 0 ? (
-        <button
-          onClick={handleRedo}
-          className="w-full py-3.5 rounded-xl bg-vibe-blunt text-cta-foreground font-semibold text-sm flex items-center justify-center gap-2"
-        >
+        </button> :
+      errors.size > 0 ?
+      <button
+        onClick={handleRedo}
+        className="w-full py-3.5 rounded-xl bg-vibe-blunt text-cta-foreground font-semibold text-sm flex items-center justify-center gap-2">
+        
           <RotateCcw className="w-4 h-4" /> Try Again
-        </button>
-      ) : null}
-    </motion.div>
-  );
+        </button> :
+      null}
+    </motion.div>);
+
 };
 
 export default FillGapExercise;
