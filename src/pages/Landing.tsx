@@ -123,7 +123,7 @@ const Landing = () => {
           
           <button
             onClick={() => navigate("/auth")}
-            className="px-8 py-3 rounded-xl bg-cta text-cta-foreground font-semibold text-sm hover:opacity-90 transition-opacity shadow-md">
+            className="px-8 py-3 rounded-xl bg-cta text-cta-foreground font-semibold text-base hover:opacity-90 transition-opacity shadow-md">
             
             Join Nuance
           </button>
