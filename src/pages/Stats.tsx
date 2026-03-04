@@ -244,8 +244,8 @@ const Stats = () => {
               transition={{ delay: 0.2 }}
               className="bg-card rounded-2xl p-5 shadow-sm flex flex-col items-center text-center"
             >
-              <div className="w-10 h-10 rounded-full bg-accent/15 flex items-center justify-center mb-3">
-                <Target className="w-5 h-5 text-accent" />
+              <div className="w-10 h-10 rounded-full bg-muted flex items-center justify-center mb-3">
+                <Target className="w-5 h-5 text-muted-foreground" />
               </div>
               <span className="text-2xl font-semibold">{firstTimeAccuracy}%</span>
               <span className="text-xs text-muted-foreground mt-1">First-Time Accuracy</span>
@@ -261,8 +261,8 @@ const Stats = () => {
               transition={{ delay: 0.35 }}
               className="bg-card rounded-2xl p-5 shadow-sm flex flex-col items-center text-center"
             >
-              <div className="w-10 h-10 rounded-full bg-cta/15 flex items-center justify-center mb-3">
-                <Clock className="w-5 h-5 text-cta" />
+              <div className="w-10 h-10 rounded-full bg-muted flex items-center justify-center mb-3">
+                <Clock className="w-5 h-5 text-muted-foreground" />
               </div>
               <span className="text-2xl font-semibold">{learningHours}h {learningMins}m</span>
               <span className="text-xs text-muted-foreground mt-1">Learning Time</span>
@@ -278,8 +278,8 @@ const Stats = () => {
               transition={{ delay: 0.5 }}
               className="bg-card rounded-2xl p-5 shadow-sm flex flex-col items-center text-center"
             >
-              <div className="w-10 h-10 rounded-full bg-vibe-nuanced/15 flex items-center justify-center mb-3">
-                <Zap className="w-5 h-5 text-vibe-nuanced" />
+              <div className="w-10 h-10 rounded-full bg-muted flex items-center justify-center mb-3">
+                <Zap className="w-5 h-5 text-muted-foreground" />
               </div>
               <span className="text-2xl font-semibold">{masteryAverage}/5</span>
               <span className="text-xs text-muted-foreground mt-1">Mastery Average</span>
