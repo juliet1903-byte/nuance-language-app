@@ -248,7 +248,7 @@ const ModuleDetail = () => {
                 <PartyPopper className="w-10 h-10 text-accent" />
               </div>
               <h2 className="text-2xl font-semibold mb-2">Module Complete!</h2>
-              <p className="text-sm text-muted-foreground mb-8 max-w-xs">
+              <p className="text-muted-foreground mb-8 max-w-xs text-base">
                 Great work on {module.title}. You're building real communication skills.
               </p>
               {nextModule ?
