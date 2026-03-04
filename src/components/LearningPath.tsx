@@ -105,7 +105,7 @@ const LearningPath = () => {
 
             <div className="pb-4 pt-0.5">
               <p className="font-semibold text-sm lg:text-base">{step.title}</p>
-              <p className="text-xs lg:text-base text-muted-foreground">{step.subtitle}</p>
+              <p className="lg:text-base text-muted-foreground text-sm">{step.subtitle}</p>
               {step.progress &&
             <div className="mt-2">
                   <div className="w-44 h-1.5 bg-muted rounded-full overflow-hidden">
