@@ -67,7 +67,7 @@ const LearningPath = () => {
       className="w-full text-left bg-card rounded-2xl p-5 shadow-sm px-[16px] py-[12px] active:scale-[0.99] transition-transform">
 
       <div className="flex items-center justify-between mb-4">
-        <h2 className="text-lg font-medium">My Learning Path</h2>
+        <h2 className="font-medium text-xl">My Learning Path</h2>
         {!showBanner
 
 
