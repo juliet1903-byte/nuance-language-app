@@ -83,7 +83,7 @@ const Index = () => {
           <button onClick={() => navigate("/notifications")} className="p-2 rounded-full bg-card relative">
             <Bell className="w-5 h-5 text-foreground" />
             {unreadCount > 0 &&
-            <span className="absolute -top-0.5 -right-0.5 w-5 h-5 rounded-full bg-destructive text-destructive-foreground text-[10px] font-bold flex items-center justify-center">
+            <span className="absolute -top-0.5 -right-0.5 w-4 h-4 rounded-full bg-destructive text-destructive-foreground text-[10px] font-bold flex items-center justify-center">
                 {unreadCount > 9 ? "9+" : unreadCount}
               </span>
             }
