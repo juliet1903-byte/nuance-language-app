@@ -93,7 +93,7 @@ const Notifications = () => {
         {unreadCount > 0 &&
         <button
           onClick={markAllAsRead}
-          className="flex items-center gap-1.5 text-s font-medium text-accent hover:text-accent/80 transition-colors">
+          className="flex items-center gap-1.5 text-xs font-medium text-accent hover:text-accent/80 transition-colors">
           
             <Check className="w-3.5 h-3.5" />
             Mark all read
