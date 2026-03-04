@@ -161,8 +161,8 @@ const Landing = () => {
               <div className="w-11 h-11 rounded-xl bg-cta/10 flex items-center justify-center mb-4">
                 <f.icon className="w-5 h-5 text-cta" />
               </div>
-              <h3 className="font-semibold text-base mb-2">{f.title}</h3>
-              <p className="text-sm text-muted-foreground leading-relaxed">{f.description}</p>
+              <h3 className="mb-2 font-medium text-base">{f.title}</h3>
+              <p className="text-muted-foreground leading-relaxed text-base">{f.description}</p>
             </div>
           )}
         </div>
