@@ -248,7 +248,7 @@ const Stats = () => {
                 <Target className="w-5 h-5 text-muted-foreground" />
               </div>
               <span className="text-2xl font-semibold">{firstTimeAccuracy}%</span>
-              <span className="text-muted-foreground mt-1 text-sm">First-Time Accuracy</span>
+              <span className="mt-1 text-sm text-secondary-foreground">First-Time Accuracy</span>
               <span className="text-xs text-muted-foreground/70 mt-0.5">
                 Tasks passed without Redo
               </span>
