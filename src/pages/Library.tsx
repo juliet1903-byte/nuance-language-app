@@ -129,7 +129,7 @@ const Library = () => {
   return (
     <AppLayout>
       <header className="px-5 pt-6 pb-2 md:max-w-[900px] md:mx-auto md:w-full">
-        <h1 className="text-lg font-semibold mb-4">Library</h1>
+        <h1 className="mb-4 text-2xl font-medium">Library</h1>
 
         {/* Search */}
         <div className="relative mb-4">
