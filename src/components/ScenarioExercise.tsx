@@ -179,10 +179,10 @@ const ScenarioExercise = ({ moduleTitle, moduleNumber, scenario, onComplete }: S
                 exit={{ opacity: 0, height: 0 }}
                 className="p-3 rounded-xl bg-accent/20 border border-accent/30">
                 
-                    <p className="text-xs font-bold tracking-wider text-accent mb-2">COACH'S TIPS</p>
+                    <p className="font-bold tracking-wider text-accent mb-2 text-sm">COACH'S TIPS</p>
                     <ul className="space-y-2">
                       {result.coachTips.map((tip, i) =>
-                  <li key={i} className="text-sm leading-relaxed opacity-90">
+                  <li key={i} className="leading-relaxed opacity-90 text-base">
                           💡 {tip}
                         </li>
                   )}
