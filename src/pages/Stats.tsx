@@ -221,7 +221,7 @@ const Stats = () => {
                     </div>
                   </div>
 
-                  <p className="text-xs text-muted-foreground mt-3">
+                  <p className="text-muted-foreground mt-3 text-sm">
                     Leader Mode uses the SBI Model · Colleague Mode uses Subjective Framing
                   </p>
                 </>);
@@ -248,8 +248,8 @@ const Stats = () => {
                 <Target className="w-5 h-5 text-muted-foreground" />
               </div>
               <span className="text-2xl font-semibold">{firstTimeAccuracy}%</span>
-              <span className="mt-1 text-secondary-foreground text-sm font-normal">First-Time Accuracy</span>
-              <span className="text-xs text-muted-foreground/70 mt-0.5">
+              <span className="mt-1 text-secondary-foreground font-normal text-base">First-Time Accuracy</span>
+              <span className="text-muted-foreground/70 mt-0.5 text-sm">
                 Tasks passed without Redo
               </span>
             </motion.div>
@@ -265,8 +265,8 @@ const Stats = () => {
                 <Clock className="w-5 h-5 text-muted-foreground" />
               </div>
               <span className="text-2xl font-semibold">{learningHours}h {learningMins}m</span>
-              <span className="mt-1 text-sm text-secondary-foreground">Learning Time</span>
-              <span className="text-xs text-muted-foreground/70 mt-0.5">
+              <span className="mt-1 text-secondary-foreground text-base">Learning Time</span>
+              <span className="text-muted-foreground/70 mt-0.5 text-sm">
                 Total hours invested
               </span>
             </motion.div>
@@ -282,8 +282,8 @@ const Stats = () => {
                 <Zap className="w-5 h-5 text-muted-foreground" />
               </div>
               <span className="text-2xl font-semibold">{masteryAverage}/5</span>
-              <span className="mt-1 text-sm text-secondary-foreground">Mastery Average</span>
-              <span className="text-xs text-muted-foreground/70 mt-0.5">
+              <span className="mt-1 text-secondary-foreground text-base">Mastery Average</span>
+              <span className="text-muted-foreground/70 mt-0.5 text-sm">
                 Mean scenario score
               </span>
             </motion.div>
