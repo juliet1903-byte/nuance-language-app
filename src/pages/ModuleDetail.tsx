@@ -172,8 +172,8 @@ const ModuleDetail = () => {
               <div className="space-y-3 mb-6">
                 {lesson.phrases.map((p, i) =>
               <div key={i} className="bg-card rounded-xl p-4 shadow-sm">
-                    <p className="text-sm font-medium mb-1">{p.phrase}</p>
-                    <p className="text-xs text-muted-foreground">{p.usage}</p>
+                    <p className="font-medium mb-1 text-base">{p.phrase}</p>
+                    <p className="text-muted-foreground text-sm">{p.usage}</p>
                   </div>
               )}
               </div>
@@ -182,7 +182,7 @@ const ModuleDetail = () => {
               <div className="space-y-3 mb-6">
                 {lesson.coachingNotes.map((note, i) =>
               <div key={i} className="bg-accent/10 border border-accent/20 rounded-xl p-4">
-                    <p className="text-sm leading-relaxed">{note}</p>
+                    <p className="leading-relaxed text-base">{note}</p>
                   </div>
               )}
               </div>
@@ -191,8 +191,8 @@ const ModuleDetail = () => {
             <div className="mb-6">
                   <h3 className="text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-3">Scenario</h3>
                   <div className="glass-dark rounded-2xl p-5 text-glass-foreground">
-                    <p className="text-xs font-bold tracking-wider text-accent mb-2">{lesson.situation.title}</p>
-                    <p className="text-sm leading-relaxed opacity-90 mb-4">{lesson.situation.prompt}</p>
+                    <p className="font-bold tracking-wider text-accent mb-2 text-sm">{lesson.situation.title}</p>
+                    <p className="leading-relaxed opacity-90 mb-4 text-base">{lesson.situation.prompt}</p>
                     <details className="group">
                       <summary className="text-xs text-accent cursor-pointer font-semibold">Show coaching response</summary>
                       <p className="text-sm leading-relaxed opacity-80 mt-3 border-t border-glass-foreground/10 pt-3">
