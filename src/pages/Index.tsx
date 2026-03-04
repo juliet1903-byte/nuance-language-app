@@ -109,10 +109,8 @@ const Index = () => {
           <h2 className="text-xl font-medium mb-3">{continueTitle}</h2>
           <div
             ref={cardRef}
-            className="rounded-2xl overflow-hidden bg-card transition-transform duration-150 will-change-transform"
+            className="rounded-2xl overflow-hidden bg-card"
             style={{
-              transform: `perspective(800px) rotateX(${tilt}deg)`,
-              transformOrigin: "bottom center",
               boxShadow: "0 1px 2px rgba(0,0,0,0.03)"
             }}>
 
