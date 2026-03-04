@@ -110,7 +110,7 @@ const ScenarioExercise = ({ moduleTitle, moduleNumber, scenario, onComplete }: S
           <button
           onClick={handleSubmit}
           disabled={!response.trim() || isLoading}
-          className="w-full py-3.5 rounded-xl bg-cta text-cta-foreground font-semibold text-sm disabled:opacity-40 transition-opacity flex items-center justify-center gap-2">
+          className="w-full py-3.5 rounded-xl bg-cta text-cta-foreground font-semibold text-base disabled:opacity-40 transition-opacity flex items-center justify-center gap-2base">
           
             {isLoading ?
           <>
