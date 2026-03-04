@@ -194,7 +194,7 @@ const ModuleDetail = () => {
                     <p className="font-bold tracking-wider text-accent mb-2 text-sm">{lesson.situation.title}</p>
                     <p className="leading-relaxed opacity-90 mb-4 text-base">{lesson.situation.prompt}</p>
                     <details className="group">
-                      <summary className="text-xs text-accent cursor-pointer font-semibold">Show coaching response</summary>
+                      <summary className="text-s text-accent cursor-pointer font-semibold">Show coaching response</summary>
                       <p className="leading-relaxed opacity-80 mt-3 border-t border-glass-foreground/10 pt-3 text-base">
                         {lesson.situation.coachingResponse}
                       </p>
