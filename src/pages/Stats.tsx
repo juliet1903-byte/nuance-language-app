@@ -150,7 +150,7 @@ const Stats = () => {
 
           {/* Tone Profile */}
           <div className="mt-8">
-            <h3 className="text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-3">
+            <h3 className="font-semibold uppercase tracking-wider text-muted-foreground mb-3 text-sm">
               Tone Profile
             </h3>
 
