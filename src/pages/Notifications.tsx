@@ -52,7 +52,9 @@ const NotificationItem = ({
       </div>
       <div className="flex-1 min-w-0">
         <div className="flex items-center gap-2">
-          <p className={`text-sm font-medium truncate ${!notification.is_read ? "text-foreground" : "text-muted-foreground"}`}>
+          <p
+            className={`text-base font-medium truncate ${!notification.is_read ? "text-foreground" : "text-muted-foreground"}`}
+          >
             {notification.title}
           </p>
           {!notification.is_read && <span className="w-2 h-2 rounded-full bg-accent shrink-0" />}
