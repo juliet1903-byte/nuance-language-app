@@ -108,7 +108,7 @@ const ModuleDetail = () => {
           <ArrowLeft className="w-5 h-5" />
         </button>
         <div>
-          <p className="text-xs text-muted-foreground font-medium">Module {module.number}</p>
+          <p className="text-muted-foreground font-medium text-sm">Module {module.number}</p>
           <h1 className="text-lg font-semibold">{module.title}</h1>
         </div>
       </header>
