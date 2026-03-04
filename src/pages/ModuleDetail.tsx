@@ -133,7 +133,7 @@ const ModuleDetail = () => {
                         <p className="text-base font-semibold">
                           {module.number}.{i + 1} — {l.title}
                         </p>
-                        <p className="text-xs text-muted-foreground mt-0.5">
+                        <p className="text-sm text-muted-foreground mt-0.5">
                           {l.flashcards?.length ? `${l.flashcards.length} flashcards · ` : ""}
                           {l.phrases.length} phrases · {l.coachingNotes.length} coaching notes
                         </p>
