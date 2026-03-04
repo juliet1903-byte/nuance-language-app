@@ -164,7 +164,7 @@ const ModuleDetail = () => {
 
           {view === "lesson" && lesson &&
           <motion.div key="lesson" initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0 }}>
-              <h2 className="text-xl font-medium mb-2">{lesson.title}</h2>
+              <h2 className="font-medium mb-2 text-2xl">{lesson.title}</h2>
 
               <p className="text-muted-foreground leading-relaxed mb-6 text-base">{lesson.intro}</p>
 
@@ -173,7 +173,7 @@ const ModuleDetail = () => {
                 {lesson.phrases.map((p, i) =>
               <div key={i} className="bg-card rounded-xl p-4 shadow-sm">
                     <p className="font-medium mb-1 text-base">{p.phrase}</p>
-                    <p className="text-muted-foreground text-sm">{p.usage}</p>
+                    <p className="text-muted-foreground text-base">{p.usage}</p>
                   </div>
               )}
               </div>
