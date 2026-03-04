@@ -97,7 +97,7 @@ const SocialTranslator = ({ open, onClose }: SocialTranslatorProps) => {
           activity_type: "translation_complete",
           module_id: "social-translator",
           tone_mode: tone,
-          vibe_score: res.translatedVibeScore,
+          vibe_score: res.translatedVibeScore
         } as any).then(() => {});
       }
 
@@ -164,13 +164,13 @@ const SocialTranslator = ({ open, onClose }: SocialTranslatorProps) => {
             </div>
 
             <div className="px-5 pb-8">
-              <h2 className="text-2xl font-semibold mb-1">Social Translator</h2>
-              <p className="text-sm text-muted-foreground mb-5">
+              <h2 className="text-2xl mb-1 font-medium">Social Translator</h2>
+              <p className="text-muted-foreground mb-5 text-base">
                 Turn raw thoughts into leadership communication
               </p>
 
               {/* Input */}
-              <label className="text-xs font-semibold tracking-wider text-muted-foreground uppercase mb-2 block">
+              <label className="font-semibold tracking-wider text-muted-foreground uppercase mb-2 block text-sm">
                 Your Raw Thoughts
               </label>
               <div className="relative rounded-xl p-4 mb-5 bg-card border border-border">
@@ -178,7 +178,7 @@ const SocialTranslator = ({ open, onClose }: SocialTranslatorProps) => {
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
                 placeholder="Type something"
-                className="w-full bg-transparent resize-none outline-none text-foreground min-h-[100px] text-sm" />
+                className="w-full bg-transparent resize-none outline-none text-foreground min-h-[100px] text-base" />
 
                 <div className="flex justify-end gap-2 mt-1">
                   {input &&
@@ -187,16 +187,16 @@ const SocialTranslator = ({ open, onClose }: SocialTranslatorProps) => {
                     </button>
                 }
                   <button
-                    onClick={handleMic}
-                    className={`p-2 rounded-full transition-colors ${isRecording ? "bg-destructive text-destructive-foreground animate-pulse" : "bg-muted/60 text-muted-foreground"}`}
-                  >
+                  onClick={handleMic}
+                  className={`p-2 rounded-full transition-colors ${isRecording ? "bg-destructive text-destructive-foreground animate-pulse" : "bg-muted/60 text-muted-foreground"}`}>
+                  
                     <Mic className="w-4 h-4" />
                   </button>
                 </div>
               </div>
 
               {/* Vibe Meter */}
-              <label className="text-xs font-semibold tracking-wider text-muted-foreground uppercase mb-2 block">
+              <label className="font-semibold tracking-wider text-muted-foreground uppercase mb-2 block text-sm">
                 The Vibe Meter
               </label>
               <div className="relative mb-1" style={{ height: 24 }}>
@@ -214,8 +214,8 @@ const SocialTranslator = ({ open, onClose }: SocialTranslatorProps) => {
               }
               </div>
               <div className="flex justify-between text-xs font-semibold mb-5">
-                <span className="text-vibe-blunt">Blunt</span>
-                <span className="text-vibe-nuanced">Nuanced</span>
+                <span className="text-vibe-blunt text-sm">Blunt</span>
+                <span className="text-vibe-nuanced text-sm">Nuanced</span>
               </div>
 
               {/* Tone Toggles */}
