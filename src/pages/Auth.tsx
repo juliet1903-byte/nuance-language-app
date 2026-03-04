@@ -105,7 +105,7 @@ const Auth = () => {
       {/* Auth Card */}
       <div className="flex-1 flex items-start justify-center px-6 pt-12">
         <div className="w-full max-w-sm">
-          <h1 className="text-2xl text-center mb-6 font-semibold">Welcome to Nuance</h1>
+          <h1 className="text-2xl font-bold text-center mb-6">Welcome to Nuance</h1>
 
           <Tabs defaultValue="signin" className="w-full">
             <TabsList className="grid w-full grid-cols-2 mb-6">
