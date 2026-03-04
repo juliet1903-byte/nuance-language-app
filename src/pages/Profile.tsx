@@ -10,8 +10,8 @@ import {
   LogOut,
   Award,
   BookOpen,
-  Flame,
-} from "lucide-react";
+  Flame } from
+"lucide-react";
 import { Switch } from "@/components/ui/switch";
 import AppLayout from "@/components/AppLayout";
 import { useTheme } from "@/components/ThemeContext";
@@ -35,15 +35,15 @@ const Profile = () => {
   const levelName = showBanner ? LEVEL_NAMES[0] : LEVEL_NAMES[Math.min((profile?.learning_level ?? 1) - 1, 3)];
 
   const quickStats = [
-    { icon: Flame, label: "Day Streak", value: showBanner ? "0" : String(streakDays), color: "text-vibe-blunt" },
-    {
-      icon: BookOpen,
-      label: "Modules",
-      value: showBanner ? `0/${modules.length}` : `${modulesCompleted}/${modules.length}`,
-      color: "text-cta",
-    },
-    { icon: Award, label: "Vibe IQ", value: showBanner ? "0" : String(vibeIq), color: "text-accent" },
-  ];
+  { icon: Flame, label: "Day Streak", value: showBanner ? "0" : String(streakDays), color: "text-vibe-blunt" },
+  {
+    icon: BookOpen,
+    label: "Modules",
+    value: showBanner ? `0/${modules.length}` : `${modulesCompleted}/${modules.length}`,
+    color: "text-cta"
+  },
+  { icon: Award, label: "Vibe IQ", value: showBanner ? "0" : String(vibeIq), color: "text-accent" }];
+
 
   return (
     <AppLayout>
@@ -62,8 +62,8 @@ const Profile = () => {
             <LetterAvatar
               name={showBanner ? "U" : profile?.display_name}
               email={showBanner ? undefined : user?.email}
-              size="lg"
-            />
+              size="lg" />
+            
           </div>
           <h2 className="text-xl font-semibold">{displayName}</h2>
           <p className="text-sm text-muted-foreground mt-0.5">{displayEmail}</p>
@@ -74,15 +74,15 @@ const Profile = () => {
         </section>
 
         <section className="grid grid-cols-3 gap-3">
-          {quickStats.map((stat) => (
-            <div key={stat.label} className="bg-card rounded-2xl p-4 shadow-sm flex flex-col items-center text-center">
+          {quickStats.map((stat) =>
+          <div key={stat.label} className="bg-card rounded-2xl p-4 shadow-sm flex flex-col items-center text-center">
               <div className="w-10 h-10 rounded-full bg-muted flex items-center justify-center mb-2">
                 <stat.icon className="w-5 h-5 text-muted-foreground" />
               </div>
               <span className="text-xl font-semibold">{stat.value}</span>
-              <span className="text-xs text-muted-foreground mt-0.5">{stat.label}</span>
+              <span className="text-muted-foreground mt-0.5 text-sm">{stat.label}</span>
             </div>
-          ))}
+          )}
         </section>
 
         <section>
@@ -123,25 +123,25 @@ const Profile = () => {
           </div>
         </section>
 
-        {!showBanner && (
-          <section>
+        {!showBanner &&
+        <section>
             <button
-              onClick={async () => {
-                await signOut();
-                navigate("/");
-              }}
-              className="w-full flex items-center justify-center gap-2 py-3 rounded-2xl border border-destructive/20 text-destructive text-sm font-medium hover:bg-destructive/5 transition-colors"
-            >
+            onClick={async () => {
+              await signOut();
+              navigate("/");
+            }}
+            className="w-full flex items-center justify-center gap-2 py-3 rounded-2xl border border-destructive/20 text-destructive text-sm font-medium hover:bg-destructive/5 transition-colors">
+            
               <LogOut className="w-4 h-4" />
               Sign Out
             </button>
           </section>
-        )}
+        }
 
         <p className="text-center text-xs text-muted-foreground pb-2">Nuance v1.0 · Career Playbook</p>
       </main>
-    </AppLayout>
-  );
+    </AppLayout>);
+
 };
 
 export default Profile;
