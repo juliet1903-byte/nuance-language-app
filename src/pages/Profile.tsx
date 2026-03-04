@@ -76,7 +76,9 @@ const Profile = () => {
         <section className="grid grid-cols-3 gap-3">
           {quickStats.map((stat) => (
             <div key={stat.label} className="bg-card rounded-2xl p-4 shadow-sm flex flex-col items-center text-center">
-              <stat.icon className={`w-5 h-5 ${stat.color} mb-1.5`} />
+              <div className="w-10 h-10 rounded-full bg-muted flex items-center justify-center mb-2">
+                <stat.icon className="w-5 h-5 text-muted-foreground" />
+              </div>
               <span className="text-xl font-semibold">{stat.value}</span>
               <span className="text-xs text-muted-foreground mt-0.5">{stat.label}</span>
             </div>
