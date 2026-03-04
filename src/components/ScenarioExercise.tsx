@@ -42,8 +42,8 @@ const ScenarioExercise = ({ moduleTitle, moduleNumber, scenario, onComplete }: S
           moduleTitle,
           moduleNumber,
           scenario,
-          userResponse: response.trim()
-        }
+          userResponse: response.trim(),
+        },
       });
 
       if (error) throw error;
@@ -62,7 +62,7 @@ const ScenarioExercise = ({ moduleTitle, moduleNumber, scenario, onComplete }: S
       toast({
         title: "Couldn't evaluate your response",
         description: "Something went wrong on our end. Give it another try.",
-        variant: "destructive"
+        variant: "destructive",
       });
     } finally {
       setIsLoading(false);
@@ -72,12 +72,7 @@ const ScenarioExercise = ({ moduleTitle, moduleNumber, scenario, onComplete }: S
   const passed = result && result.vibeScore >= 50;
 
   return (
-    <motion.div
-      key="scenario"
-      initial={{ opacity: 0, x: 20 }}
-      animate={{ opacity: 1, x: 0 }}
-      exit={{ opacity: 0 }}>
-      
+    <motion.div key="scenario" initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0 }}>
       <div className="mb-5">
         <p className="text-xs font-semibold tracking-wider text-accent uppercase mb-1">
           Module {moduleNumber} — Final Challenge
@@ -93,59 +88,56 @@ const ScenarioExercise = ({ moduleTitle, moduleNumber, scenario, onComplete }: S
       </div>
 
       {/* User Response */}
-      {!result &&
-      <>
+      {!result && (
+        <>
           <label className="font-semibold tracking-wider text-muted-foreground uppercase mb-2 block text-sm">
             Your Response
           </label>
           <div className="bg-card rounded-xl p-4 mb-5 shadow-sm">
             <textarea
-            value={response}
-            onChange={(e) => setResponse(e.target.value)}
-            placeholder="Write what you would actually say in this situation..."
-            className="w-full bg-transparent resize-none outline-none text-foreground min-h-[120px] text-base" />
-          
+              value={response}
+              onChange={(e) => setResponse(e.target.value)}
+              placeholder="Write what you would actually say in this situation..."
+              className="w-full bg-transparent resize-none outline-none text-foreground min-h-[120px] text-base"
+            />
           </div>
 
           <button
-          onClick={handleSubmit}
-          disabled={!response.trim() || isLoading}
-          className="w-full py-3.5 rounded-xl bg-cta text-cta-foreground font-semibold text-base disabled:opacity-40 transition-opacity flex items-center justify-center gap-2base">
-          
-            {isLoading ?
-          <>
+            onClick={handleSubmit}
+            disabled={!response.trim() || isLoading}
+            className="w-full py-3.5 rounded-xl bg-cta text-cta-foreground font-semibold text-base disabled:opacity-40 transition-opacity flex items-center justify-center gap-2base"
+          >
+            {isLoading ? (
+              <>
                 <Loader2 className="w-5 h-5 animate-spin" />
                 Evaluating…
-              </> :
-
-          "Submit Response"
-          }
+              </>
+            ) : (
+              "Submit Response"
+            )}
           </button>
         </>
-      }
+      )}
 
       {/* Result */}
       <AnimatePresence>
-        {result &&
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}>
-          
+        {result && (
+          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
             {/* Vibe Meter */}
             <label className="text-xs font-semibold tracking-wider text-muted-foreground uppercase mb-2 block">
               Your Nuance Score
             </label>
             <div className="relative mb-1" style={{ height: 24 }}>
               <div className="absolute inset-x-0 top-1/2 -translate-y-1/2 h-2 rounded-full bg-gradient-to-r from-vibe-blunt via-muted to-vibe-nuanced" />
-              {needlePosition !== null &&
-            <motion.div
-              className="absolute rounded-full bg-foreground border-2 border-card shadow-md"
-              style={{ width: 24, height: 24, top: 0 }}
-              initial={{ opacity: 0, left: `calc(${needlePosition}% - 12px)` }}
-              animate={{ opacity: 1, left: `calc(${needlePosition}% - 12px)` }}
-              transition={{ type: "spring", damping: 20, stiffness: 150 }} />
-
-            }
+              {needlePosition !== null && (
+                <motion.div
+                  className="absolute rounded-full bg-foreground border-2 border-card shadow-md"
+                  style={{ width: 24, height: 24, top: 0 }}
+                  initial={{ opacity: 0, left: `calc(${needlePosition}% - 12px)` }}
+                  animate={{ opacity: 1, left: `calc(${needlePosition}% - 12px)` }}
+                  transition={{ type: "spring", damping: 20, stiffness: 150 }}
+                />
+              )}
             </div>
             <div className="flex justify-between text-xs font-semibold mb-5">
               <span className="text-vibe-blunt text-sm">Blunt</span>
@@ -157,45 +149,45 @@ const ScenarioExercise = ({ moduleTitle, moduleNumber, scenario, onComplete }: S
               <p className="font-bold tracking-wider text-accent mb-2 text-sm">FEEDBACK</p>
               <p className="leading-relaxed opacity-90 mb-4 text-base">{result.feedback}</p>
 
-              {result.strengths.length > 0 &&
-            <div className="mb-4">
+              {result.strengths.length > 0 && (
+                <div className="mb-4">
                   <p className="font-bold tracking-wider text-accent mb-2 text-sm">WHAT WORKED</p>
                   <ul className="space-y-1">
-                    {result.strengths.map((s, i) =>
-                <li key={i} className="opacity-90 flex items-start gap-2 text-base">
+                    {result.strengths.map((s, i) => (
+                      <li key={i} className="opacity-90 flex items-start gap-2 text-base">
                         <span className="text-accent mt-0.5">✓</span> {s}
                       </li>
-                )}
+                    ))}
                   </ul>
                 </div>
-            }
+              )}
 
               {/* Coach Tips Toggle */}
               <AnimatePresence>
-                {showTips && result.coachTips.length > 0 &&
-              <motion.div
-                initial={{ opacity: 0, height: 0 }}
-                animate={{ opacity: 1, height: "auto" }}
-                exit={{ opacity: 0, height: 0 }}
-                className="p-3 rounded-xl bg-accent/20 border border-accent/30">
-                
+                {showTips && result.coachTips.length > 0 && (
+                  <motion.div
+                    initial={{ opacity: 0, height: 0 }}
+                    animate={{ opacity: 1, height: "auto" }}
+                    exit={{ opacity: 0, height: 0 }}
+                    className="p-3 rounded-xl bg-accent/20 border border-accent/30"
+                  >
                     <p className="font-bold tracking-wider text-accent mb-2 text-sm">COACH'S TIPS</p>
                     <ul className="space-y-2">
-                      {result.coachTips.map((tip, i) =>
-                  <li key={i} className="leading-relaxed opacity-90 text-base">
+                      {result.coachTips.map((tip, i) => (
+                        <li key={i} className="leading-relaxed opacity-90 text-base">
                           💡 {tip}
                         </li>
-                  )}
+                      ))}
                     </ul>
                   </motion.div>
-              }
+                )}
               </AnimatePresence>
 
               <div className="flex justify-end mt-3">
                 <button
-                onClick={() => setShowTips((p) => !p)}
-                className={`p-2 rounded-full transition-colors ${showTips ? "bg-accent/30" : "bg-glass-foreground/10"}`}>
-                
+                  onClick={() => setShowTips((p) => !p)}
+                  className={`p-2 rounded-full transition-colors ${showTips ? "bg-accent/30" : "bg-glass-foreground/10"}`}
+                >
                   <HelpCircle className="w-4 h-4" />
                 </button>
               </div>
@@ -203,26 +195,31 @@ const ScenarioExercise = ({ moduleTitle, moduleNumber, scenario, onComplete }: S
 
             {/* Continue */}
             <button
-            onClick={passed ? () => onComplete(result!.vibeScore) : () => {setResult(null);setNeedlePosition(null);}}
-            className={`w-full py-3.5 rounded-xl font-semibold text-sm flex items-center justify-center gap-2 ${
-            passed ?
-            "bg-accent text-accent-foreground" :
-            "bg-cta text-cta-foreground"}`
-            }>
-            
-              {passed ?
-            <>
+              onClick={
+                passed
+                  ? () => onComplete(result!.vibeScore)
+                  : () => {
+                      setResult(null);
+                      setNeedlePosition(null);
+                    }
+              }
+              className={`w-full py-3.5 rounded-xl font-semibold text-base flex items-center justify-center gap-2 ${
+                passed ? "bg-accent text-accent-foreground" : "bg-cta text-cta-foreground"
+              }`}
+            >
+              {passed ? (
+                <>
                   Complete Module <ArrowRight className="w-4 h-4" />
-                </> :
-
-            "Try Again"
-            }
+                </>
+              ) : (
+                "Try Again"
+              )}
             </button>
           </motion.div>
-        }
+        )}
       </AnimatePresence>
-    </motion.div>);
-
+    </motion.div>
+  );
 };
 
 export default ScenarioExercise;
