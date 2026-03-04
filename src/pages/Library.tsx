@@ -249,7 +249,7 @@ const Library = () => {
                 </div>
                 <div className="flex-1 text-left">
                   <p className="text-sm font-semibold">{video.title}</p>
-                  <p className="text-xs text-muted-foreground mt-0.5">
+                  <p className="text-muted-foreground mt-0.5 text-sm">
                     {video.category} · {video.duration}
                   </p>
                 </div>
