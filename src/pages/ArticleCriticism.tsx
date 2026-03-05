@@ -88,7 +88,7 @@ const ArticleCriticism = () => {
               '"What would \'more polish\' look like in practice? I want to make sure I\'m addressing the right thing."',
               '"Was there a specific part of the presentation that was unclear, or was it the overall structure?"'].
               map((phrase, i) =>
-              <div key={i} className="bg-card rounded-xl p-4 border border-border/50 text-sm text-foreground italic">
+              <div key={i} className="bg-card rounded-xl p-4 border border-border/50 text-base text-foreground italic">
                   {phrase}
                 </div>
               )}
