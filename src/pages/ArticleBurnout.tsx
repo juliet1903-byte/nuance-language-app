@@ -181,7 +181,7 @@ const ArticleBurnout = () => {
             <div className="space-y-3">
               {irreversibleSigns.map((sign, i) =>
               <div key={i} className="flex gap-3 bg-card rounded-xl p-4 border border-border/50">
-                  <span className="text-destructive font-bold text-sm shrink-0 mt-0.5">⚠</span>
+                  <span className="text-destructive font-bold text-base shrink-0 mt-0.5">⚠</span>
                   <p className="text-muted-foreground text-base">{sign}</p>
                 </div>
               )}
