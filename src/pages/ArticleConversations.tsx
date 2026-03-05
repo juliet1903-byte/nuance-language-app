@@ -168,7 +168,7 @@ const ArticleConversations = () => {
               "The issue is fundamentally about personal style, not performance.",
               "You do not have standing to raise it."].
               map((item, i) =>
-              <div key={i} className="flex gap-2 text-sm text-muted-foreground">
+              <div key={i} className="flex gap-2 text-base text-muted-foreground">
                   <span className="text-foreground font-bold shrink-0">•</span>{item}
                 </div>
               )}
