@@ -95,7 +95,7 @@ const Index = () => {
             size="sm" /> :
 
 
-          <div className="w-9 h-9 rounded-full bg-muted overflow-hidden flex items-center justify-center">
+          <div onClick={() => navigate("/auth")} className="w-9 h-9 rounded-full bg-muted overflow-hidden flex items-center justify-center cursor-pointer">
               <User className="w-5 h-5 text-muted-foreground" />
             </div>
           }
