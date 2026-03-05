@@ -538,7 +538,7 @@ export const modules: Module[] = [
           {
             type: "fill-gap",
             instruction: "Tap the correct phrase to complete each sentence.",
-            wordBank: ["particularly proud of", "handle differently", "at the time", "my reasoning", "pushed back"],
+            wordBank: ["particularly proud of", "handle differently", "at the time", "pushed back"],
             items: [
               { id: "6-1", prompt: '"One thing I\'m _____ is reducing deploy time by 40%."', answer: "particularly proud of" },
               { id: "6-2", prompt: '"Looking back, I\'d _____ the stakeholder communication."', answer: "handle differently" },
