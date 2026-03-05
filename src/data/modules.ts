@@ -724,8 +724,8 @@ export const modules: Module[] = [
             wordBank: ["work with", "add something", "my impression", "hard to follow", "before we move on"],
             items: [
               { id: "8-1", prompt: '"I _____ engineering teams to simplify complexity."', answer: "work with" },
-              { id: "8-2", prompt: '"Could I _____ here _____?"', answer: "add something" },
-              { id: "8-3", prompt: '"_____ was that the recommendation was _____."', answer: "my impression" },
+              { id: "8-2", prompt: '"Could I _____ here before we move on?"', answer: "add something" },
+              { id: "8-3", prompt: '"_____ was that the recommendation was hard to follow."', answer: "my impression" },
             ],
           },
         ],
