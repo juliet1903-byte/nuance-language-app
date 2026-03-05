@@ -396,8 +396,8 @@ export const modules: Module[] = [
             instruction: "Tap the correct phrase to complete each sentence.",
             wordBank: ["early signal", "at risk", "your perspective", "late surprise", "what I need"],
             items: [
-              { id: "4-2a", prompt: '"I want to give you an _____ rather than a _____."', answer: "early signal" },
-              { id: "4-2b", prompt: '"Here\'s where we are, what\'s _____, and _____."', answer: "at risk" },
+              { id: "4-2a", prompt: '"I want to give you an _____ rather than a late surprise."', answer: "early signal" },
+              { id: "4-2b", prompt: '"Here\'s where we are, what\'s _____, and what I need from you."', answer: "at risk" },
               { id: "4-2c", prompt: '"I\'ve thought about this from _____ — here\'s my recommendation."', answer: "your perspective" },
             ],
           },
