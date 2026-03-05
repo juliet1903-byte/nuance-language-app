@@ -360,7 +360,7 @@ export const modules: Module[] = [
             items: [
               { id: "4-1", prompt: '"I think this _____ to your Q3 priority."', answer: "connects directly" },
               { id: "4-2", prompt: '"What would _____ for you to support this?"', answer: "need to be true" },
-              { id: "4-3", prompt: '"I\'d rather _____ than raise it when it\'s _____."', answer: "flag this early" },
+              { id: "4-3", prompt: '"I\'d rather _____ than raise it when it\'s too late to act."', answer: "flag this early" },
             ],
           },
         ],
