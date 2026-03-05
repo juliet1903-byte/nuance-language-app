@@ -163,7 +163,7 @@ const ArticleWarmIntro = () => {
               { mistake: "The vague introduction", detail: "'You two should talk.' About what? Why? When? Vague introductions waste everyone's time." }].
               map((item) =>
               <div key={item.mistake} className="bg-card rounded-xl p-4 border border-border/50">
-                  <p className="font-semibold text-sm mb-1">{item.mistake}</p>
+                  <p className="font-semibold text-base mb-1">{item.mistake}</p>
                   <p className="text-muted-foreground text-base">{item.detail}</p>
                 </div>
               )}
