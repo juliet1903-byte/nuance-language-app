@@ -150,7 +150,7 @@ const ArticleBurnout = () => {
               "'I noticed you've been working late a lot. Is there something I can take off your plate this week?' — Concrete, immediate offer.",
               "'I've been in that place before and I know how hard it is. If you want to talk it through, I'm here — no advice, just listening.' — Acknowledges without pressuring."].
               map((phrase, i) =>
-              <div key={i} className="bg-card rounded-xl p-4 border border-border/50 text-sm text-foreground leading-relaxed">
+              <div key={i} className="bg-card rounded-xl p-4 border border-border/50 text-base text-foreground leading-relaxed">
                   {phrase}
                 </div>
               )}
