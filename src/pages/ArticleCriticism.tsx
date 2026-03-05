@@ -167,7 +167,7 @@ const ArticleCriticism = () => {
               "Is this feedback about something I can actually control?",
               "Is this feedback aligned with the outcomes I am trying to achieve?"].
               map((q, i) =>
-              <div key={i} className="bg-card rounded-xl p-4 border border-border/50 text-sm text-foreground">
+              <div key={i} className="bg-card rounded-xl p-4 border border-border/50 text-base text-foreground">
                   {q}
                 </div>
               )}
