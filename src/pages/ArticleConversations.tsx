@@ -152,7 +152,7 @@ const ArticleConversations = () => {
               '"I\'m not trying to attack you. I\'m trying to address a pattern that\'s affecting the team. Can we focus on that?"',
               '"If this isn\'t a good time, we can come back to it. But I do need us to talk about it at some point."'].
               map((phrase, i) =>
-              <div key={i} className="bg-card rounded-xl p-4 border border-border/50 text-sm text-foreground italic">
+              <div key={i} className="bg-card rounded-xl p-4 border border-border/50 text-base text-foreground italic">
                   {phrase}
                 </div>
               )}
