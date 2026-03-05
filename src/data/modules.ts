@@ -669,7 +669,7 @@ export const modules: Module[] = [
             wordBank: ["landed differently", "your intention", "came across", "different way", "noticed that too"],
             items: [
               { id: "7-2a", prompt: '"I think that comment _____ than you intended."', answer: "landed differently" },
-              { id: "7-2b", prompt: '"I\'m sure that wasn\'t _____, but here\'s how it _____."', answer: "your intention" },
+              { id: "7-2b", prompt: '"I\'m sure that wasn\'t _____, but here\'s how it came across."', answer: "your intention" },
               { id: "7-2c", prompt: '"Can we find a _____ to phrase that?"', answer: "different way" },
             ],
           },
