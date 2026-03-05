@@ -721,7 +721,7 @@ export const modules: Module[] = [
           {
             type: "fill-gap",
             instruction: "Tap the correct phrase to complete each sentence.",
-            wordBank: ["work with", "add something", "my impression", "hard to follow", "before we move on"],
+            wordBank: ["work with", "add something", "my impression", "before we move on"],
             items: [
               { id: "8-1", prompt: '"I _____ engineering teams to simplify complexity."', answer: "work with" },
               { id: "8-2", prompt: '"Could I _____ here before we move on?"', answer: "add something" },
