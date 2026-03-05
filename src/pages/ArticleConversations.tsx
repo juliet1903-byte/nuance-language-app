@@ -136,7 +136,7 @@ const ArticleConversations = () => {
               '"Can I share an observation — it\'s something I\'ve noticed more than once."',
               '"I may have contributed to this situation — can we start from there?"'].
               map((phrase, i) =>
-              <div key={i} className="bg-card rounded-xl p-4 border border-border/50 text-sm text-foreground italic">
+              <div key={i} className="bg-card rounded-xl p-4 border border-border/50 text-base text-foreground italic">
                   {phrase}
                 </div>
               )}
