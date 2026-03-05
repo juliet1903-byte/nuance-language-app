@@ -18,8 +18,34 @@ const ModuleDetail = () => {
   const navigate = useNavigate();
   const { user } = useAuth();
   const { logActivity, completedLessons } = useProgress();
-  const [view, setView] = useState<View>("overview");
-  const [activeLessonIdx, setActiveLessonIdx] = useState(0);
+  // Persist exercise progress in localStorage
+  const storageKey = `nuance-progress-${id}`;
+  const saved = (() => {
+    try {
+      const raw = localStorage.getItem(storageKey);
+      if (raw) return JSON.parse(raw) as { view: View; lessonIdx: number };
+    } catch {}
+    return null;
+  })();
+
+  const [view, setViewState] = useState<View>(saved?.view || "overview");
+  const [activeLessonIdx, setActiveLessonIdxState] = useState(saved?.lessonIdx ?? 0);
+
+  const persistProgress = (v: View, idx: number) => {
+    try {
+      localStorage.setItem(storageKey, JSON.stringify({ view: v, lessonIdx: idx }));
+    } catch {}
+  };
+
+  const setView = (v: View) => {
+    setViewState(v);
+    persistProgress(v, activeLessonIdx);
+  };
+
+  const setActiveLessonIdx = (idx: number) => {
+    setActiveLessonIdxState(idx);
+    persistProgress(view, idx);
+  };
 
   const module = modules.find((m) => m.id === id);
   if (!module) {
