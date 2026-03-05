@@ -50,7 +50,7 @@ export const modules: Module[] = [
     number: 1,
     title: "Starting Strong",
     subtitle: "Introductions, onboarding, and making your mark",
-    description: "How you show up in the first interactions sets the tone for everything that follows. People form opinions about you within minutes, and those opinions are hard to change later. This module covers how to introduce yourself in a way that people actually remember. You will also learn to navigate onboarding conversations and build connections at events. Getting this right early gives you confidence and credibility from day one.",
+    description: "How you show up in the first interactions sets the tone for everything that follows. People form opinions about you within minutes, and those opinions are hard to change later. This module covers how to introduce yourself in a way that people actually remember.",
     image: "module-starting-strong",
     lessons: [
       {
