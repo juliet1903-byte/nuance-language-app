@@ -266,7 +266,7 @@ export const modules: Module[] = [
             wordBank: ["push back", "share them", "your thinking", "slightly", "different view"],
             items: [
               { id: "3-1", prompt: '"I have some concerns — can I _____?"', answer: "share them" },
-              { id: "3-2", prompt: '"Can I _____ on that _____?"', answer: "push back" },
+              { id: "3-2", prompt: '"Can I _____ on that point?"', answer: "push back" },
               { id: "3-3", prompt: '"I want to understand _____ before I respond."', answer: "your thinking" },
               { id: "3-4", prompt: '"I\'d like to share a _____ on this."', answer: "different view" },
             ],
