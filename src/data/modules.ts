@@ -631,7 +631,7 @@ export const modules: Module[] = [
             wordBank: ["Hey everyone", "experience differently", "be aware", "feel default", "habitual"],
             items: [
               { id: "7-1", prompt: '"_____ — let\'s get started with the standup."', answer: "Hey everyone" },
-              { id: "7-2", prompt: '"I try to _____ of how people _____ this environment."', answer: "be aware" },
+              { id: "7-2", prompt: '"I try to _____ of how people experience this environment."', answer: "be aware" },
               { id: "7-3", prompt: '"Most exclusive language is _____, not intentional."', answer: "habitual" },
             ],
           },
