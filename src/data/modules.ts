@@ -760,7 +760,7 @@ export const modules: Module[] = [
           {
             type: "fill-gap",
             instruction: "Tap the correct phrase to complete each sentence.",
-            wordBank: ["walk away remembering", "land the key point", "context and ask", "structure this", "recommendation"],
+            wordBank: ["walk away remembering", "land the key point", "structure this", "recommendation"],
             items: [
               { id: "8-2a", prompt: '"What\'s the one thing you want them to _____?"', answer: "walk away remembering" },
               { id: "8-2b", prompt: '"Let me _____ first, then I\'ll give context."', answer: "land the key point" },
