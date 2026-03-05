@@ -179,12 +179,12 @@ const ArticleConversations = () => {
             <p className="text-muted-foreground leading-relaxed italic text-base">
               Difficult conversations are a skill, not a trait. The more you practice, the better you get. The alternative is to avoid them entirely — and watch as small issues become large ones, fixable problems become entrenched, and relationships deteriorate because nobody was willing to name what was happening.
             </p>
-            <p className="text-xs text-muted-foreground mt-3">— Based on insights from The Career Playbook</p>
+            <p className="text-xs text-muted-foreground mt-3">
+</p>
           </section>
         </div>
       </article>
     </div>);
-
 };
 
 export default ArticleConversations;
