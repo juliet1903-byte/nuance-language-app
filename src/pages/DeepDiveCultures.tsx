@@ -14,122 +14,124 @@ const FlipCard = ({ front, back }: FlipCardProps) => {
     <button
       onClick={() => setFlipped(!flipped)}
       className="w-full text-left rounded-xl border transition-all duration-300 overflow-hidden"
-      style={{ minHeight: "90px" }}>
-      
+      style={{ minHeight: "90px" }}
+    >
       <div className={`p-4 transition-all duration-300 ${flipped ? "bg-cta text-cta-foreground" : "bg-card"}`}>
         <div className="flex items-start justify-between gap-2">
           <div>
             <p
-              className={`text-xs font-bold uppercase tracking-wider mb-1 ${flipped ? "text-cta-foreground/70" : "text-muted-foreground"}`}>
-              
+              className={`text-xs font-bold uppercase tracking-wider mb-1 ${flipped ? "text-cta-foreground/70" : "text-muted-foreground"}`}
+            >
               {flipped ? "🔓 Real meaning" : "📣 They said"}
             </p>
-            <p className={`text-sm font-medium leading-relaxed ${flipped ? "text-cta-foreground" : "text-foreground"}`}>
+            <p
+              className={`text-base font-medium leading-relaxed ${flipped ? "text-cta-foreground" : "text-foreground"}`}
+            >
               {flipped ? back : front}
             </p>
           </div>
           <RotateCcw
-            className={`w-4 h-4 shrink-0 mt-0.5 transition-transform ${flipped ? "rotate-180 text-cta-foreground/70" : "text-muted-foreground"}`} />
-          
+            className={`w-4 h-4 shrink-0 mt-0.5 transition-transform ${flipped ? "rotate-180 text-cta-foreground/70" : "text-muted-foreground"}`}
+          />
         </div>
       </div>
-    </button>);
-
+    </button>
+  );
 };
 
 const DeepDiveCultures = () => {
   const navigate = useNavigate();
 
   const flipCards = [
-  {
-    front: '"I\'ll have to check with my manager before I can commit."',
-    back: "Likely meaning: No, but I am declining indirectly to preserve the relationship. The 'manager' may never actually be consulted."
-  },
-  {
-    front: '"We should explore all the options before deciding."',
-    back: "Likely meaning: I do not support the current direction but I'm not stating that directly. I want more time to build a case against it."
-  },
-  {
-    front: '"That\'s a valid point — let me think."',
-    back: "Likely meaning: I disagree but need time to formulate a response that avoids direct confrontation."
-  },
-  {
-    front: '"I hear what you\'re saying."',
-    back: "Likely meaning: I understand your position but I do not necessarily agree with it — this is acknowledgement, not agreement."
-  },
-  {
-    front: '"That\'s an interesting approach..."',
-    back: "Likely meaning: I have serious concerns about this direction but I am raising them indirectly."
-  },
-  {
-    front: '"Let\'s revisit this later."',
-    back: "Likely meaning: This is probably a no, and I'm hoping the subject will be dropped by the time we revisit it."
-  }];
-
+    {
+      front: '"I\'ll have to check with my manager before I can commit."',
+      back: "Likely meaning: No, but I am declining indirectly to preserve the relationship. The 'manager' may never actually be consulted.",
+    },
+    {
+      front: '"We should explore all the options before deciding."',
+      back: "Likely meaning: I do not support the current direction but I'm not stating that directly. I want more time to build a case against it.",
+    },
+    {
+      front: '"That\'s a valid point — let me think."',
+      back: "Likely meaning: I disagree but need time to formulate a response that avoids direct confrontation.",
+    },
+    {
+      front: '"I hear what you\'re saying."',
+      back: "Likely meaning: I understand your position but I do not necessarily agree with it — this is acknowledgement, not agreement.",
+    },
+    {
+      front: '"That\'s an interesting approach..."',
+      back: "Likely meaning: I have serious concerns about this direction but I am raising them indirectly.",
+    },
+    {
+      front: '"Let\'s revisit this later."',
+      back: "Likely meaning: This is probably a no, and I'm hoping the subject will be dropped by the time we revisit it.",
+    },
+  ];
 
   const knowledgeCheck = [
-  {
-    q: "In a project meeting, a colleague says: 'That timeline is ambitious.' What is the most likely intended meaning?",
-    options: [
-    "A. They think the timeline is achievable but challenging",
-    "B. They are signaling that the timeline is unrealistic without saying so directly",
-    "C. They are complimenting your ambition",
-    "D. They need more information before they can commit"],
+    {
+      q: "In a project meeting, a colleague says: 'That timeline is ambitious.' What is the most likely intended meaning?",
+      options: [
+        "A. They think the timeline is achievable but challenging",
+        "B. They are signaling that the timeline is unrealistic without saying so directly",
+        "C. They are complimenting your ambition",
+        "D. They need more information before they can commit",
+      ],
 
+      answer: "B",
+      explanation: "'Ambitious' is often a polite way of saying 'unrealistic' in high-context communication.",
+    },
+    {
+      q: "You propose a new process. A team member says 'I'll have to check with my manager.' They never follow up. What probably happened?",
+      options: [
+        "A. They forgot to ask their manager",
+        "B. Their manager said no and they're avoiding telling you",
+        "C. This was a polite way of declining without direct confrontation",
+        "D. They are still waiting for the right moment to ask",
+      ],
 
-    answer: "B",
-    explanation: "'Ambitious' is often a polite way of saying 'unrealistic' in high-context communication."
-  },
-  {
-    q: "You propose a new process. A team member says 'I'll have to check with my manager.' They never follow up. What probably happened?",
-    options: [
-    "A. They forgot to ask their manager",
-    "B. Their manager said no and they're avoiding telling you",
-    "C. This was a polite way of declining without direct confrontation",
-    "D. They are still waiting for the right moment to ask"],
+      answer: "C",
+      explanation: "This is a soft no. The manager was likely never consulted.",
+    },
+    {
+      q: "After presenting your idea, there is a long silence in the room. What is the safest assumption?",
+      options: [
+        "A. Everyone agrees and is processing the information",
+        "B. People are waiting for someone senior to speak first",
+        "C. Silence signals disagreement or discomfort that has not been voiced",
+        "D. Both B and C are possible — silence should not be assumed to mean agreement",
+      ],
 
+      answer: "D",
+      explanation: "Silence is culturally ambiguous. Never assume it means agreement.",
+    },
+    {
+      q: "A colleague says 'Let's revisit this in a few weeks' for the third time. What should you do?",
+      options: [
+        "A. Wait a few more weeks and raise it again",
+        "B. Recognise this is a soft no and either address the underlying concern or move on",
+        "C. Escalate to their manager to get a clear answer",
+        "D. Assume they are just very busy and will eventually agree",
+      ],
 
-    answer: "C",
-    explanation: "This is a soft no. The manager was likely never consulted."
-  },
-  {
-    q: "After presenting your idea, there is a long silence in the room. What is the safest assumption?",
-    options: [
-    "A. Everyone agrees and is processing the information",
-    "B. People are waiting for someone senior to speak first",
-    "C. Silence signals disagreement or discomfort that has not been voiced",
-    "D. Both B and C are possible — silence should not be assumed to mean agreement"],
+      answer: "B",
+      explanation: "Repeated deferrals are a signal to either address the real issue or move on.",
+    },
+    {
+      q: "You're in a meeting and you're not sure if a colleague's vague response means yes or no. What should you say?",
+      options: [
+        "A. 'Can you be more direct? I'm not sure what you mean.'",
+        "B. 'I want to make sure I've understood correctly — are you saying we should proceed, or would you like more time?'",
+        "C. Say nothing and assume they will clarify later if needed",
+        "D. 'In my culture we say things directly — can you just tell me yes or no?'",
+      ],
 
-
-    answer: "D",
-    explanation: "Silence is culturally ambiguous. Never assume it means agreement."
-  },
-  {
-    q: "A colleague says 'Let's revisit this in a few weeks' for the third time. What should you do?",
-    options: [
-    "A. Wait a few more weeks and raise it again",
-    "B. Recognise this is a soft no and either address the underlying concern or move on",
-    "C. Escalate to their manager to get a clear answer",
-    "D. Assume they are just very busy and will eventually agree"],
-
-
-    answer: "B",
-    explanation: "Repeated deferrals are a signal to either address the real issue or move on."
-  },
-  {
-    q: "You're in a meeting and you're not sure if a colleague's vague response means yes or no. What should you say?",
-    options: [
-    "A. 'Can you be more direct? I'm not sure what you mean.'",
-    "B. 'I want to make sure I've understood correctly — are you saying we should proceed, or would you like more time?'",
-    "C. Say nothing and assume they will clarify later if needed",
-    "D. 'In my culture we say things directly — can you just tell me yes or no?'"],
-
-
-    answer: "B",
-    explanation:
-    "This phrase clarifies without forcing direct confrontation. Options A and D are culturally tone-deaf."
-  }];
-
+      answer: "B",
+      explanation:
+        "This phrase clarifies without forcing direct confrontation. Options A and D are culturally tone-deaf.",
+    },
+  ];
 
   const [answers, setAnswers] = useState<Record<number, string>>({});
   const [submitted, setSubmitted] = useState(false);
@@ -222,9 +224,9 @@ const DeepDiveCultures = () => {
               reveal the real meaning.
             </p>
             <div className="space-y-3">
-              {flipCards.map((card, i) =>
-              <FlipCard key={i} front={card.front} back={card.back} />
-              )}
+              {flipCards.map((card, i) => (
+                <FlipCard key={i} front={card.front} back={card.back} />
+              ))}
             </div>
           </section>
 
@@ -235,15 +237,15 @@ const DeepDiveCultures = () => {
             </p>
             <div className="space-y-3">
               {[
-              "Before I move forward, I want to make sure I've understood this correctly — are you saying we should proceed, or would you like more time to consider it?",
-              "I'm hearing some hesitation — is there a concern I should address before we lock this in?",
-              "I want to check: when you say 'let's revisit this later,' does that mean you'd like to see more data first, or is there a bigger issue with the direction?",
-              "I don't want to misinterpret silence as agreement — does anyone have concerns they'd like to raise, even tentatively?"].
-              map((phrase, i) =>
-              <div key={i} className="bg-card rounded-xl p-4 border border-border/50">
+                "Before I move forward, I want to make sure I've understood this correctly — are you saying we should proceed, or would you like more time to consider it?",
+                "I'm hearing some hesitation — is there a concern I should address before we lock this in?",
+                "I want to check: when you say 'let's revisit this later,' does that mean you'd like to see more data first, or is there a bigger issue with the direction?",
+                "I don't want to misinterpret silence as agreement — does anyone have concerns they'd like to raise, even tentatively?",
+              ].map((phrase, i) => (
+                <div key={i} className="bg-card rounded-xl p-4 border border-border/50">
                   <p className="text-foreground italic text-base">"{phrase}"</p>
                 </div>
-              )}
+              ))}
             </div>
           </section>
 
@@ -272,88 +274,88 @@ const DeepDiveCultures = () => {
           <section>
             <div className="flex items-center justify-between mb-4">
               <h2 className="text-xl font-semibold">✅ Knowledge Check</h2>
-              {submitted &&
-              <button
-                onClick={() => {
-                  setAnswers({});
-                  setSubmitted(false);
-                }}
-                className="text-xs text-cta font-semibold">
-                
+              {submitted && (
+                <button
+                  onClick={() => {
+                    setAnswers({});
+                    setSubmitted(false);
+                  }}
+                  className="text-xs text-cta font-semibold"
+                >
                   Retry
                 </button>
-              }
+              )}
             </div>
             <p className="text-muted-foreground mb-6 text-base">
               Test your cross-cultural reading skills. Choose the best answer for each scenario.
             </p>
 
             <div className="space-y-6">
-              {knowledgeCheck.map((item, qi) =>
-              <div key={qi} className="bg-card rounded-xl p-4 border border-border/50">
+              {knowledgeCheck.map((item, qi) => (
+                <div key={qi} className="bg-card rounded-xl p-4 border border-border/50">
                   <p className="mb-3 text-base font-medium">
                     Q{qi + 1}. {item.q}
                   </p>
                   <div className="space-y-2">
                     {item.options.map((opt) => {
-                    const letter = opt[0];
-                    const isSelected = answers[qi] === letter;
-                    const isCorrect = letter === item.answer;
-                    let style = "bg-background border border-border/50 text-muted-foreground";
-                    if (submitted) {
-                      if (isCorrect)
-                      style = "bg-green-500/10 border border-green-500/30 text-green-700 dark:text-green-400";else
-                      if (isSelected && !isCorrect)
-                      style = "bg-destructive/10 border border-destructive/30 text-destructive";else
-                      style = "bg-background border border-border/30 text-muted-foreground opacity-50";
-                    } else if (isSelected) {
-                      style = "bg-cta/10 border border-cta text-foreground";
-                    }
-                    return (
-                      <button
-                        key={opt}
-                        disabled={submitted}
-                        onClick={() => setAnswers((prev) => ({ ...prev, [qi]: letter }))}
-                        className={`w-full text-left rounded-lg px-3 py-2.5 text-sm transition-all ${style}`}>
-                        
+                      const letter = opt[0];
+                      const isSelected = answers[qi] === letter;
+                      const isCorrect = letter === item.answer;
+                      let style = "bg-background border border-border/50 text-muted-foreground";
+                      if (submitted) {
+                        if (isCorrect)
+                          style = "bg-green-500/10 border border-green-500/30 text-green-700 dark:text-green-400";
+                        else if (isSelected && !isCorrect)
+                          style = "bg-destructive/10 border border-destructive/30 text-destructive";
+                        else style = "bg-background border border-border/30 text-muted-foreground opacity-50";
+                      } else if (isSelected) {
+                        style = "bg-cta/10 border border-cta text-foreground";
+                      }
+                      return (
+                        <button
+                          key={opt}
+                          disabled={submitted}
+                          onClick={() => setAnswers((prev) => ({ ...prev, [qi]: letter }))}
+                          className={`w-full text-left rounded-lg px-3 py-2.5 text-sm transition-all ${style}`}
+                        >
                           {opt}
-                        </button>);
-
-                  })}
+                        </button>
+                      );
+                    })}
                   </div>
                   {submitted && <p className="text-muted-foreground mt-3 italic text-sm">✓ {item.explanation}</p>}
                 </div>
-              )}
+              ))}
             </div>
 
-            {!submitted && Object.keys(answers).length === knowledgeCheck.length &&
-            <button
-              onClick={() => setSubmitted(true)}
-              className="mt-4 w-full py-3 rounded-xl bg-cta text-cta-foreground font-semibold text-sm">
-              
+            {!submitted && Object.keys(answers).length === knowledgeCheck.length && (
+              <button
+                onClick={() => setSubmitted(true)}
+                className="mt-4 w-full py-3 rounded-xl bg-cta text-cta-foreground font-semibold text-sm"
+              >
                 Check Answers
               </button>
-            }
+            )}
 
-            {submitted &&
-            <div className="mt-4 bg-card rounded-xl p-4 border border-border/50 text-center">
+            {submitted && (
+              <div className="mt-4 bg-card rounded-xl p-4 border border-border/50 text-center">
                 <p className="font-bold text-lg">
                   {Object.entries(answers).filter(([qi, a]) => a === knowledgeCheck[Number(qi)].answer).length} /{" "}
                   {knowledgeCheck.length} correct
                 </p>
                 <p className="text-sm text-muted-foreground mt-1">
                   {Object.entries(answers).filter(([qi, a]) => a === knowledgeCheck[Number(qi)].answer).length ===
-                knowledgeCheck.length ?
-                "Perfect score! 🎉" :
-                "Review the explanations above to learn more."}
+                  knowledgeCheck.length
+                    ? "Perfect score! 🎉"
+                    : "Review the explanations above to learn more."}
                 </p>
               </div>
-            }
+            )}
           </section>
         </div>
       </article>
-    </div>);
-
+    </div>
+  );
 };
 
 export default DeepDiveCultures;
