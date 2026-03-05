@@ -666,7 +666,7 @@ export const modules: Module[] = [
           {
             type: "fill-gap",
             instruction: "Tap the correct phrase to complete each sentence.",
-            wordBank: ["landed differently", "your intention", "came across", "different way", "noticed that too"],
+            wordBank: ["landed differently", "your intention", "different way", "noticed that too"],
             items: [
               { id: "7-2a", prompt: '"I think that comment _____ than you intended."', answer: "landed differently" },
               { id: "7-2b", prompt: '"I\'m sure that wasn\'t _____, but here\'s how it came across."', answer: "your intention" },
