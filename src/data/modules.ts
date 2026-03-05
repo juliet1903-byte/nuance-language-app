@@ -578,8 +578,8 @@ export const modules: Module[] = [
             instruction: "Tap the correct phrase to complete each sentence.",
             wordBank: ["right footing", "flexibility on", "what I've delivered", "the market", "excited about"],
             items: [
-              { id: "6-2a", prompt: '"I\'m _____ this role — I want to start on the _____."', answer: "excited about" },
-              { id: "6-2b", prompt: '"Based on _____ and _____, I believe this range is fair."', answer: "what I've delivered" },
+              { id: "6-2a", prompt: '"I\'m _____ this role — I want to start on the right footing."', answer: "excited about" },
+              { id: "6-2b", prompt: '"Based on _____ and the market, I believe this range is fair."', answer: "what I've delivered" },
               { id: "6-2c", prompt: '"Is there _____ the start date?"', answer: "flexibility on" },
             ],
           },
