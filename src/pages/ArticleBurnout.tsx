@@ -169,7 +169,7 @@ const ArticleBurnout = () => {
               "'I can't take on another project without dropping something else. If this is the priority, what should I deprioritise?'",
               "'I'm not able to commit to that timeline. If we push it out by a week, I can do it properly.'"].
               map((phrase, i) =>
-              <div key={i} className="bg-card rounded-xl p-4 border border-border/50 text-sm text-foreground italic">
+              <div key={i} className="bg-card rounded-xl p-4 border border-border/50 text-base text-foreground italic">
                   {phrase}
                 </div>
               )}
