@@ -764,7 +764,7 @@ export const modules: Module[] = [
             items: [
               { id: "8-2a", prompt: '"What\'s the one thing you want them to _____?"', answer: "walk away remembering" },
               { id: "8-2b", prompt: '"Let me _____ first, then I\'ll give context."', answer: "land the key point" },
-              { id: "8-2c", prompt: '"I\'m going to _____ as: context, _____, ask."', answer: "structure this" },
+              { id: "8-2c", prompt: '"I\'m going to _____ as: context, recommendation, ask."', answer: "structure this" },
             ],
           },
         ],
