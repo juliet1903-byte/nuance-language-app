@@ -302,7 +302,7 @@ export const modules: Module[] = [
           {
             type: "fill-gap",
             instruction: "Tap the correct phrase to complete each sentence.",
-            wordBank: ["reading this correctly", "how it lands", "some hesitation", "discuss further", "comfortable with"],
+            wordBank: ["reading this correctly", "how it lands", "some hesitation", "comfortable with"],
             items: [
               { id: "3-2a", prompt: '"I want to make sure I\'m _____ — are you comfortable with the direction?"', answer: "reading this correctly" },
               { id: "3-2b", prompt: '"I noticed _____ — is there something we should discuss further?"', answer: "some hesitation" },
