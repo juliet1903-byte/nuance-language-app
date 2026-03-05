@@ -628,7 +628,7 @@ export const modules: Module[] = [
           {
             type: "fill-gap",
             instruction: "Tap the correct phrase to complete each sentence.",
-            wordBank: ["Hey everyone", "experience differently", "be aware", "feel default", "habitual"],
+            wordBank: ["Hey everyone", "be aware", "feel default", "habitual"],
             items: [
               { id: "7-1", prompt: '"_____ — let\'s get started with the standup."', answer: "Hey everyone" },
               { id: "7-2", prompt: '"I try to _____ of how people experience this environment."', answer: "be aware" },
