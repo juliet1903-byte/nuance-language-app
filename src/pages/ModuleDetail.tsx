@@ -124,7 +124,8 @@ const ModuleDetail = () => {
         await logActivity("module_complete", module.id);
       }
     }
-    setView("complete");
+    try { localStorage.removeItem(storageKey); } catch {}
+    setViewState("complete");
   };
 
   return (
