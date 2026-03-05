@@ -212,7 +212,7 @@ export const modules: Module[] = [
             instruction: "Tap the correct phrase to complete each sentence.",
             wordBank: ["who's doing what", "follow-up", "sound right", "by when", "we've agreed"],
             items: [
-              { id: "2-2a", prompt: '"Let me summarise what _____ — and _____ _____."', answer: "we've agreed" },
+              { id: "2-2a", prompt: '"Let me summarise what _____ — and confirm the next steps."', answer: "we've agreed" },
               { id: "2-2b", prompt: '"I\'ll send a short _____ so we\'re all aligned."', answer: "follow-up" },
               { id: "2-2c", prompt: '"My action is to revise the spec by Friday. Does that _____?"', answer: "sound right" },
             ],
