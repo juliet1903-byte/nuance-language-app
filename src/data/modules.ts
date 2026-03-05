@@ -304,8 +304,8 @@ export const modules: Module[] = [
             instruction: "Tap the correct phrase to complete each sentence.",
             wordBank: ["reading this correctly", "how it lands", "some hesitation", "discuss further", "comfortable with"],
             items: [
-              { id: "3-2a", prompt: '"I want to make sure I\'m _____ — are you _____ the direction?"', answer: "reading this correctly" },
-              { id: "3-2b", prompt: '"I noticed _____ — is there something we should _____?"', answer: "some hesitation" },
+              { id: "3-2a", prompt: '"I want to make sure I\'m _____ — are you comfortable with the direction?"', answer: "reading this correctly" },
+              { id: "3-2b", prompt: '"I noticed _____ — is there something we should discuss further?"', answer: "some hesitation" },
               { id: "3-2c", prompt: '"I\'m curious _____ here given the team dynamics."', answer: "how it lands" },
             ],
           },
