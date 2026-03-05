@@ -316,7 +316,7 @@ const DeepDiveCultures = () => {
                           key={opt}
                           disabled={submitted}
                           onClick={() => setAnswers((prev) => ({ ...prev, [qi]: letter }))}
-                          className={`w-full text-left rounded-lg px-3 py-2.5 text-sm transition-all ${style}`}
+                          className={`w-full text-left rounded-lg px-3 py-2.5 text-base transition-all ${style}`}
                         >
                           {opt}
                         </button>
