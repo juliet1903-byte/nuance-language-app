@@ -488,8 +488,8 @@ export const modules: Module[] = [
             instruction: "Tap the correct phrase to complete each sentence.",
             wordBank: ["sit with that", "telling me", "specific example", "do differently", "seen it that way"],
             items: [
-              { id: "5-2a", prompt: '"Thank you for _____ — can you give me a _____?"', answer: "telling me" },
-              { id: "5-2b", prompt: '"I hadn\'t _____ — let me _____."', answer: "seen it that way" },
+              { id: "5-2a", prompt: '"Thank you for _____ — can you give me a specific example?"', answer: "telling me" },
+              { id: "5-2b", prompt: '"I hadn\'t _____ — let me sit with that."', answer: "seen it that way" },
               { id: "5-2c", prompt: '"What would you suggest I _____ going forward?"', answer: "do differently" },
             ],
           },
