@@ -542,7 +542,7 @@ export const modules: Module[] = [
             items: [
               { id: "6-1", prompt: '"One thing I\'m _____ is reducing deploy time by 40%."', answer: "particularly proud of" },
               { id: "6-2", prompt: '"Looking back, I\'d _____ the stakeholder communication."', answer: "handle differently" },
-              { id: "6-3", prompt: '"_____, here was _____ for that decision."', answer: "at the time" },
+              { id: "6-3", prompt: '"_____, here was my reasoning for that decision."', answer: "at the time" },
             ],
           },
         ],
