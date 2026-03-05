@@ -210,9 +210,9 @@ export const modules: Module[] = [
           {
             type: "fill-gap",
             instruction: "Tap the correct phrase to complete each sentence.",
-            wordBank: ["who's doing what", "follow-up", "sound right", "by when", "we've agreed"],
+            wordBank: ["follow-up", "sound right", "by when", "we've agreed"],
             items: [
-              { id: "2-2a", prompt: '"Let me summarise what _____ — and _____ _____."', answer: "we've agreed" },
+              { id: "2-2a", prompt: '"Let me summarise what _____ — and confirm the next steps."', answer: "we've agreed" },
               { id: "2-2b", prompt: '"I\'ll send a short _____ so we\'re all aligned."', answer: "follow-up" },
               { id: "2-2c", prompt: '"My action is to revise the spec by Friday. Does that _____?"', answer: "sound right" },
             ],
@@ -266,7 +266,7 @@ export const modules: Module[] = [
             wordBank: ["push back", "share them", "your thinking", "slightly", "different view"],
             items: [
               { id: "3-1", prompt: '"I have some concerns — can I _____?"', answer: "share them" },
-              { id: "3-2", prompt: '"Can I _____ on that _____?"', answer: "push back" },
+              { id: "3-2", prompt: '"Can I _____ on that point?"', answer: "push back" },
               { id: "3-3", prompt: '"I want to understand _____ before I respond."', answer: "your thinking" },
               { id: "3-4", prompt: '"I\'d like to share a _____ on this."', answer: "different view" },
             ],
@@ -302,10 +302,10 @@ export const modules: Module[] = [
           {
             type: "fill-gap",
             instruction: "Tap the correct phrase to complete each sentence.",
-            wordBank: ["reading this correctly", "how it lands", "some hesitation", "discuss further", "comfortable with"],
+            wordBank: ["reading this correctly", "how it lands", "some hesitation", "comfortable with"],
             items: [
-              { id: "3-2a", prompt: '"I want to make sure I\'m _____ — are you _____ the direction?"', answer: "reading this correctly" },
-              { id: "3-2b", prompt: '"I noticed _____ — is there something we should _____?"', answer: "some hesitation" },
+              { id: "3-2a", prompt: '"I want to make sure I\'m _____ — are you comfortable with the direction?"', answer: "reading this correctly" },
+              { id: "3-2b", prompt: '"I noticed _____ — is there something we should discuss further?"', answer: "some hesitation" },
               { id: "3-2c", prompt: '"I\'m curious _____ here given the team dynamics."', answer: "how it lands" },
             ],
           },
@@ -360,7 +360,7 @@ export const modules: Module[] = [
             items: [
               { id: "4-1", prompt: '"I think this _____ to your Q3 priority."', answer: "connects directly" },
               { id: "4-2", prompt: '"What would _____ for you to support this?"', answer: "need to be true" },
-              { id: "4-3", prompt: '"I\'d rather _____ than raise it when it\'s _____."', answer: "flag this early" },
+              { id: "4-3", prompt: '"I\'d rather _____ than raise it when it\'s too late to act."', answer: "flag this early" },
             ],
           },
         ],
@@ -394,10 +394,10 @@ export const modules: Module[] = [
           {
             type: "fill-gap",
             instruction: "Tap the correct phrase to complete each sentence.",
-            wordBank: ["early signal", "at risk", "your perspective", "late surprise", "what I need"],
+            wordBank: ["early signal", "at risk", "your perspective", "what I need"],
             items: [
-              { id: "4-2a", prompt: '"I want to give you an _____ rather than a _____."', answer: "early signal" },
-              { id: "4-2b", prompt: '"Here\'s where we are, what\'s _____, and _____."', answer: "at risk" },
+              { id: "4-2a", prompt: '"I want to give you an _____ rather than a late surprise."', answer: "early signal" },
+              { id: "4-2b", prompt: '"Here\'s where we are, what\'s _____, and what I need from you."', answer: "at risk" },
               { id: "4-2c", prompt: '"I\'ve thought about this from _____ — here\'s my recommendation."', answer: "your perspective" },
             ],
           },
@@ -486,10 +486,10 @@ export const modules: Module[] = [
           {
             type: "fill-gap",
             instruction: "Tap the correct phrase to complete each sentence.",
-            wordBank: ["sit with that", "telling me", "specific example", "do differently", "seen it that way"],
+            wordBank: ["telling me", "do differently", "seen it that way", "sit with that"],
             items: [
-              { id: "5-2a", prompt: '"Thank you for _____ — can you give me a _____?"', answer: "telling me" },
-              { id: "5-2b", prompt: '"I hadn\'t _____ — let me _____."', answer: "seen it that way" },
+              { id: "5-2a", prompt: '"Thank you for _____ — can you give me a specific example?"', answer: "telling me" },
+              { id: "5-2b", prompt: '"I hadn\'t _____ — let me sit with that."', answer: "seen it that way" },
               { id: "5-2c", prompt: '"What would you suggest I _____ going forward?"', answer: "do differently" },
             ],
           },
@@ -538,11 +538,11 @@ export const modules: Module[] = [
           {
             type: "fill-gap",
             instruction: "Tap the correct phrase to complete each sentence.",
-            wordBank: ["particularly proud of", "handle differently", "at the time", "my reasoning", "pushed back"],
+            wordBank: ["particularly proud of", "handle differently", "at the time", "pushed back"],
             items: [
               { id: "6-1", prompt: '"One thing I\'m _____ is reducing deploy time by 40%."', answer: "particularly proud of" },
               { id: "6-2", prompt: '"Looking back, I\'d _____ the stakeholder communication."', answer: "handle differently" },
-              { id: "6-3", prompt: '"_____, here was _____ for that decision."', answer: "at the time" },
+              { id: "6-3", prompt: '"_____, here was my reasoning for that decision."', answer: "at the time" },
             ],
           },
         ],
@@ -576,10 +576,10 @@ export const modules: Module[] = [
           {
             type: "fill-gap",
             instruction: "Tap the correct phrase to complete each sentence.",
-            wordBank: ["right footing", "flexibility on", "what I've delivered", "the market", "excited about"],
+            wordBank: ["flexibility on", "what I've delivered", "excited about", "right footing"],
             items: [
-              { id: "6-2a", prompt: '"I\'m _____ this role — I want to start on the _____."', answer: "excited about" },
-              { id: "6-2b", prompt: '"Based on _____ and _____, I believe this range is fair."', answer: "what I've delivered" },
+              { id: "6-2a", prompt: '"I\'m _____ this role — I want to start on the right footing."', answer: "excited about" },
+              { id: "6-2b", prompt: '"Based on _____ and the market, I believe this range is fair."', answer: "what I've delivered" },
               { id: "6-2c", prompt: '"Is there _____ the start date?"', answer: "flexibility on" },
             ],
           },
@@ -628,10 +628,10 @@ export const modules: Module[] = [
           {
             type: "fill-gap",
             instruction: "Tap the correct phrase to complete each sentence.",
-            wordBank: ["Hey everyone", "experience differently", "be aware", "feel default", "habitual"],
+            wordBank: ["Hey everyone", "be aware", "feel default", "habitual"],
             items: [
               { id: "7-1", prompt: '"_____ — let\'s get started with the standup."', answer: "Hey everyone" },
-              { id: "7-2", prompt: '"I try to _____ of how people _____ this environment."', answer: "be aware" },
+              { id: "7-2", prompt: '"I try to _____ of how people experience this environment."', answer: "be aware" },
               { id: "7-3", prompt: '"Most exclusive language is _____, not intentional."', answer: "habitual" },
             ],
           },
@@ -666,10 +666,10 @@ export const modules: Module[] = [
           {
             type: "fill-gap",
             instruction: "Tap the correct phrase to complete each sentence.",
-            wordBank: ["landed differently", "your intention", "came across", "different way", "noticed that too"],
+            wordBank: ["landed differently", "your intention", "different way", "noticed that too"],
             items: [
               { id: "7-2a", prompt: '"I think that comment _____ than you intended."', answer: "landed differently" },
-              { id: "7-2b", prompt: '"I\'m sure that wasn\'t _____, but here\'s how it _____."', answer: "your intention" },
+              { id: "7-2b", prompt: '"I\'m sure that wasn\'t _____, but here\'s how it came across."', answer: "your intention" },
               { id: "7-2c", prompt: '"Can we find a _____ to phrase that?"', answer: "different way" },
             ],
           },
@@ -721,11 +721,11 @@ export const modules: Module[] = [
           {
             type: "fill-gap",
             instruction: "Tap the correct phrase to complete each sentence.",
-            wordBank: ["work with", "add something", "my impression", "hard to follow", "before we move on"],
+            wordBank: ["work with", "add something", "my impression", "before we move on"],
             items: [
               { id: "8-1", prompt: '"I _____ engineering teams to simplify complexity."', answer: "work with" },
-              { id: "8-2", prompt: '"Could I _____ here _____?"', answer: "add something" },
-              { id: "8-3", prompt: '"_____ was that the recommendation was _____."', answer: "my impression" },
+              { id: "8-2", prompt: '"Could I _____ here before we move on?"', answer: "add something" },
+              { id: "8-3", prompt: '"_____ was that the recommendation was hard to follow."', answer: "my impression" },
             ],
           },
         ],
@@ -760,11 +760,11 @@ export const modules: Module[] = [
           {
             type: "fill-gap",
             instruction: "Tap the correct phrase to complete each sentence.",
-            wordBank: ["walk away remembering", "land the key point", "context and ask", "structure this", "recommendation"],
+            wordBank: ["walk away remembering", "land the key point", "structure this", "recommendation"],
             items: [
               { id: "8-2a", prompt: '"What\'s the one thing you want them to _____?"', answer: "walk away remembering" },
               { id: "8-2b", prompt: '"Let me _____ first, then I\'ll give context."', answer: "land the key point" },
-              { id: "8-2c", prompt: '"I\'m going to _____ as: context, _____, ask."', answer: "structure this" },
+              { id: "8-2c", prompt: '"I\'m going to _____ as: context, recommendation, ask."', answer: "structure this" },
             ],
           },
         ],
