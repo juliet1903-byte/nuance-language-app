@@ -23,26 +23,6 @@ const Index = () => {
   const { unreadCount } = useNotifications();
   const showAvatar = !isGuest && user;
 
-  const cardRef = useRef<HTMLDivElement>(null);
-  const scrollContainerRef = useScrollContainer();
-  const [tilt, setTilt] = useState(0);
-
-  useEffect(() => {
-    const scrollEl = scrollContainerRef?.current;
-    const target: HTMLElement | Window = scrollEl || window;
-
-    const onScroll = () => {
-      if (!cardRef.current) return;
-      const rect = cardRef.current.getBoundingClientRect();
-      const viewH = window.innerHeight;
-      const r = Math.max(0, Math.min(1, (viewH * 0.5 - rect.top) / (viewH * 0.5)));
-      setTilt(r * 12);
-    };
-
-    target.addEventListener("scroll", onScroll, { passive: true });
-    onScroll();
-    return () => target.removeEventListener("scroll", onScroll);
-  }, [scrollContainerRef]);
 
   // Find next lesson for registered users
   const nextLesson = useMemo(() => {
