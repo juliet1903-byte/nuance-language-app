@@ -23,6 +23,8 @@ interface AuthContextType {
   signOut: () => Promise<void>;
   enterGuestMode: () => void;
   exitGuestMode: () => void;
+  refreshProfile: () => Promise<void>;
+  deleteAccount: () => Promise<{ error: Error | null }>;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
