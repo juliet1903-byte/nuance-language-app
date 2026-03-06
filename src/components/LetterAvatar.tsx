@@ -1,6 +1,7 @@
 interface LetterAvatarProps {
   name?: string | null;
   email?: string | null;
+  avatarUrl?: string | null;
   size?: "sm" | "md" | "lg";
   className?: string;
 }
@@ -11,9 +12,17 @@ const sizeMap = {
   lg: "w-20 h-20 text-2xl",
 };
 
-const LetterAvatar = ({ name, email, size = "md", className = "" }: LetterAvatarProps) => {
+const LetterAvatar = ({ name, email, avatarUrl, size = "md", className = "" }: LetterAvatarProps) => {
   const display = name || email || "?";
   const letter = display.charAt(0).toUpperCase();
+
+  if (avatarUrl) {
+    return (
+      <div className={`rounded-full overflow-hidden shrink-0 ${sizeMap[size]} ${className}`}>
+        <img src={avatarUrl} alt={display} className="w-full h-full object-cover" />
+      </div>
+    );
+  }
 
   return (
     <div

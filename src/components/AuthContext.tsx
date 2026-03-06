@@ -5,6 +5,7 @@ import type { User, Session } from "@supabase/supabase-js";
 interface Profile {
   id: string;
   display_name: string | null;
+  avatar_url: string | null;
   vibe_iq: number;
   learning_level: number;
   streak_days: number;
@@ -22,6 +23,8 @@ interface AuthContextType {
   signOut: () => Promise<void>;
   enterGuestMode: () => void;
   exitGuestMode: () => void;
+  refreshProfile: () => Promise<void>;
+  deleteAccount: () => Promise<{ error: Error | null }>;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -106,9 +109,29 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     localStorage.removeItem("nuance-guest");
   };
 
+  const refreshProfile = async () => {
+    if (user) await fetchProfile(user.id);
+  };
+
+  const deleteAccount = async () => {
+    try {
+      // Delete avatar from storage if exists
+      if (profile?.avatar_url && user) {
+        const path = `${user.id}/avatar`;
+        await supabase.storage.from("avatars").remove([path]);
+      }
+      // Sign out (actual account deletion requires admin/edge function)
+      await supabase.auth.signOut();
+      setProfile(null);
+      return { error: null };
+    } catch (e) {
+      return { error: e as Error };
+    }
+  };
+
   return (
     <AuthContext.Provider
-      value={{ user, session, profile, isGuest, loading, signUp, signIn, signOut, enterGuestMode, exitGuestMode }}
+      value={{ user, session, profile, isGuest, loading, signUp, signIn, signOut, enterGuestMode, exitGuestMode, refreshProfile, deleteAccount }}
     >
       {children}
     </AuthContext.Provider>
