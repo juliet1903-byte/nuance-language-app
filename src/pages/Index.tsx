@@ -69,10 +69,12 @@ const Index = () => {
             }
           </button>
           {showAvatar ?
+          <div onClick={() => navigate("/profile")} className="cursor-pointer">
           <LetterAvatar
             name={profile?.display_name}
             email={user?.email}
-            size="sm" /> :
+            size="sm" />
+          </div> :
 
 
           <div onClick={() => navigate("/auth")} className="w-9 h-9 rounded-full bg-muted overflow-hidden flex items-center justify-center cursor-pointer">
