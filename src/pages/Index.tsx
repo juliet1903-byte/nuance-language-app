@@ -11,7 +11,7 @@ import videoPositive from "@/assets/video-positive.png";
 import LearningPath from "@/components/LearningPath";
 import ModuleCard from "@/components/ModuleCard";
 import TrendingCard from "@/components/TrendingCard";
-import AppLayout, { useScrollContainer } from "@/components/AppLayout";
+import AppLayout from "@/components/AppLayout";
 import { modules } from "@/data/modules";
 import { useProgress } from "@/hooks/useProgress";
 import { useNotifications } from "@/hooks/useNotifications";
