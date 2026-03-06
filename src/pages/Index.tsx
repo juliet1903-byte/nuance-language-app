@@ -87,14 +87,7 @@ const Index = () => {
 
         <section>
           <h2 className="text-xl font-medium mb-3">{continueTitle}</h2>
-          <div
-            ref={cardRef}
-            className="rounded-2xl overflow-hidden bg-card transition-transform duration-150 will-change-transform"
-            style={{
-              transform: `perspective(800px) rotateX(${tilt}deg)`,
-              transformOrigin: "bottom center",
-              boxShadow: "0 1px 2px rgba(0,0,0,0.03)"
-            }}>
+          <div className="rounded-2xl overflow-hidden bg-card shadow-sm">
 
             <img alt="Lesson" className="w-full h-40 object-cover" src="/lovable-uploads/44f61677-4fd5-49b3-9fbb-eabbecbad3aa.png" />
             <div className="p-4 text-sm">
