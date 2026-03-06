@@ -73,6 +73,7 @@ const Index = () => {
           <LetterAvatar
             name={profile?.display_name}
             email={user?.email}
+            avatarUrl={profile?.avatar_url}
             size="sm" />
           </div> :
 
