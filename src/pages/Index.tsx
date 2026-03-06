@@ -1,6 +1,6 @@
 import { Bell, User } from "lucide-react";
 import { useNavigate } from "react-router-dom";
-import { useRef, useEffect, useState, useMemo } from "react";
+import { useMemo } from "react";
 import Logo from "@/components/Logo";
 import LetterAvatar from "@/components/LetterAvatar";
 import { useAuth } from "@/components/AuthContext";
@@ -11,7 +11,7 @@ import videoPositive from "@/assets/video-positive.png";
 import LearningPath from "@/components/LearningPath";
 import ModuleCard from "@/components/ModuleCard";
 import TrendingCard from "@/components/TrendingCard";
-import AppLayout, { useScrollContainer } from "@/components/AppLayout";
+import AppLayout from "@/components/AppLayout";
 import { modules } from "@/data/modules";
 import { useProgress } from "@/hooks/useProgress";
 import { useNotifications } from "@/hooks/useNotifications";
@@ -23,26 +23,6 @@ const Index = () => {
   const { unreadCount } = useNotifications();
   const showAvatar = !isGuest && user;
 
-  const cardRef = useRef<HTMLDivElement>(null);
-  const scrollContainerRef = useScrollContainer();
-  const [tilt, setTilt] = useState(0);
-
-  useEffect(() => {
-    const scrollEl = scrollContainerRef?.current;
-    const target: HTMLElement | Window = scrollEl || window;
-
-    const onScroll = () => {
-      if (!cardRef.current) return;
-      const rect = cardRef.current.getBoundingClientRect();
-      const viewH = window.innerHeight;
-      const r = Math.max(0, Math.min(1, (viewH * 0.5 - rect.top) / (viewH * 0.5)));
-      setTilt(r * 12);
-    };
-
-    target.addEventListener("scroll", onScroll, { passive: true });
-    onScroll();
-    return () => target.removeEventListener("scroll", onScroll);
-  }, [scrollContainerRef]);
 
   // Find next lesson for registered users
   const nextLesson = useMemo(() => {
@@ -107,14 +87,7 @@ const Index = () => {
 
         <section>
           <h2 className="text-xl font-medium mb-3">{continueTitle}</h2>
-          <div
-            ref={cardRef}
-            className="rounded-2xl overflow-hidden bg-card transition-transform duration-150 will-change-transform"
-            style={{
-              transform: `perspective(800px) rotateX(${tilt}deg)`,
-              transformOrigin: "bottom center",
-              boxShadow: "0 1px 2px rgba(0,0,0,0.03)"
-            }}>
+          <div className="rounded-2xl overflow-hidden bg-card shadow-sm">
 
             <img alt="Lesson" className="w-full h-40 object-cover" src="/lovable-uploads/44f61677-4fd5-49b3-9fbb-eabbecbad3aa.png" />
             <div className="p-4 text-sm">
