@@ -177,7 +177,7 @@ const Profile = () => {
 
         <section className="flex flex-col items-center text-center pt-2">
           <div className="relative mb-3">
-            <div className="ring-2 ring-accent ring-offset-2 ring-offset-background rounded-full">
+            <div className="rounded-full">
               <LetterAvatar
                 name={showBanner ? "U" : profile?.display_name}
                 email={showBanner ? undefined : user?.email}
