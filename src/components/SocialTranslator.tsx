@@ -34,10 +34,18 @@ const SocialTranslator = ({ open, onClose }: SocialTranslatorProps) => {
 
   const MAX_RECORDING_SECONDS = 60;
 
+  const stopRecording = useCallback(() => {
+    recognitionRef.current?.stop();
+    setIsRecording(false);
+    if (micTimerRef.current) {
+      clearTimeout(micTimerRef.current);
+      micTimerRef.current = null;
+    }
+  }, []);
+
   const handleMic = useCallback(() => {
     if (isRecording) {
-      recognitionRef.current?.stop();
-      setIsRecording(false);
+      stopRecording();
       return;
     }
 
