@@ -81,12 +81,18 @@ const SocialTranslator = ({ open, onClose }: SocialTranslatorProps) => {
       setInput(finalTranscriptRef.current + (interim ? " " + interim : ""));
     };
 
-    recognition.onerror = () => setIsRecording(false);
-    recognition.onend = () => setIsRecording(false);
+    recognition.onerror = () => stopRecording();
+    recognition.onend = () => stopRecording();
 
     recognition.start();
     setIsRecording(true);
-  }, [isRecording, input]);
+
+    // Auto-stop after time limit
+    micTimerRef.current = setTimeout(() => {
+      stopRecording();
+      toast({ title: "Recording stopped", description: "60-second limit reached." });
+    }, MAX_RECORDING_SECONDS * 1000);
+  }, [isRecording, input, stopRecording]);
 
   const handleTranslate = useCallback(async () => {
     if (!input.trim() || isLoading) return;
