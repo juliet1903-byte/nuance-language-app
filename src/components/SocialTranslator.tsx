@@ -291,12 +291,32 @@ const SocialTranslator = ({ open, onClose }: SocialTranslatorProps) => {
                 exit={{ opacity: 0 }}
                 className="mt-5 glass-dark rounded-2xl p-5 text-glass-foreground">
                 
-                    {result.sections.map((s) =>
-                <div key={s.label} className="mb-4 last:mb-0">
-                        <p className="font-bold tracking-wider text-accent mb-1 text-sm">{s.label}</p>
-                        <p className="leading-relaxed opacity-90 text-base">{s.content}</p>
+                    {/* View mode toggle */}
+                    {result.conversational &&
+                  <div className="flex rounded-lg p-0.5 mb-4 bg-glass-foreground/10">
+                        <button
+                      onClick={() => setViewMode("structured")}
+                      className={`flex-1 flex items-center justify-center gap-1.5 py-2 text-sm font-semibold rounded-md transition-all ${viewMode === "structured" ? "bg-accent/30 text-accent" : "text-glass-foreground/60"}`}>
+                          <List className="w-3.5 h-3.5" /> Structured
+                        </button>
+                        <button
+                      onClick={() => setViewMode("conversational")}
+                      className={`flex-1 flex items-center justify-center gap-1.5 py-2 text-sm font-semibold rounded-md transition-all ${viewMode === "conversational" ? "bg-accent/30 text-accent" : "text-glass-foreground/60"}`}>
+                          <MessageSquareText className="w-3.5 h-3.5" /> Conversational
+                        </button>
                       </div>
-                )}
+                  }
+
+                    {viewMode === "structured" ? (
+                      result.sections.map((s) =>
+                    <div key={s.label} className="mb-4 last:mb-0">
+                          <p className="font-bold tracking-wider text-accent mb-1 text-sm">{s.label}</p>
+                          <p className="leading-relaxed opacity-90 text-base">{s.content}</p>
+                        </div>
+                    )
+                    ) : (
+                      <p className="leading-relaxed opacity-90 text-base">{result.conversational}</p>
+                    )}
 
                     {/* Coach's Tip */}
                     <AnimatePresence>
