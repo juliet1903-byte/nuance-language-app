@@ -5,7 +5,7 @@ import { useTextSize } from "@/hooks/useTextSize";
 
 const ArticleBurnout = () => {
   const navigate = useNavigate();
-  const { textSizeClass, cycleTextSize } = useTextSize();
+  const { textSize, textSizeClass, cycleTextSize } = useTextSize();
 
   const earlyWarnings = [
   "You stop volunteering for things. You used to raise your hand for new projects, offer to help with side tasks. Now you wait to be asked — and sometimes you hope you are not asked at all.",
