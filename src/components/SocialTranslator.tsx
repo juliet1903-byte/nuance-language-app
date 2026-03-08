@@ -318,21 +318,6 @@ const SocialTranslator = ({ open, onClose }: SocialTranslatorProps) => {
                 exit={{ opacity: 0 }}
                 className="mt-5 glass-dark rounded-2xl p-5 text-glass-foreground">
                 
-                    {/* View mode toggle */}
-                    {result.conversational &&
-                  <div className="flex rounded-lg p-0.5 mb-4 bg-glass-foreground/10">
-                        <button
-                      onClick={() => setViewMode("structured")}
-                      className={`flex-1 flex items-center justify-center gap-1.5 py-2 text-sm font-semibold rounded-md transition-all ${viewMode === "structured" ? "bg-glass-foreground/20 text-glass-foreground" : "text-glass-foreground/50"}`}>
-                          <List className="w-3.5 h-3.5" /> Structured
-                        </button>
-                        <button
-                      onClick={() => setViewMode("conversational")}
-                      className={`flex-1 flex items-center justify-center gap-1.5 py-2 text-sm font-semibold rounded-md transition-all ${viewMode === "conversational" ? "bg-glass-foreground/20 text-glass-foreground" : "text-glass-foreground/50"}`}>
-                          <MessageSquareText className="w-3.5 h-3.5" /> Conversational
-                        </button>
-                      </div>
-                  }
 
                     {viewMode === "structured" ? (
                       result.sections.map((s) =>
@@ -361,10 +346,17 @@ const SocialTranslator = ({ open, onClose }: SocialTranslatorProps) => {
                     </AnimatePresence>
 
                     <div className="flex justify-end gap-2 mt-4">
+                      {result.conversational &&
+                        <button
+                          onClick={() => setViewMode((v) => v === "structured" ? "conversational" : "structured")}
+                          className={`p-2 rounded-full transition-colors ${viewMode === "conversational" ? "bg-glass-foreground/20" : "bg-glass-foreground/10"}`}
+                          title={viewMode === "structured" ? "Switch to conversational" : "Switch to structured"}>
+                          <MessageSquareText className="w-[20px] h-[20px]" />
+                        </button>
+                      }
                       <button
-                    onClick={() => setShowCoachTip((p) => !p)}
-                    className={`p-2 rounded-full transition-colors ${showCoachTip ? "bg-accent/30" : "bg-glass-foreground/10"}`}>
-                    
+                        onClick={() => setShowCoachTip((p) => !p)}
+                        className={`p-2 rounded-full transition-colors ${showCoachTip ? "bg-glass-foreground/20" : "bg-glass-foreground/10"}`}>
                         <HelpCircle className="w-[20px] h-[20px]" />
                       </button>
                       <button onClick={handleCopy} className="p-2 rounded-full bg-glass-foreground/10">
