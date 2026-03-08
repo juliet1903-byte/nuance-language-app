@@ -336,31 +336,38 @@ const SocialTranslator = ({ open, onClose }: SocialTranslatorProps) => {
                       </div>
                     }
 
-                    <AnimatePresence mode="wait" initial={false}>
-                      {viewMode === "structured" ? (
-                        <motion.div
-                          key="structured"
-                          initial={{ opacity: 0 }}
-                          animate={{ opacity: 1 }}
-                          exit={{ opacity: 0 }}
-                          transition={{ duration: 0.15 }}>
-                          {result.sections.map((s) =>
-                            <div key={s.label} className="mb-4 last:mb-0">
-                              <p className="font-bold tracking-wider text-accent mb-1 text-sm">{s.label}</p>
-                              <p className="leading-relaxed opacity-90 text-base">{s.content}</p>
-                            </div>
-                          )}
-                        </motion.div>
-                      ) : (
-                        <motion.p
-                          key="conversational"
-                          initial={{ opacity: 0 }}
-                          animate={{ opacity: 1 }}
-                          exit={{ opacity: 0 }}
-                          transition={{ duration: 0.15 }}
-                          className="leading-relaxed opacity-90 text-base">{result.conversational}</motion.p>
-                      )}
-                    </AnimatePresence>
+                    <div style={{ minHeight: structuredHeight ?? undefined }}>
+                      <AnimatePresence mode="wait" initial={false}>
+                        {viewMode === "structured" ? (
+                          <motion.div
+                            key="structured"
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            exit={{ opacity: 0 }}
+                            transition={{ duration: 0.15 }}
+                            ref={(el) => {
+                              if (el && !structuredHeight) {
+                                setStructuredHeight(el.getBoundingClientRect().height);
+                              }
+                            }}>
+                            {result.sections.map((s) =>
+                              <div key={s.label} className="mb-4 last:mb-0">
+                                <p className="font-bold tracking-wider text-accent mb-1 text-sm">{s.label}</p>
+                                <p className="leading-relaxed opacity-90 text-base">{s.content}</p>
+                              </div>
+                            )}
+                          </motion.div>
+                        ) : (
+                          <motion.p
+                            key="conversational"
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            exit={{ opacity: 0 }}
+                            transition={{ duration: 0.15 }}
+                            className="leading-relaxed opacity-90 text-base">{result.conversational}</motion.p>
+                        )}
+                      </AnimatePresence>
+                    </div>
 
                     {/* Coach's Tip */}
                     <AnimatePresence>
