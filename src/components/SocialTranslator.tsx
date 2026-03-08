@@ -1,5 +1,5 @@
 import { useState, useCallback, useRef } from "react";
-import { X, Mic, HelpCircle, Copy, Loader2 } from "lucide-react";
+import { X, Mic, HelpCircle, Copy, Loader2, MessageSquareText, List } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "@/hooks/use-toast";
