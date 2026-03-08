@@ -12,6 +12,7 @@ import AppLayout from "@/components/AppLayout";
 import { useAuth } from "@/components/AuthContext";
 import { useProgress } from "@/hooks/useProgress";
 import LoginBanner from "@/components/LoginBanner";
+import Leaderboard from "@/components/Leaderboard";
 
 const TONE_COLORS = ["hsl(152, 40%, 46%)", "hsl(228, 80%, 56%)"];
 
