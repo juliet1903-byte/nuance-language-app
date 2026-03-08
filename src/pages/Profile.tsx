@@ -177,8 +177,15 @@ const Profile = () => {
         {showBanner && <LoginBanner className="-top-2" />}
 
         <section className="flex flex-col items-center text-center pt-2">
-          <div className="relative mb-3">
-            <div className="rounded-full">
+          <div className="relative mb-3 group">
+            <div
+              className="rounded-full md:cursor-default cursor-pointer"
+              onClick={() => {
+                if (window.innerWidth < 768 && !showBanner) {
+                  setShowAvatarMenu((v) => !v);
+                }
+              }}
+            >
               <LetterAvatar
                 name={showBanner ? "U" : profile?.display_name}
                 email={showBanner ? undefined : user?.email}
@@ -188,10 +195,11 @@ const Profile = () => {
             </div>
             {!showBanner && (
               <>
+                {/* Desktop: centered edit overlay on hover */}
                 <button
                   onClick={() => setShowAvatarMenu((v) => !v)}
                   disabled={uploadingAvatar}
-                  className="absolute -bottom-1 -right-1 w-8 h-8 rounded-full bg-cta text-cta-foreground flex items-center justify-center shadow-md hover:opacity-90 transition-opacity disabled:opacity-50"
+                  className="hidden md:flex absolute inset-0 m-auto w-10 h-10 rounded-full bg-primary text-primary-foreground items-center justify-center shadow-md opacity-0 group-hover:opacity-100 transition-opacity disabled:opacity-50"
                 >
                   <Pencil className="w-4 h-4" />
                 </button>
