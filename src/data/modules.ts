@@ -45,6 +45,7 @@ export interface Module {
 }
 
 export const modules: Module[] = [
+  // Level 1: Natural Flow
   {
     id: "starting-strong",
     number: 1,
