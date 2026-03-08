@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom";
-import { ArrowLeft, Clock, Tag } from "lucide-react";
+import { ArrowLeft, Clock, Tag, AArrowUp } from "lucide-react";
 import articleConversations from "@/assets/article-conversations.png";
+import { useTextSize } from "@/hooks/useTextSize";
 
 const ArticleConversations = () => {
   const navigate = useNavigate();
