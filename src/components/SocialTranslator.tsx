@@ -359,11 +359,11 @@ const SocialTranslator = ({ open, onClose }: SocialTranslatorProps) => {
                     <div className="flex justify-end gap-2 mt-4">
                       <button
                         onClick={() => setShowCoachTip((p) => !p)}
-                        className={`p-2 rounded-full transition-colors ${showCoachTip ? "bg-glass-foreground/20" : "bg-glass-foreground/10"}`}>
-                        <HelpCircle className="w-[20px] h-[20px]" />
+                        className={`w-10 h-10 flex items-center justify-center rounded-full transition-colors ${showCoachTip ? "bg-glass-foreground/20" : "bg-glass-foreground/10"}`}>
+                        <HelpCircle className="w-5 h-5" />
                       </button>
-                      <button onClick={handleCopy} className="p-2 rounded-full bg-glass-foreground/10">
-                        <Copy className="w-4 h-4" />
+                      <button onClick={handleCopy} className="w-10 h-10 flex items-center justify-center rounded-full bg-glass-foreground/10">
+                        <Copy className="w-5 h-5" />
                       </button>
                     </div>
                   </motion.div>
