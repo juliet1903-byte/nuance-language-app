@@ -174,11 +174,7 @@ const Insights = () => {
                     </p>
                   </div>);
 
-        }
-
-        {/* Leaderboard */}
-        {!showBanner && <Leaderboard />}
-
+              }
               const leaderPct = Math.round(leaderCount / total * 100);
               const colleaguePct = 100 - leaderPct;
               const toneData = [
