@@ -25,6 +25,7 @@ const SocialTranslator = ({ open, onClose }: SocialTranslatorProps) => {
   const [input, setInput] = useState("");
   const [tone, setTone] = useState<Tone>("colleague");
   const [result, setResult] = useState<TranslationResult | null>(null);
+  const [structuredHeight, setStructuredHeight] = useState<number | null>(null);
   const [needlePosition, setNeedlePosition] = useState<number | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [showCoachTip, setShowCoachTip] = useState(false);
