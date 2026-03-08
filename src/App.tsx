@@ -57,6 +57,7 @@ const App = () => (
                 <Route path="/article/criticism" element={<ArticleCriticism />} />
                 <Route path="/article/conversations" element={<ArticleConversations />} />
                 <Route path="/deep-dive/cultures" element={<DeepDiveCultures />} />
+                <Route path="/deep-dive/managing-up" element={<DeepDiveManagingUp />} />
                 <Route path="/video/interview" element={<VideoInterview />} />
                 <Route path="/video/relationships" element={<VideoRelationships />} />
                 <Route path="/video/emotional-intelligence" element={<VideoEmotionalIntelligence />} />
