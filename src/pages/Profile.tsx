@@ -283,14 +283,6 @@ const Profile = () => {
                   </button>
                 )}
               </div>
-              {!showBanner && !profile?.display_name && (
-                <button
-                  onClick={handleEditName}
-                  className="text-xs text-primary font-medium hover:underline"
-                >
-                  Set your display name
-                </button>
-              )}
               {!showBanner && (
                 <p className="text-xs text-muted-foreground/70 mt-0.5">
                   This name appears on the leaderboard and in your activity
