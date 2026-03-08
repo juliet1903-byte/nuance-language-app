@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useCallback, useEffect, useRef } from "react";
 
 export type TextSize = "normal" | "large" | "x-large";
 
@@ -26,16 +26,16 @@ export const useTextSize = () => {
     if (textSize === "normal") directionRef.current = "up";
   }, [textSize]);
 
-  const cycleTextSize = () => {
-    const currentIndex = sizes.indexOf(textSize);
-    if (directionRef.current === "up") {
-      setTextSize(sizes[currentIndex + 1]);
-    } else {
-      setTextSize(sizes[currentIndex - 1]);
-    }
-  };
+  const cycleTextSize = useCallback(() => {
+    setTextSize((prev) => {
+      const currentIndex = sizes.indexOf(prev);
+      if (directionRef.current === "up") {
+        return sizes[currentIndex + 1] ?? prev;
+      } else {
+        return sizes[currentIndex - 1] ?? prev;
+      }
+    });
+  }, []);
 
-  const isMaxSize = textSize === "x-large";
-
-  return { textSize, textSizeClass: sizeMap[textSize], cycleTextSize, isMaxSize };
+  return { textSize, textSizeClass: sizeMap[textSize], cycleTextSize, isMaxSize: textSize === "x-large" };
 };
