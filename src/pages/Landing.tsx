@@ -60,7 +60,7 @@ const Landing = () => {
           onClick={() => navigate("/dashboard")}
           className="flex items-center text-sm font-medium text-foreground hover:opacity-80 transition-opacity">
           
-            <LetterAvatar name={profile?.display_name} email={user.email} size="sm" />
+            <LetterAvatar name={profile?.display_name} email={user.email} avatarUrl={profile?.avatar_url} size="sm" />
           </button> :
 
         <button
