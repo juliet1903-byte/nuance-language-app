@@ -290,6 +290,9 @@ const Insights = () => {
           </div>
         </section>
         }
+
+        {/* Leaderboard */}
+        {!showBanner && <Leaderboard />}
       </main>
     </AppLayout>);
 
