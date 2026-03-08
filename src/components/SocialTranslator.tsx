@@ -157,6 +157,7 @@ const SocialTranslator = ({ open, onClose }: SocialTranslatorProps) => {
     setResult(null);
     setNeedlePosition(null);
     setShowCoachTip(false);
+    setViewMode("structured");
   };
 
   const handleCopy = () => {
