@@ -42,7 +42,7 @@ const FlipCard = ({ front, back }: FlipCardProps) => {
 
 const DeepDiveCultures = () => {
   const navigate = useNavigate();
-  const { textSizeClass, cycleTextSize } = useTextSize();
+  const { textSize, textSizeClass, cycleTextSize } = useTextSize();
 
   const flipCards = [
     {
