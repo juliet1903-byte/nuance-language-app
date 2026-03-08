@@ -5,6 +5,7 @@ import { useTextSize } from "@/hooks/useTextSize";
 
 const ArticleWarmIntro = () => {
   const navigate = useNavigate();
+  const { textSizeClass, cycleTextSize } = useTextSize();
 
   return (
     <div className="min-h-screen bg-background text-foreground">
