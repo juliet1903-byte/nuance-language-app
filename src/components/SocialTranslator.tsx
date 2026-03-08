@@ -242,15 +242,14 @@ const SocialTranslator = ({ open, onClose }: SocialTranslatorProps) => {
 
                 <div className="flex justify-end gap-2 mt-1">
                   {input &&
-                <button onClick={handleClear} className="p-2 rounded-full bg-muted/60 text-muted-foreground">
-                      <X className="w-4 h-4" />
+                <button onClick={handleClear} className="w-10 h-10 flex items-center justify-center rounded-full bg-muted/60 text-muted-foreground">
+                      <X className="w-5 h-5" />
                     </button>
                 }
                   <button
                   onClick={handleMic}
-                  className={`p-2 rounded-full transition-colors ${isRecording ? "bg-destructive text-destructive-foreground animate-pulse" : "bg-muted/60 text-muted-foreground"}`}>
-                  
-                    <Mic className="w-4 h-4" />
+                  className={`w-10 h-10 flex items-center justify-center rounded-full transition-colors ${isRecording ? "bg-destructive text-destructive-foreground animate-pulse" : "bg-muted/60 text-muted-foreground"}`}>
+                    <Mic className="w-5 h-5" />
                   </button>
                 </div>
               </div>
