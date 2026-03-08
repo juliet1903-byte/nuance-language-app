@@ -33,10 +33,12 @@ const SocialTranslator = ({ open, onClose }: SocialTranslatorProps) => {
   const recognitionRef = useRef<any>(null);
   const finalTranscriptRef = useRef("");
   const micTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const shouldRestartRef = useRef(false);
 
   const MAX_RECORDING_SECONDS = 60;
 
   const stopRecording = useCallback(() => {
+    shouldRestartRef.current = false;
     recognitionRef.current?.stop();
     setIsRecording(false);
     if (micTimerRef.current) {
@@ -44,6 +46,53 @@ const SocialTranslator = ({ open, onClose }: SocialTranslatorProps) => {
       micTimerRef.current = null;
     }
   }, []);
+
+  const startRecognitionSession = useCallback(() => {
+    const SpeechRecognition = (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
+    if (!SpeechRecognition) return;
+
+    const recognition = new SpeechRecognition();
+    recognition.lang = "en-US";
+    recognition.interimResults = true;
+    recognition.continuous = false;
+    recognitionRef.current = recognition;
+
+    recognition.onresult = (event: any) => {
+      let interim = "";
+      for (let i = 0; i < event.results.length; i++) {
+        if (event.results[i].isFinal) {
+          const text = event.results[i][0].transcript.trim();
+          if (text) {
+            finalTranscriptRef.current = finalTranscriptRef.current
+              ? finalTranscriptRef.current + " " + text
+              : text;
+          }
+        } else {
+          interim = event.results[i][0].transcript;
+        }
+      }
+      setInput(finalTranscriptRef.current + (interim ? " " + interim : ""));
+    };
+
+    recognition.onerror = (e: any) => {
+      if (e.error === "no-speech") return;
+      stopRecording();
+    };
+
+    recognition.onend = () => {
+      if (shouldRestartRef.current) {
+        try {
+          startRecognitionSession();
+        } catch {
+          stopRecording();
+        }
+      } else {
+        setIsRecording(false);
+      }
+    };
+
+    recognition.start();
+  }, [stopRecording]);
 
   const handleMic = useCallback(() => {
     if (isRecording) {
@@ -61,51 +110,16 @@ const SocialTranslator = ({ open, onClose }: SocialTranslatorProps) => {
       return;
     }
 
-    const recognition = new SpeechRecognition();
-    recognition.lang = "en-US";
-    recognition.interimResults = true;
-    recognition.continuous = true;
-    recognitionRef.current = recognition;
-
-    // Snapshot existing input as the base
-    const baseText = input;
-    finalTranscriptRef.current = baseText;
-
-    recognition.onresult = (event: any) => {
-      // Only process new results from resultIndex to avoid mobile Chrome duplication
-      for (let i = event.resultIndex; i < event.results.length; i++) {
-        if (event.results[i].isFinal) {
-          const text = event.results[i][0].transcript.trim();
-          if (text) {
-            finalTranscriptRef.current = finalTranscriptRef.current
-              ? finalTranscriptRef.current + " " + text
-              : text;
-          }
-        }
-      }
-
-      // Get current interim (only the last non-final result)
-      let interim = "";
-      const lastResult = event.results[event.results.length - 1];
-      if (lastResult && !lastResult.isFinal) {
-        interim = lastResult[0].transcript;
-      }
-
-      setInput(finalTranscriptRef.current + (interim ? " " + interim : ""));
-    };
-
-    recognition.onerror = () => stopRecording();
-    recognition.onend = () => stopRecording();
-
-    recognition.start();
+    finalTranscriptRef.current = input;
+    shouldRestartRef.current = true;
     setIsRecording(true);
+    startRecognitionSession();
 
-    // Auto-stop after time limit
     micTimerRef.current = setTimeout(() => {
       stopRecording();
       toast({ title: "Recording stopped", description: "60-second limit reached." });
     }, MAX_RECORDING_SECONDS * 1000);
-  }, [isRecording, input, stopRecording]);
+  }, [isRecording, input, stopRecording, startRecognitionSession]);
 
   const handleTranslate = useCallback(async () => {
     if (!input.trim() || isLoading) return;
