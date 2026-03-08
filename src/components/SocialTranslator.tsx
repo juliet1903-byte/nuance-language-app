@@ -30,11 +30,22 @@ const SocialTranslator = ({ open, onClose }: SocialTranslatorProps) => {
   const [isRecording, setIsRecording] = useState(false);
   const recognitionRef = useRef<any>(null);
   const finalTranscriptRef = useRef("");
+  const micTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  const MAX_RECORDING_SECONDS = 60;
+
+  const stopRecording = useCallback(() => {
+    recognitionRef.current?.stop();
+    setIsRecording(false);
+    if (micTimerRef.current) {
+      clearTimeout(micTimerRef.current);
+      micTimerRef.current = null;
+    }
+  }, []);
 
   const handleMic = useCallback(() => {
     if (isRecording) {
-      recognitionRef.current?.stop();
-      setIsRecording(false);
+      stopRecording();
       return;
     }
 
@@ -70,20 +81,25 @@ const SocialTranslator = ({ open, onClose }: SocialTranslatorProps) => {
       setInput(finalTranscriptRef.current + (interim ? " " + interim : ""));
     };
 
-    recognition.onerror = () => setIsRecording(false);
-    recognition.onend = () => setIsRecording(false);
+    recognition.onerror = () => stopRecording();
+    recognition.onend = () => stopRecording();
 
     recognition.start();
     setIsRecording(true);
-  }, [isRecording, input]);
+
+    // Auto-stop after time limit
+    micTimerRef.current = setTimeout(() => {
+      stopRecording();
+      toast({ title: "Recording stopped", description: "60-second limit reached." });
+    }, MAX_RECORDING_SECONDS * 1000);
+  }, [isRecording, input, stopRecording]);
 
   const handleTranslate = useCallback(async () => {
     if (!input.trim() || isLoading) return;
 
     // Stop recording if active
     if (isRecording) {
-      recognitionRef.current?.stop();
-      setIsRecording(false);
+      stopRecording();
     }
 
     setIsLoading(true);
