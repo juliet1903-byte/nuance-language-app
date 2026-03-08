@@ -190,7 +190,7 @@ const Leaderboard = () => {
                         : entry.display_name || "Anonymous"}
                     </p>
                     <p className="text-xs text-muted-foreground">
-                      {entry.lessons_completed} lessons
+                      Position #{idx + 1}
                     </p>
                   </div>
 
