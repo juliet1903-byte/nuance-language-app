@@ -23,6 +23,7 @@ import ArticleBurnout from "./pages/ArticleBurnout";
 import ArticleCriticism from "./pages/ArticleCriticism";
 import ArticleConversations from "./pages/ArticleConversations";
 import DeepDiveCultures from "./pages/DeepDiveCultures";
+import DeepDiveManagingUp from "./pages/DeepDiveManagingUp";
 import VideoInterview from "./pages/VideoInterview";
 import VideoRelationships from "./pages/VideoRelationships";
 import VideoEmotionalIntelligence from "./pages/VideoEmotionalIntelligence";
