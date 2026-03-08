@@ -99,8 +99,7 @@ const SocialTranslator = ({ open, onClose }: SocialTranslatorProps) => {
 
     // Stop recording if active
     if (isRecording) {
-      recognitionRef.current?.stop();
-      setIsRecording(false);
+      stopRecording();
     }
 
     setIsLoading(true);
