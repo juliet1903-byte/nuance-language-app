@@ -110,8 +110,8 @@ const Leaderboard = () => {
         </div>
       )}
 
-      {/* Your rank (always visible if logged in) */}
-      {user && currentVibeIq > 0 && (
+      {/* Your rank summary (only when not on the list) */}
+      {user && currentVibeIq > 0 && !optedIn && (
         <motion.div
           initial={{ opacity: 0, y: 8 }}
           animate={{ opacity: 1, y: 0 }}
@@ -127,11 +127,7 @@ const Leaderboard = () => {
             <p className="text-sm font-semibold truncate">
               {profile?.display_name || user.email?.split("@")[0] || "You"}
             </p>
-            <p className="text-xs text-muted-foreground">
-              {optedIn && myRank > 0
-                ? `Rank #${myRank} of ${totalParticipants}`
-                : "Your score (private)"}
-            </p>
+            <p className="text-xs text-muted-foreground">Your score (private)</p>
           </div>
           <span className="text-lg font-bold text-primary">{currentVibeIq}</span>
         </motion.div>
