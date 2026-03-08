@@ -14,8 +14,8 @@ const ArticleConversations = () => {
           <ArrowLeft className="w-5 h-5" />
         </button>
         <span className="font-semibold truncate text-base flex-1">The Conversations Most People Avoid</span>
-        <button onClick={cycleTextSize} className="p-1.5 rounded-lg hover:bg-card transition-colors" aria-label="Increase text size">
-          {textSize === "x-large" ? <AArrowDown className="w-5 h-5" /> : <AArrowUp className="w-5 h-5" />}
+        <button onClick={cycleTextSize} className="p-2 rounded-lg hover:bg-card transition-colors" aria-label="Increase text size">
+          {textSize === "x-large" ? <AArrowDown className="w-10 h-10" /> : <AArrowUp className="w-10 h-10" />}
         </button>
       </header>
 
