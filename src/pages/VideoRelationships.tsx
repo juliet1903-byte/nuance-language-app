@@ -18,7 +18,7 @@ const VideoRelationships = () => {
         </button>
       </header>
 
-      <div className="max-w-2xl mx-auto px-5 pb-20">
+      <div className={`max-w-2xl mx-auto px-5 pb-20 ${textSizeClass}`}>
         <div className="relative -mx-5 mb-8 bg-black">
           <div className="aspect-video w-full">
             <iframe

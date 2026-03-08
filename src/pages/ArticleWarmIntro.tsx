@@ -20,7 +20,7 @@ const ArticleWarmIntro = () => {
         </button>
       </header>
 
-      <article className="max-w-2xl mx-auto px-5 pb-20">
+      <article className={`max-w-2xl mx-auto px-5 pb-20 ${textSizeClass}`}>
         {/* Hero image */}
         <div className="relative -mx-5 mb-8">
           <img src={articleWarmIntro} alt="The Art of the Warm Intro" className="w-full h-56 md:h-72 object-cover" />

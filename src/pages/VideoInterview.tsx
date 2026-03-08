@@ -19,7 +19,7 @@ const VideoInterview = () => {
         </button>
       </header>
 
-      <div className="max-w-2xl mx-auto px-5 pb-20">
+      <div className={`max-w-2xl mx-auto px-5 pb-20 ${textSizeClass}`}>
         {/* Hero video embed */}
         <div className="relative -mx-5 mb-8 bg-black">
           <div className="aspect-video w-full">
