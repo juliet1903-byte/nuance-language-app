@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { ArrowLeft, Clock, Tag, RotateCcw, AArrowUp } from "lucide-react";
+import { ArrowLeft, Clock, Tag, RotateCcw, AArrowUp, AArrowDown } from "lucide-react";
 import { useState } from "react";
 import articleCultures from "@/assets/article-cultures.png";
 import { useTextSize } from "@/hooks/useTextSize";
@@ -42,7 +42,7 @@ const FlipCard = ({ front, back }: FlipCardProps) => {
 
 const DeepDiveCultures = () => {
   const navigate = useNavigate();
-  const { textSizeClass, cycleTextSize } = useTextSize();
+  const { textSize, textSizeClass, cycleTextSize } = useTextSize();
 
   const flipCards = [
     {
@@ -146,7 +146,7 @@ const DeepDiveCultures = () => {
         </button>
         <span className="font-semibold truncate text-base flex-1">Reading Between Cultures</span>
         <button onClick={cycleTextSize} className="p-1.5 rounded-lg hover:bg-card transition-colors" aria-label="Increase text size">
-          <AArrowUp className="w-5 h-5" />
+          {textSize === "x-large" ? <AArrowDown className="w-5 h-5" /> : <AArrowUp className="w-5 h-5" />}
         </button>
       </header>
 

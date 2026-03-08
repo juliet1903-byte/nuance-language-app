@@ -1,11 +1,11 @@
 import { useNavigate } from "react-router-dom";
-import { ArrowLeft, Clock, Tag, AArrowUp } from "lucide-react";
+import { ArrowLeft, Clock, Tag, AArrowUp, AArrowDown } from "lucide-react";
 import articleBurnout from "@/assets/article-burnout.png";
 import { useTextSize } from "@/hooks/useTextSize";
 
 const ArticleBurnout = () => {
   const navigate = useNavigate();
-  const { textSizeClass, cycleTextSize } = useTextSize();
+  const { textSize, textSizeClass, cycleTextSize } = useTextSize();
 
   const earlyWarnings = [
   "You stop volunteering for things. You used to raise your hand for new projects, offer to help with side tasks. Now you wait to be asked — and sometimes you hope you are not asked at all.",
@@ -31,7 +31,7 @@ const ArticleBurnout = () => {
         </button>
         <span className="font-semibold truncate text-base flex-1">Quiet Cracking or Burning Out?</span>
         <button onClick={cycleTextSize} className="p-1.5 rounded-lg hover:bg-card transition-colors" aria-label="Increase text size">
-          <AArrowUp className="w-5 h-5" />
+          {textSize === "x-large" ? <AArrowDown className="w-5 h-5" /> : <AArrowUp className="w-5 h-5" />}
         </button>
       </header>
 
