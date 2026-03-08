@@ -133,6 +133,7 @@ const SocialTranslator = ({ open, onClose }: SocialTranslatorProps) => {
 
     setIsLoading(true);
     setResult(null);
+    setStructuredHeight(null);
     setShowCoachTip(false);
 
     try {
