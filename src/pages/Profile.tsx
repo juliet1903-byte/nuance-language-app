@@ -186,13 +186,39 @@ const Profile = () => {
               />
             </div>
             {!showBanner && (
-              <button
-                onClick={() => fileInputRef.current?.click()}
-                disabled={uploadingAvatar}
-                className="absolute -bottom-1 -right-1 w-8 h-8 rounded-full bg-cta text-cta-foreground flex items-center justify-center shadow-md hover:opacity-90 transition-opacity disabled:opacity-50"
-              >
-                <Camera className="w-4 h-4" />
-              </button>
+              <>
+                <button
+                  onClick={() => fileInputRef.current?.click()}
+                  disabled={uploadingAvatar}
+                  className="absolute -bottom-1 -right-1 w-8 h-8 rounded-full bg-cta text-cta-foreground flex items-center justify-center shadow-md hover:opacity-90 transition-opacity disabled:opacity-50"
+                >
+                  <Camera className="w-4 h-4" />
+                </button>
+                {profile?.avatar_url && (
+                  <button
+                    onClick={async () => {
+                      if (!user) return;
+                      setUploadingAvatar(true);
+                      await supabase.storage.from("avatars").remove([`${user.id}/avatar`]);
+                      const { error } = await supabase
+                        .from("profiles")
+                        .update({ avatar_url: null })
+                        .eq("id", user.id);
+                      setUploadingAvatar(false);
+                      if (error) {
+                        toast.error("Failed to remove photo");
+                      } else {
+                        toast.success("Photo removed");
+                        await refreshProfile();
+                      }
+                    }}
+                    disabled={uploadingAvatar}
+                    className="absolute -bottom-1 -left-1 w-8 h-8 rounded-full bg-destructive text-destructive-foreground flex items-center justify-center shadow-md hover:opacity-90 transition-opacity disabled:opacity-50"
+                  >
+                    <Trash2 className="w-4 h-4" />
+                  </button>
+                )}
+              </>
             )}
             <input
               ref={fileInputRef}
