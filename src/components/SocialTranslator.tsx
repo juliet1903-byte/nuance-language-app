@@ -117,7 +117,7 @@ const SocialTranslator = ({ open, onClose }: SocialTranslatorProps) => {
       const res = data as TranslationResult;
       setResult(res);
 
-      // Log translation for tone profile tracking (include vibe score)
+      // Log translation — use rawVibeScore (user's own ability, not AI-improved)
       if (user) {
         supabase.
         from("activity_log").
@@ -126,7 +126,7 @@ const SocialTranslator = ({ open, onClose }: SocialTranslatorProps) => {
           activity_type: "translation_complete",
           module_id: "social-translator",
           tone_mode: tone,
-          vibe_score: res.translatedVibeScore
+          vibe_score: res.rawVibeScore
         } as any).
         then(() => {});
       }
