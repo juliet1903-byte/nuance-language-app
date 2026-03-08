@@ -188,35 +188,50 @@ const Profile = () => {
             {!showBanner && (
               <>
                 <button
-                  onClick={() => fileInputRef.current?.click()}
+                  onClick={() => setShowAvatarMenu((v) => !v)}
                   disabled={uploadingAvatar}
                   className="absolute -bottom-1 -right-1 w-8 h-8 rounded-full bg-cta text-cta-foreground flex items-center justify-center shadow-md hover:opacity-90 transition-opacity disabled:opacity-50"
                 >
-                  <Camera className="w-4 h-4" />
+                  <Pencil className="w-4 h-4" />
                 </button>
-                {profile?.avatar_url && (
-                  <button
-                    onClick={async () => {
-                      if (!user) return;
-                      setUploadingAvatar(true);
-                      await supabase.storage.from("avatars").remove([`${user.id}/avatar`]);
-                      const { error } = await supabase
-                        .from("profiles")
-                        .update({ avatar_url: null })
-                        .eq("id", user.id);
-                      setUploadingAvatar(false);
-                      if (error) {
-                        toast.error("Failed to remove photo");
-                      } else {
-                        toast.success("Photo removed");
-                        await refreshProfile();
-                      }
-                    }}
-                    disabled={uploadingAvatar}
-                    className="absolute -bottom-1 -left-1 w-8 h-8 rounded-full bg-destructive text-destructive-foreground flex items-center justify-center shadow-md hover:opacity-90 transition-opacity disabled:opacity-50"
-                  >
-                    <Trash2 className="w-4 h-4" />
-                  </button>
+                {showAvatarMenu && (
+                  <div className="absolute -bottom-20 left-1/2 -translate-x-1/2 bg-card border border-border rounded-xl shadow-lg py-1 z-10 min-w-[160px]">
+                    <button
+                      onClick={() => {
+                        setShowAvatarMenu(false);
+                        fileInputRef.current?.click();
+                      }}
+                      className="w-full flex items-center gap-2 px-4 py-2.5 text-sm font-medium hover:bg-muted transition-colors"
+                    >
+                      <Camera className="w-4 h-4 text-muted-foreground" />
+                      Upload photo
+                    </button>
+                    {profile?.avatar_url && (
+                      <button
+                        onClick={async () => {
+                          setShowAvatarMenu(false);
+                          if (!user) return;
+                          setUploadingAvatar(true);
+                          await supabase.storage.from("avatars").remove([`${user.id}/avatar`]);
+                          const { error } = await supabase
+                            .from("profiles")
+                            .update({ avatar_url: null })
+                            .eq("id", user.id);
+                          setUploadingAvatar(false);
+                          if (error) {
+                            toast.error("Failed to remove photo");
+                          } else {
+                            toast.success("Photo removed");
+                            await refreshProfile();
+                          }
+                        }}
+                        className="w-full flex items-center gap-2 px-4 py-2.5 text-sm font-medium text-destructive hover:bg-muted transition-colors"
+                      >
+                        <Trash2 className="w-4 h-4" />
+                        Remove photo
+                      </button>
+                    )}
+                  </div>
                 )}
               </>
             )}
