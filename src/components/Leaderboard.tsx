@@ -185,7 +185,9 @@ const Leaderboard = () => {
                   {/* Name */}
                   <div className="flex-1 min-w-0">
                     <p className="text-sm font-medium truncate">
-                      {isMe ? "You" : entry.display_name || "Anonymous"}
+                      {isMe
+                        ? `${entry.display_name || "You"} (you)`
+                        : entry.display_name || "Anonymous"}
                     </p>
                     <p className="text-xs text-muted-foreground">
                       {entry.lessons_completed} lessons
