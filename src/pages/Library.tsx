@@ -21,6 +21,7 @@ import articleCultures from "@/assets/article-cultures.png";
 import articleInterview from "@/assets/article-interview.png";
 import articleCriticism from "@/assets/article-criticism.png";
 import articleConversations from "@/assets/article-conversations.png";
+import articlePromoted from "@/assets/article-promoted.png";
 import videoNeutral from "@/assets/video-neutral.png";
 import videoPositive from "@/assets/video-positive.png";
 
