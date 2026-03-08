@@ -182,7 +182,10 @@ const Leaderboard = () => {
 
   const currentVibeIq = (profile as any)?.vibe_iq ?? 0;
   const myIndex = entries.findIndex((e) => e.user_id === user?.id);
-  const showPinnedRow = user && myIndex > -1 && !myRowVisible && entries.length > VISIBLE_COUNT;
+  const isInList = myIndex > -1;
+  const showPinnedRow = user && isInList && !myRowVisible && entries.length > VISIBLE_COUNT;
+  // Show "Your position" card when user is opted in but not in the fetched list (outside top 50)
+  const showOutOfRangeCard = user && optedIn && !isInList && myRank > 0;
 
   return (
     <section className="bg-card rounded-2xl p-6 shadow-sm">
@@ -285,6 +288,23 @@ const Leaderboard = () => {
               />
             </div>
           )}
+        </div>
+      )}
+
+      {/* Your position card when outside top 50 */}
+      {showOutOfRangeCard && (
+        <div className="mt-2 border-t border-border pt-2 bg-card">
+          <LeaderboardRow
+            entry={{
+              user_id: user!.id,
+              display_name: profile?.display_name || null,
+              avatar_url: profile?.avatar_url || null,
+              vibe_iq: currentVibeIq,
+              lessons_completed: (profile as any)?.lessons_completed ?? 0,
+            }}
+            idx={myRank - 1}
+            isMe={true}
+          />
         </div>
       )}
     </section>
