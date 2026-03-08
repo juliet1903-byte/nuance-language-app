@@ -48,7 +48,7 @@ const App = () => (
                 <Route path="/module/:id" element={<ModuleDetail />} />
                 <Route path="/progress" element={<Progress />} />
                 <Route path="/library" element={<Library />} />
-                <Route path="/stats" element={<Stats />} />
+                <Route path="/insights" element={<Insights />} />
                 <Route path="/profile" element={<Profile />} />
                 <Route path="/notifications" element={<Notifications />} />
                 <Route path="/reset-password" element={<ResetPassword />} />

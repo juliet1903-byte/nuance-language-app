@@ -16,7 +16,7 @@ const DesktopSidebar = ({ onTranslatorOpen }: DesktopSidebarProps) => {
   const navItems = [
     { icon: Home, label: "Home", route: "/dashboard" },
     { icon: BookOpen, label: "Library", route: "/library" },
-    { icon: BarChart3, label: "Stats", route: "/stats" },
+    { icon: BarChart3, label: "Insights", route: "/insights" },
     { icon: User, label: "Profile", route: "/profile" },
   ];
 

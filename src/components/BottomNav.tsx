@@ -15,7 +15,7 @@ const BottomNav = ({ onTranslatorOpen }: BottomNavProps) => {
     { icon: Home, label: "Home", route: "/dashboard" },
     { icon: BookOpen, label: "Library", route: "/library" },
     { id: "translator", icon: MessageSquare, label: "" },
-    { icon: BarChart3, label: "Stats", route: "/stats" },
+    { icon: BarChart3, label: "Insights", route: "/insights" },
     { icon: User, label: "Profile", route: "/profile" },
   ];
 

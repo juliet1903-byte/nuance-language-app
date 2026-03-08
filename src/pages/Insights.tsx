@@ -296,4 +296,4 @@ const Insights = () => {
 
 };
 
-export default Stats;
+export default Insights;
