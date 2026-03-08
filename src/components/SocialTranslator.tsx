@@ -162,7 +162,9 @@ const SocialTranslator = ({ open, onClose }: SocialTranslatorProps) => {
 
   const handleCopy = () => {
     if (!result) return;
-    const text = result.sections.map((s) => s.content).join(" ");
+    const text = viewMode === "conversational" && result.conversational
+      ? result.conversational
+      : result.sections.map((s) => s.content).join(" ");
     navigator.clipboard.writeText(text);
     toast({ title: "Copied to clipboard" });
   };
