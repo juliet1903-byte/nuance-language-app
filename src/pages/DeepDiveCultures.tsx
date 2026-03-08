@@ -1,7 +1,8 @@
 import { useNavigate } from "react-router-dom";
-import { ArrowLeft, Clock, Tag, RotateCcw } from "lucide-react";
+import { ArrowLeft, Clock, Tag, RotateCcw, AArrowUp } from "lucide-react";
 import { useState } from "react";
 import articleCultures from "@/assets/article-cultures.png";
+import { useTextSize } from "@/hooks/useTextSize";
 
 interface FlipCardProps {
   front: string;

@@ -12,7 +12,10 @@ const VideoEmotionalIntelligence = () => {
         <button onClick={() => navigate(-1)} className="p-1.5 rounded-lg hover:bg-card transition-colors">
           <ArrowLeft className="w-5 h-5" />
         </button>
-        <span className="font-semibold truncate text-base">The 4 Domains of Emotional Intelligence</span>
+        <span className="font-semibold truncate text-base flex-1">The 4 Domains of Emotional Intelligence</span>
+        <button onClick={cycleTextSize} className="p-1.5 rounded-lg hover:bg-card transition-colors" aria-label="Increase text size">
+          <AArrowUp className="w-5 h-5" />
+        </button>
       </header>
 
       <div className="max-w-2xl mx-auto px-5 pb-20">
