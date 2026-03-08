@@ -123,12 +123,24 @@ const SocialTranslator = ({ open, onClose }: SocialTranslatorProps) => {
     }, MAX_RECORDING_SECONDS * 1000);
   }, [isRecording, input, stopRecording, startRecognitionSession]);
 
+  const PROFANITY_PATTERN = /\b(fuck|shit|damn|ass|bitch|bastard|crap|dick|cock|pussy|slut|whore|cunt|nigger|faggot|retard)\w*\b/i;
+
   const handleTranslate = useCallback(async () => {
     if (!input.trim() || isLoading) return;
 
     // Stop recording if active
     if (isRecording) {
       stopRecording();
+    }
+
+    // Check for offensive language
+    if (PROFANITY_PATTERN.test(input)) {
+      toast({
+        title: "Strong language detected",
+        description: "Please rephrase your message without offensive words to continue.",
+        variant: "destructive"
+      });
+      return;
     }
 
     setIsLoading(true);
