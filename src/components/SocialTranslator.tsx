@@ -28,6 +28,7 @@ const SocialTranslator = ({ open, onClose }: SocialTranslatorProps) => {
   const [needlePosition, setNeedlePosition] = useState<number | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [showCoachTip, setShowCoachTip] = useState(false);
+  const [viewMode, setViewMode] = useState<"structured" | "conversational">("structured");
   const [isRecording, setIsRecording] = useState(false);
   const recognitionRef = useRef<any>(null);
   const finalTranscriptRef = useRef("");
