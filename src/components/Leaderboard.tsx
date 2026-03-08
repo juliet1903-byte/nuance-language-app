@@ -162,7 +162,7 @@ const Leaderboard = () => {
 
   const currentVibeIq = (profile as any)?.vibe_iq ?? 0;
   const myIndex = entries.findIndex((e) => e.user_id === user?.id);
-  const showPinnedRow = user && myIndex > -1 && !myRowVisible;
+  const showPinnedRow = user && myIndex > -1 && !myRowVisible && entries.length > VISIBLE_COUNT;
 
   return (
     <section className="bg-card rounded-2xl p-6 shadow-sm">
