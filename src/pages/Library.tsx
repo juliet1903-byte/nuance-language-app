@@ -24,6 +24,7 @@ import articleConversations from "@/assets/article-conversations.png";
 import articlePromoted from "@/assets/article-promoted.png";
 import videoNeutral from "@/assets/video-neutral.png";
 import videoPositive from "@/assets/video-positive.png";
+import deepDiveManagingUp from "@/assets/deep-dive-managing-up.png";
 
 const imageMap: Record<string, string> = {
   "module-starting-strong": moduleStartingStrong,
