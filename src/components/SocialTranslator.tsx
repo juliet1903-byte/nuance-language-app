@@ -318,6 +318,18 @@ const SocialTranslator = ({ open, onClose }: SocialTranslatorProps) => {
                 exit={{ opacity: 0 }}
                 className="mt-5 glass-dark rounded-2xl p-5 text-glass-foreground">
                 
+                
+                    {/* Conversational toggle */}
+                    {result.conversational &&
+                      <div className="flex items-center gap-2.5 mb-4">
+                        <button
+                          onClick={() => setViewMode((v) => v === "structured" ? "conversational" : "structured")}
+                          className={`relative w-10 h-[22px] rounded-full transition-colors ${viewMode === "conversational" ? "bg-glass-foreground/40" : "bg-glass-foreground/15"}`}>
+                          <span className={`absolute top-[2px] left-[2px] w-[18px] h-[18px] rounded-full bg-glass-foreground transition-transform ${viewMode === "conversational" ? "translate-x-[18px]" : "translate-x-0"}`} />
+                        </button>
+                        <span className="text-sm text-glass-foreground/70 font-medium">Conversational</span>
+                      </div>
+                    }
 
                     {viewMode === "structured" ? (
                       result.sections.map((s) =>
@@ -346,14 +358,6 @@ const SocialTranslator = ({ open, onClose }: SocialTranslatorProps) => {
                     </AnimatePresence>
 
                     <div className="flex justify-end gap-2 mt-4">
-                      {result.conversational &&
-                        <button
-                          onClick={() => setViewMode((v) => v === "structured" ? "conversational" : "structured")}
-                          className={`p-2 rounded-full transition-colors ${viewMode === "conversational" ? "bg-glass-foreground/20" : "bg-glass-foreground/10"}`}
-                          title={viewMode === "structured" ? "Switch to conversational" : "Switch to structured"}>
-                          <MessageSquareText className="w-[20px] h-[20px]" />
-                        </button>
-                      }
                       <button
                         onClick={() => setShowCoachTip((p) => !p)}
                         className={`p-2 rounded-full transition-colors ${showCoachTip ? "bg-glass-foreground/20" : "bg-glass-foreground/10"}`}>
