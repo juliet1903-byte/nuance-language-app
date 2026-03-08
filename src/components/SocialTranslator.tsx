@@ -68,18 +68,20 @@ const SocialTranslator = ({ open, onClose }: SocialTranslatorProps) => {
     recognitionRef.current = recognition;
 
     // Snapshot existing input as the base
-    finalTranscriptRef.current = input;
+    const baseText = input;
 
     recognition.onresult = (event: any) => {
+      let finalParts: string[] = [];
       let interim = "";
-      for (let i = event.resultIndex; i < event.results.length; i++) {
-        const transcript = event.results[i][0].transcript;
+      for (let i = 0; i < event.results.length; i++) {
         if (event.results[i].isFinal) {
-          finalTranscriptRef.current += (finalTranscriptRef.current ? " " : "") + transcript;
+          finalParts.push(event.results[i][0].transcript.trim());
         } else {
-          interim = transcript;
+          interim = event.results[i][0].transcript;
         }
       }
+      const finalText = finalParts.join(" ");
+      finalTranscriptRef.current = baseText + (baseText && finalText ? " " : "") + finalText;
       setInput(finalTranscriptRef.current + (interim ? " " + interim : ""));
     };
 
