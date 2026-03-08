@@ -1,10 +1,13 @@
 
 
-## Plan: Remove fake users & show lessons completed
+## Problem
 
-Two changes to `src/components/Leaderboard.tsx`:
+The `overflow-hidden` on the `<main>` container (line 52) clips the top of the avatar's `ring-2 ring-offset-2` decoration, since the avatar is the first visual element inside and the ring extends outside its box.
 
-1. **Remove fake users** — Delete the `FAKE_USERS` array (lines 111-118) and the merge logic (lines 125-126). Use only real data from `get_leaderboard`.
+## Fix
 
-2. **Replace "Position #X" with lessons completed** — Change line 69-71 from `Position #{idx + 1}` to `{entry.lessons_completed} lessons completed`.
+Add `pt-2` (or similar small top padding) to the avatar's wrapping `<section>` so the ring has room to render without being clipped. This is the minimal change that preserves the existing `overflow-hidden` (which is needed for the `LoginBanner` blur effect).
+
+**File:** `src/pages/Profile.tsx`, line 55  
+- Change `<section className="flex flex-col items-center text-center">` to `<section className="flex flex-col items-center text-center pt-2">`
 
