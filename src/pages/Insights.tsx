@@ -123,7 +123,7 @@ const Insights = () => {
         <button onClick={() => navigate("/")} className="p-2 -ml-2 rounded-full">
           <ArrowLeft className="w-5 h-5" />
         </button>
-        <h1 className="text-lg font-semibold">Stats</h1>
+        <h1 className="text-lg font-semibold">Insights</h1>
       </header>
 
       <main className="px-5 space-y-6 pb-8 md:max-w-[900px] md:mx-auto md:w-full">
