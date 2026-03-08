@@ -139,10 +139,10 @@ const Progress = () => {
         <div className="flex-1">
           <h1 className="text-lg font-semibold">My Progress</h1>
         </div>
-        {!showBanner &&
-        <span className="flex items-center gap-1.5 text-sm px-3 py-1.5 rounded-full font-medium text-cta bg-secondary">
-            <CalendarDays className="w-3.5 h-3.5" /> {streakDays}
-          </span>
+        {!showBanner
+
+
+
         }
       </header>
 
