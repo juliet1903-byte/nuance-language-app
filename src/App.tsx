@@ -12,7 +12,7 @@ import Index from "./pages/Index";
 import ModuleDetail from "./pages/ModuleDetail";
 import Progress from "./pages/Progress";
 import Library from "./pages/Library";
-import Stats from "./pages/Stats";
+import Insights from "./pages/Insights";
 import Profile from "./pages/Profile";
 import Notifications from "./pages/Notifications";
 import ResetPassword from "./pages/ResetPassword";
