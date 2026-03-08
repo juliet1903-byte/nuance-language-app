@@ -4,15 +4,12 @@ import { useMemo } from "react";
 import Logo from "@/components/Logo";
 import LetterAvatar from "@/components/LetterAvatar";
 import { useAuth } from "@/components/AuthContext";
-import articlePromoted from "@/assets/article-promoted.png";
-import articleCriticism from "@/assets/article-criticism.png";
-import deepDiveManagingUp from "@/assets/deep-dive-managing-up.png";
-import videoPositive from "@/assets/video-positive.png";
 import LearningPath from "@/components/LearningPath";
 import ModuleCard from "@/components/ModuleCard";
 import TrendingCard from "@/components/TrendingCard";
 import AppLayout from "@/components/AppLayout";
 import { modules } from "@/data/modules";
+import { articles, videos } from "@/data/content";
 import { useProgress } from "@/hooks/useProgress";
 import { useNotifications } from "@/hooks/useNotifications";
 
@@ -22,7 +19,6 @@ const Index = () => {
   const { completedLessons, completedModules, loading: progressLoading } = useProgress();
   const { unreadCount } = useNotifications();
   const showAvatar = !isGuest && user;
-
 
   // Find next lesson for registered users
   const nextLesson = useMemo(() => {
@@ -41,18 +37,25 @@ const Index = () => {
   const continueModule = isGuest || !nextLesson ? modules[0] : nextLesson.module;
   const continueTitle = isGuest ? "Start Learning" : "Continue where you left";
   const continueSubtitle = isGuest ?
-  continueModule.lessons[0]?.title ?? continueModule.subtitle :
-  nextLesson?.lesson.title ?? continueModule.subtitle;
+    continueModule.lessons[0]?.title ?? continueModule.subtitle :
+    nextLesson?.lesson.title ?? continueModule.subtitle;
   const continueDescription = isGuest ?
-  continueModule.description :
-  `Module ${continueModule.number} · Lesson ${(nextLesson?.lessonIdx ?? 0) + 1}`;
+    continueModule.description :
+    `Module ${continueModule.number} · Lesson ${(nextLesson?.lessonIdx ?? 0) + 1}`;
 
-  const trendingItems = [
-  { image: articlePromoted, badge: "Article", badgeColor: "bg-accent", title: "Why Some People Get Promoted", href: "/article/promoted" },
-  { image: articleCriticism, badge: "Article", badgeColor: "bg-accent", title: "How to Receive Criticism", href: "/article/criticism" },
-  { image: videoPositive, badge: "Video", badgeColor: "bg-cta", title: "The 4 Domains of Emotional Intelligence", href: "/video/emotional-intelligence" },
-  { image: deepDiveManagingUp, badge: "Deep Dive", badgeColor: "bg-vibe-blunt", title: "Managing Up: How to Work With Your Manager", href: "/deep-dive/managing-up" }];
+  // Dynamic trending: newest article, second newest article, newest deep dive, newest video
+  const trendingItems = useMemo(() => {
+    const plainArticles = articles.filter((a) => !a.badge);
+    const deepDives = articles.filter((a) => a.badge === "Deep Dive");
+    const items: { image: string; badge: string; badgeColor: string; title: string; href: string }[] = [];
 
+    if (plainArticles[0]) items.push({ image: plainArticles[0].image, badge: "Article", badgeColor: "bg-accent", title: plainArticles[0].title, href: plainArticles[0].href });
+    if (plainArticles[1]) items.push({ image: plainArticles[1].image, badge: "Article", badgeColor: "bg-accent", title: plainArticles[1].title, href: plainArticles[1].href });
+    if (videos[0]) items.push({ image: videos[0].image, badge: "Video", badgeColor: "bg-cta", title: videos[0].title, href: videos[0].href });
+    if (deepDives[0]) items.push({ image: deepDives[0].image, badge: "Deep Dive", badgeColor: "bg-vibe-blunt", title: deepDives[0].title, href: deepDives[0].href });
+
+    return items;
+  }, []);
 
   return (
     <AppLayout>
@@ -76,8 +79,6 @@ const Index = () => {
             avatarUrl={profile?.avatar_url}
             size="sm" />
           </div> :
-
-
           <div onClick={() => navigate("/auth")} className="w-9 h-9 rounded-full bg-muted overflow-hidden flex items-center justify-center cursor-pointer">
               <User className="w-5 h-5 text-muted-foreground" />
             </div>
@@ -91,7 +92,6 @@ const Index = () => {
         <section>
           <h2 className="text-xl font-medium mb-3">{continueTitle}</h2>
           <div className="rounded-2xl overflow-hidden bg-card shadow-sm">
-
             <img alt="Lesson" className="w-full h-40 object-cover" src="/lovable-uploads/44f61677-4fd5-49b3-9fbb-eabbecbad3aa.png" />
             <div className="p-4 text-sm">
               <h3 className="text-base mb-1 font-medium">{continueSubtitle}</h3>
@@ -129,7 +129,6 @@ const Index = () => {
         </section>
       </main>
     </AppLayout>);
-
 };
 
 export default Index;
