@@ -1,4 +1,4 @@
-import { useState, useCallback, useEffect, useRef } from "react";
+import { useState, useCallback, useEffect } from "react";
 
 export type TextSize = "normal" | "large" | "x-large";
 
@@ -18,22 +18,15 @@ export const useTextSize = () => {
     return (saved as TextSize) || "normal";
   });
 
-  const directionRef = useRef<"up" | "down">("up");
-
   useEffect(() => {
     localStorage.setItem(TEXT_SIZE_KEY, textSize);
-    if (textSize === "x-large") directionRef.current = "down";
-    if (textSize === "normal") directionRef.current = "up";
   }, [textSize]);
 
   const cycleTextSize = useCallback(() => {
     setTextSize((prev) => {
+      if (prev === "x-large") return "normal";
       const currentIndex = sizes.indexOf(prev);
-      if (directionRef.current === "up") {
-        return sizes[currentIndex + 1] ?? prev;
-      } else {
-        return sizes[currentIndex - 1] ?? prev;
-      }
+      return sizes[currentIndex + 1] ?? prev;
     });
   }, []);
 
