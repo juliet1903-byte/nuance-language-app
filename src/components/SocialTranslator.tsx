@@ -423,14 +423,13 @@ const SocialTranslator = ({ open, onClose }: SocialTranslatorProps) => {
               className="fixed inset-0 bg-foreground/20 z-40"
               onClick={onClose}
             />
-            {/* Side panel */}
+            {/* Side panel - right side */}
             <motion.div
-              initial={{ x: -20, opacity: 0 }}
+              initial={{ x: 20, opacity: 0 }}
               animate={{ x: 0, opacity: 1 }}
-              exit={{ x: -20, opacity: 0 }}
+              exit={{ x: 20, opacity: 0 }}
               transition={{ type: "spring", damping: 30, stiffness: 300 }}
-              className="fixed top-0 bottom-0 z-50 w-[400px] bg-background border-r border-border/50 overflow-y-auto"
-              style={{ left: sidebarWidth }}
+              className="fixed top-0 bottom-0 right-0 z-50 w-[400px] bg-background border-l border-border/50 overflow-y-auto"
             >
               <div className="pt-6">
                 {content}
