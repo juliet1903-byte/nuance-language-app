@@ -11,7 +11,17 @@ function buildSystemPrompt(tone: string): string {
 
 You MUST respond with valid JSON only, no markdown, no code fences.
 
-IMPORTANT: Every response MUST include a "conversational" field — a single, concise, ready-to-send message that naturally incorporates the key points. It should read like something you'd actually say or type to a colleague — warm, direct, no labels or headers. Keep it to 2-4 sentences max.`;
+IMPORTANT: Every response MUST include a "conversational" field — a single, concise, ready-to-send message that naturally incorporates the key points. It should read like something you'd actually say or type to a colleague — warm, direct, no labels or headers. Keep it to 2-4 sentences max.
+
+CRITICAL SCORING RULES for rawVibeScore (0-100 scale):
+- Score the input HONESTLY based on how it actually sounds, not based on assumptions.
+- 0-20: Genuinely hostile, aggressive, or insulting language.
+- 20-40: Blunt, curt, or dismissive — lacks tact but isn't hostile.
+- 40-60: Neutral, factual, or casual — not particularly rude or polished. Most everyday sentences fall here.
+- 60-75: Already somewhat polished or considerate, just not optimally framed.
+- 75-100: Already well-crafted, diplomatic, professional communication.
+- A simple neutral statement like "I think I'm growing as a designer" is NOT blunt — score it 45-60.
+- Only score below 30 if the input is genuinely harsh or rude.`;
 
   if (tone === "neutral") {
     return `${base}
@@ -25,8 +35,8 @@ Goal: Strip away emotion and bias to provide a clear, factual statement.
 
 JSON schema:
 {
-  "rawVibeScore": <number 5-35, how blunt/harsh the raw input sounds>,
-  "translatedVibeScore": <number 50-70, moderate nuance — clear but not overly warm>,
+  "rawVibeScore": <number 0-100, honest assessment of how the raw input sounds — see scoring rules above>,
+  "translatedVibeScore": <number, always higher than rawVibeScore, target 50-70 range>,
   "sections": [
     {"label": "OBSERVATION", "content": "<clear, factual restatement of the situation>"},
     {"label": "RECOMMENDATION", "content": "<neutral, actionable suggestion>"}
@@ -50,8 +60,8 @@ Goal: Provide high-impact, professional feedback that drives results.
 
 JSON schema:
 {
-  "rawVibeScore": <number 5-35, how blunt/harsh the raw input sounds>,
-  "translatedVibeScore": <number 80-95, deep nuance — masterful leadership communication>,
+  "rawVibeScore": <number 0-100, honest assessment of how the raw input sounds — see scoring rules above>,
+  "translatedVibeScore": <number, always higher than rawVibeScore, target 80-95 range>,
   "sections": [
     {"label": "SITUATION", "content": "<specific context and setting>"},
     {"label": "BEHAVIOUR", "content": "<objective, observable behaviour description>"},
@@ -75,8 +85,8 @@ Goal: Maintain social harmony and peer-to-peer relationships.
 
 JSON schema:
 {
-  "rawVibeScore": <number 5-35, how blunt/harsh the raw input sounds>,
-  "translatedVibeScore": <number 65-85, good nuance — warm and diplomatic>,
+  "rawVibeScore": <number 0-100, honest assessment of how the raw input sounds — see scoring rules above>,
+  "translatedVibeScore": <number, always higher than rawVibeScore, target 65-85 range>,
   "sections": [
     {"label": "PERSPECTIVE", "content": "<subjectively framed observation using I-statements>"},
     {"label": "CONCERN", "content": "<what worries you, framed personally>"},
