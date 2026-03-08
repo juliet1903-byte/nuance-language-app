@@ -34,6 +34,7 @@ const SocialTranslator = ({ open, onClose }: SocialTranslatorProps) => {
   const finalTranscriptRef = useRef("");
   const micTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const shouldRestartRef = useRef(false);
+  const resultRef = useRef<HTMLDivElement>(null);
 
   const MAX_RECORDING_SECONDS = 60;
 
@@ -312,9 +313,13 @@ const SocialTranslator = ({ open, onClose }: SocialTranslatorProps) => {
               <AnimatePresence>
                 {result &&
               <motion.div
+                ref={resultRef}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0 }}
+                onAnimationComplete={() => {
+                  resultRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+                }}
                 className="mt-5 glass-dark rounded-2xl p-5 text-glass-foreground">
                 
                 
