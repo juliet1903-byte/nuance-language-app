@@ -108,11 +108,23 @@ const Leaderboard = () => {
       });
   }, [user]);
 
+  // TODO: Remove fake test users after testing
+  const FAKE_USERS: LeaderboardEntry[] = Array.from({ length: 10 }, (_, i) => ({
+    user_id: `fake-${i}`,
+    display_name: ["Alex Morgan", "Sam Rivera", "Jordan Lee", "Taylor Chen", "Casey Kim", "Riley Patel", "Morgan Davis", "Drew Santos", "Quinn Walker", "Avery Thompson"][i],
+    avatar_url: null,
+    vibe_iq: 80 - i * 5,
+    lessons_completed: 20 - i * 2,
+  }));
+
   // Fetch leaderboard data
   const fetchLeaderboard = useCallback(async () => {
     setLoading(true);
     const { data } = await supabase.rpc("get_leaderboard");
-    if (data) setEntries(data as LeaderboardEntry[]);
+    const realEntries = (data as LeaderboardEntry[]) || [];
+    // Merge real + fake, then sort by vibe_iq
+    const merged = [...realEntries, ...FAKE_USERS].sort((a, b) => b.vibe_iq - a.vibe_iq);
+    setEntries(merged);
 
     if (user) {
       const { data: rankData } = await supabase.rpc("get_my_leaderboard_rank", {
