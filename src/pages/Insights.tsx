@@ -97,7 +97,7 @@ const VibeMeter = ({ score }: {score: number;}) => {
 
 // ---------- Page ----------
 
-const Stats = () => {
+const Insights = () => {
   const navigate = useNavigate();
   const { isGuest, user } = useAuth();
   const { vibeIq, lessonsCompleted, activityLog } = useProgress();
