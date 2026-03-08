@@ -6,7 +6,7 @@ import LetterAvatar from "@/components/LetterAvatar";
 import { useAuth } from "@/components/AuthContext";
 import articlePromoted from "@/assets/article-promoted.png";
 import articleCriticism from "@/assets/article-criticism.png";
-import articleCultures from "@/assets/article-cultures.png";
+import deepDiveManagingUp from "@/assets/deep-dive-managing-up.png";
 import videoPositive from "@/assets/video-positive.png";
 import LearningPath from "@/components/LearningPath";
 import ModuleCard from "@/components/ModuleCard";
@@ -51,7 +51,7 @@ const Index = () => {
   { image: articlePromoted, badge: "Article", badgeColor: "bg-accent", title: "Why Some People Get Promoted", href: "/article/promoted" },
   { image: articleCriticism, badge: "Article", badgeColor: "bg-accent", title: "How to Receive Criticism", href: "/article/criticism" },
   { image: videoPositive, badge: "Video", badgeColor: "bg-cta", title: "The 4 Domains of Emotional Intelligence", href: "/video/emotional-intelligence" },
-  { image: articleCultures, badge: "Deep Dive", badgeColor: "bg-vibe-blunt", title: "Reading Between Cultures", href: "/deep-dive/cultures" }];
+  { image: deepDiveManagingUp, badge: "Deep Dive", badgeColor: "bg-vibe-blunt", title: "Managing Up: How to Work With Your Manager", href: "/deep-dive/managing-up" }];
 
 
   return (

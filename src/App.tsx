@@ -23,6 +23,7 @@ import ArticleBurnout from "./pages/ArticleBurnout";
 import ArticleCriticism from "./pages/ArticleCriticism";
 import ArticleConversations from "./pages/ArticleConversations";
 import DeepDiveCultures from "./pages/DeepDiveCultures";
+import DeepDiveManagingUp from "./pages/DeepDiveManagingUp";
 import VideoInterview from "./pages/VideoInterview";
 import VideoRelationships from "./pages/VideoRelationships";
 import VideoEmotionalIntelligence from "./pages/VideoEmotionalIntelligence";
@@ -56,6 +57,7 @@ const App = () => (
                 <Route path="/article/criticism" element={<ArticleCriticism />} />
                 <Route path="/article/conversations" element={<ArticleConversations />} />
                 <Route path="/deep-dive/cultures" element={<DeepDiveCultures />} />
+                <Route path="/deep-dive/managing-up" element={<DeepDiveManagingUp />} />
                 <Route path="/video/interview" element={<VideoInterview />} />
                 <Route path="/video/relationships" element={<VideoRelationships />} />
                 <Route path="/video/emotional-intelligence" element={<VideoEmotionalIntelligence />} />

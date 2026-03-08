@@ -24,6 +24,7 @@ import articleConversations from "@/assets/article-conversations.png";
 import articlePromoted from "@/assets/article-promoted.png";
 import videoNeutral from "@/assets/video-neutral.png";
 import videoPositive from "@/assets/video-positive.png";
+import deepDiveManagingUp from "@/assets/deep-dive-managing-up.png";
 
 const imageMap: Record<string, string> = {
   "module-starting-strong": moduleStartingStrong,
@@ -65,6 +66,15 @@ const articles = [
   },
   {
     id: "a3",
+    title: "Managing Up: How to Work With Your Manager",
+    category: "Career",
+    readTime: "15 min read",
+    href: "/deep-dive/managing-up",
+    image: deepDiveManagingUp,
+    badge: "Deep Dive",
+  },
+  {
+    id: "a3b",
     title: "Reading Between Cultures",
     category: "Cross-Cultural",
     readTime: "10 min read",
