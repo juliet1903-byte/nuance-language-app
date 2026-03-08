@@ -291,6 +291,11 @@ const Profile = () => {
                   Set your display name
                 </button>
               )}
+              {!showBanner && (
+                <p className="text-xs text-muted-foreground/70 mt-0.5">
+                  This name appears on the leaderboard and in your activity
+                </p>
+              )}
             </div>
           )}
           <p className="text-sm text-muted-foreground mt-0.5">{displayEmail}</p>
