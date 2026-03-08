@@ -249,7 +249,7 @@ const SocialTranslator = ({ open, onClose }: SocialTranslatorProps) => {
                   <button
                   onClick={handleMic}
                   className={`w-10 h-10 flex items-center justify-center rounded-full transition-colors ${isRecording ? "bg-destructive text-destructive-foreground animate-pulse" : "bg-muted/60 text-muted-foreground"}`}>
-                    <Mic className="w-5 h-5" />
+                    {isRecording ? <Check className="w-5 h-5" /> : <Mic className="w-5 h-5" />}
                   </button>
                 </div>
               </div>
