@@ -14,8 +14,8 @@ const VideoInterview = () => {
           <ArrowLeft className="w-5 h-5" />
         </button>
         <span className="font-semibold truncate text-base flex-1">How to Get Ready for an Interview</span>
-        <button onClick={cycleTextSize} className="p-2 rounded-lg hover:bg-card transition-colors" aria-label="Increase text size">
-          {textSize === "x-large" ? <AArrowDown className="w-10 h-10" /> : <AArrowUp className="w-10 h-10" />}
+        <button onClick={cycleTextSize} className="w-10 h-10 flex items-center justify-center rounded-full bg-card hover:bg-accent transition-colors" aria-label="Increase text size">
+          {textSize === "x-large" ? <AArrowDown className="w-5 h-5" /> : <AArrowUp className="w-5 h-5" />}
         </button>
       </header>
 
