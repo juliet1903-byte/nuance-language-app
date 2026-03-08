@@ -82,6 +82,7 @@ JSON schema:
     {"label": "CONCERN", "content": "<what worries you, framed personally>"},
     {"label": "INVITATION", "content": "<open question inviting their perspective>"}
   ],
+  "conversational": "<a single concise, ready-to-send message combining the above points naturally>",
   "coachTip": "<1-2 sentence explanation of the subjective framing technique applied>"
 }`;
 }
