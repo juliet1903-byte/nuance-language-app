@@ -25,6 +25,7 @@ const SocialTranslator = ({ open, onClose }: SocialTranslatorProps) => {
   const [input, setInput] = useState("");
   const [tone, setTone] = useState<Tone>("colleague");
   const [result, setResult] = useState<TranslationResult | null>(null);
+  const [structuredHeight, setStructuredHeight] = useState<number | null>(null);
   const [needlePosition, setNeedlePosition] = useState<number | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [showCoachTip, setShowCoachTip] = useState(false);
@@ -132,6 +133,7 @@ const SocialTranslator = ({ open, onClose }: SocialTranslatorProps) => {
 
     setIsLoading(true);
     setResult(null);
+    setStructuredHeight(null);
     setShowCoachTip(false);
 
     try {
@@ -181,6 +183,7 @@ const SocialTranslator = ({ open, onClose }: SocialTranslatorProps) => {
   const handleClear = () => {
     setInput("");
     setResult(null);
+    setStructuredHeight(null);
     setNeedlePosition(null);
     setShowCoachTip(false);
     setViewMode("structured");
@@ -328,38 +331,45 @@ const SocialTranslator = ({ open, onClose }: SocialTranslatorProps) => {
                       <div className="flex items-center gap-2.5 mb-4">
                         <button
                           onClick={() => setViewMode((v) => v === "structured" ? "conversational" : "structured")}
-                          className={`relative w-11 h-7 rounded-full transition-colors ${viewMode === "conversational" ? "bg-glass-foreground/40" : "bg-glass-foreground/15"}`}>
-                          <span className={`absolute top-[3px] left-[3px] w-[22px] h-[22px] rounded-full bg-glass-foreground transition-transform ${viewMode === "conversational" ? "translate-x-[16px]" : "translate-x-0"}`} />
+                          className={`relative w-11 h-7 rounded-full transition-colors ${viewMode === "conversational" ? "bg-cta" : "bg-glass-foreground/15"}`}>
+                          <span className={`absolute top-[3px] left-[3px] w-[22px] h-[22px] rounded-full shadow-sm transition-transform ${viewMode === "conversational" ? "bg-cta-foreground translate-x-[16px]" : "bg-glass-foreground/50 translate-x-0"}`} />
                         </button>
                         <span className="text-sm text-glass-foreground/70 font-medium">Conversational</span>
                       </div>
                     }
 
-                    <AnimatePresence mode="wait" initial={false}>
-                      {viewMode === "structured" ? (
-                        <motion.div
-                          key="structured"
-                          initial={{ opacity: 0 }}
-                          animate={{ opacity: 1 }}
-                          exit={{ opacity: 0 }}
-                          transition={{ duration: 0.15 }}>
-                          {result.sections.map((s) =>
-                            <div key={s.label} className="mb-4 last:mb-0">
-                              <p className="font-bold tracking-wider text-accent mb-1 text-sm">{s.label}</p>
-                              <p className="leading-relaxed opacity-90 text-base">{s.content}</p>
-                            </div>
-                          )}
-                        </motion.div>
-                      ) : (
-                        <motion.p
-                          key="conversational"
-                          initial={{ opacity: 0 }}
-                          animate={{ opacity: 1 }}
-                          exit={{ opacity: 0 }}
-                          transition={{ duration: 0.15 }}
-                          className="leading-relaxed opacity-90 text-base">{result.conversational}</motion.p>
-                      )}
-                    </AnimatePresence>
+                    <div style={{ minHeight: structuredHeight ?? undefined }}>
+                      <AnimatePresence mode="wait" initial={false}>
+                        {viewMode === "structured" ? (
+                          <motion.div
+                            key="structured"
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            exit={{ opacity: 0 }}
+                            transition={{ duration: 0.15 }}
+                            ref={(el) => {
+                              if (el && !structuredHeight) {
+                                setStructuredHeight(el.getBoundingClientRect().height);
+                              }
+                            }}>
+                            {result.sections.map((s) =>
+                              <div key={s.label} className="mb-4 last:mb-0">
+                                <p className="font-bold tracking-wider text-accent mb-1 text-sm">{s.label}</p>
+                                <p className="leading-relaxed opacity-90 text-base">{s.content}</p>
+                              </div>
+                            )}
+                          </motion.div>
+                        ) : (
+                          <motion.p
+                            key="conversational"
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            exit={{ opacity: 0 }}
+                            transition={{ duration: 0.15 }}
+                            className="leading-relaxed opacity-90 text-base">{result.conversational}</motion.p>
+                        )}
+                      </AnimatePresence>
+                    </div>
 
                     {/* Coach's Tip */}
                     <AnimatePresence>
