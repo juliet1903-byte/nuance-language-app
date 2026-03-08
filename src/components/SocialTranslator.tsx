@@ -259,9 +259,16 @@ const SocialTranslator = ({ open, onClose }: SocialTranslatorProps) => {
               </div>
 
               {/* Vibe Meter */}
-              <label className="font-semibold tracking-wider text-muted-foreground uppercase mb-2 block text-sm">
-                The Vibe Meter
-              </label>
+              <div className="flex items-baseline justify-between mb-2">
+                <label className="font-semibold tracking-wider text-muted-foreground uppercase text-sm">
+                  The Vibe Meter
+                </label>
+                {result &&
+                  <span className="text-sm font-semibold text-muted-foreground">
+                    {result.rawVibeScore}<span className="mx-0.5">→</span>{result.translatedVibeScore}
+                  </span>
+                }
+              </div>
               <div className="relative mb-1" style={{ height: 24 }}>
                 <div className="absolute inset-x-0 top-1/2 -translate-y-1/2 h-2 rounded-full bg-gradient-to-r from-vibe-blunt via-muted to-vibe-nuanced" />
 
