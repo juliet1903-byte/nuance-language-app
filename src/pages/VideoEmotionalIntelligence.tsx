@@ -4,6 +4,7 @@ import { useTextSize } from "@/hooks/useTextSize";
 
 const VideoEmotionalIntelligence = () => {
   const navigate = useNavigate();
+  const { textSizeClass, cycleTextSize } = useTextSize();
 
   return (
     <div className="min-h-screen bg-background text-foreground">
