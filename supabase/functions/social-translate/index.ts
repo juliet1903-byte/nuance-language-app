@@ -31,6 +31,7 @@ JSON schema:
     {"label": "OBSERVATION", "content": "<clear, factual restatement of the situation>"},
     {"label": "RECOMMENDATION", "content": "<neutral, actionable suggestion>"}
   ],
+  "conversational": "<a single concise, ready-to-send message combining the above points naturally>",
   "coachTip": "<1-2 sentence explanation of the key linguistic shift, e.g. removing emotional charge or bias>"
 }`;
   }
