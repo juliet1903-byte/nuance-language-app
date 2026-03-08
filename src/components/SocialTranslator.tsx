@@ -69,19 +69,28 @@ const SocialTranslator = ({ open, onClose }: SocialTranslatorProps) => {
 
     // Snapshot existing input as the base
     const baseText = input;
+    finalTranscriptRef.current = baseText;
 
     recognition.onresult = (event: any) => {
-      let finalParts: string[] = [];
-      let interim = "";
-      for (let i = 0; i < event.results.length; i++) {
+      // Only process new results from resultIndex to avoid mobile Chrome duplication
+      for (let i = event.resultIndex; i < event.results.length; i++) {
         if (event.results[i].isFinal) {
-          finalParts.push(event.results[i][0].transcript.trim());
-        } else {
-          interim = event.results[i][0].transcript;
+          const text = event.results[i][0].transcript.trim();
+          if (text) {
+            finalTranscriptRef.current = finalTranscriptRef.current
+              ? finalTranscriptRef.current + " " + text
+              : text;
+          }
         }
       }
-      const finalText = finalParts.join(" ");
-      finalTranscriptRef.current = baseText + (baseText && finalText ? " " : "") + finalText;
+
+      // Get current interim (only the last non-final result)
+      let interim = "";
+      const lastResult = event.results[event.results.length - 1];
+      if (lastResult && !lastResult.isFinal) {
+        interim = lastResult[0].transcript;
+      }
+
       setInput(finalTranscriptRef.current + (interim ? " " + interim : ""));
     };
 
