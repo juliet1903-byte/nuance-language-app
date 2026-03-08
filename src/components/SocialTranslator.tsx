@@ -34,6 +34,7 @@ const SocialTranslator = ({ open, onClose }: SocialTranslatorProps) => {
   const finalTranscriptRef = useRef("");
   const micTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const shouldRestartRef = useRef(false);
+  const resultRef = useRef<HTMLDivElement>(null);
 
   const MAX_RECORDING_SECONDS = 60;
 
