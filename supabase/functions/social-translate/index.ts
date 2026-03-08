@@ -57,6 +57,7 @@ JSON schema:
     {"label": "BEHAVIOUR", "content": "<objective, observable behaviour description>"},
     {"label": "IMPACT", "content": "<effect on team/project + invitation to discuss>"}
   ],
+  "conversational": "<a single concise, ready-to-send message combining the above points naturally>",
   "coachTip": "<1-2 sentence explanation of the SBI technique applied>"
 }`;
   }
