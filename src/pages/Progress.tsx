@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { ArrowLeft, Check, Lock, ChevronDown, ChevronRight, CalendarDays } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
