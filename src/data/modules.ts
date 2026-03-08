@@ -46,9 +46,191 @@ export interface Module {
 
 export const modules: Module[] = [
   // Level 1: Natural Flow
+  // Level 1: Natural Flow
+  {
+    id: "dei-fundamentals",
+    number: 1,
+    title: "DEI Fundamentals",
+    subtitle: "Language, inclusion, and belonging",
+    description: "The specific language choices that either include people or exclude them — often without realising. Most exclusive language is not intentional, it is simply habit. This module helps you recognise common patterns and replace them with more thoughtful alternatives. You will also learn how to respond when someone says something that feels wrong. Building this awareness makes every team you join more welcoming and productive.",
+    image: "module-dei",
+    lessons: [
+      {
+        id: "7-1",
+        title: "Inclusive Language in Practice",
+        intro: "Small word choices can make people feel included or excluded without you realising it. Most exclusive language is not intentional — it is just habit. This lesson helps you recognise common patterns and replace them with more inclusive alternatives. You will learn why 'Hey everyone' works better than 'Hey guys' and similar practical swaps. Building this awareness makes you a better colleague and leader.",
+        phrases: [
+          { phrase: '"Hey everyone / Hey team — let\'s get started."', usage: "Gender-neutral group address" },
+          { phrase: '"I try to be aware of how different people experience this environment differently."', usage: "When asked about your DEI approach" },
+        ],
+        coachingNotes: [
+          "Most exclusive language is habitual, not malicious. The question is whether language makes certain people feel default and others exceptional.",
+        ],
+        flashcards: [
+          { front: "\"Hey everyone\" vs \"Hey guys\"", back: "'Hey everyone' or 'Hey team' are gender-neutral alternatives that include all participants without assumption." },
+          { front: "Habitual vs malicious exclusion", back: "Most exclusive language isn't intentional — it's habitual. The goal is awareness, not blame." },
+          { front: "\"Experience differently\"", back: "Acknowledges that the same environment isn't equally comfortable for everyone. Shows awareness without preaching." },
+          { front: "Default vs exceptional", back: "Inclusive language avoids making some identities feel 'normal' and others 'other'. Example: 'partner' instead of 'husband/wife'." },
+        ],
+        wordOrderExercise: {
+          instruction: "Arrange the words to form an inclusive workplace phrase.",
+          items: [
+            { id: "wo-7-1a", correctSentence: "I try to be aware of how people experience this differently", scrambledWords: ["this", "aware", "try", "differently", "how", "I", "people", "be", "experience", "of", "to"] },
+            { id: "wo-7-1b", correctSentence: "Hey everyone let us get started with the agenda", scrambledWords: ["agenda", "everyone", "Hey", "get", "with", "us", "the", "started", "let"] },
+          ],
+        },
+        exercises: [
+          {
+            type: "fill-gap",
+            instruction: "Tap the correct phrase to complete each sentence.",
+            wordBank: ["Hey everyone", "be aware", "feel default", "habitual"],
+            items: [
+              { id: "7-1", prompt: '"_____ — let\'s get started with the standup."', answer: "Hey everyone" },
+              { id: "7-2", prompt: '"I try to _____ of how people experience this environment."', answer: "be aware" },
+              { id: "7-3", prompt: '"Most exclusive language is _____, not intentional."', answer: "habitual" },
+            ],
+          },
+        ],
+      },
+      {
+        id: "7-2",
+        title: "Responding to Microaggressions",
+        intro: "Sometimes people say things that feel wrong, but you are not sure how to respond. Staying silent feels bad, but overreacting can make things worse. This lesson teaches you to address uncomfortable moments calmly and clearly. You will learn to separate someone's intention from the impact of their words. These phrases help whether you are the target or a bystander.",
+        phrases: [
+          { phrase: '"I think that comment landed differently than you intended — can I share why?"', usage: "Addressing a microaggression without escalating" },
+          { phrase: '"I\'m sure that wasn\'t your intention, but here\'s how it came across."', usage: "Separating intent from impact" },
+          { phrase: '"Can we find a different way to phrase that?"', usage: "Redirecting language without shaming" },
+        ],
+        coachingNotes: [
+          "The goal is awareness, not punishment. Separate intent from impact — people can mean well and still cause harm.",
+          "If you witness it but aren't the target, speaking up matters more. The phrase 'I noticed that too' can be powerful.",
+        ],
+        flashcards: [
+          { front: "Intent vs impact", back: "Someone can mean no harm but still cause it. Address the impact without attacking the intent." },
+          { front: "\"Landed differently\"", back: "A gentle way to say 'that was offensive' — it implies the speaker didn't intend harm but the effect was real." },
+          { front: "Bystander intervention", back: "If you witness a microaggression, saying 'I noticed that too' validates the target and shares the burden of speaking up." },
+        ],
+        wordOrderExercise: {
+          instruction: "Arrange the words to form a thoughtful response to a microaggression.",
+          items: [
+            { id: "wo-7-2a", correctSentence: "I think that comment landed differently than you intended", scrambledWords: ["intended", "think", "that", "I", "differently", "you", "landed", "than", "comment"] },
+            { id: "wo-7-2b", correctSentence: "Can we find a different way to phrase that", scrambledWords: ["that", "we", "find", "Can", "way", "a", "phrase", "to", "different"] },
+          ],
+        },
+        exercises: [
+          {
+            type: "fill-gap",
+            instruction: "Tap the correct phrase to complete each sentence.",
+            wordBank: ["landed differently", "your intention", "different way", "noticed that too"],
+            items: [
+              { id: "7-2a", prompt: '"I think that comment _____ than you intended."', answer: "landed differently" },
+              { id: "7-2b", prompt: '"I\'m sure that wasn\'t _____, but here\'s how it came across."', answer: "your intention" },
+              { id: "7-2c", prompt: '"Can we find a _____ to phrase that?"', answer: "different way" },
+            ],
+          },
+        ],
+      },
+    ],
+    scenarioExercise: {
+      title: "The Uncomfortable Moment",
+      context: "During a team retrospective, a colleague uses the phrase \"that's so lame\" to describe a process. A team member with a visible disability shifts uncomfortably. Nobody else seems to notice.",
+      prompt: "How do you address this in the moment without making it feel like a lecture?",
+    },
+  },
+  {
+    id: "career-moves",
+    number: 2,
+    title: "Career Moves",
+    subtitle: "Interviews, promotions, salary conversations",
+    description: "Career conversations are emotionally loaded, and most people handle them badly. They either undersell themselves or come across as arrogant. This module teaches you to talk about your achievements with confidence and negotiate salary without awkwardness. You will learn to discuss failures honestly and frame promotion conversations as collaborative. There is a middle path that is both honest and effective — this module shows you how to find it.",
+    image: "module-career-moves",
+    lessons: [
+      {
+        id: "6-1",
+        title: "Talking About Your Work",
+        intro: "In interviews and reviews, most people either undersell themselves or sound arrogant. There is a middle ground that feels natural and confident. This lesson teaches you to talk about your achievements by leading with results and showing self-awareness. You will also learn how to discuss failures honestly without making yourself look bad. These phrases work in interviews, annual reviews, and promotion conversations.",
+        phrases: [
+          { phrase: '"One thing I\'m particularly proud of is [outcome] — because [why it was hard]."', usage: "Interview or review — leads with result, gives context" },
+          { phrase: '"Looking back, I\'d handle [X] differently — but at the time, here was my reasoning."', usage: "Reflecting on failure — shows growth" },
+        ],
+        coachingNotes: [
+          "Most candidates only talk about decisions they agreed with. Showing you pushed back signals strong independent judgement.",
+        ],
+        flashcards: [
+          { front: "\"Particularly proud of\"", back: "Leads with your result and then explains why it was hard. Shows both competence and self-awareness." },
+          { front: "\"Handle differently\"", back: "Reflects on past decisions honestly. Signals growth mindset and the ability to learn from mistakes." },
+          { front: "\"At the time, here was my reasoning\"", back: "Explains past decisions without excuses. Shows you made thoughtful choices even if they weren't perfect." },
+          { front: "Talking about failure in interviews", back: "Show the mistake, what you learned, and what you'd do differently. Never blame others or external factors." },
+        ],
+        wordOrderExercise: {
+          instruction: "Put the words in order to form a strong interview answer.",
+          items: [
+            { id: "wo-6-1a", correctSentence: "One thing I am particularly proud of is reducing deploy time", scrambledWords: ["time", "proud", "is", "thing", "I", "reducing", "am", "One", "deploy", "particularly", "of"] },
+            { id: "wo-6-1b", correctSentence: "Looking back I would handle the communication differently", scrambledWords: ["the", "Looking", "I", "handle", "differently", "communication", "back", "would"] },
+          ],
+        },
+        exercises: [
+          {
+            type: "fill-gap",
+            instruction: "Tap the correct phrase to complete each sentence.",
+            wordBank: ["particularly proud of", "handle differently", "at the time", "pushed back"],
+            items: [
+              { id: "6-1", prompt: '"One thing I\'m _____ is reducing deploy time by 40%."', answer: "particularly proud of" },
+              { id: "6-2", prompt: '"Looking back, I\'d _____ the stakeholder communication."', answer: "handle differently" },
+              { id: "6-3", prompt: '"_____, here was my reasoning for that decision."', answer: "at the time" },
+            ],
+          },
+        ],
+      },
+      {
+        id: "6-2",
+        title: "Negotiating Salary and Role",
+        intro: "Salary conversations make most people uncomfortable, but avoiding them costs you real money. Many professionals accept the first offer because they do not know what to say. This lesson teaches you to anchor with evidence, use ranges instead of single numbers, and frame negotiation as collaborative. You will learn to test boundaries without making demands. These phrases help you start any role on the right terms.",
+        phrases: [
+          { phrase: '"Based on what I\'ve delivered and the market, I believe a range of [X–Y] is fair."', usage: "Anchoring salary with evidence and range" },
+          { phrase: '"I\'m excited about this role — I want to make sure we start on the right footing."', usage: "Framing negotiation as collaborative, not adversarial" },
+          { phrase: '"Is there flexibility on [specific element]?"', usage: "Testing the boundaries without making demands" },
+        ],
+        coachingNotes: [
+          "Always negotiate with a range, not a single number. It shows research and gives the other side room to move.",
+          "'Right footing' signals you're thinking long-term — it's about the relationship, not just the transaction.",
+        ],
+        flashcards: [
+          { front: "\"The right footing\"", back: "Frames salary negotiation as setting up a healthy long-term relationship, not a one-time transaction." },
+          { front: "Range anchoring", back: "Giving a range (e.g., £65–75k) shows research, signals flexibility, and lets the other side feel they're negotiating." },
+          { front: "\"Is there flexibility on…\"", back: "Tests boundaries gently. Works for salary, start date, remote days, or title. Doesn't demand — it asks." },
+        ],
+        wordOrderExercise: {
+          instruction: "Arrange the words to form a confident negotiation phrase.",
+          items: [
+            { id: "wo-6-2a", correctSentence: "I want to make sure we start on the right footing", scrambledWords: ["footing", "make", "the", "I", "start", "right", "to", "sure", "want", "we", "on"] },
+            { id: "wo-6-2b", correctSentence: "Is there flexibility on the remote working arrangement", scrambledWords: ["arrangement", "the", "there", "Is", "on", "working", "flexibility", "remote"] },
+          ],
+        },
+        exercises: [
+          {
+            type: "fill-gap",
+            instruction: "Tap the correct phrase to complete each sentence.",
+            wordBank: ["flexibility on", "what I've delivered", "excited about", "right footing"],
+            items: [
+              { id: "6-2a", prompt: '"I\'m _____ this role — I want to start on the right footing."', answer: "excited about" },
+              { id: "6-2b", prompt: '"Based on _____ and the market, I believe this range is fair."', answer: "what I've delivered" },
+              { id: "6-2c", prompt: '"Is there _____ the start date?"', answer: "flexibility on" },
+            ],
+          },
+        ],
+      },
+    ],
+    scenarioExercise: {
+      title: "The Promotion Conversation",
+      context: "Your annual review is next week. You believe you've been performing at the next level for six months but haven't been promoted. Your manager is supportive but hasn't raised it.",
+      prompt: "How do you open the promotion conversation without sounding entitled or creating awkwardness?",
+    },
+  },
+  // Level 2: The Specialist
   {
     id: "starting-strong",
-    number: 1,
+    number: 3,
     title: "Starting Strong",
     subtitle: "Introductions, onboarding, and making your mark",
     description: "How you show up in the first interactions sets the tone for everything that follows. People form opinions about you within minutes, and those opinions are hard to change later. This module covers how to introduce yourself in a way that people actually remember.",
@@ -137,7 +319,7 @@ export const modules: Module[] = [
   },
   {
     id: "meeting-room",
-    number: 2,
+    number: 4,
     title: "The Meeting Room",
     subtitle: "Participating confidently, managing flow, and closing with clarity",
     description: "Meetings are where professional reputations are built — or quietly eroded. If you stay silent, people forget you were there. If you speak poorly, they remember for the wrong reasons. This module teaches you how to enter discussions confidently, close meetings with clear next steps, and write follow-ups that keep things moving. These are the skills that separate people who attend meetings from people who lead them.",
@@ -227,9 +409,10 @@ export const modules: Module[] = [
       prompt: "How do you re-open the discussion without sounding like you're derailing the meeting?",
     },
   },
+  // Level 3: The Collaborator
   {
     id: "across-cultures",
-    number: 3,
+    number: 5,
     title: "Working Across Cultures",
     subtitle: "Reading communication styles — not just learning idioms",
     description: "Understanding that the same words carry different social weight in different contexts. What sounds polite in one culture can feel rude in another. This module helps you read indirect communication, adapt your tone, and avoid misunderstandings in international teams. You will learn how to express disagreement respectfully and check for real alignment. These skills are essential for anyone who works with colleagues from different backgrounds.",
@@ -320,100 +503,8 @@ export const modules: Module[] = [
     },
   },
   {
-    id: "managing-up",
-    number: 4,
-    title: "Managing Up & Sideways",
-    subtitle: "Influencing without authority",
-    description: "Most important relationships at work are with people you cannot direct — only influence. Your manager, your peers, your stakeholders — none of them report to you. This module teaches you how to link your ideas to what other people care about and give updates that build trust. You will learn to flag problems early and surface hidden objections. These techniques help you get things done even without formal authority.",
-    image: "module-managing-up",
-    lessons: [
-      {
-        id: "4-1",
-        title: "Influencing Without Authority",
-        intro: "You cannot always tell people what to do. Most of the time, you need to persuade people who do not report to you. This lesson teaches you how to link your ideas to what other people already care about. You will learn to surface hidden objections and address them directly. These techniques work with managers, peers, and stakeholders at any level.",
-        phrases: [
-          { phrase: '"I think this connects directly to something you mentioned about [their goal]."', usage: "Linking your idea to their stated priorities" },
-          { phrase: '"What would need to be true for you to feel comfortable with this?"', usage: "Surfaces the real objection" },
-          { phrase: '"I\'d rather flag this early than raise it when it\'s too late to act."', usage: "Framing concern as proactive" },
-        ],
-        coachingNotes: [
-          "When someone hesitates without a reason, this phrase asks them to articulate the condition. Once you know it, you can meet it or have an honest conversation.",
-        ],
-        flashcards: [
-          { front: "\"Connects directly to\"", back: "Links your proposal to someone else's stated priorities. Makes your idea feel aligned, not competing." },
-          { front: "\"What would need to be true?\"", back: "Surfaces hidden objections by asking the other person to articulate their conditions for agreement." },
-          { front: "\"Flag this early\"", back: "Frames your concern as proactive risk management, not complaining. Shows professional maturity." },
-          { front: "Influencing without authority", back: "The skill of moving people through alignment, empathy, and strategic framing — not through formal power." },
-          { front: "\"Feel comfortable with this\"", back: "Acknowledges the emotional component of decisions. People need to feel safe, not just logically convinced." },
-        ],
-        wordOrderExercise: {
-          instruction: "Arrange the words to form an effective influence phrase.",
-          items: [
-            { id: "wo-4-1a", correctSentence: "What would need to be true for you to support this", scrambledWords: ["for", "need", "true", "What", "you", "this", "be", "to", "support", "would", "to"] },
-            { id: "wo-4-1b", correctSentence: "I would rather flag this early than raise it too late", scrambledWords: ["this", "flag", "late", "raise", "it", "would", "I", "too", "rather", "early", "than"] },
-          ],
-        },
-        exercises: [
-          {
-            type: "fill-gap",
-            instruction: "Tap the correct phrase to complete each sentence.",
-            wordBank: ["flag this early", "need to be true", "connects directly", "comfortable with", "too late to act"],
-            items: [
-              { id: "4-1", prompt: '"I think this _____ to your Q3 priority."', answer: "connects directly" },
-              { id: "4-2", prompt: '"What would _____ for you to support this?"', answer: "need to be true" },
-              { id: "4-3", prompt: '"I\'d rather _____ than raise it when it\'s too late to act."', answer: "flag this early" },
-            ],
-          },
-        ],
-      },
-      {
-        id: "4-2",
-        title: "Giving Updates That Build Trust",
-        intro: "Senior people hate surprises. When you share bad news late, it damages trust. When you share it early with a plan, it builds credibility. This lesson teaches you to structure updates that senior stakeholders actually want to hear. You will learn the Status-Risk-Ask framework that works in any situation. Good updates are one of the fastest ways to build a strong professional reputation.",
-        phrases: [
-          { phrase: '"Here\'s where we are, what\'s at risk, and what I need from you."', usage: "Structured status update for senior stakeholders" },
-          { phrase: '"I want to give you an early signal rather than a late surprise."', usage: "Flagging potential problems before they escalate" },
-          { phrase: '"I\'ve thought about this from your perspective — here\'s what I\'d recommend."', usage: "Showing you've considered their priorities" },
-        ],
-        coachingNotes: [
-          "Senior people don't want to be surprised. An early warning with a plan is always better than a late confession without one.",
-          "Structure updates as: Status → Risk → Ask. Don't bury the ask at the end.",
-        ],
-        flashcards: [
-          { front: "\"Early signal, not late surprise\"", back: "Frames bad news as proactive risk management. Shows you're on top of issues, not hiding them." },
-          { front: "Status → Risk → Ask", back: "The ideal update structure for senior stakeholders. Lead with where things stand, highlight risks, then state what you need." },
-          { front: "\"From your perspective\"", back: "Shows you've considered how the situation affects them, not just you. Builds trust and credibility." },
-        ],
-        wordOrderExercise: {
-          instruction: "Arrange the words to form a clear stakeholder update.",
-          items: [
-            { id: "wo-4-2a", correctSentence: "I want to give you an early signal on this", scrambledWords: ["this", "give", "early", "I", "an", "to", "signal", "you", "want", "on"] },
-            { id: "wo-4-2b", correctSentence: "Here is where we are and what I need from you", scrambledWords: ["you", "is", "are", "Here", "what", "and", "from", "where", "I", "need", "we"] },
-          ],
-        },
-        exercises: [
-          {
-            type: "fill-gap",
-            instruction: "Tap the correct phrase to complete each sentence.",
-            wordBank: ["early signal", "at risk", "your perspective", "what I need"],
-            items: [
-              { id: "4-2a", prompt: '"I want to give you an _____ rather than a late surprise."', answer: "early signal" },
-              { id: "4-2b", prompt: '"Here\'s where we are, what\'s _____, and what I need from you."', answer: "at risk" },
-              { id: "4-2c", prompt: '"I\'ve thought about this from _____ — here\'s my recommendation."', answer: "your perspective" },
-            ],
-          },
-        ],
-      },
-    ],
-    scenarioExercise: {
-      title: "The Reluctant Stakeholder",
-      context: "Your skip-level manager has been delaying approval on a process change you proposed. They haven't said no, but they haven't said yes either. You have 5 minutes with them before a meeting.",
-      prompt: "How do you surface their real concern and move toward a decision without being pushy?",
-    },
-  },
-  {
     id: "difficult-convos",
-    number: 5,
+    number: 6,
     title: "Difficult Conversations",
     subtitle: "Conflict, feedback, and hard truths — without the damage",
     description: "The conversations most people avoid are usually the ones that matter most. Giving feedback, receiving criticism, and addressing conflict — these moments define professional relationships. This module gives you clear frameworks to handle each situation with confidence. You will learn to deliver honest feedback without damaging trust and receive it without getting defensive. Mastering difficult conversations is one of the most valuable career skills you can build.",
@@ -503,184 +594,97 @@ export const modules: Module[] = [
       prompt: "How do you address this pattern directly while keeping the relationship intact?",
     },
   },
+  // Level 4: The Influencer
   {
-    id: "career-moves",
-    number: 6,
-    title: "Career Moves",
-    subtitle: "Interviews, promotions, salary conversations",
-    description: "Career conversations are emotionally loaded, and most people handle them badly. They either undersell themselves or come across as arrogant. This module teaches you to talk about your achievements with confidence and negotiate salary without awkwardness. You will learn to discuss failures honestly and frame promotion conversations as collaborative. There is a middle path that is both honest and effective — this module shows you how to find it.",
-    image: "module-career-moves",
-    lessons: [
-      {
-        id: "6-1",
-        title: "Talking About Your Work",
-        intro: "In interviews and reviews, most people either undersell themselves or sound arrogant. There is a middle ground that feels natural and confident. This lesson teaches you to talk about your achievements by leading with results and showing self-awareness. You will also learn how to discuss failures honestly without making yourself look bad. These phrases work in interviews, annual reviews, and promotion conversations.",
-        phrases: [
-          { phrase: '"One thing I\'m particularly proud of is [outcome] — because [why it was hard]."', usage: "Interview or review — leads with result, gives context" },
-          { phrase: '"Looking back, I\'d handle [X] differently — but at the time, here was my reasoning."', usage: "Reflecting on failure — shows growth" },
-        ],
-        coachingNotes: [
-          "Most candidates only talk about decisions they agreed with. Showing you pushed back signals strong independent judgement.",
-        ],
-        flashcards: [
-          { front: "\"Particularly proud of\"", back: "Leads with your result and then explains why it was hard. Shows both competence and self-awareness." },
-          { front: "\"Handle differently\"", back: "Reflects on past decisions honestly. Signals growth mindset and the ability to learn from mistakes." },
-          { front: "\"At the time, here was my reasoning\"", back: "Explains past decisions without excuses. Shows you made thoughtful choices even if they weren't perfect." },
-          { front: "Talking about failure in interviews", back: "Show the mistake, what you learned, and what you'd do differently. Never blame others or external factors." },
-        ],
-        wordOrderExercise: {
-          instruction: "Put the words in order to form a strong interview answer.",
-          items: [
-            { id: "wo-6-1a", correctSentence: "One thing I am particularly proud of is reducing deploy time", scrambledWords: ["time", "proud", "is", "thing", "I", "reducing", "am", "One", "deploy", "particularly", "of"] },
-            { id: "wo-6-1b", correctSentence: "Looking back I would handle the communication differently", scrambledWords: ["the", "Looking", "I", "handle", "differently", "communication", "back", "would"] },
-          ],
-        },
-        exercises: [
-          {
-            type: "fill-gap",
-            instruction: "Tap the correct phrase to complete each sentence.",
-            wordBank: ["particularly proud of", "handle differently", "at the time", "pushed back"],
-            items: [
-              { id: "6-1", prompt: '"One thing I\'m _____ is reducing deploy time by 40%."', answer: "particularly proud of" },
-              { id: "6-2", prompt: '"Looking back, I\'d _____ the stakeholder communication."', answer: "handle differently" },
-              { id: "6-3", prompt: '"_____, here was my reasoning for that decision."', answer: "at the time" },
-            ],
-          },
-        ],
-      },
-      {
-        id: "6-2",
-        title: "Negotiating Salary and Role",
-        intro: "Salary conversations make most people uncomfortable, but avoiding them costs you real money. Many professionals accept the first offer because they do not know what to say. This lesson teaches you to anchor with evidence, use ranges instead of single numbers, and frame negotiation as collaborative. You will learn to test boundaries without making demands. These phrases help you start any role on the right terms.",
-        phrases: [
-          { phrase: '"Based on what I\'ve delivered and the market, I believe a range of [X–Y] is fair."', usage: "Anchoring salary with evidence and range" },
-          { phrase: '"I\'m excited about this role — I want to make sure we start on the right footing."', usage: "Framing negotiation as collaborative, not adversarial" },
-          { phrase: '"Is there flexibility on [specific element]?"', usage: "Testing the boundaries without making demands" },
-        ],
-        coachingNotes: [
-          "Always negotiate with a range, not a single number. It shows research and gives the other side room to move.",
-          "'Right footing' signals you're thinking long-term — it's about the relationship, not just the transaction.",
-        ],
-        flashcards: [
-          { front: "\"The right footing\"", back: "Frames salary negotiation as setting up a healthy long-term relationship, not a one-time transaction." },
-          { front: "Range anchoring", back: "Giving a range (e.g., £65–75k) shows research, signals flexibility, and lets the other side feel they're negotiating." },
-          { front: "\"Is there flexibility on…\"", back: "Tests boundaries gently. Works for salary, start date, remote days, or title. Doesn't demand — it asks." },
-        ],
-        wordOrderExercise: {
-          instruction: "Arrange the words to form a confident negotiation phrase.",
-          items: [
-            { id: "wo-6-2a", correctSentence: "I want to make sure we start on the right footing", scrambledWords: ["footing", "make", "the", "I", "start", "right", "to", "sure", "want", "we", "on"] },
-            { id: "wo-6-2b", correctSentence: "Is there flexibility on the remote working arrangement", scrambledWords: ["arrangement", "the", "there", "Is", "on", "working", "flexibility", "remote"] },
-          ],
-        },
-        exercises: [
-          {
-            type: "fill-gap",
-            instruction: "Tap the correct phrase to complete each sentence.",
-            wordBank: ["flexibility on", "what I've delivered", "excited about", "right footing"],
-            items: [
-              { id: "6-2a", prompt: '"I\'m _____ this role — I want to start on the right footing."', answer: "excited about" },
-              { id: "6-2b", prompt: '"Based on _____ and the market, I believe this range is fair."', answer: "what I've delivered" },
-              { id: "6-2c", prompt: '"Is there _____ the start date?"', answer: "flexibility on" },
-            ],
-          },
-        ],
-      },
-    ],
-    scenarioExercise: {
-      title: "The Promotion Conversation",
-      context: "Your annual review is next week. You believe you've been performing at the next level for six months but haven't been promoted. Your manager is supportive but hasn't raised it.",
-      prompt: "How do you open the promotion conversation without sounding entitled or creating awkwardness?",
-    },
-  },
-  {
-    id: "dei-fundamentals",
+    id: "managing-up",
     number: 7,
-    title: "DEI Fundamentals",
-    subtitle: "Language, inclusion, and belonging",
-    description: "The specific language choices that either include people or exclude them — often without realising. Most exclusive language is not intentional, it is simply habit. This module helps you recognise common patterns and replace them with more thoughtful alternatives. You will also learn how to respond when someone says something that feels wrong. Building this awareness makes every team you join more welcoming and productive.",
-    image: "module-dei",
+    title: "Managing Up & Sideways",
+    subtitle: "Influencing without authority",
+    description: "Most important relationships at work are with people you cannot direct — only influence. Your manager, your peers, your stakeholders — none of them report to you. This module teaches you how to link your ideas to what other people care about and give updates that build trust. You will learn to flag problems early and surface hidden objections. These techniques help you get things done even without formal authority.",
+    image: "module-managing-up",
     lessons: [
       {
-        id: "7-1",
-        title: "Inclusive Language in Practice",
-        intro: "Small word choices can make people feel included or excluded without you realising it. Most exclusive language is not intentional — it is just habit. This lesson helps you recognise common patterns and replace them with more inclusive alternatives. You will learn why 'Hey everyone' works better than 'Hey guys' and similar practical swaps. Building this awareness makes you a better colleague and leader.",
+        id: "4-1",
+        title: "Influencing Without Authority",
+        intro: "You cannot always tell people what to do. Most of the time, you need to persuade people who do not report to you. This lesson teaches you how to link your ideas to what other people already care about. You will learn to surface hidden objections and address them directly. These techniques work with managers, peers, and stakeholders at any level.",
         phrases: [
-          { phrase: '"Hey everyone / Hey team — let\'s get started."', usage: "Gender-neutral group address" },
-          { phrase: '"I try to be aware of how different people experience this environment differently."', usage: "When asked about your DEI approach" },
+          { phrase: '"I think this connects directly to something you mentioned about [their goal]."', usage: "Linking your idea to their stated priorities" },
+          { phrase: '"What would need to be true for you to feel comfortable with this?"', usage: "Surfaces the real objection" },
+          { phrase: '"I\'d rather flag this early than raise it when it\'s too late to act."', usage: "Framing concern as proactive" },
         ],
         coachingNotes: [
-          "Most exclusive language is habitual, not malicious. The question is whether language makes certain people feel default and others exceptional.",
+          "When someone hesitates without a reason, this phrase asks them to articulate the condition. Once you know it, you can meet it or have an honest conversation.",
         ],
         flashcards: [
-          { front: "\"Hey everyone\" vs \"Hey guys\"", back: "'Hey everyone' or 'Hey team' are gender-neutral alternatives that include all participants without assumption." },
-          { front: "Habitual vs malicious exclusion", back: "Most exclusive language isn't intentional — it's habitual. The goal is awareness, not blame." },
-          { front: "\"Experience differently\"", back: "Acknowledges that the same environment isn't equally comfortable for everyone. Shows awareness without preaching." },
-          { front: "Default vs exceptional", back: "Inclusive language avoids making some identities feel 'normal' and others 'other'. Example: 'partner' instead of 'husband/wife'." },
+          { front: "\"Connects directly to\"", back: "Links your proposal to someone else's stated priorities. Makes your idea feel aligned, not competing." },
+          { front: "\"What would need to be true?\"", back: "Surfaces hidden objections by asking the other person to articulate their conditions for agreement." },
+          { front: "\"Flag this early\"", back: "Frames your concern as proactive risk management, not complaining. Shows professional maturity." },
+          { front: "Influencing without authority", back: "The skill of moving people through alignment, empathy, and strategic framing — not through formal power." },
+          { front: "\"Feel comfortable with this\"", back: "Acknowledges the emotional component of decisions. People need to feel safe, not just logically convinced." },
         ],
         wordOrderExercise: {
-          instruction: "Arrange the words to form an inclusive workplace phrase.",
+          instruction: "Arrange the words to form an effective influence phrase.",
           items: [
-            { id: "wo-7-1a", correctSentence: "I try to be aware of how people experience this differently", scrambledWords: ["this", "aware", "try", "differently", "how", "I", "people", "be", "experience", "of", "to"] },
-            { id: "wo-7-1b", correctSentence: "Hey everyone let us get started with the agenda", scrambledWords: ["agenda", "everyone", "Hey", "get", "with", "us", "the", "started", "let"] },
+            { id: "wo-4-1a", correctSentence: "What would need to be true for you to support this", scrambledWords: ["for", "need", "true", "What", "you", "this", "be", "to", "support", "would", "to"] },
+            { id: "wo-4-1b", correctSentence: "I would rather flag this early than raise it too late", scrambledWords: ["this", "flag", "late", "raise", "it", "would", "I", "too", "rather", "early", "than"] },
           ],
         },
         exercises: [
           {
             type: "fill-gap",
             instruction: "Tap the correct phrase to complete each sentence.",
-            wordBank: ["Hey everyone", "be aware", "feel default", "habitual"],
+            wordBank: ["flag this early", "need to be true", "connects directly", "comfortable with", "too late to act"],
             items: [
-              { id: "7-1", prompt: '"_____ — let\'s get started with the standup."', answer: "Hey everyone" },
-              { id: "7-2", prompt: '"I try to _____ of how people experience this environment."', answer: "be aware" },
-              { id: "7-3", prompt: '"Most exclusive language is _____, not intentional."', answer: "habitual" },
+              { id: "4-1", prompt: '"I think this _____ to your Q3 priority."', answer: "connects directly" },
+              { id: "4-2", prompt: '"What would _____ for you to support this?"', answer: "need to be true" },
+              { id: "4-3", prompt: '"I\'d rather _____ than raise it when it\'s too late to act."', answer: "flag this early" },
             ],
           },
         ],
       },
       {
-        id: "7-2",
-        title: "Responding to Microaggressions",
-        intro: "Sometimes people say things that feel wrong, but you are not sure how to respond. Staying silent feels bad, but overreacting can make things worse. This lesson teaches you to address uncomfortable moments calmly and clearly. You will learn to separate someone's intention from the impact of their words. These phrases help whether you are the target or a bystander.",
+        id: "4-2",
+        title: "Giving Updates That Build Trust",
+        intro: "Senior people hate surprises. When you share bad news late, it damages trust. When you share it early with a plan, it builds credibility. This lesson teaches you to structure updates that senior stakeholders actually want to hear. You will learn the Status-Risk-Ask framework that works in any situation. Good updates are one of the fastest ways to build a strong professional reputation.",
         phrases: [
-          { phrase: '"I think that comment landed differently than you intended — can I share why?"', usage: "Addressing a microaggression without escalating" },
-          { phrase: '"I\'m sure that wasn\'t your intention, but here\'s how it came across."', usage: "Separating intent from impact" },
-          { phrase: '"Can we find a different way to phrase that?"', usage: "Redirecting language without shaming" },
+          { phrase: '"Here\'s where we are, what\'s at risk, and what I need from you."', usage: "Structured status update for senior stakeholders" },
+          { phrase: '"I want to give you an early signal rather than a late surprise."', usage: "Flagging potential problems before they escalate" },
+          { phrase: '"I\'ve thought about this from your perspective — here\'s what I\'d recommend."', usage: "Showing you've considered their priorities" },
         ],
         coachingNotes: [
-          "The goal is awareness, not punishment. Separate intent from impact — people can mean well and still cause harm.",
-          "If you witness it but aren't the target, speaking up matters more. The phrase 'I noticed that too' can be powerful.",
+          "Senior people don't want to be surprised. An early warning with a plan is always better than a late confession without one.",
+          "Structure updates as: Status → Risk → Ask. Don't bury the ask at the end.",
         ],
         flashcards: [
-          { front: "Intent vs impact", back: "Someone can mean no harm but still cause it. Address the impact without attacking the intent." },
-          { front: "\"Landed differently\"", back: "A gentle way to say 'that was offensive' — it implies the speaker didn't intend harm but the effect was real." },
-          { front: "Bystander intervention", back: "If you witness a microaggression, saying 'I noticed that too' validates the target and shares the burden of speaking up." },
+          { front: "\"Early signal, not late surprise\"", back: "Frames bad news as proactive risk management. Shows you're on top of issues, not hiding them." },
+          { front: "Status → Risk → Ask", back: "The ideal update structure for senior stakeholders. Lead with where things stand, highlight risks, then state what you need." },
+          { front: "\"From your perspective\"", back: "Shows you've considered how the situation affects them, not just you. Builds trust and credibility." },
         ],
         wordOrderExercise: {
-          instruction: "Arrange the words to form a thoughtful response to a microaggression.",
+          instruction: "Arrange the words to form a clear stakeholder update.",
           items: [
-            { id: "wo-7-2a", correctSentence: "I think that comment landed differently than you intended", scrambledWords: ["intended", "think", "that", "I", "differently", "you", "landed", "than", "comment"] },
-            { id: "wo-7-2b", correctSentence: "Can we find a different way to phrase that", scrambledWords: ["that", "we", "find", "Can", "way", "a", "phrase", "to", "different"] },
+            { id: "wo-4-2a", correctSentence: "I want to give you an early signal on this", scrambledWords: ["this", "give", "early", "I", "an", "to", "signal", "you", "want", "on"] },
+            { id: "wo-4-2b", correctSentence: "Here is where we are and what I need from you", scrambledWords: ["you", "is", "are", "Here", "what", "and", "from", "where", "I", "need", "we"] },
           ],
         },
         exercises: [
           {
             type: "fill-gap",
             instruction: "Tap the correct phrase to complete each sentence.",
-            wordBank: ["landed differently", "your intention", "different way", "noticed that too"],
+            wordBank: ["early signal", "at risk", "your perspective", "what I need"],
             items: [
-              { id: "7-2a", prompt: '"I think that comment _____ than you intended."', answer: "landed differently" },
-              { id: "7-2b", prompt: '"I\'m sure that wasn\'t _____, but here\'s how it came across."', answer: "your intention" },
-              { id: "7-2c", prompt: '"Can we find a _____ to phrase that?"', answer: "different way" },
+              { id: "4-2a", prompt: '"I want to give you an _____ rather than a late surprise."', answer: "early signal" },
+              { id: "4-2b", prompt: '"Here\'s where we are, what\'s _____, and what I need from you."', answer: "at risk" },
+              { id: "4-2c", prompt: '"I\'ve thought about this from _____ — here\'s my recommendation."', answer: "your perspective" },
             ],
           },
         ],
       },
     ],
     scenarioExercise: {
-      title: "The Uncomfortable Moment",
-      context: "During a team retrospective, a colleague uses the phrase \"that's so lame\" to describe a process. A team member with a visible disability shifts uncomfortably. Nobody else seems to notice.",
-      prompt: "How do you address this in the moment without making it feel like a lecture?",
+      title: "The Reluctant Stakeholder",
+      context: "Your skip-level manager has been delaying approval on a process change you proposed. They haven't said no, but they haven't said yes either. You have 5 minutes with them before a meeting.",
+      prompt: "How do you surface their real concern and move toward a decision without being pushy?",
     },
   },
   {
