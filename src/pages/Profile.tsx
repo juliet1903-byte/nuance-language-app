@@ -362,7 +362,7 @@ const Profile = () => {
                 await signOut();
                 navigate("/");
               }}
-              className="w-full flex items-center justify-center gap-2 py-3 rounded-2xl border border-destructive/20 text-destructive text-sm font-medium hover:bg-destructive/5 transition-colors"
+              className="w-full flex items-center justify-center gap-2 py-3 rounded-2xl border border-border text-muted-foreground text-sm font-medium hover:bg-muted/50 transition-colors"
             >
               <LogOut className="w-4 h-4" />
               Sign Out
