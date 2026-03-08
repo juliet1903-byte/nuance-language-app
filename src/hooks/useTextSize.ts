@@ -24,9 +24,14 @@ export const useTextSize = () => {
 
   const cycleTextSize = () => {
     const currentIndex = sizes.indexOf(textSize);
-    const nextIndex = (currentIndex + 1) % sizes.length;
-    setTextSize(sizes[nextIndex]);
+    if (currentIndex < sizes.length - 1) {
+      setTextSize(sizes[currentIndex + 1]);
+    } else {
+      setTextSize(sizes[currentIndex - 1]);
+    }
   };
+
+  const isMaxSize = textSize === "x-large";
 
   return { textSize, textSizeClass: sizeMap[textSize], cycleTextSize };
 };
