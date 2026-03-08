@@ -21,6 +21,7 @@ import articleCultures from "@/assets/article-cultures.png";
 import articleInterview from "@/assets/article-interview.png";
 import articleCriticism from "@/assets/article-criticism.png";
 import articleConversations from "@/assets/article-conversations.png";
+import articlePromoted from "@/assets/article-promoted.png";
 import videoNeutral from "@/assets/video-neutral.png";
 import videoPositive from "@/assets/video-positive.png";
 
@@ -78,6 +79,14 @@ const articles = [
     readTime: "9 min read",
     href: "/article/conversations",
     image: articleConversations,
+  },
+  {
+    id: "a7",
+    title: "Why Some People Get Promoted and Others Don't",
+    category: "Career",
+    readTime: "12 min read",
+    href: "/article/promoted",
+    image: articlePromoted,
   },
 ];
 

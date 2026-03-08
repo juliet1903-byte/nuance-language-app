@@ -26,6 +26,7 @@ import DeepDiveCultures from "./pages/DeepDiveCultures";
 import VideoInterview from "./pages/VideoInterview";
 import VideoRelationships from "./pages/VideoRelationships";
 import VideoEmotionalIntelligence from "./pages/VideoEmotionalIntelligence";
+import ArticlePromoted from "./pages/ArticlePromoted";
 
 const queryClient = new QueryClient();
 
@@ -58,6 +59,7 @@ const App = () => (
                 <Route path="/video/interview" element={<VideoInterview />} />
                 <Route path="/video/relationships" element={<VideoRelationships />} />
                 <Route path="/video/emotional-intelligence" element={<VideoEmotionalIntelligence />} />
+                <Route path="/article/promoted" element={<ArticlePromoted />} />
                 <Route path="*" element={<NotFound />} />
               </Routes>
             </BrowserRouter>
