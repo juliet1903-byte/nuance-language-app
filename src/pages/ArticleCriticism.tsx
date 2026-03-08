@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { ArrowLeft, Clock, Tag, AArrowUp } from "lucide-react";
+import { ArrowLeft, Clock, Tag, AArrowUp, AArrowDown } from "lucide-react";
 import articleCriticism from "@/assets/article-criticism.png";
 import { useTextSize } from "@/hooks/useTextSize";
 
