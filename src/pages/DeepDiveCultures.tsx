@@ -1,7 +1,8 @@
 import { useNavigate } from "react-router-dom";
-import { ArrowLeft, Clock, Tag, RotateCcw } from "lucide-react";
+import { ArrowLeft, Clock, Tag, RotateCcw, AArrowUp } from "lucide-react";
 import { useState } from "react";
 import articleCultures from "@/assets/article-cultures.png";
+import { useTextSize } from "@/hooks/useTextSize";
 
 interface FlipCardProps {
   front: string;
@@ -41,6 +42,7 @@ const FlipCard = ({ front, back }: FlipCardProps) => {
 
 const DeepDiveCultures = () => {
   const navigate = useNavigate();
+  const { textSizeClass, cycleTextSize } = useTextSize();
 
   const flipCards = [
     {
@@ -142,10 +144,13 @@ const DeepDiveCultures = () => {
         <button onClick={() => navigate(-1)} className="p-1.5 rounded-lg hover:bg-card transition-colors">
           <ArrowLeft className="w-5 h-5" />
         </button>
-        <span className="font-semibold truncate text-base">Reading Between Cultures</span>
+        <span className="font-semibold truncate text-base flex-1">Reading Between Cultures</span>
+        <button onClick={cycleTextSize} className="p-1.5 rounded-lg hover:bg-card transition-colors" aria-label="Increase text size">
+          <AArrowUp className="w-5 h-5" />
+        </button>
       </header>
 
-      <article className="max-w-2xl mx-auto px-5 pb-20">
+      <article className={`max-w-2xl mx-auto px-5 pb-20 ${textSizeClass}`}>
         {/* Hero */}
         <div className="relative -mx-5 mb-8">
           <img src={articleCultures} alt="Reading Between Cultures" className="w-full h-56 md:h-72 object-cover" />

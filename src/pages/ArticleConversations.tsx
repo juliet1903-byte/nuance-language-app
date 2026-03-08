@@ -1,9 +1,11 @@
 import { useNavigate } from "react-router-dom";
-import { ArrowLeft, Clock, Tag } from "lucide-react";
+import { ArrowLeft, Clock, Tag, AArrowUp } from "lucide-react";
 import articleConversations from "@/assets/article-conversations.png";
+import { useTextSize } from "@/hooks/useTextSize";
 
 const ArticleConversations = () => {
   const navigate = useNavigate();
+  const { textSizeClass, cycleTextSize } = useTextSize();
 
   return (
     <div className="min-h-screen bg-background text-foreground">
@@ -11,10 +13,13 @@ const ArticleConversations = () => {
         <button onClick={() => navigate(-1)} className="p-1.5 rounded-lg hover:bg-card transition-colors">
           <ArrowLeft className="w-5 h-5" />
         </button>
-        <span className="font-semibold truncate text-base">The Conversations Most People Avoid</span>
+        <span className="font-semibold truncate text-base flex-1">The Conversations Most People Avoid</span>
+        <button onClick={cycleTextSize} className="p-1.5 rounded-lg hover:bg-card transition-colors" aria-label="Increase text size">
+          <AArrowUp className="w-5 h-5" />
+        </button>
       </header>
 
-      <article className="max-w-2xl mx-auto px-5 pb-20">
+      <article className={`max-w-2xl mx-auto px-5 pb-20 ${textSizeClass}`}>
         <div className="relative -mx-5 mb-8">
           <img src={articleConversations} alt="Difficult conversations" className="w-full h-56 md:h-72 object-cover" />
           <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-black/20 to-transparent" />

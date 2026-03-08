@@ -1,8 +1,10 @@
 import { useNavigate } from "react-router-dom";
-import { ArrowLeft, Clock, Tag, Play } from "lucide-react";
+import { ArrowLeft, Clock, Tag, Play, AArrowUp } from "lucide-react";
+import { useTextSize } from "@/hooks/useTextSize";
 
 const VideoRelationships = () => {
   const navigate = useNavigate();
+  const { textSizeClass, cycleTextSize } = useTextSize();
 
   return (
     <div className="min-h-screen bg-background text-foreground">
@@ -10,10 +12,13 @@ const VideoRelationships = () => {
         <button onClick={() => navigate(-1)} className="p-1.5 rounded-lg hover:bg-card transition-colors">
           <ArrowLeft className="w-5 h-5" />
         </button>
-        <span className="font-semibold truncate text-base">How to Grow Professional Relationships</span>
+        <span className="font-semibold truncate text-base flex-1">How to Grow Professional Relationships</span>
+        <button onClick={cycleTextSize} className="p-1.5 rounded-lg hover:bg-card transition-colors" aria-label="Increase text size">
+          <AArrowUp className="w-5 h-5" />
+        </button>
       </header>
 
-      <div className="max-w-2xl mx-auto px-5 pb-20">
+      <div className={`max-w-2xl mx-auto px-5 pb-20 ${textSizeClass}`}>
         <div className="relative -mx-5 mb-8 bg-black">
           <div className="aspect-video w-full">
             <iframe

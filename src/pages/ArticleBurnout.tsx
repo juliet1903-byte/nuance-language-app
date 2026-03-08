@@ -1,9 +1,11 @@
 import { useNavigate } from "react-router-dom";
-import { ArrowLeft, Clock, Tag } from "lucide-react";
+import { ArrowLeft, Clock, Tag, AArrowUp } from "lucide-react";
 import articleBurnout from "@/assets/article-burnout.png";
+import { useTextSize } from "@/hooks/useTextSize";
 
 const ArticleBurnout = () => {
   const navigate = useNavigate();
+  const { textSizeClass, cycleTextSize } = useTextSize();
 
   const earlyWarnings = [
   "You stop volunteering for things. You used to raise your hand for new projects, offer to help with side tasks. Now you wait to be asked — and sometimes you hope you are not asked at all.",
@@ -27,10 +29,13 @@ const ArticleBurnout = () => {
         <button onClick={() => navigate(-1)} className="p-1.5 rounded-lg hover:bg-card transition-colors">
           <ArrowLeft className="w-5 h-5" />
         </button>
-        <span className="font-semibold truncate text-base">Quiet Cracking or Burning Out?</span>
+        <span className="font-semibold truncate text-base flex-1">Quiet Cracking or Burning Out?</span>
+        <button onClick={cycleTextSize} className="p-1.5 rounded-lg hover:bg-card transition-colors" aria-label="Increase text size">
+          <AArrowUp className="w-5 h-5" />
+        </button>
       </header>
 
-      <article className="max-w-2xl mx-auto px-5 pb-20">
+      <article className={`max-w-2xl mx-auto px-5 pb-20 ${textSizeClass}`}>
         {/* Hero image */}
         <div className="relative -mx-5 mb-8">
           <img src={articleBurnout} alt="Burnout article" className="w-full h-56 md:h-72 object-cover" />
