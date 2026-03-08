@@ -79,6 +79,13 @@ const SocialTranslator = ({ open, onClose }: SocialTranslatorProps) => {
 
   const handleTranslate = useCallback(async () => {
     if (!input.trim() || isLoading) return;
+
+    // Stop recording if active
+    if (isRecording) {
+      recognitionRef.current?.stop();
+      setIsRecording(false);
+    }
+
     setIsLoading(true);
     setResult(null);
     setShowCoachTip(false);
