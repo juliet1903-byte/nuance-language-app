@@ -269,17 +269,13 @@ const Leaderboard = () => {
 
           {/* Pinned current user row when scrolled out of view */}
           {showPinnedRow && (
-            <motion.div
-              initial={{ opacity: 0, y: 8 }}
-              animate={{ opacity: 1, y: 0 }}
-              className="sticky bottom-0 mt-2 border-t border-border pt-2"
-            >
+            <div className="mt-2 border-t border-border pt-2 bg-card">
               <LeaderboardRow
                 entry={entries[myIndex]}
                 idx={myIndex}
                 isMe={true}
               />
-            </motion.div>
+            </div>
           )}
         </div>
       )}
