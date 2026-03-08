@@ -4,6 +4,8 @@ import { motion, AnimatePresence } from "framer-motion";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "@/hooks/use-toast";
 import { useAuth } from "@/components/AuthContext";
+import { useIsMobile } from "@/hooks/use-mobile";
+import { useSidebar } from "@/components/SidebarContext";
 
 type Tone = "neutral" | "colleague" | "leader";
 
@@ -22,6 +24,8 @@ interface SocialTranslatorProps {
 
 const SocialTranslator = ({ open, onClose }: SocialTranslatorProps) => {
   const { user } = useAuth();
+  const isMobile = useIsMobile();
+  const { collapsed } = useSidebar();
   const [input, setInput] = useState("");
   const [tone, setTone] = useState<Tone>("colleague");
   const [result, setResult] = useState<TranslationResult | null>(null);
@@ -128,12 +132,10 @@ const SocialTranslator = ({ open, onClose }: SocialTranslatorProps) => {
   const handleTranslate = useCallback(async () => {
     if (!input.trim() || isLoading) return;
 
-    // Stop recording if active
     if (isRecording) {
       stopRecording();
     }
 
-    // Check for offensive language
     if (PROFANITY_PATTERN.test(input)) {
       toast({
         title: "Strong language detected",
@@ -159,7 +161,6 @@ const SocialTranslator = ({ open, onClose }: SocialTranslatorProps) => {
       const res = data as TranslationResult;
       setResult(res);
 
-      // Log translation — use rawVibeScore (user's own ability, not AI-improved)
       if (user) {
         supabase.
         from("activity_log").
@@ -173,10 +174,8 @@ const SocialTranslator = ({ open, onClose }: SocialTranslatorProps) => {
         then(() => {});
       }
 
-      // 1. Show needle at raw score
       setNeedlePosition(res.rawVibeScore);
 
-      // 2. After a beat, sweep needle to translated score
       setTimeout(() => {
         setNeedlePosition(res.translatedVibeScore);
       }, 600);
@@ -211,219 +210,267 @@ const SocialTranslator = ({ open, onClose }: SocialTranslatorProps) => {
   };
 
   const tones: {value: Tone;label: string;}[] = [
-  { value: "neutral", label: "Neutral" },
-  { value: "colleague", label: "Colleague" },
-  { value: "leader", label: "Leader" }];
+    { value: "neutral", label: "Neutral" },
+    { value: "colleague", label: "Colleague" },
+    { value: "leader", label: "Leader" },
+  ];
 
+  const sidebarWidth = collapsed ? 68 : 220;
 
+  const content = (
+    <div className="px-5 pb-8">
+      <div className="flex items-center justify-between mb-1">
+        <h2 className="text-2xl font-medium">Social Translator</h2>
+        {!isMobile && (
+          <button onClick={onClose} className="w-10 h-10 flex items-center justify-center rounded-full bg-card hover:bg-muted transition-colors">
+            <X className="w-5 h-5" />
+          </button>
+        )}
+      </div>
+      <p className="text-muted-foreground mb-5 text-base">Turn raw thoughts into leadership communication</p>
+
+      {/* Input */}
+      <label className="font-semibold tracking-wider text-muted-foreground uppercase mb-2 block text-sm">
+        Your Raw Thoughts
+      </label>
+      <div className="relative rounded-xl p-4 mb-5 bg-card border border-border">
+        <textarea
+          value={input}
+          onChange={(e) => setInput(e.target.value)}
+          placeholder="Type something"
+          className="w-full bg-transparent resize-none outline-none text-foreground min-h-[100px] text-base"
+        />
+        <div className="flex justify-end gap-2 mt-1">
+          {input && (
+            <button onClick={handleClear} className="w-10 h-10 flex items-center justify-center rounded-full bg-muted/60 text-muted-foreground">
+              <X className="w-5 h-5" />
+            </button>
+          )}
+          <button
+            onClick={handleMic}
+            className={`w-10 h-10 flex items-center justify-center rounded-full transition-colors ${isRecording ? "bg-destructive text-destructive-foreground animate-pulse" : "bg-muted/60 text-muted-foreground"}`}
+          >
+            {isRecording ? <Check className="w-5 h-5" /> : <Mic className="w-5 h-5" />}
+          </button>
+        </div>
+      </div>
+
+      {/* Vibe Meter */}
+      <div className="flex items-baseline justify-between mb-2">
+        <label className="font-semibold tracking-wider text-muted-foreground uppercase text-sm">
+          The Vibe Meter
+        </label>
+        {result && (
+          <span className="text-sm font-semibold text-muted-foreground">
+            {result.rawVibeScore}<span className="mx-0.5">→</span>{result.translatedVibeScore}
+          </span>
+        )}
+      </div>
+      <div className="relative mb-1" style={{ height: 24 }}>
+        <div className="absolute inset-x-0 top-1/2 -translate-y-1/2 h-2 rounded-full bg-gradient-to-r from-vibe-blunt via-muted to-vibe-nuanced" />
+        {needlePosition !== null && (
+          <motion.div
+            className="absolute rounded-full bg-foreground border-2 border-card shadow-md"
+            style={{ width: 24, height: 24, top: 0 }}
+            initial={{ opacity: 0, left: `calc(${needlePosition}% - 12px)` }}
+            animate={{ opacity: 1, left: `calc(${needlePosition}% - 12px)` }}
+            transition={{ type: "spring", damping: 20, stiffness: 150 }}
+          />
+        )}
+      </div>
+      <div className="flex justify-between text-xs font-semibold mb-5">
+        <span className="text-vibe-blunt text-sm">Blunt</span>
+        <span className="text-vibe-nuanced text-sm">Nuanced</span>
+      </div>
+
+      {/* Tone Toggles */}
+      <div className="flex rounded-xl p-1 mb-5 bg-secondary border border-border">
+        {tones.map((t) => (
+          <button
+            key={t.value}
+            onClick={() => setTone(t.value)}
+            className={`flex-1 py-2.5 text-base font-semibold rounded-lg transition-all ${
+              tone === t.value ? "bg-foreground text-background shadow-sm" : "text-muted-foreground"
+            }`}
+          >
+            {t.label}
+          </button>
+        ))}
+      </div>
+
+      {/* Translate Button */}
+      <button
+        onClick={handleTranslate}
+        disabled={!input.trim() || isLoading}
+        className="w-full py-4 rounded-xl bg-cta text-cta-foreground font-semibold text-lg disabled:opacity-40 transition-opacity flex items-center justify-center gap-2"
+      >
+        {isLoading ? (
+          <>
+            <Loader2 className="w-5 h-5 animate-spin" />
+            Translating…
+          </>
+        ) : (
+          "Translate"
+        )}
+      </button>
+
+      {/* Result */}
+      <AnimatePresence>
+        {result && (
+          <motion.div
+            ref={resultRef}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0 }}
+            onAnimationComplete={() => {
+              resultRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+            }}
+            className="mt-5 glass-dark rounded-2xl p-5 text-glass-foreground"
+          >
+            {/* Conversational toggle */}
+            {result.conversational && (
+              <div className="flex items-center gap-2.5 mb-4">
+                <button
+                  onClick={() => setViewMode((v) => v === "structured" ? "conversational" : "structured")}
+                  className={`relative w-11 h-7 rounded-full transition-colors ${viewMode === "conversational" ? "bg-cta" : "bg-glass-foreground/15"}`}
+                >
+                  <span className={`absolute top-[3px] left-[3px] w-[22px] h-[22px] rounded-full shadow-sm transition-transform ${viewMode === "conversational" ? "bg-cta-foreground translate-x-[16px]" : "bg-glass-foreground/50 translate-x-0"}`} />
+                </button>
+                <span className="text-sm text-glass-foreground/70 font-medium">Conversational</span>
+              </div>
+            )}
+
+            <div style={{ minHeight: structuredHeight ?? undefined }}>
+              <AnimatePresence mode="wait" initial={false}>
+                {viewMode === "structured" ? (
+                  <motion.div
+                    key="structured"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: 0.15 }}
+                    ref={(el) => {
+                      if (el && !structuredHeight) {
+                        setStructuredHeight(el.getBoundingClientRect().height);
+                      }
+                    }}
+                  >
+                    {result.sections.map((s) => (
+                      <div key={s.label} className="mb-4 last:mb-0">
+                        <p className="font-bold tracking-wider text-accent mb-1 text-sm">{s.label}</p>
+                        <p className="leading-relaxed opacity-90 text-base">{s.content}</p>
+                      </div>
+                    ))}
+                  </motion.div>
+                ) : (
+                  <motion.p
+                    key="conversational"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: 0.15 }}
+                    className="leading-relaxed opacity-90 text-base"
+                  >
+                    {result.conversational}
+                  </motion.p>
+                )}
+              </AnimatePresence>
+            </div>
+
+            {/* Coach's Tip */}
+            <AnimatePresence>
+              {showCoachTip && result.coachTip && (
+                <motion.div
+                  initial={{ opacity: 0, height: 0 }}
+                  animate={{ opacity: 1, height: "auto" }}
+                  exit={{ opacity: 0, height: 0 }}
+                  className="mt-3 p-3 rounded-xl bg-accent/20 border border-accent/30"
+                >
+                  <p className="font-bold tracking-wider text-accent mb-1 text-sm">COACH'S TIP</p>
+                  <p className="leading-relaxed opacity-90 text-base">{result.coachTip}</p>
+                </motion.div>
+              )}
+            </AnimatePresence>
+
+            <div className="flex justify-end gap-2 mt-4">
+              <button
+                onClick={() => setShowCoachTip((p) => !p)}
+                className={`w-10 h-10 flex items-center justify-center rounded-full transition-colors ${showCoachTip ? "bg-glass-foreground/20" : "bg-glass-foreground/10"}`}
+              >
+                <HelpCircle className="w-5 h-5" />
+              </button>
+              <button onClick={handleCopy} className="w-10 h-10 flex items-center justify-center rounded-full bg-glass-foreground/10">
+                <Copy className="w-5 h-5" />
+              </button>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
+  );
+
+  // Desktop: side panel next to sidebar
+  if (!isMobile) {
+    return (
+      <AnimatePresence>
+        {open && (
+          <>
+            {/* Backdrop */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="fixed inset-0 bg-foreground/20 z-40"
+              onClick={onClose}
+            />
+            {/* Side panel */}
+            <motion.div
+              initial={{ x: -20, opacity: 0 }}
+              animate={{ x: 0, opacity: 1 }}
+              exit={{ x: -20, opacity: 0 }}
+              transition={{ type: "spring", damping: 30, stiffness: 300 }}
+              className="fixed top-0 bottom-0 z-50 w-[400px] bg-background border-r border-border/50 overflow-y-auto"
+              style={{ left: sidebarWidth }}
+            >
+              <div className="pt-6">
+                {content}
+              </div>
+            </motion.div>
+          </>
+        )}
+      </AnimatePresence>
+    );
+  }
+
+  // Mobile: bottom sheet (unchanged)
   return (
     <AnimatePresence>
-      {open &&
-      <>
+      {open && (
+        <>
           <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          className="fixed inset-0 bg-foreground/20 z-50"
-          onClick={onClose} />
-        
-
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 bg-foreground/20 z-50"
+            onClick={onClose}
+          />
           <motion.div
-          initial={{ y: "100%" }}
-          animate={{ y: 0 }}
-          exit={{ y: "100%" }}
-          transition={{ type: "spring", damping: 30, stiffness: 300 }}
-          className="fixed bottom-0 left-0 right-0 z-50 rounded-t-3xl max-h-[90vh] overflow-y-auto bg-background border-t border-border/50">
-          
+            initial={{ y: "100%" }}
+            animate={{ y: 0 }}
+            exit={{ y: "100%" }}
+            transition={{ type: "spring", damping: 30, stiffness: 300 }}
+            className="fixed bottom-0 left-0 right-0 z-50 rounded-t-3xl max-h-[90vh] overflow-y-auto bg-background border-t border-border/50"
+          >
             {/* Handle */}
             <div className="flex justify-center pt-3 pb-1">
               <div className="w-10 h-1 bg-muted rounded-full" />
             </div>
-
-            <div className="px-5 pb-8">
-              <h2 className="text-2xl mb-1 font-medium">Social Translator</h2>
-              <p className="text-muted-foreground mb-5 text-base">Turn raw thoughts into leadership communication</p>
-
-              {/* Input */}
-              <label className="font-semibold tracking-wider text-muted-foreground uppercase mb-2 block text-sm">
-                Your Raw Thoughts
-              </label>
-              <div className="relative rounded-xl p-4 mb-5 bg-card border border-border">
-                <textarea
-                value={input}
-                onChange={(e) => setInput(e.target.value)}
-                placeholder="Type something"
-                className="w-full bg-transparent resize-none outline-none text-foreground min-h-[100px] text-base" />
-              
-
-                <div className="flex justify-end gap-2 mt-1">
-                  {input &&
-                <button onClick={handleClear} className="w-10 h-10 flex items-center justify-center rounded-full bg-muted/60 text-muted-foreground">
-                      <X className="w-5 h-5" />
-                    </button>
-                }
-                  <button
-                  onClick={handleMic}
-                  className={`w-10 h-10 flex items-center justify-center rounded-full transition-colors ${isRecording ? "bg-destructive text-destructive-foreground animate-pulse" : "bg-muted/60 text-muted-foreground"}`}>
-                    {isRecording ? <Check className="w-5 h-5" /> : <Mic className="w-5 h-5" />}
-                  </button>
-                </div>
-              </div>
-
-              {/* Vibe Meter */}
-              <div className="flex items-baseline justify-between mb-2">
-                <label className="font-semibold tracking-wider text-muted-foreground uppercase text-sm">
-                  The Vibe Meter
-                </label>
-                {result &&
-                  <span className="text-sm font-semibold text-muted-foreground">
-                    {result.rawVibeScore}<span className="mx-0.5">→</span>{result.translatedVibeScore}
-                  </span>
-                }
-              </div>
-              <div className="relative mb-1" style={{ height: 24 }}>
-                <div className="absolute inset-x-0 top-1/2 -translate-y-1/2 h-2 rounded-full bg-gradient-to-r from-vibe-blunt via-muted to-vibe-nuanced" />
-
-                {/* Solid needle – hidden until translate */}
-                {needlePosition !== null &&
-              <motion.div
-                className="absolute rounded-full bg-foreground border-2 border-card shadow-md"
-                style={{ width: 24, height: 24, top: 0 }}
-                initial={{ opacity: 0, left: `calc(${needlePosition}% - 12px)` }}
-                animate={{ opacity: 1, left: `calc(${needlePosition}% - 12px)` }}
-                transition={{ type: "spring", damping: 20, stiffness: 150 }} />
-
-              }
-              </div>
-              <div className="flex justify-between text-xs font-semibold mb-5">
-                <span className="text-vibe-blunt text-sm">Blunt</span>
-                <span className="text-vibe-nuanced text-sm">Nuanced</span>
-              </div>
-
-              {/* Tone Toggles */}
-              <div className="flex rounded-xl p-1 mb-5 bg-secondary border border-border">
-                {tones.map((t) =>
-              <button
-                key={t.value}
-                onClick={() => setTone(t.value)}
-                className={`flex-1 py-2.5 text-base font-semibold rounded-lg transition-all ${
-                tone === t.value ? "bg-foreground text-background shadow-sm" : "text-muted-foreground"}`
-                }>
-                
-                    {t.label}
-                  </button>
-              )}
-              </div>
-
-              {/* Translate Button */}
-              <button
-              onClick={handleTranslate}
-              disabled={!input.trim() || isLoading}
-              className="w-full py-4 rounded-xl bg-cta text-cta-foreground font-semibold text-lg disabled:opacity-40 transition-opacity flex items-center justify-center gap-2">
-              
-                {isLoading ?
-              <>
-                    <Loader2 className="w-5 h-5 animate-spin" />
-                    Translating…
-                  </> :
-
-              "Translate"
-              }
-              </button>
-
-              {/* Result */}
-              <AnimatePresence>
-                {result &&
-              <motion.div
-                ref={resultRef}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0 }}
-                onAnimationComplete={() => {
-                  resultRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
-                }}
-                className="mt-5 glass-dark rounded-2xl p-5 text-glass-foreground">
-                
-                
-                    {/* Conversational toggle */}
-                    {result.conversational &&
-                      <div className="flex items-center gap-2.5 mb-4">
-                        <button
-                          onClick={() => setViewMode((v) => v === "structured" ? "conversational" : "structured")}
-                          className={`relative w-11 h-7 rounded-full transition-colors ${viewMode === "conversational" ? "bg-cta" : "bg-glass-foreground/15"}`}>
-                          <span className={`absolute top-[3px] left-[3px] w-[22px] h-[22px] rounded-full shadow-sm transition-transform ${viewMode === "conversational" ? "bg-cta-foreground translate-x-[16px]" : "bg-glass-foreground/50 translate-x-0"}`} />
-                        </button>
-                        <span className="text-sm text-glass-foreground/70 font-medium">Conversational</span>
-                      </div>
-                    }
-
-                    <div style={{ minHeight: structuredHeight ?? undefined }}>
-                      <AnimatePresence mode="wait" initial={false}>
-                        {viewMode === "structured" ? (
-                          <motion.div
-                            key="structured"
-                            initial={{ opacity: 0 }}
-                            animate={{ opacity: 1 }}
-                            exit={{ opacity: 0 }}
-                            transition={{ duration: 0.15 }}
-                            ref={(el) => {
-                              if (el && !structuredHeight) {
-                                setStructuredHeight(el.getBoundingClientRect().height);
-                              }
-                            }}>
-                            {result.sections.map((s) =>
-                              <div key={s.label} className="mb-4 last:mb-0">
-                                <p className="font-bold tracking-wider text-accent mb-1 text-sm">{s.label}</p>
-                                <p className="leading-relaxed opacity-90 text-base">{s.content}</p>
-                              </div>
-                            )}
-                          </motion.div>
-                        ) : (
-                          <motion.p
-                            key="conversational"
-                            initial={{ opacity: 0 }}
-                            animate={{ opacity: 1 }}
-                            exit={{ opacity: 0 }}
-                            transition={{ duration: 0.15 }}
-                            className="leading-relaxed opacity-90 text-base">{result.conversational}</motion.p>
-                        )}
-                      </AnimatePresence>
-                    </div>
-
-                    {/* Coach's Tip */}
-                    <AnimatePresence>
-                      {showCoachTip && result.coachTip &&
-                  <motion.div
-                    initial={{ opacity: 0, height: 0 }}
-                    animate={{ opacity: 1, height: "auto" }}
-                    exit={{ opacity: 0, height: 0 }}
-                    className="mt-3 p-3 rounded-xl bg-accent/20 border border-accent/30">
-                    
-                          <p className="font-bold tracking-wider text-accent mb-1 text-sm">COACH'S TIP</p>
-                          <p className="leading-relaxed opacity-90 text-base">{result.coachTip}</p>
-                        </motion.div>
-                  }
-                    </AnimatePresence>
-
-                    <div className="flex justify-end gap-2 mt-4">
-                      <button
-                        onClick={() => setShowCoachTip((p) => !p)}
-                        className={`w-10 h-10 flex items-center justify-center rounded-full transition-colors ${showCoachTip ? "bg-glass-foreground/20" : "bg-glass-foreground/10"}`}>
-                        <HelpCircle className="w-5 h-5" />
-                      </button>
-                      <button onClick={handleCopy} className="w-10 h-10 flex items-center justify-center rounded-full bg-glass-foreground/10">
-                        <Copy className="w-5 h-5" />
-                      </button>
-                    </div>
-                  </motion.div>
-              }
-              </AnimatePresence>
-            </div>
+            {content}
           </motion.div>
         </>
-      }
-    </AnimatePresence>);
-
+      )}
+    </AnimatePresence>
+  );
 };
 
 export default SocialTranslator;
