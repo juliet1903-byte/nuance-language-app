@@ -242,15 +242,14 @@ const SocialTranslator = ({ open, onClose }: SocialTranslatorProps) => {
 
                 <div className="flex justify-end gap-2 mt-1">
                   {input &&
-                <button onClick={handleClear} className="p-2 rounded-full bg-muted/60 text-muted-foreground">
-                      <X className="w-4 h-4" />
+                <button onClick={handleClear} className="w-10 h-10 flex items-center justify-center rounded-full bg-muted/60 text-muted-foreground">
+                      <X className="w-5 h-5" />
                     </button>
                 }
                   <button
                   onClick={handleMic}
-                  className={`p-2 rounded-full transition-colors ${isRecording ? "bg-destructive text-destructive-foreground animate-pulse" : "bg-muted/60 text-muted-foreground"}`}>
-                  
-                    <Mic className="w-4 h-4" />
+                  className={`w-10 h-10 flex items-center justify-center rounded-full transition-colors ${isRecording ? "bg-destructive text-destructive-foreground animate-pulse" : "bg-muted/60 text-muted-foreground"}`}>
+                    <Mic className="w-5 h-5" />
                   </button>
                 </div>
               </div>
@@ -324,8 +323,8 @@ const SocialTranslator = ({ open, onClose }: SocialTranslatorProps) => {
                       <div className="flex items-center gap-2.5 mb-4">
                         <button
                           onClick={() => setViewMode((v) => v === "structured" ? "conversational" : "structured")}
-                          className={`relative w-10 h-[22px] rounded-full transition-colors ${viewMode === "conversational" ? "bg-glass-foreground/40" : "bg-glass-foreground/15"}`}>
-                          <span className={`absolute top-[2px] left-[2px] w-[18px] h-[18px] rounded-full bg-glass-foreground transition-transform ${viewMode === "conversational" ? "translate-x-[18px]" : "translate-x-0"}`} />
+                          className={`relative w-11 h-7 rounded-full transition-colors ${viewMode === "conversational" ? "bg-glass-foreground/40" : "bg-glass-foreground/15"}`}>
+                          <span className={`absolute top-[3px] left-[3px] w-[22px] h-[22px] rounded-full bg-glass-foreground transition-transform ${viewMode === "conversational" ? "translate-x-[16px]" : "translate-x-0"}`} />
                         </button>
                         <span className="text-sm text-glass-foreground/70 font-medium">Conversational</span>
                       </div>
@@ -360,11 +359,11 @@ const SocialTranslator = ({ open, onClose }: SocialTranslatorProps) => {
                     <div className="flex justify-end gap-2 mt-4">
                       <button
                         onClick={() => setShowCoachTip((p) => !p)}
-                        className={`p-2 rounded-full transition-colors ${showCoachTip ? "bg-glass-foreground/20" : "bg-glass-foreground/10"}`}>
-                        <HelpCircle className="w-[20px] h-[20px]" />
+                        className={`w-10 h-10 flex items-center justify-center rounded-full transition-colors ${showCoachTip ? "bg-glass-foreground/20" : "bg-glass-foreground/10"}`}>
+                        <HelpCircle className="w-5 h-5" />
                       </button>
-                      <button onClick={handleCopy} className="p-2 rounded-full bg-glass-foreground/10">
-                        <Copy className="w-4 h-4" />
+                      <button onClick={handleCopy} className="w-10 h-10 flex items-center justify-center rounded-full bg-glass-foreground/10">
+                        <Copy className="w-5 h-5" />
                       </button>
                     </div>
                   </motion.div>
