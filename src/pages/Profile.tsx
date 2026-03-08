@@ -252,6 +252,7 @@ const Profile = () => {
                 onChange={(e) => setNameValue(e.target.value)}
                 maxLength={50}
                 autoFocus
+                placeholder="Enter your name"
                 className="bg-muted border border-border rounded-lg px-3 py-1.5 text-base font-semibold text-center w-48 focus:outline-none focus:ring-2 focus:ring-accent"
                 onKeyDown={(e) => {
                   if (e.key === "Enter") handleSaveName();
@@ -273,11 +274,21 @@ const Profile = () => {
               </button>
             </div>
           ) : (
-            <div className="flex items-center gap-1.5">
-              <h2 className="text-xl font-semibold">{displayName}</h2>
-              {!showBanner && (
-                <button onClick={handleEditName} className="p-1 rounded-full hover:bg-muted transition-colors">
-                  <Pencil className="w-4 h-4 text-muted-foreground" />
+            <div className="flex flex-col items-center gap-1">
+              <div className="flex items-center gap-1.5">
+                <h2 className="text-xl font-semibold">{displayName}</h2>
+                {!showBanner && (
+                  <button onClick={handleEditName} className="p-1 rounded-full hover:bg-muted transition-colors">
+                    <Pencil className="w-4 h-4 text-muted-foreground" />
+                  </button>
+                )}
+              </div>
+              {!showBanner && !profile?.display_name && (
+                <button
+                  onClick={handleEditName}
+                  className="text-xs text-primary font-medium hover:underline"
+                >
+                  Set your display name
                 </button>
               )}
             </div>
