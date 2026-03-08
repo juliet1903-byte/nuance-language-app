@@ -113,9 +113,7 @@ const Leaderboard = () => {
   const fetchLeaderboard = useCallback(async () => {
     setLoading(true);
     const { data } = await supabase.rpc("get_leaderboard");
-    const realEntries = (data as LeaderboardEntry[]) || [];
-    // Merge real + fake, then sort by vibe_iq
-    const merged = [...realEntries, ...FAKE_USERS].sort((a, b) => b.vibe_iq - a.vibe_iq);
+    const merged = ((data as LeaderboardEntry[]) || []).sort((a, b) => b.vibe_iq - a.vibe_iq);
     setEntries(merged);
 
     if (user) {
