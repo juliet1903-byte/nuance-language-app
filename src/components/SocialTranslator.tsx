@@ -323,8 +323,8 @@ const SocialTranslator = ({ open, onClose }: SocialTranslatorProps) => {
                       <div className="flex items-center gap-2.5 mb-4">
                         <button
                           onClick={() => setViewMode((v) => v === "structured" ? "conversational" : "structured")}
-                          className={`relative w-10 h-[22px] rounded-full transition-colors ${viewMode === "conversational" ? "bg-glass-foreground/40" : "bg-glass-foreground/15"}`}>
-                          <span className={`absolute top-[2px] left-[2px] w-[18px] h-[18px] rounded-full bg-glass-foreground transition-transform ${viewMode === "conversational" ? "translate-x-[18px]" : "translate-x-0"}`} />
+                          className={`relative w-11 h-7 rounded-full transition-colors ${viewMode === "conversational" ? "bg-glass-foreground/40" : "bg-glass-foreground/15"}`}>
+                          <span className={`absolute top-[3px] left-[3px] w-[22px] h-[22px] rounded-full bg-glass-foreground transition-transform ${viewMode === "conversational" ? "translate-x-[16px]" : "translate-x-0"}`} />
                         </button>
                         <span className="text-sm text-glass-foreground/70 font-medium">Conversational</span>
                       </div>
