@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom";
-import { ArrowLeft, Clock, Tag, Play } from "lucide-react";
+import { ArrowLeft, Clock, Tag, Play, AArrowUp } from "lucide-react";
 import articleInterview from "@/assets/article-interview.png";
+import { useTextSize } from "@/hooks/useTextSize";
 
 const VideoInterview = () => {
   const navigate = useNavigate();
