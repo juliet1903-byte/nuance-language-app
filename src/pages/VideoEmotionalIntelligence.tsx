@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
-import { ArrowLeft, Clock, Tag, Play } from "lucide-react";
+import { ArrowLeft, Clock, Tag, Play, AArrowUp } from "lucide-react";
+import { useTextSize } from "@/hooks/useTextSize";
 
 const VideoEmotionalIntelligence = () => {
   const navigate = useNavigate();
