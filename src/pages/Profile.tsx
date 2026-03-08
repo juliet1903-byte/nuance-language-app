@@ -51,6 +51,7 @@ const Profile = () => {
   const [savingName, setSavingName] = useState(false);
   const [uploadingAvatar, setUploadingAvatar] = useState(false);
   const [showDeleteDialog, setShowDeleteDialog] = useState(false);
+  const [showAvatarMenu, setShowAvatarMenu] = useState(false);
   const [deleting, setDeleting] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
