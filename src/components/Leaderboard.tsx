@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef, useCallback } from "react";
 import { Trophy, Shield, ShieldOff, Crown, Medal } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { supabase } from "@/integrations/supabase/client";
@@ -15,10 +15,72 @@ interface LeaderboardEntry {
 }
 
 const RANK_ICONS = [
-  <Crown className="w-5 h-5 text-yellow-500" />,
-  <Medal className="w-5 h-5 text-gray-400" />,
-  <Medal className="w-5 h-5 text-amber-600" />,
+  <Crown key="crown" className="w-5 h-5 text-yellow-500" />,
+  <Medal key="silver" className="w-5 h-5 text-gray-400" />,
+  <Medal key="bronze" className="w-5 h-5 text-amber-600" />,
 ];
+
+const ITEM_HEIGHT = 56; // approx height of each row in px
+const VISIBLE_COUNT = 5;
+
+interface LeaderboardRowProps {
+  entry: LeaderboardEntry;
+  idx: number;
+  isMe: boolean;
+  animationDelay?: number;
+}
+
+const LeaderboardRow = ({ entry, idx, isMe, animationDelay = 0 }: LeaderboardRowProps) => (
+  <motion.div
+    initial={{ opacity: 0, x: -10 }}
+    animate={{ opacity: 1, x: 0 }}
+    transition={{ delay: animationDelay }}
+    className={`flex items-center gap-3 p-3 rounded-xl transition-colors ${
+      isMe
+        ? "bg-primary/10 border border-primary/20"
+        : "bg-muted/30 hover:bg-muted/50"
+    }`}
+  >
+    {/* Rank */}
+    <div className="w-7 flex items-center justify-center shrink-0">
+      {idx < 3 ? (
+        RANK_ICONS[idx]
+      ) : (
+        <span className="text-sm font-semibold text-muted-foreground">
+          {idx + 1}
+        </span>
+      )}
+    </div>
+
+    {/* Avatar */}
+    <LetterAvatar
+      name={entry.display_name}
+      avatarUrl={entry.avatar_url}
+      size="sm"
+    />
+
+    {/* Name */}
+    <div className="flex-1 min-w-0">
+      <p className="text-sm font-medium truncate">
+        {isMe
+          ? `${entry.display_name || "You"} (you)`
+          : entry.display_name || "Anonymous"}
+      </p>
+      <p className="text-xs text-muted-foreground">
+        Position #{idx + 1}
+      </p>
+    </div>
+
+    {/* Score */}
+    <span
+      className={`text-base font-bold ${
+        idx === 0 ? "text-yellow-500" : "text-foreground"
+      }`}
+    >
+      {entry.vibe_iq}
+    </span>
+  </motion.div>
+);
 
 const Leaderboard = () => {
   const { user, profile } = useAuth();
@@ -28,6 +90,10 @@ const Leaderboard = () => {
   const [totalParticipants, setTotalParticipants] = useState<number>(0);
   const [loading, setLoading] = useState(true);
   const [toggling, setToggling] = useState(false);
+  const [myRowVisible, setMyRowVisible] = useState(true);
+
+  const myRowRef = useRef<HTMLDivElement>(null);
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
 
   // Fetch opt-in status
   useEffect(() => {
@@ -43,7 +109,7 @@ const Leaderboard = () => {
   }, [user]);
 
   // Fetch leaderboard data
-  const fetchLeaderboard = async () => {
+  const fetchLeaderboard = useCallback(async () => {
     setLoading(true);
     const { data } = await supabase.rpc("get_leaderboard");
     if (data) setEntries(data as LeaderboardEntry[]);
@@ -58,11 +124,29 @@ const Leaderboard = () => {
       }
     }
     setLoading(false);
-  };
+  }, [user]);
 
   useEffect(() => {
     fetchLeaderboard();
-  }, [user, optedIn]);
+  }, [fetchLeaderboard, optedIn]);
+
+  // IntersectionObserver for current user's row
+  useEffect(() => {
+    if (!myRowRef.current || !scrollContainerRef.current) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setMyRowVisible(entry.isIntersecting);
+      },
+      {
+        root: scrollContainerRef.current,
+        threshold: 0.5,
+      }
+    );
+
+    observer.observe(myRowRef.current);
+    return () => observer.disconnect();
+  }, [entries, user]);
 
   const handleToggle = async (checked: boolean) => {
     if (!user || toggling) return;
@@ -77,6 +161,8 @@ const Leaderboard = () => {
   };
 
   const currentVibeIq = (profile as any)?.vibe_iq ?? 0;
+  const myIndex = entries.findIndex((e) => e.user_id === user?.id);
+  const showPinnedRow = user && myIndex > -1 && !myRowVisible;
 
   return (
     <section className="bg-card rounded-2xl p-6 shadow-sm">
@@ -148,65 +234,44 @@ const Leaderboard = () => {
           </p>
         </div>
       ) : (
-        <AnimatePresence>
-          <div className="space-y-2">
-            {entries.map((entry, idx) => {
-              const isMe = entry.user_id === user?.id;
-              return (
-                <motion.div
-                  key={entry.user_id}
-                  initial={{ opacity: 0, x: -10 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: idx * 0.05 }}
-                  className={`flex items-center gap-3 p-3 rounded-xl transition-colors ${
-                    isMe
-                      ? "bg-primary/10 border border-primary/20"
-                      : "bg-muted/30 hover:bg-muted/50"
-                  }`}
-                >
-                  {/* Rank */}
-                  <div className="w-7 flex items-center justify-center shrink-0">
-                    {idx < 3 ? (
-                      RANK_ICONS[idx]
-                    ) : (
-                      <span className="text-sm font-semibold text-muted-foreground">
-                        {idx + 1}
-                      </span>
-                    )}
+        <div className="relative">
+          <div
+            ref={scrollContainerRef}
+            className="space-y-2 overflow-y-auto scrollbar-thin"
+            style={{ maxHeight: VISIBLE_COUNT * ITEM_HEIGHT + (VISIBLE_COUNT - 1) * 8 }}
+          >
+            <AnimatePresence>
+              {entries.map((entry, idx) => {
+                const isMe = entry.user_id === user?.id;
+                return (
+                  <div key={entry.user_id} ref={isMe ? myRowRef : undefined}>
+                    <LeaderboardRow
+                      entry={entry}
+                      idx={idx}
+                      isMe={isMe}
+                      animationDelay={idx * 0.05}
+                    />
                   </div>
-
-                  {/* Avatar */}
-                  <LetterAvatar
-                    name={entry.display_name}
-                    avatarUrl={entry.avatar_url}
-                    size="sm"
-                  />
-
-                  {/* Name */}
-                  <div className="flex-1 min-w-0">
-                    <p className="text-sm font-medium truncate">
-                      {isMe
-                        ? `${entry.display_name || "You"} (you)`
-                        : entry.display_name || "Anonymous"}
-                    </p>
-                    <p className="text-xs text-muted-foreground">
-                      Position #{idx + 1}
-                    </p>
-                  </div>
-
-                  {/* Score */}
-                  <span
-                    className={`text-base font-bold ${
-                      idx === 0 ? "text-yellow-500" : "text-foreground"
-                    }`}
-                  >
-                    {entry.vibe_iq}
-                  </span>
-                </motion.div>
-              );
-            })}
+                );
+              })}
+            </AnimatePresence>
           </div>
-        </AnimatePresence>
+
+          {/* Pinned current user row when scrolled out of view */}
+          {showPinnedRow && (
+            <motion.div
+              initial={{ opacity: 0, y: 8 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="sticky bottom-0 mt-2 border-t border-border pt-2"
+            >
+              <LeaderboardRow
+                entry={entries[myIndex]}
+                idx={myIndex}
+                isMe={true}
+              />
+            </motion.div>
+          )}
+        </div>
       )}
     </section>
   );
