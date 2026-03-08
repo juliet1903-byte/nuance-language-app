@@ -6,7 +6,7 @@ import LetterAvatar from "@/components/LetterAvatar";
 import { useAuth } from "@/components/AuthContext";
 import articlePromoted from "@/assets/article-promoted.png";
 import articleCriticism from "@/assets/article-criticism.png";
-import articleCultures from "@/assets/article-cultures.png";
+import deepDiveManagingUp from "@/assets/deep-dive-managing-up.png";
 import videoPositive from "@/assets/video-positive.png";
 import LearningPath from "@/components/LearningPath";
 import ModuleCard from "@/components/ModuleCard";
