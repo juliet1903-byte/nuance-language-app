@@ -30,6 +30,9 @@ const SocialTranslator = ({ open, onClose }: SocialTranslatorProps) => {
   const [isRecording, setIsRecording] = useState(false);
   const recognitionRef = useRef<any>(null);
   const finalTranscriptRef = useRef("");
+  const micTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  const MAX_RECORDING_SECONDS = 60;
 
   const handleMic = useCallback(() => {
     if (isRecording) {
