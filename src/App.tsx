@@ -12,7 +12,7 @@ import Index from "./pages/Index";
 import ModuleDetail from "./pages/ModuleDetail";
 import Progress from "./pages/Progress";
 import Library from "./pages/Library";
-import Stats from "./pages/Stats";
+import Insights from "./pages/Insights";
 import Profile from "./pages/Profile";
 import Notifications from "./pages/Notifications";
 import ResetPassword from "./pages/ResetPassword";
@@ -48,7 +48,7 @@ const App = () => (
                 <Route path="/module/:id" element={<ModuleDetail />} />
                 <Route path="/progress" element={<Progress />} />
                 <Route path="/library" element={<Library />} />
-                <Route path="/stats" element={<Stats />} />
+                <Route path="/insights" element={<Insights />} />
                 <Route path="/profile" element={<Profile />} />
                 <Route path="/notifications" element={<Notifications />} />
                 <Route path="/reset-password" element={<ResetPassword />} />

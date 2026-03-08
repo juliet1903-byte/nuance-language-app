@@ -12,6 +12,7 @@ import AppLayout from "@/components/AppLayout";
 import { useAuth } from "@/components/AuthContext";
 import { useProgress } from "@/hooks/useProgress";
 import LoginBanner from "@/components/LoginBanner";
+import Leaderboard from "@/components/Leaderboard";
 
 const TONE_COLORS = ["hsl(152, 40%, 46%)", "hsl(228, 80%, 56%)"];
 
@@ -96,7 +97,7 @@ const VibeMeter = ({ score }: {score: number;}) => {
 
 // ---------- Page ----------
 
-const Stats = () => {
+const Insights = () => {
   const navigate = useNavigate();
   const { isGuest, user } = useAuth();
   const { vibeIq, lessonsCompleted, activityLog } = useProgress();
@@ -122,7 +123,7 @@ const Stats = () => {
         <button onClick={() => navigate("/")} className="p-2 -ml-2 rounded-full">
           <ArrowLeft className="w-5 h-5" />
         </button>
-        <h1 className="text-lg font-semibold">Stats</h1>
+        <h1 className="text-lg font-semibold">Insights</h1>
       </header>
 
       <main className="px-5 space-y-6 pb-8 md:max-w-[900px] md:mx-auto md:w-full">
@@ -174,7 +175,6 @@ const Stats = () => {
                   </div>);
 
               }
-
               const leaderPct = Math.round(leaderCount / total * 100);
               const colleaguePct = 100 - leaderPct;
               const toneData = [
@@ -290,9 +290,12 @@ const Stats = () => {
           </div>
         </section>
         }
+
+        {/* Leaderboard */}
+        {!showBanner && <Leaderboard />}
       </main>
     </AppLayout>);
 
 };
 
-export default Stats;
+export default Insights;

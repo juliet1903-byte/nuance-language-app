@@ -90,6 +90,7 @@ export type Database = {
           display_name: string | null
           id: string
           last_active_date: string | null
+          leaderboard_opt_in: boolean
           learning_level: number
           lessons_completed: number
           modules_completed: number
@@ -104,6 +105,7 @@ export type Database = {
           display_name?: string | null
           id: string
           last_active_date?: string | null
+          leaderboard_opt_in?: boolean
           learning_level?: number
           lessons_completed?: number
           modules_completed?: number
@@ -118,6 +120,7 @@ export type Database = {
           display_name?: string | null
           id?: string
           last_active_date?: string | null
+          leaderboard_opt_in?: boolean
           learning_level?: number
           lessons_completed?: number
           modules_completed?: number
@@ -143,6 +146,23 @@ export type Database = {
           _user_id: string
         }
         Returns: undefined
+      }
+      get_leaderboard: {
+        Args: never
+        Returns: {
+          avatar_url: string
+          display_name: string
+          lessons_completed: number
+          user_id: string
+          vibe_iq: number
+        }[]
+      }
+      get_my_leaderboard_rank: {
+        Args: { _user_id: string }
+        Returns: {
+          rank: number
+          total_participants: number
+        }[]
       }
     }
     Enums: {
