@@ -404,7 +404,39 @@ const SocialTranslator = ({ open, onClose }: SocialTranslatorProps) => {
     </div>
   );
 
-  // Desktop: side panel next to sidebar
+  // Desktop: resizable side panel
+  const [panelWidth, setPanelWidth] = useState(400);
+  const isDragging = useRef(false);
+  const dragStartX = useRef(0);
+  const dragStartWidth = useRef(400);
+
+  const handleDragStart = useCallback((e: React.MouseEvent) => {
+    e.preventDefault();
+    isDragging.current = true;
+    dragStartX.current = e.clientX;
+    dragStartWidth.current = panelWidth;
+
+    const handleMouseMove = (ev: MouseEvent) => {
+      if (!isDragging.current) return;
+      const delta = dragStartX.current - ev.clientX;
+      const newWidth = Math.min(800, Math.max(360, dragStartWidth.current + delta));
+      setPanelWidth(newWidth);
+    };
+
+    const handleMouseUp = () => {
+      isDragging.current = false;
+      document.removeEventListener("mousemove", handleMouseMove);
+      document.removeEventListener("mouseup", handleMouseUp);
+      document.body.style.cursor = "";
+      document.body.style.userSelect = "";
+    };
+
+    document.body.style.cursor = "col-resize";
+    document.body.style.userSelect = "none";
+    document.addEventListener("mousemove", handleMouseMove);
+    document.addEventListener("mouseup", handleMouseUp);
+  }, [panelWidth]);
+
   if (!isMobile) {
     return (
       <AnimatePresence>
@@ -418,14 +450,22 @@ const SocialTranslator = ({ open, onClose }: SocialTranslatorProps) => {
               className="fixed inset-0 bg-foreground/20 z-40"
               onClick={onClose}
             />
-            {/* Side panel - right side */}
+            {/* Side panel - right side, resizable */}
             <motion.div
               initial={{ x: 20, opacity: 0 }}
               animate={{ x: 0, opacity: 1 }}
               exit={{ x: 20, opacity: 0 }}
               transition={{ type: "spring", damping: 30, stiffness: 300 }}
-              className="fixed top-0 bottom-0 right-0 z-50 w-[400px] bg-background border-l border-border/50 overflow-y-auto"
+              style={{ width: panelWidth }}
+              className="fixed top-0 bottom-0 right-0 z-50 bg-background border-l border-border/50 overflow-y-auto"
             >
+              {/* Resize handle */}
+              <div
+                onMouseDown={handleDragStart}
+                className="absolute left-0 top-0 bottom-0 w-3 cursor-col-resize z-10 flex items-center justify-center group hover:bg-primary/10 transition-colors"
+              >
+                <div className="w-1 h-12 rounded-full bg-border group-hover:bg-primary transition-colors" />
+              </div>
               <div className="pt-6">
                 {content}
               </div>
