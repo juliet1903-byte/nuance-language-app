@@ -9,7 +9,9 @@ const corsHeaders = {
 function buildSystemPrompt(tone: string): string {
   const base = `You are a workplace communication coach from the Career Playbook. You help professionals translate blunt, raw thoughts into polished workplace communication.
 
-You MUST respond with valid JSON only, no markdown, no code fences.`;
+You MUST respond with valid JSON only, no markdown, no code fences.
+
+IMPORTANT: Every response MUST include a "conversational" field — a single, concise, ready-to-send message that naturally incorporates the key points. It should read like something you'd actually say or type to a colleague — warm, direct, no labels or headers. Keep it to 2-4 sentences max.`;
 
   if (tone === "neutral") {
     return `${base}
@@ -29,6 +31,7 @@ JSON schema:
     {"label": "OBSERVATION", "content": "<clear, factual restatement of the situation>"},
     {"label": "RECOMMENDATION", "content": "<neutral, actionable suggestion>"}
   ],
+  "conversational": "<a single concise, ready-to-send message combining the above points naturally>",
   "coachTip": "<1-2 sentence explanation of the key linguistic shift, e.g. removing emotional charge or bias>"
 }`;
   }
@@ -54,6 +57,7 @@ JSON schema:
     {"label": "BEHAVIOUR", "content": "<objective, observable behaviour description>"},
     {"label": "IMPACT", "content": "<effect on team/project + invitation to discuss>"}
   ],
+  "conversational": "<a single concise, ready-to-send message combining the above points naturally>",
   "coachTip": "<1-2 sentence explanation of the SBI technique applied>"
 }`;
   }
@@ -78,6 +82,7 @@ JSON schema:
     {"label": "CONCERN", "content": "<what worries you, framed personally>"},
     {"label": "INVITATION", "content": "<open question inviting their perspective>"}
   ],
+  "conversational": "<a single concise, ready-to-send message combining the above points naturally>",
   "coachTip": "<1-2 sentence explanation of the subjective framing technique applied>"
 }`;
 }
