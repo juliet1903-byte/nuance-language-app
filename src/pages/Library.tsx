@@ -40,6 +40,14 @@ type Tab = "modules" | "articles" | "videos";
 
 const articles = [
   {
+    id: "a7",
+    title: "Why Some People Get Promoted and Others Don't",
+    category: "Career",
+    readTime: "12 min read",
+    href: "/article/promoted",
+    image: articlePromoted,
+  },
+  {
     id: "a1",
     title: "The Art of the Warm Intro",
     category: "Networking",
@@ -79,14 +87,6 @@ const articles = [
     readTime: "9 min read",
     href: "/article/conversations",
     image: articleConversations,
-  },
-  {
-    id: "a7",
-    title: "Why Some People Get Promoted and Others Don't",
-    category: "Career",
-    readTime: "12 min read",
-    href: "/article/promoted",
-    image: articlePromoted,
   },
 ];
 
