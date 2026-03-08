@@ -221,11 +221,6 @@ const SocialTranslator = ({ open, onClose }: SocialTranslatorProps) => {
     <div className="px-5 pb-8">
       <div className="flex items-center justify-between mb-1">
         <h2 className="text-2xl font-medium">Social Translator</h2>
-        {!isMobile && (
-          <button onClick={onClose} className="w-10 h-10 flex items-center justify-center rounded-full bg-card hover:bg-muted transition-colors">
-            <X className="w-5 h-5" />
-          </button>
-        )}
       </div>
       <p className="text-muted-foreground mb-5 text-base">Turn raw thoughts into leadership communication</p>
 
