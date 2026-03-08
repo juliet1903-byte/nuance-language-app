@@ -144,19 +144,27 @@ const Leaderboard = () => {
 
   // IntersectionObserver for current user's row
   useEffect(() => {
-    if (!myRowRef.current || !scrollContainerRef.current) return;
+    const scrollEl = scrollContainerRef.current;
+    const myRowEl = myRowRef.current;
+    if (!myRowEl || !scrollEl) return;
+
+    // Check immediately
+    const rect = myRowEl.getBoundingClientRect();
+    const rootRect = scrollEl.getBoundingClientRect();
+    const isVisible = rect.top >= rootRect.top && rect.bottom <= rootRect.bottom;
+    setMyRowVisible(isVisible);
 
     const observer = new IntersectionObserver(
       ([entry]) => {
         setMyRowVisible(entry.isIntersecting);
       },
       {
-        root: scrollContainerRef.current,
-        threshold: 0.5,
+        root: scrollEl,
+        threshold: 0.1,
       }
     );
 
-    observer.observe(myRowRef.current);
+    observer.observe(myRowEl);
     return () => observer.disconnect();
   }, [entries, user]);
 
