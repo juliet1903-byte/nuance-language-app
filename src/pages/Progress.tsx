@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { ArrowLeft, Check, Lock, ChevronDown, ChevronRight, CalendarDays } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
@@ -76,7 +76,15 @@ const Progress = () => {
     }
     return LEVEL_META[0].id;
   };
-  const [expandedLevel, setExpandedLevel] = useState<string | null>(getDefaultExpanded());
+  const [expandedLevel, setExpandedLevel] = useState<string | null>(null);
+  const hasSetDefault = useRef(false);
+
+  useEffect(() => {
+    if (!loading && !hasSetDefault.current) {
+      hasSetDefault.current = true;
+      setExpandedLevel(getDefaultExpanded());
+    }
+  }, [loading, completedLessons]);
 
   // Build dynamic career levels
   const careerLevels = LEVEL_META.map((meta) => {
