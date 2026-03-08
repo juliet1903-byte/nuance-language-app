@@ -24,6 +24,7 @@ import articleConversations from "@/assets/article-conversations.png";
 import articlePromoted from "@/assets/article-promoted.png";
 import videoNeutral from "@/assets/video-neutral.png";
 import videoPositive from "@/assets/video-positive.png";
+import videoImpostor from "@/assets/video-impostor.png";
 import deepDiveManagingUp from "@/assets/deep-dive-managing-up.png";
 
 const imageMap: Record<string, string> = {
@@ -101,6 +102,14 @@ const articles = [
 ];
 
 const videos = [
+  {
+    id: "v4",
+    title: "Impostor Syndrome: What It Is and How to Overcome It",
+    duration: "10 min",
+    category: "Career",
+    href: "/video/impostor-syndrome",
+    image: videoImpostor,
+  },
   {
     id: "v1",
     title: "How to Get Ready for an Interview",
