@@ -183,6 +183,7 @@ const SocialTranslator = ({ open, onClose }: SocialTranslatorProps) => {
   const handleClear = () => {
     setInput("");
     setResult(null);
+    setStructuredHeight(null);
     setNeedlePosition(null);
     setShowCoachTip(false);
     setViewMode("structured");
