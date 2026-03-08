@@ -45,12 +45,12 @@ const VibeMeter = ({ score }: {score: number;}) => {
     <div className="w-full max-w-[320px] mx-auto">
       <div className="relative flex items-center justify-center">
         {/* Radial gradient background */}
-        <div
-          className="absolute inset-0 rounded-full"
-          style={{
-            background: "radial-gradient(circle at 50% 80%, hsl(var(--muted) / 0.5) 0%, hsl(var(--muted) / 0.25) 40%, transparent 70%)",
-          }}
-        />
+        
+
+
+
+
+        
         <svg viewBox="0 0 220 138" className="w-full overflow-visible">
           <defs>
             <linearGradient id="vibe-arc" x1="0" y1="0" x2="1" y2="0">
