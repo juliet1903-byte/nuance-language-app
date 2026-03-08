@@ -158,14 +158,20 @@ serve(async (req) => {
     const data = await response.json();
     const raw = data.choices?.[0]?.message?.content || "";
     
-    // Strip markdown fences if present
-    const cleaned = raw.replace(/```json\s*/gi, "").replace(/```\s*/gi, "").trim();
+    // Strip markdown fences and extract JSON object
+    let cleaned = raw.replace(/```json\s*/gi, "").replace(/```\s*/gi, "").trim();
+    
+    // Try to extract JSON object if there's extra text around it
+    const jsonMatch = cleaned.match(/\{[\s\S]*\}/);
+    if (jsonMatch) {
+      cleaned = jsonMatch[0];
+    }
     
     let parsed;
     try {
       parsed = JSON.parse(cleaned);
     } catch {
-      console.error("Failed to parse AI response:", raw);
+      console.error("Failed to parse AI response. Raw:", raw, "Cleaned:", cleaned);
       throw new Error("Invalid AI response format");
     }
 
