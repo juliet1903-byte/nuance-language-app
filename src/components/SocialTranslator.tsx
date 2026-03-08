@@ -346,10 +346,17 @@ const SocialTranslator = ({ open, onClose }: SocialTranslatorProps) => {
                     </AnimatePresence>
 
                     <div className="flex justify-end gap-2 mt-4">
+                      {result.conversational &&
+                        <button
+                          onClick={() => setViewMode((v) => v === "structured" ? "conversational" : "structured")}
+                          className={`p-2 rounded-full transition-colors ${viewMode === "conversational" ? "bg-glass-foreground/20" : "bg-glass-foreground/10"}`}
+                          title={viewMode === "structured" ? "Switch to conversational" : "Switch to structured"}>
+                          <MessageSquareText className="w-[20px] h-[20px]" />
+                        </button>
+                      }
                       <button
-                    onClick={() => setShowCoachTip((p) => !p)}
-                    className={`p-2 rounded-full transition-colors ${showCoachTip ? "bg-accent/30" : "bg-glass-foreground/10"}`}>
-                    
+                        onClick={() => setShowCoachTip((p) => !p)}
+                        className={`p-2 rounded-full transition-colors ${showCoachTip ? "bg-glass-foreground/20" : "bg-glass-foreground/10"}`}>
                         <HelpCircle className="w-[20px] h-[20px]" />
                       </button>
                       <button onClick={handleCopy} className="p-2 rounded-full bg-glass-foreground/10">
