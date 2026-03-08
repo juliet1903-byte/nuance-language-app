@@ -15,7 +15,7 @@ const ArticleWarmIntro = () => {
           <ArrowLeft className="w-5 h-5" />
         </button>
         <span className="truncate text-base font-medium text-secondary-foreground flex-1">The Art of the Warm Intro</span>
-        <button onClick={cycleTextSize} className="w-10 h-10 flex items-center justify-center rounded-full bg-card hover:bg-accent transition-colors" aria-label="Increase text size">
+        <button onClick={cycleTextSize} className="w-10 h-10 flex items-center justify-center rounded-full bg-card hover:bg-muted transition-colors" aria-label="Increase text size">
           {textSize === "x-large" ? <AArrowDown className="w-5 h-5" /> : <AArrowUp className="w-5 h-5" />}
         </button>
       </header>
