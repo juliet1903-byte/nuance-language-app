@@ -240,21 +240,19 @@ const Leaderboard = () => {
             className="space-y-2 overflow-y-auto scrollbar-thin"
             style={{ maxHeight: VISIBLE_COUNT * ITEM_HEIGHT + (VISIBLE_COUNT - 1) * 8 }}
           >
-            <AnimatePresence>
-              {entries.map((entry, idx) => {
-                const isMe = entry.user_id === user?.id;
-                return (
-                  <div key={entry.user_id} ref={isMe ? myRowRef : undefined}>
-                    <LeaderboardRow
-                      entry={entry}
-                      idx={idx}
-                      isMe={isMe}
-                      animationDelay={idx * 0.05}
-                    />
-                  </div>
-                );
-              })}
-            </AnimatePresence>
+            {entries.map((entry, idx) => {
+              const isMe = entry.user_id === user?.id;
+              return (
+                <div key={entry.user_id} ref={isMe ? myRowRef : undefined}>
+                  <LeaderboardRow
+                    entry={entry}
+                    idx={idx}
+                    isMe={isMe}
+                    animationDelay={idx * 0.05}
+                  />
+                </div>
+              );
+            })}
           </div>
 
           {/* Pinned current user row when scrolled out of view */}
