@@ -146,7 +146,7 @@ const DeepDiveCultures = () => {
         </button>
         <span className="font-semibold truncate text-base flex-1">Reading Between Cultures</span>
         <button onClick={cycleTextSize} className="p-1.5 rounded-lg hover:bg-card transition-colors" aria-label="Increase text size">
-          <AArrowUp className="w-5 h-5" />
+          {textSize === "x-large" ? <AArrowDown className="w-5 h-5" /> : <AArrowUp className="w-5 h-5" />}
         </button>
       </header>
 
