@@ -12,6 +12,7 @@ interface TranslationResult {
   rawVibeScore: number;
   translatedVibeScore: number;
   coachTip: string;
+  conversational?: string;
 }
 
 interface SocialTranslatorProps {
