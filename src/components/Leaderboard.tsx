@@ -67,7 +67,7 @@ const LeaderboardRow = ({ entry, idx, isMe, animationDelay = 0 }: LeaderboardRow
           : entry.display_name || "Anonymous"}
       </p>
       <p className="text-xs text-muted-foreground">
-        Position #{idx + 1}
+        {entry.lessons_completed} lessons completed
       </p>
     </div>
 
