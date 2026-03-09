@@ -15,8 +15,8 @@ interface LeaderboardEntry {
 }
 
 const RANK_ICONS = [
-  <Crown key="crown" className="w-5 h-5 text-yellow-500" />,
-  <Medal key="silver" className="w-5 h-5 text-gray-400" />,
+  <Crown key="crown" className="w-5 h-5 text-amber-600" />,
+  <Medal key="silver" className="w-5 h-5 text-gray-500" />,
   <Medal key="bronze" className="w-5 h-5 text-amber-600" />,
 ];
 
@@ -74,7 +74,7 @@ const LeaderboardRow = ({ entry, idx, isMe, animationDelay = 0 }: LeaderboardRow
     {/* Score */}
     <span
       className={`text-base font-bold ${
-        idx === 0 ? "text-yellow-500" : "text-foreground"
+        idx === 0 ? "text-amber-700" : "text-foreground"
       }`}
     >
       {entry.vibe_iq}

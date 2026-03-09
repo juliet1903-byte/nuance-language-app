@@ -20,9 +20,9 @@
     --secondary-foreground: 220 20% 12%;
 
     --muted: 36 12% 85%;
-    --muted-foreground: 220 8% 46%;
+    --muted-foreground: 220 8% 44%;
 
-    --accent: 152 40% 46%;
+    --accent: 152 40% 36%;
     --accent-foreground: 0 0% 100%;
 
     --destructive: 0 72% 51%;
@@ -41,7 +41,7 @@
     --glass-foreground: 0 0% 100%;
 
     --vibe-blunt: 14 80% 52%;
-    --vibe-nuanced: 152 40% 46%;
+    --vibe-nuanced: 152 40% 36%;
 
     --sidebar-background: 0 0% 100%;
     --sidebar-foreground: 220 20% 12%;

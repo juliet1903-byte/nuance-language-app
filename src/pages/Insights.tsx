@@ -256,7 +256,7 @@ const Insights = () => {
               </div>
               <span className="text-2xl font-semibold">{firstTimeAccuracy}%</span>
               <span className="mt-1 text-secondary-foreground font-normal text-base">First-Time Accuracy</span>
-              <span className="text-muted-foreground/70 mt-0.5 text-sm">
+               <span className="text-muted-foreground mt-0.5 text-sm">
                 Tasks passed without Redo
               </span>
             </motion.div>
@@ -273,7 +273,7 @@ const Insights = () => {
               </div>
               <span className="text-2xl font-semibold">{learningHours}h {learningMins}m</span>
               <span className="mt-1 text-secondary-foreground text-base">Learning Time</span>
-              <span className="text-muted-foreground/70 mt-0.5 text-sm">
+               <span className="text-muted-foreground mt-0.5 text-sm">
                 Total hours invested
               </span>
             </motion.div>
@@ -290,7 +290,7 @@ const Insights = () => {
               </div>
               <span className="text-2xl font-semibold">{masteryAverage}/5</span>
               <span className="mt-1 text-secondary-foreground text-base">Mastery Average</span>
-              <span className="text-muted-foreground/70 mt-0.5 text-sm">
+               <span className="text-muted-foreground mt-0.5 text-sm">
                 Mean scenario score
               </span>
             </motion.div>
