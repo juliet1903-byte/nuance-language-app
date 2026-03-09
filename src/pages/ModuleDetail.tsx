@@ -23,7 +23,7 @@ const ModuleDetail = () => {
   const saved = (() => {
     try {
       const raw = localStorage.getItem(storageKey);
-      if (raw) return JSON.parse(raw) as { view: View; lessonIdx: number };
+      if (raw) return JSON.parse(raw) as {view: View;lessonIdx: number;};
     } catch {}
     return null;
   })();
@@ -124,7 +124,7 @@ const ModuleDetail = () => {
         await logActivity("module_complete", module.id);
       }
     }
-    try { localStorage.removeItem(storageKey); } catch {}
+    try {localStorage.removeItem(storageKey);} catch {}
     setViewState("complete");
   };
 
@@ -144,7 +144,7 @@ const ModuleDetail = () => {
         <AnimatePresence mode="wait">
           {view === "overview" &&
           <motion.div key="overview" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
-              <h2 className="text-2xl font-semibold mb-2">{module.subtitle}</h2>
+              <h2 className="text-2xl mb-2 font-medium">{module.subtitle}</h2>
               <p className="text-muted-foreground mb-6 text-base">{module.description}</p>
 
               <h3 className="text-sm font-semibold uppercase tracking-wider text-muted-foreground mb-3">Lessons</h3>
