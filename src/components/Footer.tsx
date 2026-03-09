@@ -52,7 +52,7 @@ const Footer = () => {
             <div className="mt-auto pt-8">
               <img src={logoword} alt="nuance" className="w-full max-w-[220px] h-auto opacity-95" />
             </div>
-            <p className="mt-2 text-xs text-[hsl(220,8%,40%)]">
+            <p className="mt-2 text-xs text-[hsl(220,8%,50%)]">
               © {new Date().getFullYear()} Nuance. All Rights Reserved.
             </p>
           </div>

@@ -74,7 +74,7 @@ const LeaderboardRow = ({ entry, idx, isMe, animationDelay = 0 }: LeaderboardRow
     {/* Score */}
     <span
       className={`text-base font-bold ${
-        idx === 0 ? "text-yellow-500" : "text-foreground"
+        idx === 0 ? "text-amber-700" : "text-foreground"
       }`}
     >
       {entry.vibe_iq}

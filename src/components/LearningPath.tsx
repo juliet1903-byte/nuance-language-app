@@ -95,7 +95,7 @@ const LearningPath = () => {
               step.active ?
               <div className="w-2.5 h-2.5 rounded-full bg-accent" /> :
               showBanner ?
-              <Lock className="w-3 h-3 text-white" /> :
+              <Lock className="w-3 h-3 text-muted-foreground" /> :
 
               <div className="w-2.5 h-2.5 rounded-full bg-muted-foreground/40" />
               }
