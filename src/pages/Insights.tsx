@@ -256,7 +256,7 @@ const Insights = () => {
               </div>
               <span className="text-2xl font-semibold">{firstTimeAccuracy}%</span>
               <span className="mt-1 text-secondary-foreground font-normal text-base">First-Time Accuracy</span>
-              <span className="text-muted-foreground/70 mt-0.5 text-sm">
+               <span className="text-muted-foreground mt-0.5 text-sm">
                 Tasks passed without Redo
               </span>
             </motion.div>
