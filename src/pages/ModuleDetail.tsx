@@ -196,7 +196,7 @@ const ModuleDetail = () => {
 
               <p className="text-muted-foreground leading-relaxed mb-6 text-base">{lesson.intro}</p>
 
-              <h3 className="text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-3">Useful Phrases</h3>
+              <h3 className="font-semibold uppercase tracking-wider text-muted-foreground mb-3 text-sm">Useful Phrases</h3>
               <div className="space-y-3 mb-6">
                 {lesson.phrases.map((p, i) =>
               <div key={i} className="bg-card rounded-xl p-4 shadow-sm">
@@ -206,7 +206,7 @@ const ModuleDetail = () => {
               )}
               </div>
 
-              <h3 className="text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-3">Coaching Notes</h3>
+              <h3 className="font-semibold uppercase tracking-wider text-muted-foreground mb-3 text-sm">Coaching Notes</h3>
               <div className="space-y-3 mb-6">
                 {lesson.coachingNotes.map((note, i) =>
               <div key={i} className="bg-accent/10 border border-accent/20 rounded-xl p-4">
