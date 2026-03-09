@@ -15,8 +15,8 @@ interface LeaderboardEntry {
 }
 
 const RANK_ICONS = [
-  <Crown key="crown" className="w-5 h-5 text-yellow-500" />,
-  <Medal key="silver" className="w-5 h-5 text-gray-400" />,
+  <Crown key="crown" className="w-5 h-5 text-amber-600" />,
+  <Medal key="silver" className="w-5 h-5 text-gray-500" />,
   <Medal key="bronze" className="w-5 h-5 text-amber-600" />,
 ];
 
