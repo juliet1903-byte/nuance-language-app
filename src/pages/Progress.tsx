@@ -349,7 +349,7 @@ const Progress = () => {
                 </div>
                 <div className="flex items-center gap-1.5">
                   <div className="w-4 h-4 rounded bg-muted/40 flex items-center justify-center">
-                    <Lock className="w-2.5 h-2.5 text-muted-foreground/50>
+                    <Lock className="w-2.5 h-2.5 text-muted-foreground" />
                   </div>
                   <span className="text-xs text-muted-foreground">Upcoming</span>
                 </div>
