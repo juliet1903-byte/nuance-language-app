@@ -322,7 +322,7 @@ const Progress = () => {
                     "bg-accent/15 text-accent" :
                     status === "today" ?
                     "bg-cta/15 text-cta ring-2 ring-cta/30" :
-                    "bg-muted/40 text-muted-foreground
+                    "bg-muted/40 text-muted-foreground"}`
                     }>
                     
                       {status === "completed" ?
