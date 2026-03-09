@@ -108,16 +108,16 @@ const ArticlePromoted = () => {
             </p>
             <div className="space-y-2 mb-4">
               {[
-                { level: "Senior", action: "Start mentoring junior team members, lead a project end-to-end, contribute to strategic discussions." },
-                { level: "Principal", action: "Write strategy documents other teams use, influence cross-functional process decisions." },
-                { level: "Director", action: "Define strategy for a domain, represent your function in senior leadership discussions." },
-                { level: "VP", action: "Set organizational direction, build alignment across the executive team." },
-              ].map((item) => (
-                <div key={item.level} className="bg-card rounded-xl p-4 border border-border/50">
+              { level: "Senior", action: "Start mentoring junior team members, lead a project end-to-end, contribute to strategic discussions." },
+              { level: "Principal", action: "Write strategy documents other teams use, influence cross-functional process decisions." },
+              { level: "Director", action: "Define strategy for a domain, represent your function in senior leadership discussions." },
+              { level: "VP", action: "Set organizational direction, build alignment across the executive team." }].
+              map((item) =>
+              <div key={item.level} className="bg-card rounded-xl p-4 border border-border/50">
                   <p className="text-base font-medium">{item.level}</p>
                   <p className="text-muted-foreground mt-1 text-base">{item.action}</p>
                 </div>
-              ))}
+              )}
             </div>
           </section>
 
@@ -164,15 +164,15 @@ const ArticlePromoted = () => {
             <h2 className="text-xl mb-4 font-semibold">Why International Workers Face Additional Barriers</h2>
             <div className="space-y-3">
               {[
-                "Communication style differences are often misread as lack of confidence or leadership.",
-                "Visibility requires comfort with self-promotion, which varies enormously across cultures.",
-                "Informal influence happens in conversations you are not part of — after meetings, in Slack threads, over lunch.",
-              ].map((item, i) => (
-                <div key={i} className="flex gap-3 bg-card rounded-xl p-4 border border-border/50">
+              "Communication style differences are often misread as lack of confidence or leadership.",
+              "Visibility requires comfort with self-promotion, which varies enormously across cultures.",
+              "Informal influence happens in conversations you are not part of — after meetings, in Slack threads, over lunch."].
+              map((item, i) =>
+              <div key={i} className="flex gap-3 bg-card rounded-xl p-4 border border-border/50">
                   <span className="text-cta font-bold text-sm shrink-0 mt-0.5">{i + 1}.</span>
                   <p className="text-muted-foreground leading-relaxed text-base">{item}</p>
                 </div>
-              ))}
+              )}
             </div>
           </section>
 
@@ -181,17 +181,17 @@ const ArticlePromoted = () => {
             <h2 className="text-xl mb-4 font-semibold">Red Flags: When You Should Stop Waiting</h2>
             <div className="space-y-3">
               {[
-                "Your manager cannot give you specific criteria for promotion, even when asked directly.",
-                "People at your level in other teams have been promoted, but you have not — and the reason given is vague.",
-                "You have been told you are 'already operating at the next level' but there is no timeline for making it official.",
-                "The company is in a hiring freeze and promotions have been paused indefinitely.",
-                "Your manager privately agrees you deserve promotion but says it is being blocked by senior leadership.",
-              ].map((sign, i) => (
-                <div key={i} className="flex gap-3 bg-card rounded-xl p-4 border border-border/50">
+              "Your manager cannot give you specific criteria for promotion, even when asked directly.",
+              "People at your level in other teams have been promoted, but you have not — and the reason given is vague.",
+              "You have been told you are 'already operating at the next level' but there is no timeline for making it official.",
+              "The company is in a hiring freeze and promotions have been paused indefinitely.",
+              "Your manager privately agrees you deserve promotion but says it is being blocked by senior leadership."].
+              map((sign, i) =>
+              <div key={i} className="flex gap-3 bg-card rounded-xl p-4 border border-border/50">
                   <span className="text-destructive font-bold text-base shrink-0 mt-0.5">⚠</span>
                   <p className="text-muted-foreground text-base">{sign}</p>
                 </div>
-              ))}
+              )}
             </div>
           </section>
 
@@ -200,14 +200,14 @@ const ArticlePromoted = () => {
             <h2 className="text-xl mb-4 font-semibold">Practical Steps You Can Take This Month</h2>
             <ul className="space-y-2 text-muted-foreground">
               {[
-                "Schedule a one-on-one with your manager specifically to discuss career progression. Ask: 'What does the path to the next level look like?'",
-                "Identify one responsibility at the next level and start doing it visibly.",
-                "Create a promotion document for yourself — list your major contributions, translate them into business impact, and share it with your manager.",
-                "Find out who the decision-makers are for promotions. Make sure your work is visible to them.",
-                "If promotion criteria are opaque, start interviewing. The experience will tell you your market value.",
-              ].map((item, i) => (
-                <li key={i} className="flex gap-2 text-base"><span className="text-cta font-bold shrink-0">→</span>{item}</li>
-              ))}
+              "Schedule a one-on-one with your manager specifically to discuss career progression. Ask: 'What does the path to the next level look like?'",
+              "Identify one responsibility at the next level and start doing it visibly.",
+              "Create a promotion document for yourself — list your major contributions, translate them into business impact, and share it with your manager.",
+              "Find out who the decision-makers are for promotions. Make sure your work is visible to them.",
+              "If promotion criteria are opaque, start interviewing. The experience will tell you your market value."].
+              map((item, i) =>
+              <li key={i} className="flex gap-2 text-base"><span className="text-cta font-bold shrink-0">→</span>{item}</li>
+              )}
             </ul>
           </section>
 
@@ -217,13 +217,13 @@ const ArticlePromoted = () => {
             <p className="text-muted-foreground leading-relaxed italic text-base">
               The engineers who get promoted are not always the best engineers. They are the engineers who understand that promotion is a political and social process as much as it is a technical one. If you are stuck at the same level, the answer is almost never 'you are not good enough.' The answer is usually 'you have not made it easy for the people who decide to say yes.'
             </p>
-            <p className="text-xs text-muted-foreground mt-4">— Based on insights from The Career Playbook</p>
+            
           </section>
 
         </div>
       </article>
-    </div>
-  );
+    </div>);
+
 };
 
 export default ArticlePromoted;
