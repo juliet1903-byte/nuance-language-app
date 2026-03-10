@@ -28,6 +28,7 @@ import VideoInterview from "./pages/VideoInterview";
 import VideoRelationships from "./pages/VideoRelationships";
 import VideoEmotionalIntelligence from "./pages/VideoEmotionalIntelligence";
 import ArticlePromoted from "./pages/ArticlePromoted";
+import ArticleMicroaggressions from "./pages/ArticleMicroaggressions";
 import VideoImpostorSyndrome from "./pages/VideoImpostorSyndrome";
 
 const queryClient = new QueryClient();
