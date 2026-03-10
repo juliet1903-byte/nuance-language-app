@@ -65,6 +65,7 @@ const App = () => (
                 <Route path="/video/emotional-intelligence" element={<VideoEmotionalIntelligence />} />
                 <Route path="/video/impostor-syndrome" element={<VideoImpostorSyndrome />} />
                 <Route path="/article/promoted" element={<ArticlePromoted />} />
+                <Route path="/article/microaggressions" element={<ArticleMicroaggressions />} />
                 <Route path="*" element={<NotFound />} />
               </Routes>
             </BrowserRouter>

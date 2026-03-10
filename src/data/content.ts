@@ -33,6 +33,14 @@ export interface Video {
 // Ordered newest-first
 export const articles: Article[] = [
   {
+    id: "a8",
+    title: "The Career Cost of Microaggressions",
+    category: "DEI",
+    readTime: "14 min read",
+    href: "/article/microaggressions",
+    image: articleMicroaggressions,
+  },
+  {
     id: "a7",
     title: "Why Some People Get Promoted and Others Don't",
     category: "Career",
