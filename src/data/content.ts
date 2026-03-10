@@ -5,6 +5,7 @@ import articleInterview from "@/assets/article-interview.png";
 import articleCriticism from "@/assets/article-criticism.png";
 import articleConversations from "@/assets/article-conversations.png";
 import articlePromoted from "@/assets/article-promoted.png";
+import articleMicroaggressions from "@/assets/article-microaggressions.webp";
 import videoNeutral from "@/assets/video-neutral.png";
 import videoPositive from "@/assets/video-positive.png";
 import videoImpostor from "@/assets/video-impostor.png";
@@ -31,6 +32,14 @@ export interface Video {
 
 // Ordered newest-first
 export const articles: Article[] = [
+  {
+    id: "a8",
+    title: "The Career Cost of Microaggressions",
+    category: "DEI",
+    readTime: "14 min read",
+    href: "/article/microaggressions",
+    image: articleMicroaggressions,
+  },
   {
     id: "a7",
     title: "Why Some People Get Promoted and Others Don't",
