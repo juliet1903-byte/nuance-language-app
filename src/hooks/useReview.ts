@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/components/AuthContext";
+import { useProgress } from "@/hooks/useProgress";
 import { modules } from "@/data/modules";
 
 export interface ReviewCard {
