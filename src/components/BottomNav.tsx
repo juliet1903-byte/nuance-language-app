@@ -1,4 +1,4 @@
-import { Home, BookOpen, BarChart3, User, MessageSquare } from "lucide-react";
+import { Home, BookOpen, BarChart3, Brain, MessageSquare } from "lucide-react";
 import { useLocation, useNavigate } from "react-router-dom";
 import chatIcon from "@/assets/chat-icon.png";
 
