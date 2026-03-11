@@ -30,6 +30,7 @@ import VideoEmotionalIntelligence from "./pages/VideoEmotionalIntelligence";
 import ArticlePromoted from "./pages/ArticlePromoted";
 import ArticleMicroaggressions from "./pages/ArticleMicroaggressions";
 import VideoImpostorSyndrome from "./pages/VideoImpostorSyndrome";
+import Review from "./pages/Review";
 
 const queryClient = new QueryClient();
 
