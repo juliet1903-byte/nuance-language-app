@@ -1,4 +1,4 @@
-import { Home, BookOpen, BarChart3, User, MessageSquare } from "lucide-react";
+import { Home, BookOpen, BarChart3, Brain, MessageSquare } from "lucide-react";
 import { useLocation, useNavigate } from "react-router-dom";
 import chatIcon from "@/assets/chat-icon.png";
 
@@ -16,7 +16,7 @@ const BottomNav = ({ onTranslatorOpen }: BottomNavProps) => {
     { icon: BookOpen, label: "Library", route: "/library" },
     { id: "translator", icon: MessageSquare, label: "" },
     { icon: BarChart3, label: "Insights", route: "/insights" },
-    { icon: User, label: "Profile", route: "/profile" },
+    { icon: Brain, label: "Review", route: "/review" },
   ];
 
   return (
