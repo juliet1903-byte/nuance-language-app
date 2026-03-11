@@ -56,9 +56,11 @@ function computeNextReview(
 
 export function useReview() {
   const { user } = useAuth();
+  const { completedLessons, completedModules, loading: progressLoading } = useProgress();
   const [dueCards, setDueCards] = useState<ReviewCard[]>([]);
   const [totalCards, setTotalCards] = useState(0);
   const [loading, setLoading] = useState(true);
+  const [seeded, setSeeded] = useState(false);
 
   const fetchDueCards = useCallback(async () => {
     if (!user) { setLoading(false); return; }
