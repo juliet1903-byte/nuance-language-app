@@ -30,6 +30,7 @@ import VideoEmotionalIntelligence from "./pages/VideoEmotionalIntelligence";
 import ArticlePromoted from "./pages/ArticlePromoted";
 import ArticleMicroaggressions from "./pages/ArticleMicroaggressions";
 import VideoImpostorSyndrome from "./pages/VideoImpostorSyndrome";
+import Review from "./pages/Review";
 
 const queryClient = new QueryClient();
 
@@ -66,6 +67,7 @@ const App = () => (
                 <Route path="/video/impostor-syndrome" element={<VideoImpostorSyndrome />} />
                 <Route path="/article/promoted" element={<ArticlePromoted />} />
                 <Route path="/article/microaggressions" element={<ArticleMicroaggressions />} />
+                <Route path="/review" element={<Review />} />
                 <Route path="*" element={<NotFound />} />
               </Routes>
             </BrowserRouter>

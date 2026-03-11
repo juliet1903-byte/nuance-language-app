@@ -131,6 +131,54 @@ export type Database = {
         }
         Relationships: []
       }
+      review_cards: {
+        Row: {
+          card_back: string
+          card_front: string
+          card_type: string
+          created_at: string
+          ease_factor: number
+          id: string
+          interval_days: number
+          last_reviewed_at: string | null
+          lesson_id: string
+          module_id: string
+          next_review_at: string
+          repetitions: number
+          user_id: string
+        }
+        Insert: {
+          card_back: string
+          card_front: string
+          card_type?: string
+          created_at?: string
+          ease_factor?: number
+          id?: string
+          interval_days?: number
+          last_reviewed_at?: string | null
+          lesson_id: string
+          module_id: string
+          next_review_at?: string
+          repetitions?: number
+          user_id: string
+        }
+        Update: {
+          card_back?: string
+          card_front?: string
+          card_type?: string
+          created_at?: string
+          ease_factor?: number
+          id?: string
+          interval_days?: number
+          last_reviewed_at?: string | null
+          lesson_id?: string
+          module_id?: string
+          next_review_at?: string
+          repetitions?: number
+          user_id?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never

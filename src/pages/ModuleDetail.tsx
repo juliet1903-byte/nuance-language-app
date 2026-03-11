@@ -10,6 +10,7 @@ import WordOrderExercise from "@/components/WordOrderExercise";
 import ScenarioExercise from "@/components/ScenarioExercise";
 import { useProgress } from "@/hooks/useProgress";
 import { useAuth } from "@/components/AuthContext";
+import { useReview } from "@/hooks/useReview";
 
 type View = "overview" | "lesson" | "flashcards" | "exercise" | "word-order" | "scenario" | "complete";
 
@@ -18,6 +19,7 @@ const ModuleDetail = () => {
   const navigate = useNavigate();
   const { user } = useAuth();
   const { logActivity, completedLessons } = useProgress();
+  const { seedCardsForLesson } = useReview();
   // Persist exercise progress in localStorage
   const storageKey = `nuance-progress-${id}`;
   const saved = (() => {
@@ -115,6 +117,8 @@ const ModuleDetail = () => {
 
       if (vibeScore >= 50 && lesson) {
         await logActivity("lesson_complete", module.id, lesson.id);
+        // Seed flashcards into spaced repetition deck
+        await seedCardsForLesson(module.id, lesson.id);
       }
 
       const allDone = module.lessons.every(

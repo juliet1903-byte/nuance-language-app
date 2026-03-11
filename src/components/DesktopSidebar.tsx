@@ -1,4 +1,4 @@
-import { Home, BookOpen, BarChart3, User, MessageSquare, PanelLeftClose, PanelLeft } from "lucide-react";
+import { Home, BookOpen, BarChart3, User, MessageSquare, PanelLeftClose, PanelLeft, Brain } from "lucide-react";
 import { useLocation, useNavigate } from "react-router-dom";
 import Logo from "@/components/Logo";
 import { useSidebar } from "@/components/SidebarContext";
@@ -16,6 +16,7 @@ const DesktopSidebar = ({ onTranslatorOpen }: DesktopSidebarProps) => {
   const navItems = [
     { icon: Home, label: "Home", route: "/dashboard" },
     { icon: BookOpen, label: "Library", route: "/library" },
+    { icon: Brain, label: "Review", route: "/review" },
     { icon: BarChart3, label: "Insights", route: "/insights" },
     { icon: User, label: "Profile", route: "/profile" },
   ];
