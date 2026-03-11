@@ -85,6 +85,44 @@ export function useReview() {
     setLoading(false);
   }, [user]);
 
+  // Auto-seed cards from all already-completed lessons on first load
+  useEffect(() => {
+    if (!user || progressLoading || seeded) return;
+    const seedAll = async () => {
+      const allCards: { user_id: string; module_id: string; lesson_id: string; card_type: string; card_front: string; card_back: string }[] = [];
+      for (const mod of modules) {
+        for (const lesson of mod.lessons) {
+          if (!lesson.flashcards?.length) continue;
+          // Seed if the lesson is completed OR the whole module is completed
+          if (completedLessons.has(lesson.id) || completedModules.has(mod.id)) {
+            for (const fc of lesson.flashcards) {
+              allCards.push({
+                user_id: user.id,
+                module_id: mod.id,
+                lesson_id: lesson.id,
+                card_type: "flashcard",
+                card_front: fc.front,
+                card_back: fc.back,
+              });
+            }
+          }
+        }
+      }
+      if (allCards.length > 0) {
+        // Batch upsert in chunks of 50
+        for (let i = 0; i < allCards.length; i += 50) {
+          await supabase.from("review_cards").upsert(allCards.slice(i, i + 50), {
+            onConflict: "user_id,lesson_id,card_front",
+            ignoreDuplicates: true,
+          });
+        }
+        await fetchDueCards();
+      }
+      setSeeded(true);
+    };
+    seedAll();
+  }, [user, progressLoading, completedLessons, completedModules, seeded, fetchDueCards]);
+
   useEffect(() => { fetchDueCards(); }, [fetchDueCards]);
 
   const reviewCard = useCallback(async (cardId: string, rating: ReviewRating) => {
