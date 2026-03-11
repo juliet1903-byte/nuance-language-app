@@ -1,4 +1,4 @@
-import { Home, BookOpen, BarChart3, User, MessageSquare, PanelLeftClose, PanelLeft } from "lucide-react";
+import { Home, BookOpen, BarChart3, User, MessageSquare, PanelLeftClose, PanelLeft, Brain } from "lucide-react";
 import { useLocation, useNavigate } from "react-router-dom";
 import Logo from "@/components/Logo";
 import { useSidebar } from "@/components/SidebarContext";
