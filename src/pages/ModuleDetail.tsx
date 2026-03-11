@@ -117,6 +117,8 @@ const ModuleDetail = () => {
 
       if (vibeScore >= 50 && lesson) {
         await logActivity("lesson_complete", module.id, lesson.id);
+        // Seed flashcards into spaced repetition deck
+        await seedCardsForLesson(module.id, lesson.id);
       }
 
       const allDone = module.lessons.every(
