@@ -19,6 +19,7 @@ const ModuleDetail = () => {
   const navigate = useNavigate();
   const { user } = useAuth();
   const { logActivity, completedLessons } = useProgress();
+  const { seedCardsForLesson } = useReview();
   // Persist exercise progress in localStorage
   const storageKey = `nuance-progress-${id}`;
   const saved = (() => {
