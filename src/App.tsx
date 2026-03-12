@@ -69,6 +69,7 @@ const App = () => (
                 <Route path="/article/promoted" element={<ArticlePromoted />} />
                 <Route path="/article/microaggressions" element={<ArticleMicroaggressions />} />
                 <Route path="/review" element={<Review />} />
+                <Route path="/help" element={<HelpSupport />} />
                 <Route path="*" element={<NotFound />} />
               </Routes>
             </BrowserRouter>
