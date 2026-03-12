@@ -317,6 +317,7 @@ const Profile = () => {
             </div>
           ))}
         </section>
+        </div>
 
         <section>
           <h2 className="text-sm font-semibold uppercase tracking-wider text-muted-foreground mb-3">Preferences</h2>
