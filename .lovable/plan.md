@@ -1,13 +1,21 @@
 
 
-## Problem
+## Plan: Add Help & Support / Feedback Page
 
-The `overflow-hidden` on the `<main>` container (line 52) clips the top of the avatar's `ring-2 ring-offset-2` decoration, since the avatar is the first visual element inside and the ring extends outside its box.
+### What
+Create a new `/help` page with a contact/feedback form identical to the footer's "Get in Touch" form, and wire the "Help & Support" button in Profile to navigate there.
 
-## Fix
+### Changes
 
-Add `pt-2` (or similar small top padding) to the avatar's wrapping `<section>` so the ring has room to render without being clipped. This is the minimal change that preserves the existing `overflow-hidden` (which is needed for the `LoginBanner` blur effect).
+**1. Create `src/pages/HelpSupport.tsx`**
+- Page with `AppLayout`, back arrow header (same pattern as Profile)
+- Contact form reusing the same logic as `Footer.tsx`: name, email, message fields calling `send-contact` edge function
+- Styled for the app's card-based look (bg-card, rounded-2xl) rather than the dark footer theme
+- Toast feedback on success/error
 
-**File:** `src/pages/Profile.tsx`, line 55  
-- Change `<section className="flex flex-col items-center text-center">` to `<section className="flex flex-col items-center text-center pt-2">`
+**2. Update `src/pages/Profile.tsx`** (line 347)
+- Add `onClick={() => navigate("/help")}` to the Help & Support button
+
+**3. Update `src/App.tsx`**
+- Import `HelpSupport` and add route `<Route path="/help" element={<HelpSupport />} />`
 
