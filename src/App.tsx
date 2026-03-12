@@ -31,6 +31,7 @@ import ArticlePromoted from "./pages/ArticlePromoted";
 import ArticleMicroaggressions from "./pages/ArticleMicroaggressions";
 import VideoImpostorSyndrome from "./pages/VideoImpostorSyndrome";
 import Review from "./pages/Review";
+import HelpSupport from "./pages/HelpSupport";
 
 const queryClient = new QueryClient();
 
