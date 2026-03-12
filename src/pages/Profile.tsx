@@ -173,8 +173,9 @@ const Profile = () => {
         <h1 className="text-lg font-semibold">Profile</h1>
       </header>
 
-      <main className="px-5 space-y-6 pb-8 md:max-w-[900px] md:mx-auto md:w-full relative overflow-hidden">
-        {showBanner && <LoginBanner className="-top-2" />}
+      <main className="px-5 space-y-6 pb-8 md:max-w-[900px] md:mx-auto md:w-full">
+        <div className="relative overflow-hidden rounded-2xl">
+          {showBanner && <LoginBanner />}
 
         <section className="flex flex-col items-center text-center pt-2">
           <div className="relative mb-3 group">
@@ -316,6 +317,7 @@ const Profile = () => {
             </div>
           ))}
         </section>
+        </div>
 
         <section>
           <h2 className="text-sm font-semibold uppercase tracking-wider text-muted-foreground mb-3">Preferences</h2>
