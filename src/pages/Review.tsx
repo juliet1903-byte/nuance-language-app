@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
-import { ArrowLeft, RotateCcw, Check, Brain, PartyPopper, CircleQuestionMark } from "lucide-react";
+import { ArrowLeft, RotateCcw, Check, Brain, PartyPopper, HelpCircle } from "lucide-react";
 import AppLayout from "@/components/AppLayout";
 import { useReview, ReviewCard, ReviewRating } from "@/hooks/useReview";
 import { useAuth } from "@/components/AuthContext";
