@@ -9,7 +9,7 @@ import {
   ResponsiveContainer } from
 "recharts";
 import AppLayout from "@/components/AppLayout";
-import { useAuth } from "@/components/AuthContext";
+import { useAuth } from "@/hooks/useAuth";
 import { useProgress } from "@/hooks/useProgress";
 import LoginBanner from "@/components/LoginBanner";
 import Leaderboard from "@/components/Leaderboard";

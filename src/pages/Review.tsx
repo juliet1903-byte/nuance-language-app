@@ -4,7 +4,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { ArrowLeft, RotateCcw, Check, Brain, PartyPopper, HelpCircle } from "lucide-react";
 import AppLayout from "@/components/AppLayout";
 import { useReview, ReviewCard, ReviewRating } from "@/hooks/useReview";
-import { useAuth } from "@/components/AuthContext";
+import { useAuth } from "@/hooks/useAuth";
 
 const ratingConfig: {value: ReviewRating;label: string;color: string;desc: string;}[] = [
 { value: "again", label: "Again", color: "bg-destructive/10 text-destructive border-destructive/20", desc: "Forgot" },

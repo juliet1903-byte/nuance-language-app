@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { Check } from "lucide-react";
 import type { Module } from "@/data/modules";
-import { useAuth } from "@/components/AuthContext";
+import { useAuth } from "@/hooks/useAuth";
 import { useProgress } from "@/hooks/useProgress";
 
 import moduleMeeting from "@/assets/module-meeting.jpg";

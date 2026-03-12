@@ -3,7 +3,7 @@ import { ArrowLeft, Check, Trash2, Bell, Trophy, Flame, BookOpen, Sparkles, Info
 import { formatDistanceToNow } from "date-fns";
 import AppLayout from "@/components/AppLayout";
 import { useNotifications, Notification } from "@/hooks/useNotifications";
-import { useAuth } from "@/components/AuthContext";
+import { useAuth } from "@/hooks/useAuth";
 import LoginBanner from "@/components/LoginBanner";
 
 const iconMap: Record<string, React.ElementType> = {

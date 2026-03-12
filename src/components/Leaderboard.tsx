@@ -2,7 +2,7 @@ import { useEffect, useState, useRef, useCallback } from "react";
 import { Trophy, Shield, ShieldOff, Crown, Medal } from "lucide-react";
 import { motion } from "framer-motion";
 import { supabase } from "@/integrations/supabase/client";
-import { useAuth } from "@/components/AuthContext";
+import { useAuth } from "@/hooks/useAuth";
 import { Switch } from "@/components/ui/switch";
 import LetterAvatar from "@/components/LetterAvatar";
 

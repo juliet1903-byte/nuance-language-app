@@ -3,7 +3,7 @@ import { X, Mic, Check, HelpCircle, Copy, Loader2, MessageSquareText, List, Grip
 import { motion, AnimatePresence } from "framer-motion";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "@/hooks/use-toast";
-import { useAuth } from "@/components/AuthContext";
+import { useAuth } from "@/hooks/useAuth";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { useSidebar } from "@/components/SidebarContext";
 

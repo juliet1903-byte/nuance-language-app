@@ -4,7 +4,7 @@ import { BookOpen, Play, FileText, Search, Check, ChevronRight } from "lucide-re
 import AppLayout from "@/components/AppLayout";
 import { modules } from "@/data/modules";
 import { articles, videos } from "@/data/content";
-import { useAuth } from "@/components/AuthContext";
+import { useAuth } from "@/hooks/useAuth";
 import { useProgress } from "@/hooks/useProgress";
 
 import moduleStartingStrong from "@/assets/module-starting-strong.png";

@@ -4,7 +4,7 @@ import { ArrowLeft, Check, Lock, ChevronDown, ChevronRight, CalendarDays } from 
 import { motion, AnimatePresence } from "framer-motion";
 import { modules } from "@/data/modules";
 import AppLayout from "@/components/AppLayout";
-import { useAuth } from "@/components/AuthContext";
+import { useAuth } from "@/hooks/useAuth";
 import { useProgress } from "@/hooks/useProgress";
 
 import moduleStartingStrong from "@/assets/module-starting-strong.png";

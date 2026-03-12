@@ -19,7 +19,7 @@ import {
 import { Switch } from "@/components/ui/switch";
 import AppLayout from "@/components/AppLayout";
 import { useTheme } from "@/components/ThemeContext";
-import { useAuth } from "@/components/AuthContext";
+import { useAuth } from "@/hooks/useAuth";
 import { useProgress } from "@/hooks/useProgress";
 import LetterAvatar from "@/components/LetterAvatar";
 import { modules } from "@/data/modules";

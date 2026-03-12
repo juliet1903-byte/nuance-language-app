@@ -9,7 +9,7 @@ import FlashcardExercise from "@/components/FlashcardExercise";
 import WordOrderExercise from "@/components/WordOrderExercise";
 import ScenarioExercise from "@/components/ScenarioExercise";
 import { useProgress } from "@/hooks/useProgress";
-import { useAuth } from "@/components/AuthContext";
+import { useAuth } from "@/hooks/useAuth";
 import { useReview } from "@/hooks/useReview";
 
 type View = "overview" | "lesson" | "flashcards" | "exercise" | "word-order" | "scenario" | "complete";

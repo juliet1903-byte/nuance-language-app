@@ -4,7 +4,7 @@ import { CircleGauge, Route, Flame } from "lucide-react";
 import Logo from "@/components/Logo";
 import LetterAvatar from "@/components/LetterAvatar";
 import heroShowcase from "@/assets/hero-showcase.png";
-import { useAuth } from "@/components/AuthContext";
+import { useAuth } from "@/hooks/useAuth";
 import Footer from "@/components/Footer";
 import { motion, useScroll, useTransform, useSpring } from "framer-motion";
 import AnimatedGrid from "@/components/AnimatedGrid";

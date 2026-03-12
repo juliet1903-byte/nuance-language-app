@@ -1,6 +1,6 @@
 import { Check, Lock, Flame } from "lucide-react";
 import { useNavigate } from "react-router-dom";
-import { useAuth } from "@/components/AuthContext";
+import { useAuth } from "@/hooks/useAuth";
 import { useProgress } from "@/hooks/useProgress";
 import { modules } from "@/data/modules";
 import LoginBanner from "@/components/LoginBanner";

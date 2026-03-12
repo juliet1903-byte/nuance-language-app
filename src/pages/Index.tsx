@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useMemo } from "react";
 import Logo from "@/components/Logo";
 import LetterAvatar from "@/components/LetterAvatar";
-import { useAuth } from "@/components/AuthContext";
+import { useAuth } from "@/hooks/useAuth";
 import LearningPath from "@/components/LearningPath";
 import ModuleCard from "@/components/ModuleCard";
 import TrendingCard from "@/components/TrendingCard";
