@@ -323,11 +323,6 @@ const Profile = () => {
           <h2 className="text-sm font-semibold uppercase tracking-wider text-muted-foreground mb-3">Preferences</h2>
           <div className="bg-card rounded-2xl shadow-sm overflow-hidden divide-y divide-border">
             <div className="w-full flex items-center gap-3 px-4 py-3.5">
-              <Bell className="w-5 h-5 text-muted-foreground shrink-0" />
-              <span className="flex-1 text-sm font-medium">Notifications</span>
-              <Switch />
-            </div>
-            <div className="w-full flex items-center gap-3 px-4 py-3.5">
               <Moon className="w-5 h-5 text-muted-foreground shrink-0" />
               <span className="flex-1 text-sm font-medium">Dark Mode</span>
               <Switch checked={theme === "dark"} onCheckedChange={toggleTheme} />
