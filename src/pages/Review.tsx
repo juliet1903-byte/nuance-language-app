@@ -25,7 +25,7 @@ const Review = () => {
     return (
       <AppLayout>
         <div className="flex flex-col items-center justify-center min-h-[60vh] px-5">
-          <CircleQuestionMark className="w-12 h-12 text-muted-foreground/30 mb-4" />
+          <HelpCircle className="w-12 h-12 text-muted-foreground/30 mb-4" />
           <p className="text-muted-foreground text-center">Sign in to access your review cards.</p>
         </div>
       </AppLayout>);
