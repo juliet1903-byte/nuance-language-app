@@ -28,7 +28,7 @@ const AppLayout = ({ children }: AppLayoutProps) => {
 
         <div
           ref={scrollRef}
-          className="flex-1 pb-24 md:pb-8 md:h-screen md:overflow-y-auto transition-all duration-300"
+          className="flex-1 pb-24 md:pb-8 md:h-screen md:overflow-y-auto transition-all duration-200"
           style={!isMobile ? { marginLeft: sidebarWidth } : undefined}
         >
           {children}
