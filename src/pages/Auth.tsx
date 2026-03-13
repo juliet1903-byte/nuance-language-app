@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { useNavigate, Link } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { useNavigate, useLocation, Link } from "react-router-dom";
 import Logo from "@/components/Logo";
 import { useAuth } from "@/hooks/useAuth";
 import { supabase } from "@/integrations/supabase/client";
@@ -13,9 +13,16 @@ import { Separator } from "@/components/ui/separator";
 
 const Auth = () => {
   const navigate = useNavigate();
-  const { signIn, signUp } = useAuth();
+  const location = useLocation();
+  const { signIn, signUp, user } = useAuth();
   const [loading, setLoading] = useState(false);
   const [googleLoading, setGoogleLoading] = useState(false);
+
+  const from = (location.state as { from?: Location })?.from?.pathname || "/dashboard";
+
+  useEffect(() => {
+    if (user) navigate(from, { replace: true });
+  }, [from, navigate, user]);
 
   const handleGoogleSignIn = async () => {
     setGoogleLoading(true);
@@ -74,8 +81,6 @@ const Auth = () => {
     setLoading(false);
     if (error) {
       toast({ title: "Couldn't sign you in", description: "Please check your email and password and try again.", variant: "destructive" });
-    } else {
-      navigate("/dashboard");
     }
   };
 

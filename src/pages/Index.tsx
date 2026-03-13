@@ -1,6 +1,6 @@
 import { Bell, User } from "lucide-react";
 import { useNavigate } from "react-router-dom";
-import { useMemo } from "react";
+import { useMemo, useRef, useEffect } from "react";
 import Logo from "@/components/Logo";
 import LetterAvatar from "@/components/LetterAvatar";
 import { useAuth } from "@/hooks/useAuth";
@@ -19,6 +19,30 @@ const Index = () => {
   const { completedLessons, completedModules, loading: progressLoading } = useProgress();
   const { unreadCount } = useNotifications();
   const showAvatar = !isGuest && user;
+  const modulesScrollRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const el = modulesScrollRef.current;
+    if (!el) return;
+    let timeout: ReturnType<typeof setTimeout>;
+    const onScroll = () => {
+      el.classList.add("scrolling");
+      clearTimeout(timeout);
+      timeout = setTimeout(() => el.classList.remove("scrolling"), 1000);
+    };
+    const onWheel = (e: WheelEvent) => {
+      if (e.deltaY === 0) return;
+      e.preventDefault();
+      el.scrollLeft += e.deltaY;
+    };
+    el.addEventListener("scroll", onScroll, { passive: true });
+    el.addEventListener("wheel", onWheel, { passive: false });
+    return () => {
+      el.removeEventListener("scroll", onScroll);
+      el.removeEventListener("wheel", onWheel);
+      clearTimeout(timeout);
+    };
+  }, []);
 
   // Find next lesson for registered users
   const nextLesson = useMemo(() => {
@@ -112,7 +136,7 @@ const Index = () => {
             <h2 className="text-xl font-medium">All Modules</h2>
             <span className="text-sm lg:text-base text-muted-foreground">{modules.length}</span>
           </div>
-          <div className="gap-3 overflow-x-auto pb-2 -mx-5 px-5 scrollbar-none flex items-start justify-start">
+          <div ref={modulesScrollRef} className="gap-3 overflow-x-auto pb-2 -mx-5 px-5 scrollbar-fade flex items-start justify-start">
             {modules.map((m) =>
             <ModuleCard key={m.id} module={m} />
             )}

@@ -27,44 +27,49 @@ const imageMap: Record<string, string> = {
   "module-difficult-convos": moduleDifficultConvos,
   "module-career-moves": moduleCareerMoves,
   "module-dei": moduleDei,
-  "module-common-mistakes": moduleCommonMistakes
+  "module-common-mistakes": moduleCommonMistakes,
 };
 
-const ModuleCard = ({ module }: {module: Module;}) => {
+const ModuleCard = ({ module }: { module: Module }) => {
   const navigate = useNavigate();
   const { isGuest, user } = useAuth();
   const { completedLessons, completedModules } = useProgress();
 
   const isLoggedIn = !isGuest && !!user;
-  const allLessonsDone = isLoggedIn && module.lessons.length > 0 && module.lessons.every((l) => completedLessons.has(l.id));
+  const allLessonsDone =
+    isLoggedIn &&
+    module.lessons.length > 0 &&
+    module.lessons.every((l) => completedLessons.has(l.id));
   const isModuleDone = isLoggedIn && (completedModules.has(module.id) || allLessonsDone);
-  const doneLessons = isLoggedIn ? module.lessons.filter((l) => completedLessons.has(l.id)).length : 0;
+  const doneLessons = isLoggedIn
+    ? module.lessons.filter((l) => completedLessons.has(l.id)).length
+    : 0;
   const hasProgress = isLoggedIn && doneLessons > 0 && !isModuleDone;
 
   return (
-    <button
-      onClick={() => navigate(`/module/${module.id}`)}
-      className="shrink-0 w-36 text-left">
-      
-      <div className="w-36 h-36 rounded-2xl overflow-hidden bg-card p-3 mb-2 relative">
+    <button onClick={() => navigate(`/module/${module.id}`)} className="group w-36 shrink-0 text-left">
+      <div className="relative mb-2 h-36 w-36 overflow-hidden rounded-2xl bg-card p-3">
         <img
           src={imageMap[module.image] || moduleMeeting}
           alt={module.title}
-          className="w-full h-full object-cover"
-          loading="lazy" />
-        
-        {isModuleDone &&
-        <div className="absolute top-2 right-2">
-            <Check className="w-4 h-4 text-foreground/70" strokeWidth={2.5} />
-          </div>
-        }
-      </div>
-      <p className="lg:text-base leading-tight text-base font-medium">{module.title}</p>
-      {hasProgress &&
-      <p className="text-xs mt-0.5 text-muted-foreground">{doneLessons}/{module.lessons.length} lessons</p>
-      }
-    </button>);
+          className="h-full w-full object-cover group-hover:scale-105 transition-transform duration-300"
+          loading="lazy"
+        />
 
+        {isModuleDone && (
+          <div className="absolute right-2 top-2">
+            <Check className="h-4 w-4 text-foreground/70" strokeWidth={2.5} />
+          </div>
+        )}
+      </div>
+      <p className="text-base font-medium leading-tight lg:text-base">{module.title}</p>
+      {hasProgress && (
+        <p className="mt-0.5 text-xs text-muted-foreground">
+          {doneLessons}/{module.lessons.length} lessons
+        </p>
+      )}
+    </button>
+  );
 };
 
 export default ModuleCard;
