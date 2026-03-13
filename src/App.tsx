@@ -55,7 +55,6 @@ const App = () => (
                 <Route path="/profile" element={<Profile />} />
                 <Route path="/notifications" element={<Notifications />} />
                 <Route path="/reset-password" element={<ResetPassword />} />
-                <Route path="/privacy" element={<PrivacyPolicy />} />
                 <Route path="/article/warm-intro" element={<ArticleWarmIntro />} />
                 <Route path="/article/burnout" element={<ArticleBurnout />} />
                 <Route path="/article/criticism" element={<ArticleCriticism />} />
@@ -68,6 +67,7 @@ const App = () => (
                 <Route path="/video/impostor-syndrome" element={<VideoImpostorSyndrome />} />
                 <Route path="/article/promoted" element={<ArticlePromoted />} />
                 <Route path="/article/microaggressions" element={<ArticleMicroaggressions />} />
+                <Route path="/privacy" element={<PrivacyPolicy />} />
                 <Route path="/review" element={<Review />} />
                 <Route path="/help" element={<HelpSupport />} />
                 <Route path="*" element={<NotFound />} />
