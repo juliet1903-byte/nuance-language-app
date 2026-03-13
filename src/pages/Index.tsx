@@ -12,6 +12,7 @@ import { modules } from "@/data/modules";
 import { articles, videos } from "@/data/content";
 import { useProgress } from "@/hooks/useProgress";
 import { useNotifications } from "@/hooks/useNotifications";
+import imageLesson from "@/assets/44f61677-4fd5-49b3-9fbb-eabbecbad3aa.png";
 
 const Index = () => {
   const navigate = useNavigate();
@@ -84,47 +85,60 @@ const Index = () => {
   return (
     <AppLayout>
       {/* Header */}
-      <header className="flex items-center justify-between px-5 pt-6 pb-4 md:max-w-[900px] md:mx-auto md:w-full">
+      <header className="flex items-center justify-between px-5 pb-4 pt-6 md:mx-auto md:w-full md:max-w-[900px]">
         <Logo className="h-8 md:hidden" />
         <div className="flex items-center gap-3 md:ml-auto">
-          <button onClick={() => navigate("/notifications")} className="p-2 rounded-full bg-card relative">
-            <Bell className="w-5 h-5 text-foreground" />
-            {unreadCount > 0 &&
-            <span className="absolute -top-0.5 -right-0.5 w-4 h-4 rounded-full bg-destructive text-destructive-foreground text-[10px] font-bold flex items-center justify-center">
+          <button
+            onClick={() => navigate("/notifications")}
+            className="relative rounded-full bg-card p-2"
+          >
+            <Bell className="h-5 w-5 text-foreground" />
+            {unreadCount > 0 && (
+              <span className="absolute -right-0.5 -top-0.5 flex h-4 w-4 items-center justify-center rounded-full bg-destructive text-[10px] font-bold text-destructive-foreground">
                 {unreadCount > 9 ? "9+" : unreadCount}
               </span>
-            }
+            )}
           </button>
-          {showAvatar ?
-          <div onClick={() => navigate("/profile")} className="cursor-pointer">
-          <LetterAvatar
-            name={profile?.display_name}
-            email={user?.email}
-            avatarUrl={profile?.avatar_url}
-            size="sm" />
-          </div> :
-          <div onClick={() => navigate("/auth")} className="w-9 h-9 rounded-full bg-muted overflow-hidden flex items-center justify-center cursor-pointer">
-              <User className="w-5 h-5 text-muted-foreground" />
+          {showAvatar ? (
+            <div onClick={() => navigate("/profile")} className="cursor-pointer">
+              <LetterAvatar
+                name={profile?.display_name}
+                email={user?.email}
+                avatarUrl={profile?.avatar_url}
+                size="sm"
+              />
             </div>
-          }
+          ) : (
+            <div
+              onClick={() => navigate("/auth")}
+              className="flex h-9 w-9 cursor-pointer items-center justify-center overflow-hidden rounded-full bg-muted"
+            >
+              <User className="h-5 w-5 text-muted-foreground" />
+            </div>
+          )}
         </div>
       </header>
 
-      <main className="px-5 space-y-7 md:max-w-[900px] md:mx-auto md:w-full">
+      <main className="space-y-7 px-5 md:mx-auto md:w-full md:max-w-[900px]">
         <LearningPath />
-
+        
         <section>
-          <h2 className="text-xl font-medium mb-3">{continueTitle}</h2>
-          <div className="rounded-2xl overflow-hidden bg-card shadow-sm">
-            <img alt="Lesson" className="w-full h-40 object-cover" src="/lovable-uploads/44f61677-4fd5-49b3-9fbb-eabbecbad3aa.png" />
+          <h2 className="mb-3 text-xl font-medium">{continueTitle}</h2>
+          <div className="overflow-hidden rounded-2xl bg-card shadow-sm">
+            <img
+              alt="Lesson"
+              className="h-40 w-full object-cover"
+              src={imageLesson}
+            />
             <div className="p-4 text-sm">
-              <h3 className="text-base mb-1 font-medium">{continueSubtitle}</h3>
-              <p className="lg:text-base text-muted-foreground mb-3 text-base">
+              <h3 className="mb-1 text-base font-medium">{continueSubtitle}</h3>
+              <p className="mb-3 text-base text-muted-foreground lg:text-base">
                 {continueDescription}
               </p>
               <button
                 onClick={() => navigate(`/module/${continueModule.id}`)}
-                className="w-full py-3 rounded-xl text-accent-foreground font-semibold text-sm lg:text-base bg-cta">
+                className="w-full rounded-xl bg-cta py-3 text-sm font-semibold text-accent-foreground lg:text-base"
+              >
                 {isGuest ? "Start Learning" : "Continue Learning"}
               </button>
             </div>
@@ -132,27 +146,31 @@ const Index = () => {
         </section>
 
         <section>
-          <div className="flex items-center justify-between mb-3">
+          <div className="mb-3 flex items-center justify-between">
             <h2 className="text-xl font-medium">All Modules</h2>
-            <span className="text-sm lg:text-base text-muted-foreground">{modules.length}</span>
+            <span className="text-sm text-muted-foreground lg:text-base">{modules.length}</span>
           </div>
-          <div ref={modulesScrollRef} className="gap-3 overflow-x-auto pb-2 -mx-5 px-5 scrollbar-fade flex items-start justify-start">
-            {modules.map((m) =>
-            <ModuleCard key={m.id} module={m} />
-            )}
+          <div
+            ref={modulesScrollRef}
+            className="scrollbar-fade -mx-5 flex items-start justify-start gap-3 overflow-x-auto px-5 pb-2"
+          >
+            {modules.map((m) => (
+              <ModuleCard key={m.id} module={m} />
+            ))}
           </div>
         </section>
 
         <section>
-          <h2 className="text-xl font-medium mb-3">Trending</h2>
-          <div className="grid grid-cols-2 md:grid-cols-1 lg:grid-cols-2 gap-3">
-            {trendingItems.map((item) =>
-            <TrendingCard key={item.title} {...item} onClick={() => navigate(item.href)} />
-            )}
+          <h2 className="mb-3 text-xl font-medium">Trending</h2>
+          <div className="grid grid-cols-2 gap-3 md:grid-cols-1 lg:grid-cols-2">
+            {trendingItems.map((item) => (
+              <TrendingCard key={item.title} {...item} onClick={() => navigate(item.href)} />
+            ))}
           </div>
         </section>
       </main>
-    </AppLayout>);
+    </AppLayout>
+  );
 };
 
 export default Index;
