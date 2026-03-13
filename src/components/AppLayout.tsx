@@ -4,10 +4,7 @@ import BottomNav from "@/components/BottomNav";
 import SocialTranslator from "@/components/SocialTranslator";
 import { useSidebar } from "@/components/SidebarContext";
 import { useIsMobile } from "@/hooks/use-mobile";
-import { createContext, useContext } from "react";
-
-export const ScrollContainerContext = createContext<React.RefObject<HTMLDivElement> | null>(null);
-export const useScrollContainer = () => useContext(ScrollContainerContext);
+import { ScrollContainerContext } from "@/components/ScrollContainerContext";
 
 interface AppLayoutProps {
   children: ReactNode;

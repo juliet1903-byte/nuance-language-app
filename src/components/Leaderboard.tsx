@@ -104,7 +104,7 @@ const Leaderboard = () => {
       .eq("id", user.id)
       .single()
       .then(({ data }) => {
-        if (data) setOptedIn((data as any).leaderboard_opt_in ?? false);
+        if (data) setOptedIn(data.leaderboard_opt_in ?? false);
       });
   }, [user]);
 
@@ -113,16 +113,16 @@ const Leaderboard = () => {
   const fetchLeaderboard = useCallback(async () => {
     setLoading(true);
     const { data } = await supabase.rpc("get_leaderboard");
-    const merged = ((data as LeaderboardEntry[]) || []).sort((a, b) => b.vibe_iq - a.vibe_iq);
+    const merged = (data || []).sort((a, b) => b.vibe_iq - a.vibe_iq);
     setEntries(merged);
 
     if (user) {
       const { data: rankData } = await supabase.rpc("get_my_leaderboard_rank", {
         _user_id: user.id,
       });
-      if (rankData && (rankData as any[])[0]) {
-        setMyRank(Number((rankData as any[])[0].rank));
-        setTotalParticipants(Number((rankData as any[])[0].total_participants));
+      if (rankData && rankData[0]) {
+        setMyRank(rankData[0].rank);
+        setTotalParticipants(rankData[0].total_participants);
       }
     }
     setLoading(false);
@@ -163,14 +163,14 @@ const Leaderboard = () => {
     setToggling(true);
     await supabase
       .from("profiles")
-      .update({ leaderboard_opt_in: checked } as any)
+      .update({ leaderboard_opt_in: checked })
       .eq("id", user.id);
     setOptedIn(checked);
     await fetchLeaderboard();
     setToggling(false);
   };
 
-  const currentVibeIq = (profile as any)?.vibe_iq ?? 0;
+  const currentVibeIq = profile?.vibe_iq ?? 0;
   const myIndex = entries.findIndex((e) => e.user_id === user?.id);
   const isInList = myIndex > -1;
   const showPinnedRow = user && isInList && !myRowVisible && entries.length > VISIBLE_COUNT;
@@ -290,7 +290,7 @@ const Leaderboard = () => {
               display_name: profile?.display_name || null,
               avatar_url: profile?.avatar_url || null,
               vibe_iq: currentVibeIq,
-              lessons_completed: (profile as any)?.lessons_completed ?? 0,
+              lessons_completed: profile?.lessons_completed ?? 0,
             }}
             idx={myRank - 1}
             isMe={true}

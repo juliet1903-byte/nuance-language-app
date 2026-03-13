@@ -9,6 +9,7 @@ export interface Profile {
   learning_level: number;
   streak_days: number;
   last_active_date: string | null;
+  lessons_completed: number;
 }
 
 export interface AuthContextType {
