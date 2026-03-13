@@ -1,4 +1,25 @@
 import { useState, useCallback, useRef } from "react";
+
+interface SpeechRecognitionEvent {
+  results: SpeechRecognitionResultList;
+}
+
+interface SpeechRecognitionErrorEvent {
+  error: string;
+}
+
+interface SpeechRecognitionInstance {
+  lang: string;
+  interimResults: boolean;
+  continuous: boolean;
+  onresult: ((event: SpeechRecognitionEvent) => void) | null;
+  onerror: ((event: SpeechRecognitionErrorEvent) => void) | null;
+  onend: (() => void) | null;
+  start: () => void;
+  stop: () => void;
+}
+
+type SpeechRecognitionConstructor = new () => SpeechRecognitionInstance;
 import { X, Mic, Check, HelpCircle, Copy, Loader2 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { supabase } from "@/integrations/supabase/client";
@@ -35,7 +56,7 @@ const SocialTranslator = ({ open, onClose }: SocialTranslatorProps) => {
   const [showCoachTip, setShowCoachTip] = useState(false);
   const [viewMode, setViewMode] = useState<"structured" | "conversational">("structured");
   const [isRecording, setIsRecording] = useState(false);
-  const recognitionRef = useRef<any>(null);
+  const recognitionRef = useRef<SpeechRecognitionInstance | null>(null);
   const finalTranscriptRef = useRef("");
   const micTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const shouldRestartRef = useRef(false);
@@ -54,7 +75,10 @@ const SocialTranslator = ({ open, onClose }: SocialTranslatorProps) => {
   }, []);
 
   const startRecognitionSession = useCallback(() => {
-    const SpeechRecognition = (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
+    const SpeechRecognition = (
+      (window as Window & { SpeechRecognition?: SpeechRecognitionConstructor }).SpeechRecognition ||
+      (window as Window & { webkitSpeechRecognition?: SpeechRecognitionConstructor }).webkitSpeechRecognition
+    );
     if (!SpeechRecognition) return;
 
     const recognition = new SpeechRecognition();
@@ -63,7 +87,7 @@ const SocialTranslator = ({ open, onClose }: SocialTranslatorProps) => {
     recognition.continuous = false;
     recognitionRef.current = recognition;
 
-    recognition.onresult = (event: any) => {
+    recognition.onresult = (event: SpeechRecognitionEvent) => {
       let interim = "";
       for (let i = 0; i < event.results.length; i++) {
         if (event.results[i].isFinal) {
@@ -80,7 +104,7 @@ const SocialTranslator = ({ open, onClose }: SocialTranslatorProps) => {
       setInput(finalTranscriptRef.current + (interim ? " " + interim : ""));
     };
 
-    recognition.onerror = (e: any) => {
+    recognition.onerror = (e: SpeechRecognitionErrorEvent) => {
       if (e.error === "no-speech") return;
       stopRecording();
     };
@@ -106,7 +130,10 @@ const SocialTranslator = ({ open, onClose }: SocialTranslatorProps) => {
       return;
     }
 
-    const SpeechRecognition = (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
+    const SpeechRecognition = (
+      (window as Window & { SpeechRecognition?: SpeechRecognitionConstructor }).SpeechRecognition ||
+      (window as Window & { webkitSpeechRecognition?: SpeechRecognitionConstructor }).webkitSpeechRecognition
+    );
     if (!SpeechRecognition) {
       toast({
         title: "Voice input unavailable",
@@ -127,7 +154,8 @@ const SocialTranslator = ({ open, onClose }: SocialTranslatorProps) => {
     }, MAX_RECORDING_SECONDS * 1000);
   }, [isRecording, input, stopRecording, startRecognitionSession]);
 
-  const PROFANITY_PATTERN = /\b(fuck|shit|damn|ass|bitch|bastard|crap|dick|cock|pussy|slut|whore|cunt|nigger|faggot|retard)\w*\b/i;
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const PROFANITY_PATTERN = /\b(fuck|shit|damn|ass|bitch|bastard|crap|dick|cock|pussy|slut|whore|cunt|nigger|faggot|retard)\b/i;
 
   const handleTranslate = useCallback(async () => {
     if (!input.trim() || isLoading) return;
@@ -170,7 +198,7 @@ const SocialTranslator = ({ open, onClose }: SocialTranslatorProps) => {
           module_id: "social-translator",
           tone_mode: tone,
           vibe_score: res.rawVibeScore
-        } as any).
+        }).
         then(() => {});
       }
 
@@ -179,7 +207,7 @@ const SocialTranslator = ({ open, onClose }: SocialTranslatorProps) => {
       setTimeout(() => {
         setNeedlePosition(res.translatedVibeScore);
       }, 600);
-    } catch (e: any) {
+    } catch (e) {
       console.error("Translation error:", e);
       toast({
         title: "Couldn't translate right now",
@@ -189,7 +217,7 @@ const SocialTranslator = ({ open, onClose }: SocialTranslatorProps) => {
     } finally {
       setIsLoading(false);
     }
-  }, [input, tone, isLoading]);
+  }, [input, isLoading, isRecording, PROFANITY_PATTERN, stopRecording, tone, user]);
 
   const handleClear = () => {
     setInput("");
