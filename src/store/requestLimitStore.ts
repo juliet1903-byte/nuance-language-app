@@ -88,7 +88,7 @@ export const useRequestLimitStore = create<RequestLimitState>((set, get) => ({
       .from("profiles")
       .select("ai_requests_today, ai_requests_reset_at")
       .eq("id", userId)
-      .single();
+      .maybeSingle();
 
     if (error || !data) return;
 

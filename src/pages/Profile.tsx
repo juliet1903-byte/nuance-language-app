@@ -162,22 +162,26 @@ const Profile = () => {
 
   const handleDeleteAccount = async () => {
     if (!user) return;
+
     setDeleting(true);
+
     try {
-      const {
-        data: { session },
-      } = await supabase.auth.getSession();
-      const res = await supabase.functions.invoke("delete-account", {
-        headers: { Authorization: `Bearer ${session?.access_token}` },
-      });
+      const res = await supabase.functions.invoke("delete-account");
+
+      console.log("DELETE_ACCOUNT_RESPONSE:", res);
+
       if (res.error) throw res.error;
+      await signOut();
+
       toast.success("Account deleted");
       navigate("/");
-    } catch {
+    } catch (err) {
+      console.error(err);
       toast.error("Failed to delete account. Please try again.");
+    } finally {
+      setDeleting(false);
+      setShowDeleteDialog(false);
     }
-    setDeleting(false);
-    setShowDeleteDialog(false);
   };
 
   const handleNavigate = (path: string) => {

@@ -19,6 +19,7 @@ const Index = () => {
   const { isGuest, user, profile } = useAuth();
   const { completedLessons, completedModules, loading: progressLoading } = useProgress();
   const { unreadCount } = useNotifications();
+  // const showAvatar = user;
   const showAvatar = !isGuest && user;
   const modulesScrollRef = useRef<HTMLDivElement>(null);
 

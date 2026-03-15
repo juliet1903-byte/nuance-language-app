@@ -11,40 +11,41 @@ import AnimatedGrid from "@/components/AnimatedGrid";
 
 const Landing = () => {
   const navigate = useNavigate();
-  const { enterGuestMode, user, profile, isGuest } = useAuth();
+  const { enterGuestMode, user, profile } = useAuth();
   const showcaseRef = useRef<HTMLDivElement>(null);
 
   const { scrollYProgress } = useScroll({
     target: showcaseRef,
-    offset: ["start end", "end start"]
+    offset: ["start end", "end start"],
   });
 
   const rawTilt = useTransform(scrollYProgress, [0, 0.6], [20, 0]);
   const tilt = useSpring(rawTilt, { stiffness: 80, damping: 30 });
 
   const features = [
-  {
-    icon: CircleGauge,
-    title: "Social Translator & Vibe Meter",
-    description: "Turn your raw thoughts into polished professional business communication"
-  },
-  {
-    icon: Route,
-    title: "4-Level Learning Path",
-    description: "Progress from Natural Flow to Influencer with structured career communication modules."
-  },
-  {
-    icon: Flame,
-    title: "Daily Streaks",
-    description: "Build consistency and momentum with daily learning goals and streaks."
-  }];
-
+    {
+      icon: CircleGauge,
+      title: "Social Translator & Vibe Meter",
+      description: "Turn your raw thoughts into polished professional business communication",
+    },
+    {
+      icon: Route,
+      title: "4-Level Learning Path",
+      description:
+        "Progress from Natural Flow to Influencer with structured career communication modules.",
+    },
+    {
+      icon: Flame,
+      title: "Daily Streaks",
+      description: "Build consistency and momentum with daily learning goals and streaks.",
+    },
+  ];
 
   const handleGuest = () => {
     enterGuestMode();
     navigate("/dashboard");
   };
-
+  console.log("USER: ", user);
   return (
     <motion.div
       className="min-h-screen bg-background text-foreground"
@@ -137,7 +138,7 @@ const Landing = () => {
             onClick={handleGuest}
             className="rounded-xl border border-border bg-card px-8 py-3 text-base font-semibold text-muted-foreground transition-colors hover:bg-muted/50"
           >
-            {isGuest ? "Try as Guest" : "To my Dashboard"}
+            {user ? "To my Dashboard" : "Try as Guest"}
           </button>
         </motion.div>
       </section>
@@ -211,7 +212,6 @@ const Landing = () => {
       <Footer />
     </motion.div>
   );
-
 };
 
 export default Landing;

@@ -77,7 +77,7 @@ export function useProgress() {
     }
 
     const [profileRes, activityRes] = await Promise.all([
-      supabase.from("profiles").select("*").eq("id", user.id).single(),
+      supabase.from("profiles").select("*").eq("id", user.id).maybeSingle(),
       supabase
         .from("activity_log")
         .select("*")
@@ -143,7 +143,7 @@ export function useProgress() {
       completedModules,
       loading: false,
     });
-  }, [user]);
+  }, [user?.id]);
 
   useEffect(() => {
     fetchAll();
@@ -161,7 +161,7 @@ export function useProgress() {
       )
       .subscribe();
     return () => { supabase.removeChannel(channel); };
-  }, [user, fetchAll]);
+  }, [user?.id, fetchAll]);
 
   const logActivity = useCallback(
     async (
