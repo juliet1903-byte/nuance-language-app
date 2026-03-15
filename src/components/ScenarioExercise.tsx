@@ -1,4 +1,4 @@
-import { useState, useCallback } from "react";
+import { useState, useCallback, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { HelpCircle, Loader2, ArrowRight } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
@@ -28,6 +28,8 @@ const ScenarioExercise = ({ moduleTitle, moduleNumber, scenario, onComplete }: S
   const [needlePosition, setNeedlePosition] = useState<number | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [showTips, setShowTips] = useState(false);
+  const MAX_CHARS = parseInt(import.meta.env.VITE_MAX_INPUT_CHARS ?? "350", 10);
+  const charToastShown = useRef(false);
 
   const handleSubmit = useCallback(async () => {
     if (!response.trim() || isLoading) return;
@@ -96,10 +98,27 @@ const ScenarioExercise = ({ moduleTitle, moduleNumber, scenario, onComplete }: S
           <div className="bg-card rounded-xl p-4 mb-5 shadow-sm">
             <textarea
               value={response}
-              onChange={(e) => setResponse(e.target.value)}
+              onChange={(e) => {
+                const newValue = e.target.value;
+                if (newValue.length > MAX_CHARS) {
+                  if (!charToastShown.current) {
+                    toast({ title: "Character limit reached", description: `Max ${MAX_CHARS} characters allowed.`, variant: "destructive" });
+                    charToastShown.current = true;
+                  }
+                  setResponse(newValue.slice(0, MAX_CHARS));
+                } else {
+                  charToastShown.current = false;
+                  setResponse(newValue);
+                }
+              }}
               placeholder="Write what you would actually say in this situation..."
-              className="w-full bg-transparent resize-none outline-none text-foreground min-h-[120px] text-base"
+              className={`w-full bg-transparent resize-none outline-none text-foreground min-h-[120px] text-base${response.length >= MAX_CHARS ? " opacity-50 cursor-not-allowed" : ""}`}
             />
+            <div className="flex justify-between mt-1">
+              <span className={`text-xs ${response.length >= MAX_CHARS ? "text-destructive" : "text-muted-foreground"}`}>
+                {response.length}/{MAX_CHARS}
+              </span>
+            </div>
           </div>
 
           <button

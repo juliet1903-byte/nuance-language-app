@@ -383,7 +383,7 @@ const Profile = () => {
               <ChevronRight className="h-4 w-4 text-muted-foreground" />
             </button>
             <button
-              onClick={() => handleNavigate("/review")}
+              onClick={() => handleNavigate("/help")}
               className="flex w-full items-center gap-3 px-4 py-3.5 text-left transition-colors hover:bg-secondary/50"
             >
               <HelpCircle className="h-5 w-5 shrink-0 text-muted-foreground" />

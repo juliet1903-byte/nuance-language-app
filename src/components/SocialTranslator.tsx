@@ -63,6 +63,8 @@ const SocialTranslator = ({ open, onClose }: SocialTranslatorProps) => {
   const resultRef = useRef<HTMLDivElement>(null);
 
   const MAX_RECORDING_SECONDS = 60;
+  const MAX_CHARS = parseInt(import.meta.env.VITE_MAX_INPUT_CHARS ?? "350", 10);
+  const charToastShown = useRef(false);
 
   const stopRecording = useCallback(() => {
     shouldRestartRef.current = false;
@@ -259,11 +261,26 @@ const SocialTranslator = ({ open, onClose }: SocialTranslatorProps) => {
       <div className="relative rounded-xl p-4 mb-5 bg-card border border-border">
         <textarea
           value={input}
-          onChange={(e) => setInput(e.target.value)}
+          onChange={(e) => {
+            const newValue = e.target.value;
+            if (newValue.length > MAX_CHARS) {
+              if (!charToastShown.current) {
+                toast({ title: "Character limit reached", description: `Max ${MAX_CHARS} characters allowed.`, variant: "destructive" });
+                charToastShown.current = true;
+              }
+              setInput(newValue.slice(0, MAX_CHARS));
+            } else {
+              charToastShown.current = false;
+              setInput(newValue);
+            }
+          }}
           placeholder="Type something"
-          className="w-full bg-transparent resize-none outline-none text-foreground min-h-[100px] text-base"
+          className={`w-full bg-transparent resize-none outline-none text-foreground min-h-[100px] text-base${input.length >= MAX_CHARS ? " opacity-50 cursor-not-allowed" : ""}`}
         />
-        <div className="flex justify-end gap-2 mt-1">
+        <div className="flex items-center justify-between mt-1">
+          <span className={`text-xs ${input.length >= MAX_CHARS ? "text-destructive" : "text-muted-foreground"}`}>
+            {input.length}/{MAX_CHARS}
+          </span>
           {input && (
             <button onClick={handleClear} className="w-10 h-10 flex items-center justify-center rounded-full bg-muted/60 text-muted-foreground">
               <X className="w-5 h-5" />
