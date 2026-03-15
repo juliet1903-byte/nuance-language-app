@@ -197,21 +197,21 @@ const Review = () => {
 
             <>
                   <div className="w-20 h-20 rounded-full bg-secondary flex items-center justify-center mb-5">
-                    <Brain className="w-10 h-10 text-muted-foreground/50" />
+                    <HelpCircle className="w-10 h-10 text-muted-foreground/50" />
                   </div>
                   <h2 className="text-2xl font-semibold mb-2">No cards due</h2>
                   <p className="text-muted-foreground mb-2 max-w-xs text-base">
                     {totalCards > 0 ?
                 "All your cards are reviewed. Check back later!" :
-                "Complete lessons to build your review deck. Flashcards from each lesson will appear here automatically."}
+                "Start completing lessons to build your review deck. Flashcards from each lesson will appear here automatically."}
                   </p>
                 </>
             }
               <button
-              onClick={() => navigate("/dashboard")}
+              onClick={() => navigate(totalCards > 0 && reviewedCount > 0 ? "/dashboard" : "/library")}
               className="mt-6 py-3 px-8 rounded-xl bg-cta text-cta-foreground font-semibold text-sm">
               
-                Back to Dashboard
+                {reviewedCount > 0 ? "Back to Dashboard" : totalCards > 0 ? "Back to Dashboard" : "Go to Library"}
               </button>
             </motion.div>
           }
