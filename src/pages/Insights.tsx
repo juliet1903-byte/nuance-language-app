@@ -135,10 +135,10 @@ const Insights = () => {
 
       <main className="px-5 space-y-6 pb-8 md:max-w-[900px] md:mx-auto md:w-full">
         {/* ========= HERO: Vibe IQ Mastery + Tone Profile (side by side) ========= */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div className="relative grid grid-cols-1 md:grid-cols-2 gap-4">
+            {showBanner && <LoginBanner />}
           {/* Left card: Vibe IQ Mastery */}
           <section className="bg-card rounded-2xl p-6 shadow-sm relative">
-            {showBanner && <LoginBanner />}
             <h2 className="text-sm font-semibold uppercase tracking-wider text-muted-foreground mb-4">
               Vibe IQ Mastery
             </h2>
