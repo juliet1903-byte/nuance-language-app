@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
-import { ArrowLeft, RotateCcw, Check, Brain, PartyPopper, HelpCircle } from "lucide-react";
+import { ArrowLeft, RotateCcw, Check, PartyPopper, HelpCircle } from "lucide-react";
 import AppLayout from "@/components/AppLayout";
 import { useReview, ReviewCard, ReviewRating } from "@/hooks/useReview";
 import { useAuth } from "@/components/AuthContext";
@@ -25,11 +25,21 @@ const Review = () => {
     return (
       <AppLayout>
         <div className="flex flex-col items-center justify-center min-h-[60vh] px-5">
-          <HelpCircle className="w-12 h-12 text-muted-foreground/30 mb-4" />
-          <p className="text-muted-foreground text-center">Sign in to access your review cards.</p>
+          <div className="w-20 h-20 rounded-full bg-secondary flex items-center justify-center mb-5">
+            <HelpCircle className="w-10 h-10 text-muted-foreground/50" />
+          </div>
+          <h2 className="text-2xl font-semibold mb-2">Review Cards</h2>
+          <p className="text-muted-foreground text-center max-w-xs text-base mb-6">
+            Sign in to access your review cards and track your learning progress.
+          </p>
+          <button
+            onClick={() => navigate("/auth")}
+            className="py-3 px-8 rounded-xl bg-cta text-cta-foreground font-semibold text-sm"
+          >
+            Sign In or Sign Up
+          </button>
         </div>
       </AppLayout>);
-
   }
 
   if (loading) {
@@ -187,21 +197,21 @@ const Review = () => {
 
             <>
                   <div className="w-20 h-20 rounded-full bg-secondary flex items-center justify-center mb-5">
-                    <Brain className="w-10 h-10 text-muted-foreground/50" />
+                    <HelpCircle className="w-10 h-10 text-muted-foreground/50" />
                   </div>
                   <h2 className="text-2xl font-semibold mb-2">No cards due</h2>
                   <p className="text-muted-foreground mb-2 max-w-xs text-base">
                     {totalCards > 0 ?
                 "All your cards are reviewed. Check back later!" :
-                "Complete lessons to build your review deck. Flashcards from each lesson will appear here automatically."}
+                "Start completing lessons to build your review deck. Flashcards from each lesson will appear here automatically."}
                   </p>
                 </>
             }
               <button
-              onClick={() => navigate("/dashboard")}
+              onClick={() => navigate(totalCards > 0 && reviewedCount > 0 ? "/dashboard" : "/library")}
               className="mt-6 py-3 px-8 rounded-xl bg-cta text-cta-foreground font-semibold text-sm">
               
-                Back to Dashboard
+                {reviewedCount > 0 ? "Back to Dashboard" : totalCards > 0 ? "Back to Dashboard" : "Go to Library"}
               </button>
             </motion.div>
           }
