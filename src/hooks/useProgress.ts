@@ -8,6 +8,7 @@ export interface ActivityEntry {
   module_id: string;
   lesson_id: string | null;
   vibe_score: number | null;
+  tone_mode: string | null;
   created_at: string;
 }
 

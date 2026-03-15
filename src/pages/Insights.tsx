@@ -39,7 +39,7 @@ const VibeMeter = ({ score }: {score: number;}) => {
       delay: 0.3
     });
     return controls.stop;
-  }, [targetTheta]);
+  }, [targetTheta, theta]);
 
   return (
     <div className="w-full max-w-[320px] mx-auto">
@@ -134,45 +134,48 @@ const Insights = () => {
       </header>
 
       <main className="px-5 space-y-6 pb-8 md:max-w-[900px] md:mx-auto md:w-full">
-        {/* ========= HERO: Vibe IQ Mastery ========= */}
-        <section className="bg-card rounded-2xl p-6 shadow-sm relative">
-          {showBanner && <LoginBanner />}
-          <h2 className="text-sm font-semibold uppercase tracking-wider text-muted-foreground mb-4">
-            Vibe IQ Mastery
-          </h2>
+        {/* ========= HERO: Vibe IQ Mastery + Tone Profile (side by side) ========= */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          {/* Left card: Vibe IQ Mastery */}
+          <section className="bg-card rounded-2xl p-6 shadow-sm relative">
+            {showBanner && <LoginBanner />}
+            <h2 className="text-sm font-semibold uppercase tracking-wider text-muted-foreground mb-4">
+              Vibe IQ Mastery
+            </h2>
 
-          <VibeMeter score={vibeIq} />
+            <VibeMeter score={vibeIq} />
 
-          {/* Impact Growth badge */}
-          <motion.div
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.6 }}
-            className="flex justify-center mt-5">
-            
-            <span className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-accent/15 text-accent text-sm font-semibold">
-              <TrendingUp className="w-4 h-4" />
-              Impact Growth: +{IMPACT_GROWTH}%
-            </span>
-          </motion.div>
+            {/* Impact Growth badge */}
+            <motion.div
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.6 }}
+              className="flex justify-center mt-5">
 
-          {/* Tone Profile */}
-          <div className="mt-8">
-            <h3 className="font-semibold uppercase tracking-wider text-muted-foreground mb-3 text-sm">
+              <span className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-accent/15 text-accent text-sm font-semibold">
+                <TrendingUp className="w-4 h-4" />
+                Impact Growth: +{IMPACT_GROWTH}%
+              </span>
+            </motion.div>
+          </section>
+
+          {/* Right card: Tone Profile */}
+          <section className="bg-card rounded-2xl p-6 shadow-sm flex flex-col justify-between">
+            <h2 className="text-sm font-semibold uppercase tracking-wider text-muted-foreground mb-4">
               Tone Profile
-            </h3>
+            </h2>
 
             {(() => {
               const translations = activityLog.filter(
-                (a) => a.activity_type === "translation_complete" && (a as any).tone_mode
+                (a) => a.activity_type === "translation_complete" && a.tone_mode
               );
-              const leaderCount = translations.filter((a) => (a as any).tone_mode === "leader").length;
-              const colleagueCount = translations.filter((a) => (a as any).tone_mode === "colleague").length;
+              const leaderCount = translations.filter((a) => a.tone_mode === "leader").length;
+              const colleagueCount = translations.filter((a) => a.tone_mode === "colleague").length;
               const total = leaderCount + colleagueCount;
 
               if (total === 0) {
                 return (
-                  <div className="flex flex-col items-center justify-center py-8 text-center">
+                  <div className="flex flex-col items-center justify-center flex-1 py-8 text-center">
                     <div className="w-24 h-24 rounded-full border-2 border-dashed border-muted-foreground/30 flex items-center justify-center mb-3">
                       <span className="text-2xl text-muted-foreground/40">?</span>
                     </div>
@@ -191,19 +194,19 @@ const Insights = () => {
 
               return (
                 <>
-                  <div className="flex items-center gap-4">
-                    <div className="w-24 h-24 shrink-0">
+                  <div className="flex items-center gap-6 flex-1 mb-6">
+                    <div className="w-32 h-32 shrink-0">
                       <ResponsiveContainer width="100%" height="100%">
                         <PieChart>
                           <Pie
                             data={toneData}
                             cx="50%"
                             cy="50%"
-                            innerRadius={28}
-                            outerRadius={42}
+                            innerRadius={38}
+                            outerRadius={56}
                             dataKey="value"
                             strokeWidth={0}>
-                            
+
                             {toneData.map((_, idx) =>
                             <Cell key={idx} fill={TONE_COLORS[idx]} />
                             )}
@@ -212,30 +215,35 @@ const Insights = () => {
                       </ResponsiveContainer>
                     </div>
 
-                    <div className="space-y-2 flex-1">
+                    <div className="space-y-3 flex-1">
                       {toneData.map((entry, idx) =>
                       <div key={entry.name} className="flex items-center justify-between">
                           <div className="flex items-center gap-2">
                             <div
                             className="w-2.5 h-2.5 rounded-full shrink-0"
                             style={{ backgroundColor: TONE_COLORS[idx] }} />
-                          
+
                             <span className="text-sm font-normal">{entry.name}</span>
                           </div>
-                          <span className="text-sm font-semibold">{entry.value}%</span>
+                          <span className="text-sm font-bold">{entry.value}%</span>
                         </div>
                       )}
                     </div>
                   </div>
 
-                  <p className="text-muted-foreground mt-3 text-sm">
-                    Leader Mode uses the SBI Model · Colleague Mode uses Subjective Framing
-                  </p>
+                  <div>
+                    <p className="text-muted-foreground text-sm">
+                      Leader Mode uses the SBI Model
+                    </p>
+                    <p className="text-muted-foreground mt-1 text-sm">
+                      Colleague Mode uses Subjective Framing
+                    </p>
+                  </div>
                 </>);
 
             })()}
-          </div>
-        </section>
+          </section>
+        </div>
 
         {!showBanner &&
         <section>
