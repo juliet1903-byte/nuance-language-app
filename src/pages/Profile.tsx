@@ -3,9 +3,7 @@ import { useState, useRef } from "react";
 import {
   ArrowLeft,
   ChevronRight,
-  Bell,
   Moon,
-  Globe,
   Shield,
   HelpCircle,
   LogOut,
