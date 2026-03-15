@@ -25,11 +25,21 @@ const Review = () => {
     return (
       <AppLayout>
         <div className="flex flex-col items-center justify-center min-h-[60vh] px-5">
-          <HelpCircle className="w-12 h-12 text-muted-foreground/30 mb-4" />
-          <p className="text-muted-foreground text-center">Sign in to access your review cards.</p>
+          <div className="w-20 h-20 rounded-full bg-secondary flex items-center justify-center mb-5">
+            <HelpCircle className="w-10 h-10 text-muted-foreground/50" />
+          </div>
+          <h2 className="text-2xl font-semibold mb-2">Review Cards</h2>
+          <p className="text-muted-foreground text-center max-w-xs text-base mb-6">
+            Sign in to access your review cards and track your learning progress.
+          </p>
+          <button
+            onClick={() => navigate("/auth")}
+            className="py-3 px-8 rounded-xl bg-cta text-cta-foreground font-semibold text-sm"
+          >
+            Sign In or Sign Up
+          </button>
         </div>
       </AppLayout>);
-
   }
 
   if (loading) {
