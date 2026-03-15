@@ -1,4 +1,5 @@
 import { serve } from "https://deno.land/std@0.168.0/http/server.ts";
+import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
@@ -100,6 +101,30 @@ JSON schema:
 serve(async (req) => {
   if (req.method === "OPTIONS") {
     return new Response(null, { headers: corsHeaders });
+  }
+  // Server-side rate limiting for authenticated users
+  const authHeader = req.headers.get("Authorization");
+  if (authHeader?.startsWith("Bearer ")) {
+    const supabaseAdmin = createClient(
+      Deno.env.get("SUPABASE_URL")!,
+      Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!,
+    );
+    const { data: { user } } = await supabaseAdmin.auth.getUser(
+      authHeader.replace("Bearer ", ""),
+    );
+    if (user) {
+      const limit = parseInt(Deno.env.get("REQUESTS_LIMIT_REGISTERED") ?? "15", 10);
+      const { data: allowed, error } = await supabaseAdmin.rpc(
+        "check_and_increment_ai_requests",
+        { p_user_id: user.id, p_limit: limit },
+      );
+      if (!error && allowed === false) {
+        return new Response(
+          JSON.stringify({ error: "daily_limit_reached", limit }),
+          { status: 429, headers: { ...corsHeaders, "Content-Type": "application/json" } },
+        );
+      }
+    }
   }
 
   try {

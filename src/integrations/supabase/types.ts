@@ -96,6 +96,8 @@ export type Database = {
           modules_completed: number
           streak_days: number
           updated_at: string
+          ai_requests_today: number
+          ai_requests_reset_at: string
           vibe_iq: number
           xp: number
         }
@@ -111,6 +113,8 @@ export type Database = {
           modules_completed?: number
           streak_days?: number
           updated_at?: string
+          ai_requests_today?: number
+          ai_requests_reset_at?: string
           vibe_iq?: number
           xp?: number
         }
@@ -126,6 +130,8 @@ export type Database = {
           modules_completed?: number
           streak_days?: number
           updated_at?: string
+          ai_requests_today?: number
+          ai_requests_reset_at?: string
           vibe_iq?: number
           xp?: number
         }
@@ -184,6 +190,13 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
+      check_and_increment_ai_requests: {
+        Args: {
+          p_user_id: string
+          p_limit: number
+        }
+        Returns: boolean
+      }
       create_notification: {
         Args: {
           _icon?: string

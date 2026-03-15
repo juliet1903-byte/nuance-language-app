@@ -1,8 +1,9 @@
-import { useState, useCallback, useRef } from "react";
+import { useState, useCallback, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { HelpCircle, Loader2, ArrowRight } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "@/hooks/use-toast";
+import { useRequestLimit } from "@/hooks/useRequestLimit";
 
 interface ScenarioExerciseProps {
   moduleTitle: string;
@@ -30,9 +31,14 @@ const ScenarioExercise = ({ moduleTitle, moduleNumber, scenario, onComplete }: S
   const [showTips, setShowTips] = useState(false);
   const MAX_CHARS = parseInt(import.meta.env.VITE_MAX_INPUT_CHARS ?? "350", 10);
   const charToastShown = useRef(false);
+  const { isLimitReached, requestsLeft, requestsLimit, isGuest, consume, syncFromServer } = useRequestLimit();
 
   const handleSubmit = useCallback(async () => {
     if (!response.trim() || isLoading) return;
+
+    const allowed = await consume();
+    if (!allowed) return;
+
     setIsLoading(true);
     setResult(null);
     setNeedlePosition(null);
@@ -49,6 +55,15 @@ const ScenarioExercise = ({ moduleTitle, moduleNumber, scenario, onComplete }: S
       });
 
       if (error) throw error;
+      if (data?.error === "daily_limit_reached") {
+        syncFromServer?.();
+        toast({
+          title: "Daily limit reached",
+          description: `You've used all ${requestsLimit} AI requests for today. Come back tomorrow!`,
+          variant: "destructive",
+        });
+        return;
+      }
       if (data?.error) throw new Error(data.error);
 
       const res = data as EvaluationResult;
@@ -59,7 +74,7 @@ const ScenarioExercise = ({ moduleTitle, moduleNumber, scenario, onComplete }: S
       setTimeout(() => {
         setNeedlePosition(res.vibeScore);
       }, 400);
-    } catch (e: any) {
+    } catch (e: unknown) {
       console.error("Scenario evaluation error:", e);
       toast({
         title: "Couldn't evaluate your response",
@@ -69,7 +84,7 @@ const ScenarioExercise = ({ moduleTitle, moduleNumber, scenario, onComplete }: S
     } finally {
       setIsLoading(false);
     }
-  }, [response, isLoading, moduleTitle, moduleNumber, scenario]);
+  }, [response, isLoading, moduleTitle, moduleNumber, scenario, consume, syncFromServer, requestsLimit]);
 
   const passed = result && result.vibeScore >= 50;
 
@@ -121,20 +136,45 @@ const ScenarioExercise = ({ moduleTitle, moduleNumber, scenario, onComplete }: S
             </div>
           </div>
 
-          <button
-            onClick={handleSubmit}
-            disabled={!response.trim() || isLoading}
-            className="w-full py-3.5 rounded-xl bg-cta text-cta-foreground font-semibold text-base disabled:opacity-40 transition-opacity flex items-center justify-center gap-2base"
-          >
-            {isLoading ? (
-              <>
-                <Loader2 className="w-5 h-5 animate-spin" />
-                Evaluating…
-              </>
-            ) : (
-              "Submit Response"
-            )}
-          </button>
+          {!isLimitReached && requestsLeft <= 2 && (
+            <p className="text-xs text-muted-foreground text-right mb-2">
+              {requestsLeft} AI {requestsLeft === 1 ? "request" : "requests"} remaining today
+            </p>
+          )}
+
+          {isLimitReached ? (
+            <div className="w-full py-4 rounded-xl bg-muted border border-border text-center">
+              <p className="font-semibold text-muted-foreground text-base">
+                Daily limit reached ({requestsLimit} requests/day)
+              </p>
+              <p className="text-sm text-muted-foreground mt-0.5">
+                {isGuest ? "Sign up for more daily requests" : "Resets at midnight"}
+              </p>
+              {isGuest && (
+                <a
+                  href="/auth"
+                  className="mt-2 inline-block text-sm font-semibold text-accent underline"
+                >
+                  Create a free account
+                </a>
+              )}
+            </div>
+          ) : (
+            <button
+              onClick={handleSubmit}
+              disabled={!response.trim() || isLoading}
+              className="w-full py-3.5 rounded-xl bg-cta text-cta-foreground font-semibold text-base disabled:opacity-40 transition-opacity flex items-center justify-center gap-2base"
+            >
+              {isLoading ? (
+                <>
+                  <Loader2 className="w-5 h-5 animate-spin" />
+                  Evaluating…
+                </>
+              ) : (
+                "Submit Response"
+              )}
+            </button>
+          )}
         </>
       )}
 

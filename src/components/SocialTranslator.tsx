@@ -27,6 +27,8 @@ import { toast } from "@/hooks/use-toast";
 import { useAuth } from "@/hooks/useAuth";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { useSidebar } from "@/components/SidebarContext";
+import { useRequestLimit } from "@/hooks/useRequestLimit";
+import { useNavigate } from "react-router-dom";
 
 type Tone = "neutral" | "colleague" | "leader";
 
@@ -44,9 +46,10 @@ interface SocialTranslatorProps {
 }
 
 const SocialTranslator = ({ open, onClose }: SocialTranslatorProps) => {
-  const { user } = useAuth();
+  const { user, isGuest } = useAuth();
   const isMobile = useIsMobile();
   const { collapsed } = useSidebar();
+  const { isLimitReached, requestsLeft, requestsLimit, consume, syncFromServer } = useRequestLimit();
   const [input, setInput] = useState("");
   const [tone, setTone] = useState<Tone>("colleague");
   const [result, setResult] = useState<TranslationResult | null>(null);
@@ -61,6 +64,7 @@ const SocialTranslator = ({ open, onClose }: SocialTranslatorProps) => {
   const micTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const shouldRestartRef = useRef(false);
   const resultRef = useRef<HTMLDivElement>(null);
+  const navigation = useNavigate()
 
   const MAX_RECORDING_SECONDS = 60;
   const MAX_CHARS = parseInt(import.meta.env.VITE_MAX_INPUT_CHARS ?? "350", 10);
@@ -175,6 +179,9 @@ const SocialTranslator = ({ open, onClose }: SocialTranslatorProps) => {
       return;
     }
 
+    const allowed = await consume();
+    if (!allowed) return;
+
     setIsLoading(true);
     setResult(null);
     setStructuredHeight(null);
@@ -186,6 +193,15 @@ const SocialTranslator = ({ open, onClose }: SocialTranslatorProps) => {
       });
 
       if (error) throw error;
+      if (data?.error === "daily_limit_reached") {
+        syncFromServer?.();
+        toast({
+          title: "Daily limit reached",
+          description: `You've used all ${requestsLimit} AI requests for today. Come back tomorrow!`,
+          variant: "destructive",
+        });
+        return;
+      }
       if (data?.error) throw new Error(data.error);
 
       const res = data as TranslationResult;
@@ -219,7 +235,7 @@ const SocialTranslator = ({ open, onClose }: SocialTranslatorProps) => {
     } finally {
       setIsLoading(false);
     }
-  }, [input, isLoading, isRecording, PROFANITY_PATTERN, stopRecording, tone, user]);
+  }, [input, isLoading, isRecording, PROFANITY_PATTERN, stopRecording, tone, user, consume, syncFromServer, requestsLimit]);
 
   const handleClear = () => {
     setInput("");
@@ -281,6 +297,8 @@ const SocialTranslator = ({ open, onClose }: SocialTranslatorProps) => {
           <span className={`text-xs ${input.length >= MAX_CHARS ? "text-destructive" : "text-muted-foreground"}`}>
             {input.length}/{MAX_CHARS}
           </span>
+          <div className="flex gap-2">
+
           {input && (
             <button onClick={handleClear} className="w-10 h-10 flex items-center justify-center rounded-full bg-muted/60 text-muted-foreground">
               <X className="w-5 h-5" />
@@ -288,10 +306,11 @@ const SocialTranslator = ({ open, onClose }: SocialTranslatorProps) => {
           )}
           <button
             onClick={handleMic}
-            className={`w-10 h-10 flex items-center justify-center rounded-full transition-colors ${isRecording ? "bg-destructive text-destructive-foreground animate-pulse" : "bg-muted/60 text-muted-foreground"}`}
+            className={`w-10 h-10 flex items-center justify-center rounded-full transition-colors ${isRecording ? "bg-accent text-destructive-foreground animate-pulse" : "bg-muted/60 text-muted-foreground"}`}
           >
             {isRecording ? <Check className="w-5 h-5" /> : <Mic className="w-5 h-5" />}
           </button>
+            </div>
         </div>
       </div>
 
@@ -339,20 +358,45 @@ const SocialTranslator = ({ open, onClose }: SocialTranslatorProps) => {
       </div>
 
       {/* Translate Button */}
-      <button
-        onClick={handleTranslate}
-        disabled={!input.trim() || isLoading}
-        className="w-full py-4 rounded-xl bg-cta text-cta-foreground font-semibold text-lg disabled:opacity-40 transition-opacity flex items-center justify-center gap-2"
-      >
-        {isLoading ? (
-          <>
-            <Loader2 className="w-5 h-5 animate-spin" />
-            Translating…
-          </>
-        ) : (
-          "Translate"
-        )}
-      </button>
+      {!isLimitReached && requestsLeft <= 2 && (
+        <p className="text-xs text-muted-foreground text-right mb-2">
+          {requestsLeft} AI {requestsLeft === 1 ? "request" : "requests"} remaining today
+        </p>
+      )}
+
+      {isLimitReached ? (
+        <div className="w-full py-4 rounded-xl bg-muted border border-border text-center">
+          <p className="font-semibold text-muted-foreground text-base">
+            Daily limit reached ({requestsLimit} requests/day)
+          </p>
+          <p className="text-sm text-muted-foreground mt-0.5">
+            {isGuest ? "Sign up for more daily requests" : "Resets at midnight"}
+          </p>
+          {isGuest && (
+            <button
+              onClick={() => navigation("/auth")}
+              className="mt-2 text-sm font-semibold text-accent underline"
+            >
+              Create a free account
+            </button>
+          )}
+        </div>
+      ) : (
+        <button
+          onClick={handleTranslate}
+          disabled={!input.trim() || isLoading}
+          className="w-full py-4 rounded-xl bg-cta text-cta-foreground font-semibold text-lg disabled:opacity-40 transition-opacity flex items-center justify-center gap-2"
+        >
+          {isLoading ? (
+            <>
+              <Loader2 className="w-5 h-5 animate-spin" />
+              Translating…
+            </>
+          ) : (
+            "Translate"
+          )}
+        </button>
+      )}
 
       {/* Result */}
       <AnimatePresence>

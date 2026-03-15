@@ -11,8 +11,11 @@ import ScenarioExercise from "@/components/ScenarioExercise";
 import { useProgress } from "@/hooks/useProgress";
 import { useAuth } from "@/hooks/useAuth";
 import { useReview } from "@/hooks/useReview";
+import { storageGet, storageSet, storageRemove } from "@/lib/storage";
 
 type View = "overview" | "lesson" | "flashcards" | "exercise" | "word-order" | "scenario" | "complete";
+
+type ProgressState = { view: View; lessonIdx: number };
 
 const ModuleDetail = () => {
   const { id } = useParams();
@@ -20,23 +23,15 @@ const ModuleDetail = () => {
   const { user } = useAuth();
   const { logActivity, completedLessons } = useProgress();
   const { seedCardsForLesson } = useReview();
-  // Persist exercise progress in localStorage
-  const storageKey = `nuance-progress-${id}`;
-  const saved = (() => {
-    try {
-      const raw = localStorage.getItem(storageKey);
-      if (raw) return JSON.parse(raw) as {view: View;lessonIdx: number;};
-    } catch {}
-    return null;
-  })();
 
-  const [view, setViewState] = useState<View>(saved?.view || "overview");
+  const storageKey = `nuance-progress-${id}`;
+  const saved = storageGet<ProgressState>(storageKey);
+
+  const [view, setViewState] = useState<View>(saved?.view ?? "overview");
   const [activeLessonIdx, setActiveLessonIdxState] = useState(saved?.lessonIdx ?? 0);
 
   const persistProgress = (v: View, idx: number) => {
-    try {
-      localStorage.setItem(storageKey, JSON.stringify({ view: v, lessonIdx: idx }));
-    } catch {}
+    storageSet<ProgressState>(storageKey, { view: v, lessonIdx: idx });
   };
 
   const setView = (v: View) => {
@@ -128,7 +123,7 @@ const ModuleDetail = () => {
         await logActivity("module_complete", module.id);
       }
     }
-    try {localStorage.removeItem(storageKey);} catch {}
+    storageRemove(storageKey);
     setViewState("complete");
   };
 
