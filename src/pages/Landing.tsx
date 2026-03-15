@@ -128,10 +128,10 @@ const Landing = () => {
             Join Nuance
           </button>
           <button
-            onClick={handleGuest}
+            onClick={() => user ? navigate("/dashboard") : handleGuest()}
             className="px-8 py-3 rounded-xl border border-border bg-card text-muted-foreground font-semibold text-base hover:bg-muted/50 transition-colors">
             
-            Try as Guest
+            {user ? "My Dashboard" : "Try as Guest"}
           </button>
         </motion.div>
       </section>
